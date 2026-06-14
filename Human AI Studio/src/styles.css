@@ -44,21 +44,19 @@ a {
 }
 
 .nav {
-  position: fixed;
+  position: relative;
   z-index: 10;
-  top: 0.85rem;
-  left: 50%;
   display: flex;
   width: min(calc(100% - 2rem), var(--content-width));
   align-items: center;
   justify-content: space-between;
+  margin: 0.85rem auto 0;
   padding: 0.72rem 0.85rem;
   border-radius: 999px;
   box-shadow: var(--nav-shadow);
   background: var(--nav-bg);
   backdrop-filter: blur(18px) saturate(150%);
   color: var(--nav-fg);
-  transform: translateX(-50%);
   transition:
     background 220ms ease,
     box-shadow 220ms ease,
@@ -205,8 +203,8 @@ a {
 .hero {
   position: relative;
   display: grid;
-  min-height: 92vh;
-  padding: clamp(7rem, 11vw, 9rem) var(--page-padding) clamp(4rem, 8vw, 7rem);
+  min-height: calc(92vh - 4.8rem);
+  padding: clamp(3.75rem, 7vw, 6rem) var(--page-padding) clamp(4rem, 8vw, 7rem);
   place-items: center;
   overflow: hidden;
 }
@@ -739,6 +737,9 @@ h3 {
 .final-cta-inner {
   position: relative;
   z-index: 1;
+  width: 100%;
+  padding-right: clamp(0.25rem, 2vw, 1rem);
+  padding-left: clamp(0.25rem, 2vw, 1rem);
 }
 
 .final-cta h2 {
@@ -932,8 +933,8 @@ h3 {
   }
 
   .hero {
-    min-height: 82vh;
-    padding-top: 6.5rem;
+    min-height: calc(82vh - 5.25rem);
+    padding-top: 3.8rem;
     padding-bottom: 4rem;
   }
 
@@ -999,11 +1000,11 @@ h3 {
     font-size: 0.62rem;
   }
 
-  .final-cta h2 {
-    max-width: 21rem;
-    font-size: clamp(1.45rem, 6.1vw, 2rem);
-    line-height: 1.05;
-  }
+.final-cta h2 {
+  max-width: min(100%, 21rem);
+  font-size: clamp(1.45rem, 6.1vw, 2rem);
+  line-height: 1.05;
+}
 
   .final-cta h2 span {
     white-space: nowrap;

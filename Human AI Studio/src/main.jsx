@@ -111,34 +111,9 @@ function DotMatrixBackground() {
 }
 
 function App() {
-  const [navTheme, setNavTheme] = React.useState("dark");
-
-  React.useEffect(() => {
-    const updateNavTheme = () => {
-      const nav = document.querySelector(".nav");
-      const sampleY = nav ? nav.getBoundingClientRect().top + nav.offsetHeight / 2 : 40;
-      const themedSections = Array.from(document.querySelectorAll("[data-nav-theme]"));
-      const activeSection = themedSections.find((section) => {
-        const rect = section.getBoundingClientRect();
-        return rect.top <= sampleY && rect.bottom >= sampleY;
-      });
-
-      setNavTheme(activeSection?.dataset.navTheme || "dark");
-    };
-
-    updateNavTheme();
-    window.addEventListener("scroll", updateNavTheme, { passive: true });
-    window.addEventListener("resize", updateNavTheme);
-
-    return () => {
-      window.removeEventListener("scroll", updateNavTheme);
-      window.removeEventListener("resize", updateNavTheme);
-    };
-  }, []);
-
   return (
     <main className="page-shell">
-      <nav className={`nav nav-${navTheme}`} aria-label="Primary">
+      <nav className="nav nav-dark" aria-label="Primary">
         <a className="brand" href="#top" aria-label="Human AI Studio home">
           <span className="brand-mark" aria-hidden="true" />
           Human AI Studio
