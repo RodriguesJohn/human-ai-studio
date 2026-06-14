@@ -111,6 +111,33 @@ function DotMatrixBackground() {
 }
 
 function App() {
+  React.useEffect(() => {
+    const revealElements = document.querySelectorAll(".reveal");
+
+    if (!("IntersectionObserver" in window)) {
+      revealElements.forEach((element) => element.classList.add("is-visible"));
+      return undefined;
+    }
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.18
+      }
+    );
+
+    revealElements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <main className="page-shell">
       <nav className="nav nav-dark" aria-label="Primary">
@@ -148,7 +175,7 @@ function App() {
       </section>
 
       <section className="offerings" aria-labelledby="offerings-title" data-nav-theme="light">
-        <div className="section-heading">
+        <div className="section-heading reveal">
           <div>
             <p className="eyebrow">Offerings</p>
             <h2 id="offerings-title">Three ways to work together</h2>
@@ -161,7 +188,11 @@ function App() {
 
         <div className="offering-grid">
           {offerings.map((offering, index) => (
-            <article className="offering-card" key={offering.title}>
+            <article
+              className="offering-card reveal"
+              key={offering.title}
+              style={{ "--reveal-delay": `${index * 110}ms` }}
+            >
               <div className="offering-topline">
                 <span className="number">{String(index + 1).padStart(2, "0")}</span>
               </div>
@@ -176,15 +207,21 @@ function App() {
 
       <section className="approach" aria-labelledby="approach-title" data-nav-theme="dark">
         <div className="approach-inner">
-          <div>
+          <div className="reveal">
             <p className="eyebrow">Approach</p>
             <h2 id="approach-title">
               Product thinking, craft, and design engineering for business impact.
             </h2>
           </div>
           <div className="principle-list">
-            {principles.map((principle) => (
-              <p key={principle}>{principle}</p>
+            {principles.map((principle, index) => (
+              <p
+                className="reveal"
+                key={principle}
+                style={{ "--reveal-delay": `${index * 100}ms` }}
+              >
+                {principle}
+              </p>
             ))}
           </div>
         </div>
@@ -192,7 +229,7 @@ function App() {
 
       <section className="bio" aria-labelledby="bio-title" data-nav-theme="light">
         <div className="bio-inner">
-          <div className="bio-copy">
+          <div className="bio-copy reveal">
             <p className="eyebrow">Work directly with John</p>
             <h2 id="bio-title">Direct, hands-on AI product work.</h2>
             <p>
@@ -225,7 +262,7 @@ function App() {
               </a>
             </div>
           </div>
-          <figure className="profile-card">
+          <figure className="profile-card reveal" style={{ "--reveal-delay": "130ms" }}>
             <div className="profile-image">
               <img src={profilePicture} alt="John Rodrigues" />
             </div>
@@ -239,7 +276,7 @@ function App() {
 
       <section className="final-cta" aria-labelledby="cta-title" data-nav-theme="dark">
         <DotMatrixBackground />
-        <div className="final-cta-inner">
+        <div className="final-cta-inner reveal">
           <p className="eyebrow">Start here</p>
           <h2 id="cta-title">
             <span>Have an AI product, workflow,</span>

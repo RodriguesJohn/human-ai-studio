@@ -371,6 +371,24 @@ h1 span:nth-child(3) {
   animation: heroFadeUp 760ms 980ms cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
+.reveal {
+  opacity: 0;
+  filter: blur(10px);
+  transform: translateY(1.35rem);
+  transition:
+    opacity 780ms cubic-bezier(0.22, 1, 0.36, 1),
+    filter 780ms cubic-bezier(0.22, 1, 0.36, 1),
+    transform 780ms cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, filter, transform;
+}
+
+.reveal.is-visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
 .offerings {
   display: grid;
   min-height: 76vh;
@@ -1017,5 +1035,15 @@ h3 {
 
   .footer-brand {
     grid-column: 1 / -1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal,
+  .reveal.is-visible {
+    opacity: 1;
+    filter: none;
+    transform: none;
+    transition: none;
   }
 }
