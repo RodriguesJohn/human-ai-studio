@@ -114,16 +114,26 @@ function App() {
   React.useEffect(() => {
     const revealElements = document.querySelectorAll(".reveal");
 
+    revealElements.forEach((element) => element.classList.add("reveal-pending"));
+
     if (!("IntersectionObserver" in window)) {
-      revealElements.forEach((element) => element.classList.add("is-visible"));
+      revealElements.forEach((element) => {
+        element.classList.remove("reveal-pending");
+        element.classList.add("is-visible");
+      });
       return undefined;
     }
+
+    const revealElement = (element) => {
+      element.classList.remove("reveal-pending");
+      element.classList.add("is-visible");
+    };
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (!entry.isIntersecting) return;
-          entry.target.classList.add("is-visible");
+          revealElement(entry.target);
           observer.unobserve(entry.target);
         });
       },
@@ -135,7 +145,15 @@ function App() {
 
     revealElements.forEach((element) => observer.observe(element));
 
-    return () => observer.disconnect();
+    const fallbackTimer = window.setTimeout(() => {
+      revealElements.forEach(revealElement);
+      observer.disconnect();
+    }, 2200);
+
+    return () => {
+      window.clearTimeout(fallbackTimer);
+      observer.disconnect();
+    };
   }, []);
 
   return (

@@ -372,6 +372,13 @@ h1 span:nth-child(3) {
 }
 
 .reveal {
+  opacity: 1;
+  clip-path: inset(0);
+  filter: blur(0);
+  transform: translate3d(0, 0, 0) scale(1);
+}
+
+.reveal.reveal-pending {
   opacity: 0;
   clip-path: inset(0 0 16% 0);
   filter: blur(14px);
@@ -385,6 +392,7 @@ h1 span:nth-child(3) {
   will-change: opacity, clip-path, filter, transform;
 }
 
+.reveal.reveal-pending.is-visible,
 .reveal.is-visible {
   opacity: 1;
   clip-path: inset(0);
