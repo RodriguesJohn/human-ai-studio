@@ -933,9 +933,9 @@ h3 {
   }
 
   .hero {
-    min-height: calc(82vh - 5.25rem);
-    padding-top: 3.8rem;
-    padding-bottom: 4rem;
+    min-height: calc(76vh - 5.25rem);
+    padding-top: 2.25rem;
+    padding-bottom: 3.25rem;
   }
 
   .hero::before,
