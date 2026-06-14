@@ -1,0 +1,317 @@
+import React from "react";
+import { createRoot } from "react-dom/client";
+import profilePicture from "./assets/Profile Picture.jpg";
+import "./styles.css";
+
+const offerings = [
+  {
+    title: "Build 0->1 AI-Native Products",
+    description:
+      "0->1 product design and design engineering, from an idea to a fully functional product."
+  },
+  {
+    title: "AI Consulting",
+    description:
+      "Identify business needs, pain points, and bottlenecks where AI can augment your workflows."
+  },
+  {
+    title: "Workshops for Teams",
+    description:
+      "Hands-on AI sessions for teams to prototype, apply, and improve real workflows."
+  }
+];
+
+const principles = [
+  "Human judgment first and design-centered approach",
+  "Prototype before theory",
+  "Systems that move business needles over demos"
+];
+
+function DotMatrixBackground() {
+  const canvasRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return undefined;
+
+    const context = canvas.getContext("2d");
+    let animationFrame = 0;
+    let startedAt = performance.now();
+    let dots = [];
+
+    const resize = () => {
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      const { width, height } = canvas.getBoundingClientRect();
+      canvas.width = Math.floor(width * pixelRatio);
+      canvas.height = Math.floor(height * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      const gap = window.innerWidth < 560 ? 22 : 26;
+      dots = [];
+
+      for (let y = gap / 2; y < height; y += gap) {
+        for (let x = gap / 2; x < width; x += gap) {
+          dots.push({
+            x,
+            y,
+            seed: Math.random(),
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      startedAt = performance.now();
+    };
+
+    const draw = (now) => {
+      const { width, height } = canvas.getBoundingClientRect();
+      const elapsed = (now - startedAt) / 1000;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const maxDistance = Math.hypot(centerX, centerY);
+      const delayedElapsed = Math.max(elapsed - 0.55, 0);
+      const revealRadius = Math.min(delayedElapsed * 0.42, 1.2);
+      const shimmerWidth = 0.045;
+
+      context.clearRect(0, 0, width, height);
+
+      dots.forEach((dot) => {
+        const distance = Math.hypot(dot.x - centerX, dot.y - centerY);
+        const normalizedDistance = distance / maxDistance;
+        const reveal = Math.min(Math.max((revealRadius - normalizedDistance) / 0.34, 0), 1);
+        const shimmerDistance = Math.abs(normalizedDistance - revealRadius);
+        const shimmer = Math.max(1 - shimmerDistance / shimmerWidth, 0);
+        const pulse = 0.45 + Math.sin(elapsed * 1.2 + dot.phase) * 0.25;
+        const edgeFade = 1 - Math.min(distance / maxDistance, 1) * 0.72;
+        const baseOpacity = 0.035 + dot.seed * 0.075 + pulse * 0.025;
+        const opacity = edgeFade * (reveal * baseOpacity + shimmer * 0.09);
+
+        if (opacity <= 0.01) return;
+
+        context.beginPath();
+        context.fillStyle = `rgba(255, 255, 255, ${opacity})`;
+        context.arc(dot.x, dot.y, shimmer > 0.18 ? 1.35 : dot.seed > 0.82 ? 1.1 : 0.85, 0, Math.PI * 2);
+        context.fill();
+      });
+
+      animationFrame = requestAnimationFrame(draw);
+    };
+
+    resize();
+    animationFrame = requestAnimationFrame(draw);
+    window.addEventListener("resize", resize);
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", resize);
+    };
+  }, []);
+
+  return <canvas className="dot-matrix-background" ref={canvasRef} aria-hidden="true" />;
+}
+
+function App() {
+  const [navTheme, setNavTheme] = React.useState("dark");
+
+  React.useEffect(() => {
+    const updateNavTheme = () => {
+      const nav = document.querySelector(".nav");
+      const sampleY = nav ? nav.getBoundingClientRect().top + nav.offsetHeight / 2 : 40;
+      const themedSections = Array.from(document.querySelectorAll("[data-nav-theme]"));
+      const activeSection = themedSections.find((section) => {
+        const rect = section.getBoundingClientRect();
+        return rect.top <= sampleY && rect.bottom >= sampleY;
+      });
+
+      setNavTheme(activeSection?.dataset.navTheme || "dark");
+    };
+
+    updateNavTheme();
+    window.addEventListener("scroll", updateNavTheme, { passive: true });
+    window.addEventListener("resize", updateNavTheme);
+
+    return () => {
+      window.removeEventListener("scroll", updateNavTheme);
+      window.removeEventListener("resize", updateNavTheme);
+    };
+  }, []);
+
+  return (
+    <main className="page-shell">
+      <nav className={`nav nav-${navTheme}`} aria-label="Primary">
+        <a className="brand" href="#top" aria-label="Human AI Studio home">
+          <span className="brand-mark" aria-hidden="true" />
+          Human AI Studio
+        </a>
+        <a className="nav-link" href="mailto:hello@humanai.studio">
+          Book a call
+        </a>
+      </nav>
+
+      <section className="hero" id="top" data-nav-theme="dark">
+        <div className="hero-inner">
+          <div className="hero-copy">
+            <p className="eyebrow hero-eyebrow">AI product studio</p>
+            <h1>
+              <span>Human</span>
+              <span>AI</span>
+              <span>Studio</span>
+            </h1>
+            <p className="intro">
+              Independent product studio based in the SF Bay Area by John Rodrigues, helping businesses build 0-&gt;1 AI-native products and agentic operating systems.
+            </p>
+            <div className="hero-actions">
+              <a className="button" href="mailto:hello@humanai.studio">
+                <span className="button-avatar" aria-hidden="true">
+                  <img src={profilePicture} alt="" />
+                </span>
+                Book discovery call
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="offerings" aria-labelledby="offerings-title" data-nav-theme="light">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">Offerings</p>
+            <h2 id="offerings-title">Three ways to work together</h2>
+          </div>
+          <p className="section-note">
+            Focused support for founders, teams, and organizations turning AI
+            ideas into useful products and practices.
+          </p>
+        </div>
+
+        <div className="offering-grid">
+          {offerings.map((offering, index) => (
+            <article className="offering-card" key={offering.title}>
+              <div className="offering-topline">
+                <span className="number">{String(index + 1).padStart(2, "0")}</span>
+              </div>
+              <div className="offering-copy">
+                <h3>{offering.title}</h3>
+                <p>{offering.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="approach" aria-labelledby="approach-title" data-nav-theme="dark">
+        <div className="approach-inner">
+          <div>
+            <p className="eyebrow">Approach</p>
+            <h2 id="approach-title">
+              Product thinking, craft, and design engineering for business impact.
+            </h2>
+          </div>
+          <div className="principle-list">
+            {principles.map((principle) => (
+              <p key={principle}>{principle}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bio" aria-labelledby="bio-title" data-nav-theme="light">
+        <div className="bio-inner">
+          <div className="bio-copy">
+            <p className="eyebrow">Work directly with John</p>
+            <h2 id="bio-title">Direct, hands-on AI product work.</h2>
+            <p>
+              Human AI Studio is led by John Rodrigues. Every engagement is
+              hands-on, practical, and close to the work: product thinking,
+              system design, prototyping, implementation, and the human side of
+              helping people make sense of AI.
+            </p>
+            <p>
+              Add John&apos;s bio here: background, perspective, recent work,
+              and the kind of collaborators, founders, teams, or organizations
+              he works best with.
+            </p>
+            <div className="bio-actions">
+              <a
+                className="secondary-button"
+                href="https://www.linkedin.com/in/john-rodrigues4?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+              <a
+                className="secondary-button"
+                href="https://john-rodrigues.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Portfolio
+              </a>
+            </div>
+          </div>
+          <figure className="profile-card">
+            <div className="profile-image">
+              <img src={profilePicture} alt="John Rodrigues" />
+            </div>
+            <figcaption>
+              <span>John Rodrigues</span>
+              <span>Design Engineer | Founder of Human AI Studio</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="final-cta" aria-labelledby="cta-title" data-nav-theme="dark">
+        <DotMatrixBackground />
+        <div className="final-cta-inner">
+          <p className="eyebrow">Start here</p>
+          <h2 id="cta-title">
+            <span>Have an AI product, workflow,</span>
+            <span>or team question?</span>
+          </h2>
+          <a className="button" href="mailto:hello@humanai.studio">
+            Book discovery call
+          </a>
+        </div>
+      </section>
+
+      <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
+        <div className="site-footer-inner">
+          <div className="footer-brand">
+            <a className="brand" href="#top" aria-label="Human AI Studio home">
+              <span className="brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </a>
+            <p>
+              Human AI Studio by Human Inspire Studio. Independent AI product
+              studio run by John Rodrigues in the SF Bay Area.
+            </p>
+          </div>
+
+          <div className="footer-column">
+            <p>Services</p>
+            <a href="#top">AI-native products</a>
+            <a href="#top">AI operating systems</a>
+            <a href="#top">AI workshops</a>
+          </div>
+
+          <div className="footer-column">
+            <p>Studio</p>
+            <span>San Francisco Bay Area</span>
+            <span>Design engineering</span>
+            <span>Product systems</span>
+          </div>
+
+          <div className="footer-column">
+            <p>Contact</p>
+            <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
+            <a href="mailto:hello@humanai.studio">Book discovery call</a>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
+}
+
+createRoot(document.getElementById("root")).render(<App />);
