@@ -795,11 +795,16 @@ h3 {
 }
 
 .footer-brand {
+  --nav-mark-fill: #ffffff;
+  --nav-mark-fill-alt: #000000;
+  --nav-mark-stroke: rgba(255, 255, 255, 0.88);
+  --nav-link-ring: rgba(255, 255, 255, 0.34);
   max-width: 22rem;
 }
 
 .footer-brand .brand {
   margin-bottom: 1rem;
+  color: #ffffff;
 }
 
 .footer-brand p,
