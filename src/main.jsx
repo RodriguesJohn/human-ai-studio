@@ -191,7 +191,7 @@ function App() {
             <article
               className="offering-card reveal"
               key={offering.title}
-              style={{ "--reveal-delay": `${index * 110}ms` }}
+              style={{ "--reveal-delay": `${120 + index * 140}ms` }}
             >
               <div className="offering-topline">
                 <span className="number">{String(index + 1).padStart(2, "0")}</span>
@@ -218,7 +218,7 @@ function App() {
               <p
                 className="reveal"
                 key={principle}
-                style={{ "--reveal-delay": `${index * 100}ms` }}
+                style={{ "--reveal-delay": `${120 + index * 110}ms` }}
               >
                 {principle}
               </p>
