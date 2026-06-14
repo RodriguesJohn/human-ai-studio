@@ -225,21 +225,15 @@ function App() {
 
       <section className="approach" aria-labelledby="approach-title" data-nav-theme="dark">
         <div className="approach-inner">
-          <div className="reveal">
+          <div>
             <p className="eyebrow">Approach</p>
             <h2 id="approach-title">
               Product thinking, craft, and design engineering for business impact.
             </h2>
           </div>
           <div className="principle-list">
-            {principles.map((principle, index) => (
-              <p
-                className="reveal"
-                key={principle}
-                style={{ "--reveal-delay": `${120 + index * 110}ms` }}
-              >
-                {principle}
-              </p>
+            {principles.map((principle) => (
+              <p key={principle}>{principle}</p>
             ))}
           </div>
         </div>
