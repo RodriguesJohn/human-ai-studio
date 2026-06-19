@@ -266,6 +266,11 @@ a {
   animation-delay: 420ms;
 }
 
+.v2-hero-section::before,
+.v2-hero-section::after {
+  display: none;
+}
+
 .hero-inner,
 .offerings,
 .approach,

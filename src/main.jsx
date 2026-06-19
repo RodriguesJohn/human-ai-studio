@@ -111,9 +111,10 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1 }) {
         const shimmerDistance = Math.abs(normalizedDistance - revealRadius);
         const shimmer = Math.max(1 - shimmerDistance / shimmerWidth, 0);
         const pulse = 0.45 + Math.sin(elapsed * 1.2 + dot.phase) * 0.25;
+        const ambientPulse = 0.72 + Math.sin(elapsed * 0.75 + dot.phase + dot.seed * 6) * 0.28;
         const edgeFade = 1 - Math.min(distance / maxDistance, 1) * 0.72;
         const baseOpacity = 0.035 + dot.seed * 0.075 + pulse * 0.025;
-        const opacity = Math.min(edgeFade * (reveal * baseOpacity + shimmer * 0.09) * intensity, 0.42);
+        const opacity = Math.min(edgeFade * (reveal * baseOpacity * ambientPulse + shimmer * 0.09) * intensity, 0.42);
 
         if (opacity <= 0.01) return;
 
