@@ -468,6 +468,10 @@ h2 {
   margin: 0 auto;
 }
 
+.v2-flow-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .offering-card {
   position: relative;
   display: grid;
@@ -1321,6 +1325,10 @@ h3 {
   }
 
   .offering-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .v2-flow-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 

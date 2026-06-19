@@ -34,9 +34,14 @@ const v2HowItWorks = [
       "Map your operations, revenue motion, tools, data, and team workflows to identify where AI agents can create the highest leverage."
   },
   {
-    title: "MVP development and implementation",
+    title: "AI agent development",
     description:
-      "Design and build a working AI operating system: agent workflows, interfaces, automations, and integrations your team can actually use."
+      "Design and develop AI agents around the workflows, decisions, and operating needs that matter most to the business."
+  },
+  {
+    title: "Integration into operations",
+    description:
+      "Connect agents into your existing systems, team processes, knowledge bases, and business context so they become part of how work gets done."
   },
   {
     title: "Continuous support and monitoring",
@@ -48,7 +53,7 @@ const v2HowItWorks = [
 const v2Principles = [
   "Design-centered mindset",
   "Product thinking",
-  "Engineering combined with one-person studio ownership"
+  "Engineering combined with direct 1:1 collaboration"
 ];
 
 function DotMatrixBackground() {
@@ -391,9 +396,8 @@ function V2Home() {
               <span>Studio</span>
             </h1>
             <p className="intro">
-              Design and development studio for AI agent operating systems that
-              help businesses scale operations, automate repetitive work, and
-              grow revenue.
+              Design and development of AI agents and agentic operating systems
+              for businesses to scale operations and grow revenue.
             </p>
             <div className="hero-actions">
               <a className="button" href="mailto:hello@humanai.studio">
@@ -415,11 +419,12 @@ function V2Home() {
           </div>
           <p className="section-note">
             A focused path for turning scattered workflows, data, and repetitive
-            work into AI agents that support real business outcomes.
+            business context into AI agents and operating systems that support
+            real business outcomes.
           </p>
         </div>
 
-        <div className="offering-grid">
+        <div className="offering-grid v2-flow-grid">
           {v2HowItWorks.map((step, index) => (
             <article
               className="offering-card reveal"
@@ -458,18 +463,18 @@ function V2Home() {
         <div className="bio-inner">
           <div className="bio-copy reveal">
             <p className="eyebrow">Work directly with John</p>
-            <h2 id="v2-bio-title">One-person studio for AI operations work.</h2>
+            <h2 id="v2-bio-title">Work 1:1 with John from strategy to shipped system.</h2>
             <p>
               Work directly with John Rodrigues across strategy, product design,
-              design engineering, and implementation. The same person helping
-              define the operating system is also close to the build, testing,
-              and day-to-day usefulness.
+              design engineering, AI agent development, and implementation. You
+              get the personal touch of a close 1:1 collaboration instead of a
+              handoff-heavy agency process.
             </p>
             <p>
               John brings AI credibility through hands-on product work: turning
-              ambiguous workflows into prototypes, agentic systems, internal
-              tools, and AI-native products that teams can understand, trust,
-              and operate.
+              ambiguous business workflows into prototypes, agentic systems,
+              internal tools, and AI-native products that teams can understand,
+              trust, and operate.
             </p>
             <div className="bio-actions">
               <a
@@ -532,15 +537,15 @@ function V2Home() {
           <div className="footer-column">
             <p>Services</p>
             <a href="/v2#top">AI agent operating systems</a>
-            <a href="/v2#top">MVP implementation</a>
-            <a href="/v2#top">Workflow automation</a>
+            <a href="/v2#top">AI agent development</a>
+            <a href="/v2#top">Operations integration</a>
           </div>
 
           <div className="footer-column">
             <p>Studio</p>
             <span>San Francisco Bay Area</span>
             <span>Design engineering</span>
-            <span>One-person operations</span>
+            <span>Direct 1:1 collaboration</span>
           </div>
 
           <div className="footer-column">
