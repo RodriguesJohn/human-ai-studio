@@ -396,8 +396,8 @@ function V2Home() {
               <span>Studio</span>
             </h1>
             <p className="intro">
-              Design and development of AI agents and agentic operating systems
-              for businesses to scale operations and grow revenue.
+              AI agent and agentic operating system development to help your
+              business scale operations and grow revenue.
             </p>
             <div className="hero-actions">
               <a className="button" href="mailto:hello@humanai.studio">
@@ -426,7 +426,7 @@ function V2Home() {
         <div className="offering-grid v2-flow-grid">
           {v2HowItWorks.map((step, index) => (
             <article
-              className="offering-card reveal"
+              className="offering-card v2-offering-card reveal"
               key={step.title}
               style={{ "--reveal-delay": `${120 + index * 140}ms` }}
             >

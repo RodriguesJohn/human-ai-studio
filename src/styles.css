@@ -478,29 +478,56 @@ h2 {
   min-height: 23.5rem;
   grid-template-rows: auto 1fr;
   overflow: hidden;
-  border: 1px solid rgba(0, 0, 0, 0.055);
+  border: 1px solid rgba(0, 0, 0, 0.08);
   border-radius: 1.1rem;
   padding: clamp(1.3rem, 2.5vw, 2rem);
+  box-shadow:
+    0 1.2rem 3.5rem rgba(0, 0, 0, 0.08),
+    0 0.25rem 1rem rgba(0, 0, 0, 0.045);
+  background:
+    linear-gradient(135deg, rgba(0, 0, 0, 0.035), transparent 38%),
+    linear-gradient(180deg, #ffffff, #f7f7f7);
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    background 180ms ease;
+}
+
+.offering-card::after {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74);
+  content: "";
+  pointer-events: none;
+}
+
+.offering-card:hover {
+  border-color: rgba(0, 0, 0, 0.16);
+  box-shadow:
+    0 1.6rem 4.5rem rgba(0, 0, 0, 0.11),
+    0 0.35rem 1.25rem rgba(0, 0, 0, 0.06);
+  transform: translateY(-0.2rem);
+}
+
+.v2-offering-card {
+  border-color: rgba(0, 0, 0, 0.055);
   box-shadow:
     0 1.5rem 3.25rem rgba(0, 0, 0, 0.075),
     0 0.25rem 0.9rem rgba(0, 0, 0, 0.035);
   background: #ffffff;
-  transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    box-shadow 180ms ease;
 }
 
-.offering-card::after {
+.v2-offering-card::after {
   display: none;
 }
 
-.offering-card:hover {
+.v2-offering-card:hover {
   border-color: rgba(0, 0, 0, 0.075);
   box-shadow:
     0 1.8rem 4rem rgba(0, 0, 0, 0.095),
     0 0.4rem 1.2rem rgba(0, 0, 0, 0.045);
-  transform: translateY(-0.2rem);
 }
 
 .number,
