@@ -27,6 +27,12 @@ const principles = [
   "Systems that move business needles over demos"
 ];
 
+const v2Stats = [
+  ["01", "Product design"],
+  ["02", "Design engineering"],
+  ["03", "Agentic systems"]
+];
+
 function DotMatrixBackground() {
   const canvasRef = React.useRef(null);
 
@@ -110,7 +116,7 @@ function DotMatrixBackground() {
   return <canvas className="dot-matrix-background" ref={canvasRef} aria-hidden="true" />;
 }
 
-function App() {
+function OriginalHome() {
   React.useEffect(() => {
     const revealElements = document.querySelectorAll(".reveal");
 
@@ -336,6 +342,130 @@ function App() {
       </footer>
     </main>
   );
+}
+
+function V2Home() {
+  return (
+    <main className="v2-page">
+      <nav className="v2-nav" aria-label="V2 primary">
+        <a className="brand v2-brand" href="/" aria-label="Human AI Studio home">
+          <span className="brand-mark" aria-hidden="true" />
+          Human AI Studio
+        </a>
+        <a className="v2-nav-link" href="mailto:hello@humanai.studio">
+          Book discovery call
+        </a>
+      </nav>
+
+      <section className="v2-hero" id="top">
+        <div className="v2-hero-copy">
+          <p className="v2-kicker">Independent AI product studio</p>
+          <h1>Human AI Studio</h1>
+          <p className="v2-intro">
+            Built by John Rodrigues in the SF Bay Area for founders and teams
+            turning AI ideas into useful products, workflows, and agentic
+            operating systems.
+          </p>
+          <div className="v2-actions">
+            <a className="v2-primary" href="mailto:hello@humanai.studio">
+              <span className="button-avatar" aria-hidden="true">
+                <img src={profilePicture} alt="" />
+              </span>
+              Book a call
+            </a>
+            <a className="v2-secondary" href="#work">
+              See offerings
+            </a>
+          </div>
+        </div>
+
+        <aside className="v2-portrait" aria-label="John Rodrigues">
+          <img src={profilePicture} alt="John Rodrigues" />
+          <div>
+            <span>John Rodrigues</span>
+            <span>Design Engineer | Founder</span>
+          </div>
+        </aside>
+      </section>
+
+      <section className="v2-offerings" id="work" aria-labelledby="v2-work-title">
+        <div className="v2-section-label">Ways to work</div>
+        <div className="v2-offerings-head">
+          <h2 id="v2-work-title">From first signal to working system.</h2>
+          <p>
+            Direct product thinking, design craft, and implementation support
+            for teams who need AI to move real business outcomes.
+          </p>
+        </div>
+
+        <div className="v2-offering-list">
+          {offerings.map((offering, index) => (
+            <article className="v2-offering-row" key={offering.title}>
+              <span>{String(index + 1).padStart(2, "0")}</span>
+              <h3>{offering.title}</h3>
+              <p>{offering.description}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="v2-principles" aria-labelledby="v2-principles-title">
+        <div>
+          <p className="v2-section-label">Approach</p>
+          <h2 id="v2-principles-title">
+            Human judgment, product taste, and engineering discipline.
+          </h2>
+        </div>
+        <div className="v2-principle-grid">
+          {principles.map((principle) => (
+            <p key={principle}>{principle}</p>
+          ))}
+        </div>
+      </section>
+
+      <section className="v2-about" aria-labelledby="v2-about-title">
+        <div className="v2-about-copy">
+          <p className="v2-section-label">Work directly with John</p>
+          <h2 id="v2-about-title">Hands-on AI product work without the agency layer.</h2>
+          <p>
+            Human AI Studio is built around close collaboration: strategy,
+            prototyping, design engineering, and practical implementation with
+            the person doing the work in the room.
+          </p>
+          <div className="v2-about-links">
+            <a href="https://www.linkedin.com/in/john-rodrigues4?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noreferrer">
+              LinkedIn
+            </a>
+            <a href="https://john-rodrigues.com/" target="_blank" rel="noreferrer">
+              Portfolio
+            </a>
+          </div>
+        </div>
+        <div className="v2-stats" aria-label="Studio focus">
+          {v2Stats.map(([number, label]) => (
+            <div key={label}>
+              <span>{number}</span>
+              <p>{label}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <section className="v2-cta" aria-labelledby="v2-cta-title">
+        <p className="v2-section-label">Start here</p>
+        <h2 id="v2-cta-title">Have an AI product, workflow, or team question?</h2>
+        <a className="v2-primary" href="mailto:hello@humanai.studio">
+          Book discovery call
+        </a>
+      </section>
+    </main>
+  );
+}
+
+function App() {
+  const isV2 = window.location.pathname.replace(/\/+$/, "") === "/v2";
+
+  return isV2 ? <V2Home /> : <OriginalHome />;
 }
 
 createRoot(document.getElementById("root")).render(<App />);
