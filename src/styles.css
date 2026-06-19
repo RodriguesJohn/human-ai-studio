@@ -1709,6 +1709,11 @@ h3 {
     gap: 1.8rem;
   }
 
+  .v2-bio .eyebrow {
+    font-size: 0.62rem;
+    letter-spacing: 0.36em;
+  }
+
   .v2-bio h2 {
     max-width: 100%;
     font-size: clamp(1.9rem, 7.2vw, 2.35rem);
