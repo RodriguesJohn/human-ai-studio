@@ -497,6 +497,7 @@ function V2Home() {
       </nav>
 
       <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
+        <DotMatrixBackground className="v2-hero-entrance-dots" intensity={3.2} dotScale={1.15} />
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">Agentic operating systems</p>
