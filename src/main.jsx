@@ -507,7 +507,7 @@ function V2Home() {
               <span>Studio</span>
             </h1>
             <p className="intro v2-hero-intro">
-              <span>AI agent and agentic operating system development to help businesses</span>
+              <span>AI agent and agentic operating system development to help businesses</span>{" "}
               <span>scale operations and grow revenue.</span>
             </p>
             <div className="hero-actions">
@@ -554,7 +554,7 @@ function V2Home() {
       </section>
 
       <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
-        <div className="approach-inner">
+        <div className="approach-inner reveal">
           <div>
             <p className="eyebrow">Approach</p>
             <h2 id="v2-approach-title">

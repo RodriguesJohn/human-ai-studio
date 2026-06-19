@@ -1653,9 +1653,16 @@ h3 {
   }
 
   .v2-hero-section h1 {
+    width: fit-content;
+    margin-right: auto;
+    margin-left: auto;
     font-size: clamp(2.35rem, 11vw, 3.45rem);
     line-height: 0.98;
     white-space: nowrap;
+  }
+
+  .v2-hero-section h1 span + span {
+    margin-left: 0.14em;
   }
 
   .v2-hero-section .hero-eyebrow {
@@ -1711,7 +1718,6 @@ h3 {
     width: 100%;
     max-width: 22rem;
     justify-self: start;
-    order: -1;
   }
 
   .v2-bio .profile-image {
