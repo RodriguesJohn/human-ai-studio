@@ -371,6 +371,10 @@ h1 span:nth-child(3) {
   line-height: 1.34;
 }
 
+.v2-hero-intro span {
+  display: block;
+}
+
 .hero-actions {
   display: flex;
   justify-content: center;

@@ -210,7 +210,7 @@ function OriginalHome() {
               <span>AI</span>
               <span>Studio</span>
             </h1>
-            <p className="intro v2-hero-intro">
+            <p className="intro">
               Independent product studio based in the SF Bay Area by John Rodrigues, helping businesses build 0-&gt;1 AI-native products and agentic operating systems.
             </p>
             <div className="hero-actions">
@@ -395,9 +395,9 @@ function V2Home() {
               <span>AI</span>
               <span>Studio</span>
             </h1>
-            <p className="intro">
-              AI agent and agentic operating system development to help your
-              business scale operations and grow revenue.
+            <p className="intro v2-hero-intro">
+              <span>AI agent and agentic operating system development to help your business</span>
+              <span>scale operations and grow revenue.</span>
             </p>
             <div className="hero-actions">
               <a className="button" href="mailto:hello@humanai.studio">
