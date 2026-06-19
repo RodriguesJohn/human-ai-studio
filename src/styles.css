@@ -1640,6 +1640,18 @@ h3 {
     padding-bottom: 3.2rem;
   }
 
+  .v2-hero-section .hero-inner {
+    display: grid;
+    justify-items: center;
+  }
+
+  .v2-hero-section .hero-copy {
+    width: 100%;
+    max-width: 23rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
   .v2-hero-section h1 {
     font-size: clamp(2.35rem, 11vw, 3.45rem);
     line-height: 0.98;
@@ -1654,13 +1666,16 @@ h3 {
   }
 
   .v2-hero-intro {
-    max-width: min(100%, 22rem);
+    max-width: 20rem;
+    margin-right: auto;
+    margin-left: auto;
     font-size: clamp(0.86rem, 3.6vw, 1rem);
     line-height: 1.38;
+    text-wrap: balance;
   }
 
   .v2-hero-intro span {
-    display: inline;
+    display: contents;
   }
 
   .v2-flow-grid {
@@ -1706,6 +1721,16 @@ h3 {
   .v2-final-cta h2 {
     max-width: 13ch;
     font-size: clamp(1.7rem, 7.5vw, 2.35rem);
+  }
+
+  .v2-final-cta .final-cta-inner {
+    display: grid;
+    justify-items: center;
+    max-width: 23rem;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 0;
+    padding-left: 0;
   }
 
   .v2-final-cta h2 span {
