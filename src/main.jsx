@@ -396,7 +396,7 @@ function V2Home() {
               <span>Studio</span>
             </h1>
             <p className="intro v2-hero-intro">
-              <span>AI agent and agentic operating system development to help your business</span>
+              <span>AI agent and agentic operating system development to help businesses</span>
               <span>scale operations and grow revenue.</span>
             </p>
             <div className="hero-actions">
