@@ -721,6 +721,20 @@ h3 {
   white-space: nowrap;
 }
 
+.v2-bio .bio-inner {
+  grid-template-columns: minmax(0, 0.92fr) minmax(16rem, 0.36fr);
+}
+
+.v2-bio h2 {
+  max-width: 17ch;
+  font-size: clamp(2rem, 3vw, 3rem);
+  white-space: normal;
+}
+
+.v2-bio .bio-copy {
+  max-width: 44rem;
+}
+
 .bio-copy {
   max-width: 47rem;
   padding-top: clamp(0rem, 2vw, 1.5rem);

@@ -458,11 +458,11 @@ function V2Home() {
         </div>
       </section>
 
-      <section className="bio" aria-labelledby="v2-bio-title" data-nav-theme="light">
+      <section className="bio v2-bio" aria-labelledby="v2-bio-title" data-nav-theme="light">
         <div className="bio-inner">
           <div className="bio-copy reveal">
             <p className="eyebrow">Work directly with John</p>
-            <h2 id="v2-bio-title">Work 1:1 with John from strategy to shipped system.</h2>
+            <h2 id="v2-bio-title">Work 1:1 with John from strategy to launch.</h2>
             <p>
               Work directly with John Rodrigues across strategy, product design,
               design engineering, AI agent development, and implementation. You
