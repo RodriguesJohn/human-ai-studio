@@ -107,6 +107,11 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1 }) {
       dots.forEach((dot) => {
         const distance = Math.hypot(dot.x - centerX, dot.y - centerY);
         const normalizedDistance = distance / maxDistance;
+        const angleFromCenter = Math.atan2(dot.y - centerY, dot.x - centerX);
+        const radialWave = Math.sin(elapsed * 0.9 - normalizedDistance * 18 + dot.phase) * 1.6;
+        const diagonalWave = Math.sin(elapsed * 0.55 + (dot.x + dot.y) * 0.018 + dot.phase) * 0.75;
+        const drawX = dot.x + Math.cos(angleFromCenter) * radialWave + diagonalWave;
+        const drawY = dot.y + Math.sin(angleFromCenter) * radialWave - diagonalWave * 0.45;
         const reveal = Math.min(Math.max((revealRadius - normalizedDistance) / 0.34, 0), 1);
         const shimmerDistance = Math.abs(normalizedDistance - revealRadius);
         const shimmer = Math.max(1 - shimmerDistance / shimmerWidth, 0);
@@ -120,7 +125,7 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1 }) {
 
         context.beginPath();
         context.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-        context.arc(dot.x, dot.y, (shimmer > 0.18 ? 1.35 : dot.seed > 0.82 ? 1.1 : 0.85) * dotScale, 0, Math.PI * 2);
+        context.arc(drawX, drawY, (shimmer > 0.18 ? 1.35 : dot.seed > 0.82 ? 1.1 : 0.85) * dotScale, 0, Math.PI * 2);
         context.fill();
       });
 
