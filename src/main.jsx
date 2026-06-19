@@ -415,7 +415,7 @@ function V2Home() {
         <div className="section-heading reveal">
           <div>
             <p className="eyebrow">How it works</p>
-            <h2 id="v2-how-title">From workflow pain to AI system</h2>
+            <h2 className="v2-how-heading" id="v2-how-title">From workflow pain to AI system</h2>
           </div>
           <p className="section-note">
             A forward-deployed process for understanding the business problem,

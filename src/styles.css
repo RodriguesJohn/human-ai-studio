@@ -472,6 +472,12 @@ h2 {
   line-height: 1.04;
 }
 
+.offerings .section-heading .v2-how-heading {
+  max-width: 13.5ch;
+  font-size: clamp(1.75rem, 2.8vw, 2.65rem);
+  line-height: 1.06;
+}
+
 .offering-grid {
   display: grid;
   max-width: var(--content-width);
