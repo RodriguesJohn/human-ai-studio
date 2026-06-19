@@ -56,7 +56,7 @@ const v2Principles = [
   "Build, integrate, and improve the system inside the business"
 ];
 
-function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1 }) {
+function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, connections = false }) {
   const canvasRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -67,6 +67,7 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1 }) {
     let animationFrame = 0;
     let startedAt = performance.now();
     let dots = [];
+    let columns = 0;
 
     const resize = () => {
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -77,10 +78,13 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1 }) {
 
       const gap = window.innerWidth < 560 ? 22 : 26;
       dots = [];
+      columns = Math.max(Math.floor(width / gap), 1);
 
-      for (let y = gap / 2; y < height; y += gap) {
-        for (let x = gap / 2; x < width; x += gap) {
+      for (let y = gap / 2, row = 0; y < height; y += gap, row += 1) {
+        for (let x = gap / 2, column = 0; x < width; x += gap, column += 1) {
           dots.push({
+            column,
+            row,
             x,
             y,
             seed: Math.random(),
@@ -104,7 +108,7 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1 }) {
 
       context.clearRect(0, 0, width, height);
 
-      dots.forEach((dot) => {
+      const drawnDots = dots.map((dot) => {
         const distance = Math.hypot(dot.x - centerX, dot.y - centerY);
         const normalizedDistance = distance / maxDistance;
         const angleFromCenter = Math.atan2(dot.y - centerY, dot.x - centerX);
@@ -121,11 +125,48 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1 }) {
         const baseOpacity = 0.035 + dot.seed * 0.075 + pulse * 0.025;
         const opacity = Math.min(edgeFade * (reveal * baseOpacity * ambientPulse + shimmer * 0.09) * intensity, 0.42);
 
-        if (opacity <= 0.01) return;
+        return {
+          ...dot,
+          drawX,
+          drawY,
+          opacity,
+          shimmer
+        };
+      });
+
+      if (connections) {
+        context.lineCap = "round";
+
+        drawnDots.forEach((dot, index) => {
+          if (dot.opacity <= 0.018 || (dot.row + dot.column) % 2 !== 0) return;
+
+          const neighbors = [drawnDots[index + 1], drawnDots[index + columns]];
+
+          neighbors.forEach((neighbor) => {
+            if (!neighbor || neighbor.opacity <= 0.018) return;
+            if (neighbor.row !== dot.row && neighbor.column !== dot.column) return;
+
+            const connectionPulse = 0.52 + Math.sin(elapsed * 1.05 + dot.phase + neighbor.phase) * 0.48;
+            const lineOpacity = Math.min(Math.min(dot.opacity, neighbor.opacity) * 0.82 * connectionPulse, 0.16);
+
+            if (lineOpacity <= 0.012) return;
+
+            context.beginPath();
+            context.strokeStyle = `rgba(255, 255, 255, ${lineOpacity})`;
+            context.lineWidth = 0.7;
+            context.moveTo(dot.drawX, dot.drawY);
+            context.lineTo(neighbor.drawX, neighbor.drawY);
+            context.stroke();
+          });
+        });
+      }
+
+      drawnDots.forEach((dot) => {
+        if (dot.opacity <= 0.01) return;
 
         context.beginPath();
-        context.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-        context.arc(drawX, drawY, (shimmer > 0.18 ? 1.35 : dot.seed > 0.82 ? 1.1 : 0.85) * dotScale, 0, Math.PI * 2);
+        context.fillStyle = `rgba(255, 255, 255, ${dot.opacity})`;
+        context.arc(dot.drawX, dot.drawY, (dot.shimmer > 0.18 ? 1.35 : dot.seed > 0.82 ? 1.1 : 0.85) * dotScale, 0, Math.PI * 2);
         context.fill();
       });
 
@@ -140,7 +181,7 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1 }) {
       cancelAnimationFrame(animationFrame);
       window.removeEventListener("resize", resize);
     };
-  }, [dotScale, intensity]);
+  }, [connections, dotScale, intensity]);
 
   return <canvas className={`dot-matrix-background ${className}`} ref={canvasRef} aria-hidden="true" />;
 }
@@ -393,7 +434,7 @@ function V2Home() {
       </nav>
 
       <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
-        <DotMatrixBackground className="v2-hero-dots" intensity={3.2} dotScale={1.18} />
+        <DotMatrixBackground className="v2-hero-dots" intensity={4.2} dotScale={1.24} connections />
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">Agentic operating systems</p>
