@@ -554,13 +554,13 @@ function V2Home() {
         </div>
       </section>
 
-      <section className="final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
+      <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
         <DotMatrixBackground />
         <div className="final-cta-inner reveal">
           <p className="eyebrow">Start here</p>
           <h2 id="v2-cta-title">
-            <span>Need an AI operating system</span>
-            <span>for your business?</span>
+            <span>Need an AI operating</span>
+            <span>system for your business?</span>
           </h2>
           <a className="button" href="mailto:hello@humanai.studio">
             Book discovery call
