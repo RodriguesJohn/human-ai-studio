@@ -228,7 +228,7 @@ a {
 }
 
 .v2-hero-dots {
-  opacity: 0.78;
+  opacity: 1;
   mask-image:
     radial-gradient(circle at center, #000 0%, #000 48%, transparent 84%),
     linear-gradient(to bottom, transparent 0%, #000 10%, #000 78%, transparent 100%);

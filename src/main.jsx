@@ -56,7 +56,7 @@ const v2Principles = [
   "Build, integrate, and improve the system inside the business"
 ];
 
-function DotMatrixBackground({ className = "" }) {
+function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1 }) {
   const canvasRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -113,13 +113,13 @@ function DotMatrixBackground({ className = "" }) {
         const pulse = 0.45 + Math.sin(elapsed * 1.2 + dot.phase) * 0.25;
         const edgeFade = 1 - Math.min(distance / maxDistance, 1) * 0.72;
         const baseOpacity = 0.035 + dot.seed * 0.075 + pulse * 0.025;
-        const opacity = edgeFade * (reveal * baseOpacity + shimmer * 0.09);
+        const opacity = Math.min(edgeFade * (reveal * baseOpacity + shimmer * 0.09) * intensity, 0.42);
 
         if (opacity <= 0.01) return;
 
         context.beginPath();
         context.fillStyle = `rgba(255, 255, 255, ${opacity})`;
-        context.arc(dot.x, dot.y, shimmer > 0.18 ? 1.35 : dot.seed > 0.82 ? 1.1 : 0.85, 0, Math.PI * 2);
+        context.arc(dot.x, dot.y, (shimmer > 0.18 ? 1.35 : dot.seed > 0.82 ? 1.1 : 0.85) * dotScale, 0, Math.PI * 2);
         context.fill();
       });
 
@@ -134,7 +134,7 @@ function DotMatrixBackground({ className = "" }) {
       cancelAnimationFrame(animationFrame);
       window.removeEventListener("resize", resize);
     };
-  }, []);
+  }, [dotScale, intensity]);
 
   return <canvas className={`dot-matrix-background ${className}`} ref={canvasRef} aria-hidden="true" />;
 }
@@ -387,7 +387,7 @@ function V2Home() {
       </nav>
 
       <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
-        <DotMatrixBackground className="v2-hero-dots" />
+        <DotMatrixBackground className="v2-hero-dots" intensity={3.2} dotScale={1.18} />
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">Agentic operating systems</p>
