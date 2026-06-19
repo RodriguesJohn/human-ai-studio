@@ -29,7 +29,7 @@ const principles = [
 
 const v2HowItWorks = [
   {
-    title: "Strategic audit",
+    title: "Workshop strategy",
     description:
       "Understand your business model, customer journey, revenue motion, tools, data, and team workflows before building."
   },
