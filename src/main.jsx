@@ -52,8 +52,8 @@ const v2HowItWorks = [
 
 const v2Principles = [
   "Scope the business problem and customer workflow",
-  "Build custom end-to-end AI workflow solutions",
-  "Deploy, monitor, and bridge business, clients, and operations"
+  "Design the agent workflow around real team handoffs",
+  "Build, integrate, and improve the system inside the business"
 ];
 
 function DotMatrixBackground() {
@@ -447,7 +447,7 @@ function V2Home() {
           <div>
             <p className="eyebrow">Approach</p>
             <h2 id="v2-approach-title">
-              Forward-deployed design engineering for AI operations.
+              Forward-deployed engineering for business workflows.
             </h2>
           </div>
           <div className="principle-list">
