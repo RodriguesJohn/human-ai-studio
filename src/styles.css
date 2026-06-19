@@ -1651,22 +1651,24 @@ h3 {
 
   .v2-hero-section .hero-copy {
     width: 100%;
-    max-width: 23rem;
+    max-width: 21.5rem;
     margin-right: auto;
     margin-left: auto;
   }
 
   .v2-hero-section h1 {
     width: fit-content;
+    max-width: calc(100vw - 3rem);
     margin-right: auto;
     margin-left: auto;
-    font-size: clamp(2.35rem, 11vw, 3.45rem);
+    font-size: clamp(2.25rem, 10.2vw, 3.08rem);
     line-height: 0.98;
+    text-align: center;
     white-space: nowrap;
   }
 
   .v2-hero-section h1 span + span {
-    margin-left: 0.14em;
+    margin-left: 0.1em;
   }
 
   .v2-hero-section .hero-eyebrow {
