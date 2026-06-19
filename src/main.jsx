@@ -210,7 +210,7 @@ function OriginalHome() {
               <span>AI</span>
               <span>Studio</span>
             </h1>
-            <p className="intro">
+            <p className="intro v2-hero-intro">
               Independent product studio based in the SF Bay Area by John Rodrigues, helping businesses build 0-&gt;1 AI-native products and agentic operating systems.
             </p>
             <div className="hero-actions">
