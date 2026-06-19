@@ -573,7 +573,10 @@ function V2Home() {
         <div className="bio-inner">
           <div className="bio-copy reveal">
             <p className="eyebrow">Work directly with John</p>
-            <h2 id="v2-bio-title">Work 1:1 with John from strategy to launch.</h2>
+            <h2 id="v2-bio-title">
+              <span>Work 1:1 with John</span>
+              <span>from strategy to launch.</span>
+            </h2>
             <p>
               Work directly with John Rodrigues across strategy, product design,
               design engineering, AI agent development, and implementation. You

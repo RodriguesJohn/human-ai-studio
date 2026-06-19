@@ -779,6 +779,10 @@ h3 {
   white-space: normal;
 }
 
+.v2-bio h2 span {
+  display: block;
+}
+
 .v2-bio .bio-copy {
   max-width: 44rem;
 }
@@ -1704,8 +1708,8 @@ h3 {
   }
 
   .v2-bio h2 {
-    max-width: 15ch;
-    font-size: clamp(2rem, 8vw, 2.55rem);
+    max-width: 100%;
+    font-size: clamp(1.9rem, 7.2vw, 2.35rem);
     line-height: 1.02;
   }
 
