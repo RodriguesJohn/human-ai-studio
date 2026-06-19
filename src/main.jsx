@@ -346,11 +346,11 @@ function OriginalHome() {
               </a>
               <a
                 className="secondary-button"
-                href="https://john-rodrigues.com/"
+                href="https://johnrodrigues.substack.com/"
                 target="_blank"
                 rel="noreferrer"
               >
-                Portfolio
+                Substack
               </a>
             </div>
           </div>
@@ -534,11 +534,11 @@ function V2Home() {
               </a>
               <a
                 className="secondary-button"
-                href="https://john-rodrigues.com/"
+                href="https://johnrodrigues.substack.com/"
                 target="_blank"
                 rel="noreferrer"
               >
-              Portfolio
+              Substack
               </a>
             </div>
           </div>
