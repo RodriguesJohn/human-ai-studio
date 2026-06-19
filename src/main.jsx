@@ -389,7 +389,7 @@ function V2Home() {
       <section className="hero" id="top" data-nav-theme="dark">
         <div className="hero-inner">
           <div className="hero-copy">
-            <p className="eyebrow hero-eyebrow">AI agent operating systems</p>
+            <p className="eyebrow hero-eyebrow">Agentic operating systems</p>
             <h1>
               <span>Human</span>
               <span>AI</span>
@@ -535,7 +535,7 @@ function V2Home() {
 
           <div className="footer-column">
             <p>Services</p>
-            <a href="/v2#top">AI agent operating systems</a>
+            <a href="/v2#top">Agentic operating systems</a>
             <a href="/v2#top">AI agent development</a>
             <a href="/v2#top">Operations integration</a>
           </div>
