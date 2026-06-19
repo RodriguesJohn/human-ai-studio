@@ -27,10 +27,28 @@ const principles = [
   "Systems that move business needles over demos"
 ];
 
-const v2Stats = [
-  ["01", "Product design"],
-  ["02", "Design engineering"],
-  ["03", "Agentic systems"]
+const v2HowItWorks = [
+  {
+    title: "Strategic audit through workshops",
+    description:
+      "Map your operations, revenue motion, tools, data, and team workflows to identify where AI agents can create the highest leverage."
+  },
+  {
+    title: "MVP development and implementation",
+    description:
+      "Design and build a working AI operating system: agent workflows, interfaces, automations, and integrations your team can actually use."
+  },
+  {
+    title: "Continuous support and monitoring",
+    description:
+      "Refine the system after launch with monitoring, iteration, workflow tuning, and support as your operations scale."
+  }
+];
+
+const v2Principles = [
+  "Design-centered mindset",
+  "Product thinking",
+  "Engineering combined with one-person studio ownership"
 ];
 
 function DotMatrixBackground() {
@@ -116,7 +134,7 @@ function DotMatrixBackground() {
   return <canvas className="dot-matrix-background" ref={canvasRef} aria-hidden="true" />;
 }
 
-function OriginalHome() {
+function useRevealAnimation() {
   React.useEffect(() => {
     const revealElements = document.querySelectorAll(".reveal");
 
@@ -161,6 +179,10 @@ function OriginalHome() {
       observer.disconnect();
     };
   }, []);
+}
+
+function OriginalHome() {
+  useRevealAnimation();
 
   return (
     <main className="page-shell">
@@ -345,119 +367,189 @@ function OriginalHome() {
 }
 
 function V2Home() {
+  useRevealAnimation();
+
   return (
-    <main className="v2-page">
-      <nav className="v2-nav" aria-label="V2 primary">
-        <a className="brand v2-brand" href="/" aria-label="Human AI Studio home">
+    <main className="page-shell">
+      <nav className="nav nav-dark" aria-label="Primary">
+        <a className="brand" href="/v2#top" aria-label="Human AI Studio V2 home">
           <span className="brand-mark" aria-hidden="true" />
           Human AI Studio
         </a>
-        <a className="v2-nav-link" href="mailto:hello@humanai.studio">
-          Book discovery call
+        <a className="nav-link" href="mailto:hello@humanai.studio">
+          Book a call
         </a>
       </nav>
 
-      <section className="v2-hero" id="top">
-        <div className="v2-hero-copy">
-          <p className="v2-kicker">Independent AI product studio</p>
-          <h1>Human AI Studio</h1>
-          <p className="v2-intro">
-            Built by John Rodrigues in the SF Bay Area for founders and teams
-            turning AI ideas into useful products, workflows, and agentic
-            operating systems.
-          </p>
-          <div className="v2-actions">
-            <a className="v2-primary" href="mailto:hello@humanai.studio">
-              <span className="button-avatar" aria-hidden="true">
-                <img src={profilePicture} alt="" />
-              </span>
-              Book a call
-            </a>
-            <a className="v2-secondary" href="#work">
-              See offerings
-            </a>
+      <section className="hero" id="top" data-nav-theme="dark">
+        <div className="hero-inner">
+          <div className="hero-copy">
+            <p className="eyebrow hero-eyebrow">AI agent operating systems</p>
+            <h1>
+              <span>Human</span>
+              <span>AI</span>
+              <span>Studio</span>
+            </h1>
+            <p className="intro">
+              Design and development studio for AI agent operating systems that
+              help businesses scale operations, automate repetitive work, and
+              grow revenue.
+            </p>
+            <div className="hero-actions">
+              <a className="button" href="mailto:hello@humanai.studio">
+                <span className="button-avatar" aria-hidden="true">
+                  <img src={profilePicture} alt="" />
+                </span>
+                Book discovery call
+              </a>
+            </div>
           </div>
         </div>
-
-        <aside className="v2-portrait" aria-label="John Rodrigues">
-          <img src={profilePicture} alt="John Rodrigues" />
-          <div>
-            <span>John Rodrigues</span>
-            <span>Design Engineer | Founder</span>
-          </div>
-        </aside>
       </section>
 
-      <section className="v2-offerings" id="work" aria-labelledby="v2-work-title">
-        <div className="v2-section-label">Ways to work</div>
-        <div className="v2-offerings-head">
-          <h2 id="v2-work-title">From first signal to working system.</h2>
-          <p>
-            Direct product thinking, design craft, and implementation support
-            for teams who need AI to move real business outcomes.
+      <section className="offerings" aria-labelledby="v2-how-title" data-nav-theme="light">
+        <div className="section-heading reveal">
+          <div>
+            <p className="eyebrow">How it works</p>
+            <h2 id="v2-how-title">From operational pain to working AI system</h2>
+          </div>
+          <p className="section-note">
+            A focused path for turning scattered workflows, data, and repetitive
+            work into AI agents that support real business outcomes.
           </p>
         </div>
 
-        <div className="v2-offering-list">
-          {offerings.map((offering, index) => (
-            <article className="v2-offering-row" key={offering.title}>
-              <span>{String(index + 1).padStart(2, "0")}</span>
-              <h3>{offering.title}</h3>
-              <p>{offering.description}</p>
+        <div className="offering-grid">
+          {v2HowItWorks.map((step, index) => (
+            <article
+              className="offering-card reveal"
+              key={step.title}
+              style={{ "--reveal-delay": `${120 + index * 140}ms` }}
+            >
+              <div className="offering-topline">
+                <span className="number">{String(index + 1).padStart(2, "0")}</span>
+              </div>
+              <div className="offering-copy">
+                <h3>{step.title}</h3>
+                <p>{step.description}</p>
+              </div>
             </article>
           ))}
         </div>
       </section>
 
-      <section className="v2-principles" aria-labelledby="v2-principles-title">
-        <div>
-          <p className="v2-section-label">Approach</p>
-          <h2 id="v2-principles-title">
-            Human judgment, product taste, and engineering discipline.
-          </h2>
-        </div>
-        <div className="v2-principle-grid">
-          {principles.map((principle) => (
-            <p key={principle}>{principle}</p>
-          ))}
-        </div>
-      </section>
-
-      <section className="v2-about" aria-labelledby="v2-about-title">
-        <div className="v2-about-copy">
-          <p className="v2-section-label">Work directly with John</p>
-          <h2 id="v2-about-title">Hands-on AI product work without the agency layer.</h2>
-          <p>
-            Human AI Studio is built around close collaboration: strategy,
-            prototyping, design engineering, and practical implementation with
-            the person doing the work in the room.
-          </p>
-          <div className="v2-about-links">
-            <a href="https://www.linkedin.com/in/john-rodrigues4?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noreferrer">
-              LinkedIn
-            </a>
-            <a href="https://john-rodrigues.com/" target="_blank" rel="noreferrer">
-              Portfolio
-            </a>
+      <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
+        <div className="approach-inner">
+          <div>
+            <p className="eyebrow">Approach</p>
+            <h2 id="v2-approach-title">
+              Design-centered mindset, product thinking, and engineering combined.
+            </h2>
+          </div>
+          <div className="principle-list">
+            {v2Principles.map((principle) => (
+              <p key={principle}>{principle}</p>
+            ))}
           </div>
         </div>
-        <div className="v2-stats" aria-label="Studio focus">
-          {v2Stats.map(([number, label]) => (
-            <div key={label}>
-              <span>{number}</span>
-              <p>{label}</p>
+      </section>
+
+      <section className="bio" aria-labelledby="v2-bio-title" data-nav-theme="light">
+        <div className="bio-inner">
+          <div className="bio-copy reveal">
+            <p className="eyebrow">Work directly with John</p>
+            <h2 id="v2-bio-title">One-person studio for AI operations work.</h2>
+            <p>
+              Work directly with John Rodrigues across strategy, product design,
+              design engineering, and implementation. The same person helping
+              define the operating system is also close to the build, testing,
+              and day-to-day usefulness.
+            </p>
+            <p>
+              John brings AI credibility through hands-on product work: turning
+              ambiguous workflows into prototypes, agentic systems, internal
+              tools, and AI-native products that teams can understand, trust,
+              and operate.
+            </p>
+            <div className="bio-actions">
+              <a
+                className="secondary-button"
+                href="https://www.linkedin.com/in/john-rodrigues4?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                target="_blank"
+                rel="noreferrer"
+              >
+              LinkedIn
+              </a>
+              <a
+                className="secondary-button"
+                href="https://john-rodrigues.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+              Portfolio
+              </a>
             </div>
-          ))}
+          </div>
+          <figure className="profile-card reveal" style={{ "--reveal-delay": "130ms" }}>
+            <div className="profile-image">
+              <img src={profilePicture} alt="John Rodrigues" />
+            </div>
+            <figcaption>
+              <span>John Rodrigues</span>
+              <span>Design Engineer | Founder of Human AI Studio</span>
+            </figcaption>
+          </figure>
         </div>
       </section>
 
-      <section className="v2-cta" aria-labelledby="v2-cta-title">
-        <p className="v2-section-label">Start here</p>
-        <h2 id="v2-cta-title">Have an AI product, workflow, or team question?</h2>
-        <a className="v2-primary" href="mailto:hello@humanai.studio">
-          Book discovery call
-        </a>
+      <section className="final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
+        <DotMatrixBackground />
+        <div className="final-cta-inner reveal">
+          <p className="eyebrow">Start here</p>
+          <h2 id="v2-cta-title">
+            <span>Need an AI operating system</span>
+            <span>for your business?</span>
+          </h2>
+          <a className="button" href="mailto:hello@humanai.studio">
+            Book discovery call
+          </a>
+        </div>
       </section>
+
+      <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
+        <div className="site-footer-inner">
+          <div className="footer-brand">
+            <a className="brand" href="/v2#top" aria-label="Human AI Studio V2 home">
+              <span className="brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </a>
+            <p>
+              Human AI Studio by Human Inspire Studio. AI agent operating system
+              design and development studio run by John Rodrigues.
+            </p>
+          </div>
+
+          <div className="footer-column">
+            <p>Services</p>
+            <a href="/v2#top">AI agent operating systems</a>
+            <a href="/v2#top">MVP implementation</a>
+            <a href="/v2#top">Workflow automation</a>
+          </div>
+
+          <div className="footer-column">
+            <p>Studio</p>
+            <span>San Francisco Bay Area</span>
+            <span>Design engineering</span>
+            <span>One-person operations</span>
+          </div>
+
+          <div className="footer-column">
+            <p>Contact</p>
+            <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
+            <a href="mailto:hello@humanai.studio">Book discovery call</a>
+          </div>
+        </div>
+      </footer>
     </main>
   );
 }
