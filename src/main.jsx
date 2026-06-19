@@ -56,7 +56,7 @@ const v2Principles = [
   "Build, integrate, and improve the system inside the business"
 ];
 
-function DotMatrixBackground() {
+function DotMatrixBackground({ className = "" }) {
   const canvasRef = React.useRef(null);
 
   React.useEffect(() => {
@@ -136,7 +136,7 @@ function DotMatrixBackground() {
     };
   }, []);
 
-  return <canvas className="dot-matrix-background" ref={canvasRef} aria-hidden="true" />;
+  return <canvas className={`dot-matrix-background ${className}`} ref={canvasRef} aria-hidden="true" />;
 }
 
 function useRevealAnimation() {
@@ -386,7 +386,8 @@ function V2Home() {
         </a>
       </nav>
 
-      <section className="hero" id="top" data-nav-theme="dark">
+      <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
+        <DotMatrixBackground className="v2-hero-dots" />
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">Agentic operating systems</p>
