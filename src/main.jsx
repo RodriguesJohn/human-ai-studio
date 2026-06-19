@@ -487,7 +487,7 @@ function V2Home() {
   return (
     <main className="page-shell">
       <nav className="nav nav-dark" aria-label="Primary">
-        <a className="brand" href="/v2#top" aria-label="Human AI Studio V2 home">
+        <a className="brand" href="/#top" aria-label="Human AI Studio home">
           <span className="brand-mark" aria-hidden="true" />
           Human AI Studio
         </a>
@@ -637,7 +637,7 @@ function V2Home() {
       <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
         <div className="site-footer-inner">
           <div className="footer-brand">
-            <a className="brand" href="/v2#top" aria-label="Human AI Studio V2 home">
+            <a className="brand" href="/#top" aria-label="Human AI Studio home">
               <span className="brand-mark" aria-hidden="true" />
               Human AI Studio
             </a>
@@ -649,9 +649,9 @@ function V2Home() {
 
           <div className="footer-column">
             <p>Services</p>
-            <a href="/v2#top">Agentic operating systems</a>
-            <a href="/v2#top">AI agent development</a>
-            <a href="/v2#top">Operations integration</a>
+            <a href="/#top">Agentic operating systems</a>
+            <a href="/#top">AI agent development</a>
+            <a href="/#top">Operations integration</a>
           </div>
 
           <div className="footer-column">
@@ -673,9 +673,10 @@ function V2Home() {
 }
 
 function App() {
-  const isV2 = window.location.pathname.replace(/\/+$/, "") === "/v2";
+  const route = window.location.pathname.replace(/\/+$/, "") || "/";
+  const isHistory = route === "/history";
 
-  return isV2 ? <V2Home /> : <OriginalHome />;
+  return isHistory ? <OriginalHome /> : <V2Home />;
 }
 
 createRoot(document.getElementById("root")).render(<App />);
