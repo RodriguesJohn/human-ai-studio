@@ -67,7 +67,8 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, conn
     let animationFrame = 0;
     let startedAt = performance.now();
     let dots = [];
-    let columns = 0;
+    let meshNodes = [];
+    let meshLinks = [];
 
     const resize = () => {
       const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
@@ -78,7 +79,8 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, conn
 
       const gap = window.innerWidth < 560 ? 22 : 26;
       dots = [];
-      columns = Math.max(Math.floor(width / gap), 1);
+      meshNodes = [];
+      meshLinks = [];
 
       for (let y = gap / 2, row = 0; y < height; y += gap, row += 1) {
         for (let x = gap / 2, column = 0; x < width; x += gap, column += 1) {
@@ -91,6 +93,47 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, conn
             phase: Math.random() * Math.PI * 2
           });
         }
+      }
+
+      if (connections) {
+        const nodeCount = window.innerWidth < 560 ? 86 : 170;
+        const radiusX = width * 0.42;
+        const radiusY = height * 0.26;
+
+        for (let index = 0; index < nodeCount; index += 1) {
+          const angle = Math.random() * Math.PI * 2;
+          const radius = Math.pow(Math.random(), 0.55);
+          const clusterBias = Math.sin(index * 1.7) * 0.18;
+
+          meshNodes.push({
+            x: width / 2 + Math.cos(angle) * radiusX * (radius + clusterBias) + (Math.random() - 0.5) * 90,
+            y: height / 2 + Math.sin(angle) * radiusY * radius + (Math.random() - 0.5) * 70,
+            phase: Math.random() * Math.PI * 2,
+            seed: Math.random(),
+            size: 0.75 + Math.random() * 1.8
+          });
+        }
+
+        meshNodes.forEach((node, index) => {
+          const nearest = meshNodes
+            .map((candidate, candidateIndex) => ({
+              candidateIndex,
+              distance: candidateIndex === index ? Infinity : Math.hypot(candidate.x - node.x, candidate.y - node.y)
+            }))
+            .sort((a, b) => a.distance - b.distance)
+            .slice(0, 3);
+
+          nearest.forEach(({ candidateIndex, distance }, neighborIndex) => {
+            if (candidateIndex <= index || distance > Math.min(width, height) * 0.34) return;
+
+            meshLinks.push({
+              from: index,
+              to: candidateIndex,
+              strength: 1 - neighborIndex * 0.2,
+              phase: Math.random() * Math.PI * 2
+            });
+          });
+        });
       }
 
       startedAt = performance.now();
@@ -107,6 +150,53 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, conn
       const shimmerWidth = 0.045;
 
       context.clearRect(0, 0, width, height);
+
+      if (connections) {
+        const meshReveal = Math.min(Math.max((elapsed - 0.55) / 1.6, 0), 1);
+        const drawnMeshNodes = meshNodes.map((node) => {
+          const driftX = Math.sin(elapsed * 0.18 + node.phase) * 7 + Math.sin(elapsed * 0.42 + node.y * 0.012) * 2.5;
+          const driftY = Math.cos(elapsed * 0.2 + node.phase * 0.8) * 5 + Math.sin(elapsed * 0.36 + node.x * 0.01) * 2;
+          const distance = Math.hypot(node.x - centerX, node.y - centerY);
+          const edgeFade = 1 - Math.min(distance / maxDistance, 1) * 0.62;
+          const pulse = 0.68 + Math.sin(elapsed * 0.75 + node.phase) * 0.32;
+
+          return {
+            ...node,
+            drawX: node.x + driftX,
+            drawY: node.y + driftY,
+            opacity: Math.min(edgeFade * pulse * meshReveal * 0.34, 0.34)
+          };
+        });
+
+        context.lineCap = "round";
+        context.lineJoin = "round";
+
+        meshLinks.forEach((link) => {
+          const from = drawnMeshNodes[link.from];
+          const to = drawnMeshNodes[link.to];
+          if (!from || !to) return;
+
+          const flow = 0.58 + Math.sin(elapsed * 0.75 + link.phase) * 0.42;
+          const lineOpacity = Math.min(Math.min(from.opacity, to.opacity) * link.strength * flow * 0.78, 0.13);
+          if (lineOpacity <= 0.01) return;
+
+          context.beginPath();
+          context.strokeStyle = `rgba(210, 236, 255, ${lineOpacity})`;
+          context.lineWidth = 0.55 + link.strength * 0.35;
+          context.moveTo(from.drawX, from.drawY);
+          context.lineTo(to.drawX, to.drawY);
+          context.stroke();
+        });
+
+        drawnMeshNodes.forEach((node) => {
+          if (node.opacity <= 0.01) return;
+
+          context.beginPath();
+          context.fillStyle = `rgba(255, 255, 255, ${Math.min(node.opacity * 1.15, 0.42)})`;
+          context.arc(node.drawX, node.drawY, node.size * dotScale, 0, Math.PI * 2);
+          context.fill();
+        });
+      }
 
       const drawnDots = dots.map((dot) => {
         const distance = Math.hypot(dot.x - centerX, dot.y - centerY);
@@ -133,33 +223,6 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, conn
           shimmer
         };
       });
-
-      if (connections) {
-        context.lineCap = "round";
-
-        drawnDots.forEach((dot, index) => {
-          if (dot.opacity <= 0.018 || (dot.row + dot.column) % 2 !== 0) return;
-
-          const neighbors = [drawnDots[index + 1], drawnDots[index + columns]];
-
-          neighbors.forEach((neighbor) => {
-            if (!neighbor || neighbor.opacity <= 0.018) return;
-            if (neighbor.row !== dot.row && neighbor.column !== dot.column) return;
-
-            const connectionPulse = 0.52 + Math.sin(elapsed * 1.05 + dot.phase + neighbor.phase) * 0.48;
-            const lineOpacity = Math.min(Math.min(dot.opacity, neighbor.opacity) * 0.82 * connectionPulse, 0.16);
-
-            if (lineOpacity <= 0.012) return;
-
-            context.beginPath();
-            context.strokeStyle = `rgba(255, 255, 255, ${lineOpacity})`;
-            context.lineWidth = 0.7;
-            context.moveTo(dot.drawX, dot.drawY);
-            context.lineTo(neighbor.drawX, neighbor.drawY);
-            context.stroke();
-          });
-        });
-      }
 
       drawnDots.forEach((dot) => {
         if (dot.opacity <= 0.01) return;
