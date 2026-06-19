@@ -29,31 +29,31 @@ const principles = [
 
 const v2HowItWorks = [
   {
-    title: "Strategic audit through workshops",
+    title: "Strategic audit",
     description:
-      "Map your operations, revenue motion, tools, data, and team workflows to identify where AI agents can create the highest leverage."
+      "Understand your business model, customer journey, revenue motion, tools, data, and team workflows before building."
   },
   {
-    title: "AI agent development",
+    title: "Agent development",
     description:
-      "Design and develop AI agents around the workflows, decisions, and operating needs that matter most to the business."
+      "Design and develop AI agents around the decisions, handoffs, and operating needs that matter most to the business."
   },
   {
-    title: "Integration into operations",
+    title: "Workflow integration",
     description:
-      "Connect agents into your existing systems, team processes, knowledge bases, and business context so they become part of how work gets done."
+      "Connect agents into your systems, knowledge bases, team processes, and client-facing workflows so they fit real operations."
   },
   {
-    title: "Continuous support and monitoring",
+    title: "Support and monitoring",
     description:
       "Refine the system after launch with monitoring, iteration, workflow tuning, and support as your operations scale."
   }
 ];
 
 const v2Principles = [
-  "Design-centered mindset",
-  "Product thinking",
-  "Engineering combined with direct 1:1 collaboration"
+  "Scope the business problem and customer workflow",
+  "Build custom end-to-end AI workflow solutions",
+  "Deploy, monitor, and bridge business, clients, and operations"
 ];
 
 function DotMatrixBackground() {
@@ -415,12 +415,11 @@ function V2Home() {
         <div className="section-heading reveal">
           <div>
             <p className="eyebrow">How it works</p>
-            <h2 id="v2-how-title">From operational pain to working AI system</h2>
+            <h2 id="v2-how-title">From workflow pain to AI system</h2>
           </div>
           <p className="section-note">
-            A focused path for turning scattered workflows, data, and repetitive
-            business context into AI agents and operating systems that support
-            real business outcomes.
+            A forward-deployed process for understanding the business problem,
+            designing the workflow, and shipping AI agents into real operations.
           </p>
         </div>
 
@@ -448,7 +447,7 @@ function V2Home() {
           <div>
             <p className="eyebrow">Approach</p>
             <h2 id="v2-approach-title">
-              Design-centered mindset, product thinking, and engineering combined.
+              Forward-deployed design engineering for AI operations.
             </h2>
           </div>
           <div className="principle-list">
