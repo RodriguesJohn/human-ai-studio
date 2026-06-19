@@ -1736,8 +1736,11 @@ h3 {
   }
 
   .v2-final-cta h2 {
-    max-width: 13ch;
-    font-size: clamp(1.7rem, 7.5vw, 2.35rem);
+    width: max-content;
+    max-width: calc(100vw - 3rem);
+    font-size: clamp(1.45rem, 6.2vw, 1.95rem);
+    line-height: 1.1;
+    text-align: center;
   }
 
   .v2-final-cta .final-cta-inner {
