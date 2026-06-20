@@ -880,6 +880,13 @@ h3 {
   display: block;
 }
 
+.v2-final-cta h2 {
+  max-width: 21ch;
+  font-size: clamp(2.35rem, 5.2vw, 5.15rem);
+  font-weight: 520;
+  line-height: 1;
+}
+
 .site-footer {
   padding: clamp(2.75rem, 5vw, 4.5rem) var(--page-padding);
   border-top: 1px solid var(--line);
