@@ -249,88 +249,6 @@ function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, conn
   return <canvas className={`dot-matrix-background ${className}`} ref={canvasRef} aria-hidden="true" />;
 }
 
-function ParticleOrb({ className = "" }) {
-  const canvasRef = React.useRef(null);
-
-  React.useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return undefined;
-
-    const context = canvas.getContext("2d");
-    let animationFrame = 0;
-    let particles = [];
-
-    const resize = () => {
-      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-      const { width, height } = canvas.getBoundingClientRect();
-      canvas.width = Math.floor(width * pixelRatio);
-      canvas.height = Math.floor(height * pixelRatio);
-      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-
-      const count = window.innerWidth < 560 ? 620 : 980;
-      particles = Array.from({ length: count }, () => {
-        const angle = Math.random() * Math.PI * 2;
-        const radius = Math.pow(Math.random(), 0.68);
-        const edgeBias = Math.random() > 0.58 ? 0.86 + Math.random() * 0.14 : radius;
-
-        return {
-          angle,
-          radius: Math.min(edgeBias, 1),
-          size: 0.72 + Math.random() * 1.45,
-          phase: Math.random() * Math.PI * 2,
-          speed: 0.045 + Math.random() * 0.08,
-          opacity: 0.42 + Math.random() * 0.48
-        };
-      });
-    };
-
-    const draw = (now) => {
-      const { width, height } = canvas.getBoundingClientRect();
-      const elapsed = now / 1000;
-      const centerX = width / 2;
-      const centerY = height / 2;
-      const radius = Math.min(width, height) * 0.38;
-
-      context.clearRect(0, 0, width, height);
-
-      particles.forEach((particle) => {
-        const orbit = particle.angle + elapsed * particle.speed;
-        const breathe = Math.sin(elapsed * 0.9 + particle.phase) * 0.025;
-        const currentRadius = radius * Math.max(0.08, particle.radius + breathe);
-        const flatten = 0.93 + Math.sin(orbit * 2 + particle.phase) * 0.05;
-        const x = centerX + Math.cos(orbit) * currentRadius;
-        const y = centerY + Math.sin(orbit) * currentRadius * flatten;
-        const edgeGlow = 0.58 + particle.radius * 0.42;
-        const twinkle = 0.72 + Math.sin(elapsed * 1.8 + particle.phase) * 0.28;
-
-        context.beginPath();
-        context.fillStyle = `rgba(255, 255, 255, ${particle.opacity * edgeGlow * twinkle})`;
-        context.arc(x, y, particle.size, 0, Math.PI * 2);
-        context.fill();
-      });
-
-      animationFrame = requestAnimationFrame(draw);
-    };
-
-    resize();
-    animationFrame = requestAnimationFrame(draw);
-    window.addEventListener("resize", resize);
-
-    return () => {
-      cancelAnimationFrame(animationFrame);
-      window.removeEventListener("resize", resize);
-    };
-  }, []);
-
-  return (
-    <div className={`particle-orb ${className}`} aria-hidden="true">
-      <span className="orb-ring orb-ring-one" />
-      <span className="orb-ring orb-ring-two" />
-      <canvas ref={canvasRef} />
-    </div>
-  );
-}
-
 function useRevealAnimation() {
   React.useEffect(() => {
     const revealElements = document.querySelectorAll(".reveal");
@@ -580,7 +498,6 @@ function V2Home() {
 
       <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
         <DotMatrixBackground className="v2-hero-entrance-dots" intensity={3.2} dotScale={1.15} />
-        <ParticleOrb />
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">Agentic operating systems</p>
