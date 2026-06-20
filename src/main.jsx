@@ -580,6 +580,7 @@ function V2Home() {
 
       <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
         <DotMatrixBackground className="v2-hero-entrance-dots" intensity={3.2} dotScale={1.15} />
+        <ParticleOrb />
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">Agentic operating systems</p>
@@ -592,7 +593,6 @@ function V2Home() {
               <span>AI agent and agentic operating system development to help businesses</span>{" "}
               <span>scale operations and grow revenue.</span>
             </p>
-            <ParticleOrb />
             <div className="hero-actions">
               <a className="button" href="mailto:hello@humanai.studio">
                 <span className="button-avatar" aria-hidden="true">
