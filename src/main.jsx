@@ -29,12 +29,12 @@ const principles = [
 
 const v2HowItWorks = [
   {
-    title: "Workshop strategy",
+    title: "Strategy workshop",
     description:
       "Understand your business model, customer journey, revenue motion, tools, data, and team workflows before building."
   },
   {
-    title: "Agent development",
+    title: "AI agent and systems development",
     description:
       "Design and develop AI agents around the decisions, handoffs, and operating needs that matter most to the business."
   },

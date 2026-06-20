@@ -1746,8 +1746,9 @@ h3 {
   }
 
   .v2-bio .eyebrow {
-    font-size: 0.62rem;
-    letter-spacing: 0.36em;
+    font-size: 0.54rem;
+    font-weight: 520;
+    letter-spacing: 0.28em;
   }
 
   .v2-bio h2 {
