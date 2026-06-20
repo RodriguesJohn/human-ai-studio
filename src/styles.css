@@ -1024,7 +1024,7 @@ h3 {
   text-transform: uppercase;
 }
 
-.v2-hero h1 {
+.v2-hero:not(.v2-hero-section) h1 {
   max-width: 10ch;
   margin: 0 0 1.45rem;
   font-size: clamp(4rem, 12vw, 10.5rem);
@@ -1032,6 +1032,10 @@ h3 {
   line-height: 0.86;
   white-space: normal;
   animation: titleReveal 900ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.v2-hero-section h1 {
+  font-size: clamp(3.2rem, 6.4vw, 6rem);
 }
 
 .v2-intro {
