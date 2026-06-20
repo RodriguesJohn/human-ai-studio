@@ -558,7 +558,7 @@ function V2Home() {
           <div>
             <p className="eyebrow">Approach</p>
             <h2 id="v2-approach-title">
-              Forward-deployed engineering for business workflows.
+              Forward-deployed design and engineering for your business.
             </h2>
           </div>
           <div className="principle-list">
