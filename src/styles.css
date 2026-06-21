@@ -530,6 +530,10 @@ h2 {
   margin-top: -0.9rem;
 }
 
+.v2-offer-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .offering-card {
   position: relative;
   display: grid;

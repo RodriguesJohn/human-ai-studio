@@ -50,10 +50,34 @@ const v2HowItWorks = [
   }
 ];
 
+const homeOffers = [
+  {
+    title: "AI agents and systems development",
+    description:
+      "Design and build practical AI agents, internal systems, and workflow tools that fit how your business actually operates."
+  },
+  {
+    title: "Design engineering services",
+    description:
+      "Turn product ideas, AI workflows, and internal tools into polished interfaces and working software with strong product craft."
+  },
+  {
+    title: "AI enablement, trainings, and workshops",
+    description:
+      "Help teams understand AI, apply it to real work, and build the confidence to use new systems and workflows effectively."
+  }
+];
+
 const v2Principles = [
   "Scope the business problem and customer workflow",
   "Design the agent workflow around real team handoffs",
   "Build, integrate, and improve the system inside the business"
+];
+
+const homePrinciples = [
+  "Start with business context, workflow, and team readiness",
+  "Design useful AI systems people can understand and operate",
+  "Build, enable, and improve adoption inside the business"
 ];
 
 function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, connections = false }) {
@@ -481,8 +505,10 @@ function OriginalHome() {
   );
 }
 
-function V2Home() {
+function StudioHome({ isHistory = false }) {
   useRevealAnimation();
+  const cards = isHistory ? v2HowItWorks : homeOffers;
+  const principlesList = isHistory ? v2Principles : homePrinciples;
 
   return (
     <main className="page-shell">
@@ -500,15 +526,26 @@ function V2Home() {
         <DotMatrixBackground className="v2-hero-entrance-dots" intensity={3.2} dotScale={1.15} />
         <div className="hero-inner">
           <div className="hero-copy">
-            <p className="eyebrow hero-eyebrow">Agentic operating systems</p>
+            <p className="eyebrow hero-eyebrow">
+              {isHistory ? "Agentic operating systems" : "AI systems and enablement studio"}
+            </p>
             <h1>
               <span>Human</span>
               <span>AI</span>
               <span>Studio</span>
             </h1>
             <p className="intro v2-hero-intro">
-              <span>AI agent and agentic operating system development to help businesses</span>{" "}
-              <span>scale operations and grow revenue.</span>
+              {isHistory ? (
+                <>
+                  <span>AI agent and agentic operating system development to help businesses</span>{" "}
+                  <span>scale operations and grow revenue.</span>
+                </>
+              ) : (
+                <>
+                  <span>AI systems, design engineering, and enablement for businesses</span>{" "}
+                  <span>building practical AI into their operations.</span>
+                </>
+              )}
             </p>
             <div className="hero-actions">
               <a className="button" href="mailto:hello@humanai.studio">
@@ -525,17 +562,20 @@ function V2Home() {
       <section className="offerings" aria-labelledby="v2-how-title" data-nav-theme="light">
         <div className="section-heading reveal">
           <div>
-            <p className="eyebrow">How it works</p>
-            <h2 className="v2-how-heading" id="v2-how-title">From workflow pain to AI system</h2>
+            <p className="eyebrow">{isHistory ? "How it works" : "Offerings"}</p>
+            <h2 className="v2-how-heading" id="v2-how-title">
+              {isHistory ? "From workflow pain to AI system" : "Three ways to work together"}
+            </h2>
           </div>
           <p className="section-note">
-            A forward-deployed process for understanding the business problem,
-            designing the workflow, and shipping AI agents into real operations.
+            {isHistory
+              ? "A forward-deployed process for understanding the business problem, designing the workflow, and shipping AI agents into real operations."
+              : "Focused support across AI systems, product-grade implementation, and team enablement."}
           </p>
         </div>
 
-        <div className="offering-grid v2-flow-grid">
-          {v2HowItWorks.map((step, index) => (
+        <div className={`offering-grid v2-flow-grid ${isHistory ? "" : "v2-offer-grid"}`}>
+          {cards.map((step, index) => (
             <article
               className="offering-card v2-offering-card reveal"
               key={step.title}
@@ -558,11 +598,13 @@ function V2Home() {
           <div>
             <p className="eyebrow">Approach</p>
             <h2 id="v2-approach-title">
-              Forward-deployed design and engineering for your business.
+              {isHistory
+                ? "Forward-deployed design and engineering for your business."
+                : "Practical AI systems work, designed around people and operations."}
             </h2>
           </div>
           <div className="principle-list">
-            {v2Principles.map((principle) => (
+            {principlesList.map((principle) => (
               <p key={principle}>{principle}</p>
             ))}
           </div>
@@ -578,16 +620,14 @@ function V2Home() {
               <span>from strategy to launch.</span>
             </h2>
             <p>
-              Work directly with John Rodrigues across strategy, product design,
-              design engineering, AI agent development, and implementation. You
-              get the personal touch of a close 1:1 collaboration instead of a
-              handoff-heavy agency process.
+              {isHistory
+                ? "Work directly with John Rodrigues across strategy, product design, design engineering, AI agent development, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."
+                : "Work directly with John Rodrigues across AI systems, design engineering, enablement, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."}
             </p>
             <p>
-              John brings AI credibility through hands-on product work: turning
-              ambiguous business workflows into prototypes, agentic systems,
-              internal tools, and AI-native products that teams can understand,
-              trust, and operate.
+              {isHistory
+                ? "John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, agentic systems, internal tools, and AI-native products that teams can understand, trust, and operate."
+                : "John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, internal tools, useful AI systems, and enablement that teams can understand, trust, and operate."}
             </p>
             <div className="bio-actions">
               <a
@@ -642,16 +682,27 @@ function V2Home() {
               Human AI Studio
             </a>
             <p>
-              Human AI Studio by Human Inspire Studio. AI agent operating system
-              design and development studio run by John Rodrigues.
+              {isHistory
+                ? "Human AI Studio by Human Inspire Studio. AI agent operating system design and development studio run by John Rodrigues."
+                : "Human AI Studio by Human Inspire Studio. AI systems and enablement studio run by John Rodrigues."}
             </p>
           </div>
 
           <div className="footer-column">
             <p>Services</p>
-            <a href="/#top">Agentic operating systems</a>
-            <a href="/#top">AI agent development</a>
-            <a href="/#top">Operations integration</a>
+            {isHistory ? (
+              <>
+                <a href="/#top">Agentic operating systems</a>
+                <a href="/#top">AI agent development</a>
+                <a href="/#top">Operations integration</a>
+              </>
+            ) : (
+              <>
+                <a href="/#top">AI agents and systems</a>
+                <a href="/#top">Design engineering</a>
+                <a href="/#top">AI enablement</a>
+              </>
+            )}
           </div>
 
           <div className="footer-column">
@@ -676,7 +727,7 @@ function App() {
   const route = window.location.pathname.replace(/\/+$/, "") || "/";
   const isHistory = route === "/history";
 
-  return isHistory ? <OriginalHome /> : <V2Home />;
+  return <StudioHome isHistory={isHistory} />;
 }
 
 createRoot(document.getElementById("root")).render(<App />);
