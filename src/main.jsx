@@ -75,9 +75,9 @@ const v2Principles = [
 ];
 
 const homePrinciples = [
-  "Start with business context, workflow, and team readiness",
-  "Design useful AI systems people can understand and operate",
-  "Build, enable, and improve adoption inside the business"
+  "Start with business context, product goals, and team readiness",
+  "Design and build practical tools with clear product craft",
+  "Enable teams to adopt AI with confidence inside real work"
 ];
 
 function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, connections = false }) {
@@ -527,7 +527,7 @@ function StudioHome({ isHistory = false }) {
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">
-              {isHistory ? "Agentic operating systems" : "AI systems and enablement studio"}
+              {isHistory ? "Agentic operating systems" : "AI systems, design engineering, and enablement"}
             </p>
             <h1>
               <span>Human</span>
@@ -542,8 +542,8 @@ function StudioHome({ isHistory = false }) {
                 </>
               ) : (
                 <>
-                  <span>AI systems, design engineering, and enablement for businesses</span>{" "}
-                  <span>building practical AI into their operations.</span>
+                  <span>An independent studio for AI agents, design engineering,</span>{" "}
+                  <span>and practical AI enablement for growing teams.</span>
                 </>
               )}
             </p>
@@ -570,7 +570,7 @@ function StudioHome({ isHistory = false }) {
           <p className="section-note">
             {isHistory
               ? "A forward-deployed process for understanding the business problem, designing the workflow, and shipping AI agents into real operations."
-              : "Focused support across AI systems, product-grade implementation, and team enablement."}
+              : "Focused support across AI product development, design engineering, and hands-on team enablement."}
           </p>
         </div>
 
@@ -600,7 +600,7 @@ function StudioHome({ isHistory = false }) {
             <h2 id="v2-approach-title">
               {isHistory
                 ? "Forward-deployed design and engineering for your business."
-                : "Practical AI systems work, designed around people and operations."}
+                : "Product-minded AI work across strategy, craft, and adoption."}
             </h2>
           </div>
           <div className="principle-list">
@@ -622,12 +622,12 @@ function StudioHome({ isHistory = false }) {
             <p>
               {isHistory
                 ? "Work directly with John Rodrigues across strategy, product design, design engineering, AI agent development, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."
-                : "Work directly with John Rodrigues across AI systems, design engineering, enablement, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."}
+                : "Work directly with John Rodrigues across AI agent development, product design, design engineering, enablement, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."}
             </p>
             <p>
               {isHistory
                 ? "John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, agentic systems, internal tools, and AI-native products that teams can understand, trust, and operate."
-                : "John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, internal tools, useful AI systems, and enablement that teams can understand, trust, and operate."}
+                : "John brings AI credibility through hands-on product work: turning ambiguous ideas into prototypes, interfaces, internal tools, AI workflows, and workshops that teams can understand, trust, and use."}
             </p>
             <div className="bio-actions">
               <a
@@ -665,8 +665,17 @@ function StudioHome({ isHistory = false }) {
         <div className="final-cta-inner reveal">
           <p className="eyebrow">Start here</p>
           <h2 id="v2-cta-title">
-            <span>Need an AI operating</span>
-            <span>system for your business?</span>
+            {isHistory ? (
+              <>
+                <span>Need an AI operating</span>
+                <span>system for your business?</span>
+              </>
+            ) : (
+              <>
+                <span>Need AI product, design,</span>
+                <span>or team enablement?</span>
+              </>
+            )}
           </h2>
           <a className="button" href="mailto:hello@humanai.studio">
             Book discovery call
@@ -684,7 +693,7 @@ function StudioHome({ isHistory = false }) {
             <p>
               {isHistory
                 ? "Human AI Studio by Human Inspire Studio. AI agent operating system design and development studio run by John Rodrigues."
-                : "Human AI Studio by Human Inspire Studio. AI systems and enablement studio run by John Rodrigues."}
+                : "Human AI Studio by Human Inspire Studio. AI systems, design engineering, and enablement studio run by John Rodrigues."}
             </p>
           </div>
 
