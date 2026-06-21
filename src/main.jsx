@@ -527,7 +527,7 @@ function StudioHome({ isHistory = false }) {
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">
-              {isHistory ? "Agentic Operating Systems" : "AI Systems, Design Engineering, and Enablement"}
+              {isHistory ? "Agentic Operating Systems" : "Independent AI Studio"}
             </p>
             <h1>
               <span>Human</span>
@@ -542,8 +542,8 @@ function StudioHome({ isHistory = false }) {
                 </>
               ) : (
                 <>
-                  <span>An independent studio for AI agents, design engineering,</span>{" "}
-                  <span>and practical AI enablement for growing teams.</span>
+                  <span>An independent studio by John Rodrigues building AI systems</span>{" "}
+                  <span>that augment human abilities and business outcomes.</span>
                 </>
               )}
             </p>
@@ -559,7 +559,11 @@ function StudioHome({ isHistory = false }) {
         </div>
       </section>
 
-      <section className="offerings" aria-labelledby="v2-how-title" data-nav-theme="light">
+      <section
+        className={`offerings ${isHistory ? "" : "dark-offerings"}`}
+        aria-labelledby="v2-how-title"
+        data-nav-theme={isHistory ? "light" : "dark"}
+      >
         <div className="section-heading reveal">
           <div>
             <p className="eyebrow">{isHistory ? "How It Works" : "Offerings"}</p>
