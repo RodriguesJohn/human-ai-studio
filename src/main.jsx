@@ -29,22 +29,22 @@ const principles = [
 
 const v2HowItWorks = [
   {
-    title: "Strategy workshop",
+    title: "Strategy Workshop",
     description:
       "Understand your business model, customer journey, revenue motion, tools, data, and team workflows before building."
   },
   {
-    title: "AI agent and systems development",
+    title: "AI Agent and Systems Development",
     description:
       "Design and develop AI agents around the decisions, handoffs, and operating needs that matter most to the business."
   },
   {
-    title: "Workflow integration",
+    title: "Workflow Integration",
     description:
       "Connect agents into your systems, knowledge bases, team processes, and client-facing workflows so they fit real operations."
   },
   {
-    title: "Support and monitoring",
+    title: "Support and Monitoring",
     description:
       "Refine the system after launch with monitoring, iteration, workflow tuning, and support as your operations scale."
   }
@@ -52,17 +52,17 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "AI agents and systems development",
+    title: "AI Agents and Systems Development",
     description:
       "Design and build practical AI agents, internal systems, and workflow tools that fit how your business actually operates."
   },
   {
-    title: "Design engineering services",
+    title: "Design Engineering Services",
     description:
       "Turn product ideas, AI workflows, and internal tools into polished interfaces and working software with strong product craft."
   },
   {
-    title: "AI enablement, trainings, and workshops",
+    title: "AI Enablement, Trainings, and Workshops",
     description:
       "Help teams understand AI, apply it to real work, and build the confidence to use new systems and workflows effectively."
   }
@@ -527,7 +527,7 @@ function StudioHome({ isHistory = false }) {
         <div className="hero-inner">
           <div className="hero-copy">
             <p className="eyebrow hero-eyebrow">
-              {isHistory ? "Agentic operating systems" : "AI systems, design engineering, and enablement"}
+              {isHistory ? "Agentic Operating Systems" : "AI Systems, Design Engineering, and Enablement"}
             </p>
             <h1>
               <span>Human</span>
@@ -562,9 +562,9 @@ function StudioHome({ isHistory = false }) {
       <section className="offerings" aria-labelledby="v2-how-title" data-nav-theme="light">
         <div className="section-heading reveal">
           <div>
-            <p className="eyebrow">{isHistory ? "How it works" : "Offerings"}</p>
+            <p className="eyebrow">{isHistory ? "How It Works" : "Offerings"}</p>
             <h2 className="v2-how-heading" id="v2-how-title">
-              {isHistory ? "From workflow pain to AI system" : "Three ways to work together"}
+              {isHistory ? "From Workflow Pain to AI System" : "Three Ways to Work Together"}
             </h2>
           </div>
           <p className="section-note">
@@ -600,7 +600,7 @@ function StudioHome({ isHistory = false }) {
             <h2 id="v2-approach-title">
               {isHistory
                 ? "Forward-deployed design and engineering for your business."
-                : "Product-minded AI work across strategy, craft, and adoption."}
+                : "Product-Minded AI Work Across Strategy, Craft, and Adoption."}
             </h2>
           </div>
           <div className="principle-list">
@@ -614,10 +614,10 @@ function StudioHome({ isHistory = false }) {
       <section className="bio v2-bio" aria-labelledby="v2-bio-title" data-nav-theme="light">
         <div className="bio-inner">
           <div className="bio-copy reveal">
-            <p className="eyebrow">Work directly with John</p>
+            <p className="eyebrow">Work Directly With John</p>
             <h2 id="v2-bio-title">
               <span>Work 1:1 with John</span>
-              <span>from strategy to launch.</span>
+              <span>From Strategy to Launch.</span>
             </h2>
             <p>
               {isHistory
@@ -663,7 +663,7 @@ function StudioHome({ isHistory = false }) {
       <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
         <DotMatrixBackground />
         <div className="final-cta-inner reveal">
-          <p className="eyebrow">Start here</p>
+          <p className="eyebrow">Start Here</p>
           <h2 id="v2-cta-title">
             {isHistory ? (
               <>
@@ -672,8 +672,8 @@ function StudioHome({ isHistory = false }) {
               </>
             ) : (
               <>
-                <span>Need AI product, design,</span>
-                <span>or team enablement?</span>
+                <span>Need AI Product, Design,</span>
+                <span>or Team Enablement?</span>
               </>
             )}
           </h2>
