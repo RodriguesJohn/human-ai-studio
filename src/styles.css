@@ -41,9 +41,25 @@ a {
   overflow-x: clip;
 }
 
+.current-home {
+  --section-black: #000000;
+  --section-charcoal: #141516;
+  --section-charcoal-soft: #101112;
+  --section-line-soft: rgba(255, 255, 255, 0.08);
+  background:
+    linear-gradient(
+      180deg,
+      var(--section-black) 0%,
+      var(--section-charcoal) 38%,
+      var(--section-black) 68%,
+      var(--section-charcoal) 100%
+    );
+}
+
 .nav {
-  position: relative;
-  z-index: 10;
+  position: sticky;
+  top: 0.85rem;
+  z-index: 50;
   display: flex;
   width: min(calc(100% - 2rem), var(--content-width));
   align-items: center;
@@ -53,7 +69,9 @@ a {
   border-radius: 999px;
   box-shadow: var(--nav-shadow);
   background: var(--nav-bg);
-  backdrop-filter: blur(18px) saturate(150%);
+  overflow: hidden;
+  backdrop-filter: blur(22px) saturate(170%);
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
   color: var(--nav-fg);
   transition:
     background 220ms ease,
@@ -61,10 +79,27 @@ a {
     color 220ms ease;
 }
 
+.nav::before {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 48%),
+    radial-gradient(circle at 12% 0%, rgba(255, 255, 255, 0.12), transparent 34%),
+    radial-gradient(circle at 88% 0%, rgba(255, 255, 255, 0.08), transparent 30%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.16),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  content: "";
+  pointer-events: none;
+}
+
 .nav-dark {
-  --nav-bg: rgba(10, 10, 10, 0.62);
+  --nav-bg: rgba(10, 10, 10, 0.54);
   --nav-fg: #ffffff;
-  --nav-shadow: 0 0.9rem 2.5rem rgba(0, 0, 0, 0.28);
+  --nav-shadow:
+    0 1.1rem 3rem rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(255, 255, 255, 0.06);
   --nav-mark-fill: #ffffff;
   --nav-mark-fill-alt: #000000;
   --nav-mark-stroke: rgba(255, 255, 255, 0.88);
@@ -72,13 +107,18 @@ a {
 }
 
 .nav-light {
-  --nav-bg: rgba(255, 255, 255, 0.76);
+  --nav-bg: rgba(255, 255, 255, 0.68);
   --nav-fg: #080808;
   --nav-shadow: 0 0.9rem 2.5rem rgba(0, 0, 0, 0.12);
   --nav-mark-fill: #000000;
   --nav-mark-fill-alt: #ffffff;
   --nav-mark-stroke: rgba(0, 0, 0, 0.8);
   --nav-link-ring: rgba(0, 0, 0, 0.16);
+}
+
+.brand,
+.nav-link {
+  z-index: 1;
 }
 
 .brand {
@@ -265,6 +305,40 @@ a {
   animation: none;
 }
 
+.current-home .v2-hero-section {
+  min-height: calc(96vh - 4.8rem);
+  background: var(--section-black);
+}
+
+.current-home .v2-hero-section::before {
+  inset: 10% auto auto 50%;
+  display: block;
+  width: min(74rem, 84vw);
+  height: min(38rem, 58vh);
+  border-radius: 999px;
+  background:
+    linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.08), transparent),
+    repeating-linear-gradient(90deg, transparent 0 5.6rem, rgba(255, 255, 255, 0.045) 5.6rem 5.7rem);
+  filter: blur(0);
+  opacity: 0.2;
+  transform: translateX(-50%);
+  mask-image: radial-gradient(ellipse at center, #000 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, transparent 72%);
+}
+
+.current-home .v2-hero-section::after {
+  display: block;
+  right: 11%;
+  bottom: 18%;
+  width: clamp(15rem, 28vw, 29rem);
+  height: clamp(15rem, 28vw, 29rem);
+  background:
+    radial-gradient(circle at center, rgba(255, 255, 255, 0.09), transparent 66%),
+    conic-gradient(from 90deg, transparent, rgba(255, 255, 255, 0.08), transparent 38%);
+  filter: blur(4.2rem);
+  opacity: 0.52;
+}
+
 .v2-hero-section .hero-eyebrow {
   opacity: 0.38;
 }
@@ -389,11 +463,11 @@ h1 span:nth-child(3) {
 }
 
 .v2-hero-intro {
-  max-width: 74rem;
-  font-size: clamp(1.08rem, 1.58vw, 1.42rem);
-  font-weight: 360;
-  line-height: 1.36;
-  color: rgba(255, 255, 255, 0.66);
+  max-width: min(46rem, 72vw);
+  font-size: clamp(0.88rem, 1.02vw, 1rem);
+  font-weight: 330;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.56);
   animation: heroFadeUp 760ms 720ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -478,6 +552,11 @@ h1 span:nth-child(3) {
   text-align: left;
 }
 
+.section-heading.no-section-note {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: var(--content-width);
+}
+
 h2 {
   max-width: 13ch;
   margin-bottom: 0;
@@ -518,10 +597,9 @@ h2 {
 
 .dark-offerings {
   background:
-    radial-gradient(circle at 18% 18%, rgba(255, 255, 255, 0.055), transparent 30rem),
-    radial-gradient(circle at 80% 18%, rgba(255, 255, 255, 0.035), transparent 28rem),
-    #000000;
-  border-top: 1px solid rgba(255, 255, 255, 0.12);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 16rem),
+    var(--section-charcoal);
+  border-top: 1px solid var(--section-line-soft);
   color: #ffffff;
 }
 
@@ -535,28 +613,42 @@ h2 {
 }
 
 .dark-offerings .v2-offering-card {
-  border-color: rgba(255, 255, 255, 0.11);
+  min-height: 22.5rem;
+  border-color: rgba(255, 255, 255, 0.16);
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.105), transparent 42%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.072), rgba(255, 255, 255, 0.028));
+    radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.11), transparent 12rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.075), rgba(255, 255, 255, 0.045));
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.07),
-    0 1.2rem 3rem rgba(0, 0, 0, 0.24);
+    inset 0 1px 0 rgba(255, 255, 255, 0.075),
+    0 1.4rem 3.2rem rgba(0, 0, 0, 0.22);
+}
+
+.dark-offerings .v2-offering-card::before {
+  display: none;
 }
 
 .dark-offerings .v2-offering-card:hover {
-  border-color: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.2);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(255, 255, 255, 0.13), transparent 12rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.052));
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.1),
-    0 1.5rem 3.4rem rgba(0, 0, 0, 0.3);
+    inset 0 1px 0 rgba(255, 255, 255, 0.085),
+    0 1.5rem 3.2rem rgba(0, 0, 0, 0.24);
 }
 
 .dark-offerings .number {
-  color: rgba(255, 255, 255, 0.11);
+  color: rgba(255, 255, 255, 0.085);
+  font-size: clamp(2.8rem, 5.2vw, 4.55rem);
 }
 
 .dark-offerings .offering-card p {
   color: rgba(255, 255, 255, 0.62);
+}
+
+.dark-offerings .offering-card h3 {
+  font-size: clamp(1.42rem, 1.98vw, 1.82rem);
+  font-weight: 560;
 }
 
 .offering-grid {
@@ -666,7 +758,7 @@ h2 {
 .offering-copy {
   display: grid;
   grid-row: 2;
-  grid-template-rows: minmax(5.2rem, auto) auto;
+  grid-template-rows: minmax(4.25rem, auto) auto;
   align-items: start;
   align-self: end;
 }
@@ -690,10 +782,35 @@ h3 {
   color: rgba(0, 0, 0, 0.62);
   font-size: 0.96rem;
   line-height: 1.65;
-  display: -webkit-box;
-  overflow: hidden;
-  -webkit-box-orient: vertical;
-  -webkit-line-clamp: 3;
+  display: block;
+  overflow: visible;
+}
+
+.logo-proof {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin-top: 1.15rem;
+}
+
+.logo-proof span {
+  display: inline-flex;
+  min-height: 1.9rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 999px;
+  padding: 0.38rem 0.68rem;
+  color: rgba(0, 0, 0, 0.64);
+  font-size: 0.72rem;
+  font-weight: 620;
+  letter-spacing: 0.02em;
+}
+
+.dark-offerings .logo-proof span {
+  border-color: rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.045);
+  color: rgba(255, 255, 255, 0.72);
 }
 
 .approach {
@@ -705,6 +822,13 @@ h3 {
   border-top: 1px solid var(--line);
 }
 
+.current-home .approach {
+  min-height: 74vh;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.012), transparent 14rem),
+    var(--section-black);
+}
+
 .approach-inner {
   display: grid;
   grid-template-columns: minmax(0, 0.8fr) minmax(18rem, 1fr);
@@ -714,36 +838,37 @@ h3 {
 
 .principle-list {
   display: grid;
-  gap: 1px;
-  overflow: hidden;
-  border: 1px solid var(--line);
-  border-radius: 1.1rem;
-  background: rgba(255, 255, 255, 0.12);
+  gap: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.14);
+  background: transparent;
 }
 
 .principle-list p {
   display: flex;
-  align-items: center;
-  gap: 0.9rem;
+  align-items: flex-start;
+  gap: 0.95rem;
   margin: 0;
-  padding: 1.2rem 1.3rem;
-  background: #050505;
-  color: rgba(255, 255, 255, 0.78);
-  font-size: clamp(1.05rem, 1.7vw, 1.35rem);
-  font-weight: 480;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  font-size: clamp(0.98rem, 1.35vw, 1.14rem);
+  font-weight: 390;
+  line-height: 1.45;
 }
 
 .principle-list p::before {
   display: inline-grid;
-  width: 1.35rem;
-  height: 1.35rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.18rem;
   flex: 0 0 auto;
   place-items: center;
-  border: 2px solid rgba(255, 255, 255, 0.72);
+  border: 1.25px solid rgba(255, 255, 255, 0.42);
   border-radius: 50%;
-  color: rgba(255, 255, 255, 0.86);
+  color: rgba(255, 255, 255, 0.72);
   content: "✓";
-  font-size: 0.72rem;
+  font-size: 0.58rem;
   font-weight: 900;
   line-height: 1;
   animation: checkPop 720ms cubic-bezier(0.22, 1, 0.36, 1) both;
@@ -772,6 +897,23 @@ h3 {
   background-image: linear-gradient(105deg, rgba(0, 0, 0, 0.52) 0%, rgba(0, 0, 0, 0.52) 32%, rgba(0, 0, 0, 0.95) 50%, rgba(0, 0, 0, 0.52) 68%, rgba(0, 0, 0, 0.52) 100%);
 }
 
+.dark-bio {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.018), transparent 15rem),
+    var(--section-charcoal);
+  border-top: 1px solid var(--section-line-soft);
+  color: #ffffff;
+}
+
+.current-home .bio {
+  min-height: 82vh;
+}
+
+.dark-bio .eyebrow {
+  color: rgba(255, 255, 255, 0.52);
+  background-image: linear-gradient(105deg, rgba(255, 255, 255, 0.52) 0%, rgba(255, 255, 255, 0.52) 32%, rgba(255, 255, 255, 0.96) 50%, rgba(255, 255, 255, 0.52) 68%, rgba(255, 255, 255, 0.52) 100%);
+}
+
 .bio-inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(16rem, 0.44fr);
@@ -796,6 +938,16 @@ h3 {
     linear-gradient(145deg, #f4f4f4, #d7d7d7);
 }
 
+.dark-bio .profile-image {
+  border-color: rgba(255, 255, 255, 0.14);
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.12), transparent 7rem),
+    linear-gradient(145deg, rgba(255, 255, 255, 0.11), rgba(255, 255, 255, 0.035));
+  box-shadow:
+    0 1.5rem 4rem rgba(0, 0, 0, 0.34),
+    0 0 0 1px rgba(255, 255, 255, 0.035);
+}
+
 .profile-image img {
   display: block;
   width: 100%;
@@ -816,6 +968,10 @@ h3 {
   font-weight: 620;
 }
 
+.dark-bio .profile-card span:first-child {
+  color: #ffffff;
+}
+
 .profile-card span:last-child {
   color: rgba(0, 0, 0, 0.52);
   font-size: 0.68rem;
@@ -823,6 +979,10 @@ h3 {
   letter-spacing: 0.08em;
   white-space: nowrap;
   text-transform: uppercase;
+}
+
+.dark-bio .profile-card span:last-child {
+  color: rgba(255, 255, 255, 0.52);
 }
 
 .bio h2 {
@@ -848,8 +1008,27 @@ h3 {
   display: block;
 }
 
+.v2-bio .eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.18em;
+}
+
 .v2-bio .bio-copy {
   max-width: 44rem;
+}
+
+.dark-bio .bio-copy {
+  padding-top: 0;
+}
+
+.dark-bio .bio-card-shell {
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  border-radius: 1.35rem;
+  padding: clamp(1.35rem, 3vw, 2.2rem);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.045),
+    0 1.4rem 3.2rem rgba(0, 0, 0, 0.26);
 }
 
 .bio-copy {
@@ -862,6 +1041,10 @@ h3 {
   color: rgba(0, 0, 0, 0.72);
   font-size: clamp(1rem, 1.35vw, 1.16rem);
   line-height: 1.65;
+}
+
+.dark-bio .bio-copy p {
+  color: rgba(255, 255, 255, 0.68);
 }
 
 .bio-copy p:last-child {
@@ -893,11 +1076,22 @@ h3 {
     transform 180ms ease;
 }
 
+.dark-bio .secondary-button {
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.24);
+  color: #ffffff;
+}
+
 .secondary-button:hover {
   background: #000000;
   box-shadow: inset 0 0 0 1px #000000;
   color: #ffffff;
   transform: translateY(-1px);
+}
+
+.dark-bio .secondary-button:hover {
+  background: #ffffff;
+  box-shadow: inset 0 0 0 1px #ffffff;
+  color: #000000;
 }
 
 .final-cta {
@@ -910,6 +1104,13 @@ h3 {
   align-content: center;
   border-top: 1px solid var(--line);
   text-align: center;
+}
+
+.current-home .final-cta {
+  min-height: 54vh;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.012), transparent 14rem),
+    var(--section-black);
 }
 
 .final-cta .dot-matrix-background {
@@ -935,16 +1136,16 @@ h3 {
 }
 
 .v2-final-cta h2 {
-  max-width: 21ch;
-  font-size: clamp(2.35rem, 5.2vw, 5.15rem);
+  max-width: 22ch;
+  font-size: clamp(1.95rem, 3.55vw, 3.45rem);
   font-weight: 520;
-  line-height: 1;
+  line-height: 1.06;
 }
 
 .site-footer {
   padding: clamp(2.75rem, 5vw, 4.5rem) var(--page-padding);
-  border-top: 1px solid var(--line);
-  background: #000000;
+  border-top: 1px solid var(--section-line-soft);
+  background: var(--section-charcoal);
 }
 
 .site-footer-inner {
@@ -978,6 +1179,10 @@ h3 {
 
 .footer-brand p {
   margin-bottom: 0;
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
 }
 
 .footer-column {
@@ -997,6 +1202,91 @@ h3 {
 
 .footer-column a:hover {
   color: #ffffff;
+}
+
+.booking-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  padding: clamp(0.75rem, 2vw, 1.5rem);
+  place-items: center;
+}
+
+.booking-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  border: 0;
+  background: rgba(0, 0, 0, 0.72);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  cursor: pointer;
+}
+
+.booking-modal-panel {
+  position: relative;
+  display: grid;
+  width: min(62rem, 100%);
+  height: min(48rem, calc(100vh - 2rem));
+  grid-template-rows: auto 1fr;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.035)),
+    #080808;
+  box-shadow:
+    0 2rem 5rem rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.booking-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.85rem 0.95rem 0.85rem 1.15rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.booking-modal-header p,
+.booking-modal-header span {
+  margin: 0;
+}
+
+.booking-modal-header p {
+  color: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 650;
+}
+
+.booking-modal-header span {
+  display: block;
+  margin-top: 0.12rem;
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 0.78rem;
+}
+
+.booking-modal-close {
+  display: inline-grid;
+  width: 2.35rem;
+  height: 2.35rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 1.45rem;
+  line-height: 1;
+}
+
+.booking-modal iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: #ffffff;
 }
 
 .v2-page {
@@ -1680,26 +1970,33 @@ h3 {
     display: block;
   }
 
+  .dark-offerings .offering-card h3 {
+    max-width: 20ch;
+    margin-bottom: 0.85rem;
+    font-size: clamp(1.2rem, 4.95vw, 1.5rem);
+    line-height: 1.1;
+  }
+
   h3 {
     min-height: 0;
   }
 
   .approach h2 {
-    max-width: 20ch;
-    font-size: clamp(1.5rem, 6.2vw, 2rem);
+    max-width: 26ch;
+    font-size: clamp(1.28rem, 5.2vw, 1.62rem);
     line-height: 1.08;
   }
 
   .principle-list p {
-    padding: 1rem 1.1rem;
-    font-size: clamp(0.92rem, 3.8vw, 1.05rem);
-    line-height: 1.38;
+    padding: 1rem 0;
+    font-size: clamp(0.9rem, 3.55vw, 1rem);
+    line-height: 1.42;
   }
 
   .principle-list p::before {
-    width: 1.15rem;
-    height: 1.15rem;
-    font-size: 0.62rem;
+    width: 1rem;
+    height: 1rem;
+    font-size: 0.54rem;
   }
 
   .final-cta h2 {
@@ -1722,9 +2019,9 @@ h3 {
   }
 
   .v2-hero-section {
-    min-height: calc(78vh - 5.25rem);
-    padding-top: 2.4rem;
-    padding-bottom: 3.2rem;
+    min-height: calc(72vh - 5.25rem);
+    padding-top: 1.8rem;
+    padding-bottom: 2.8rem;
   }
 
   .v2-hero-section .hero-inner {
@@ -1734,7 +2031,7 @@ h3 {
 
   .v2-hero-section .hero-copy {
     width: 100%;
-    max-width: 21.5rem;
+    max-width: 20rem;
     margin-right: auto;
     margin-left: auto;
   }
@@ -1744,34 +2041,41 @@ h3 {
     max-width: calc(100vw - 3rem);
     margin-right: auto;
     margin-left: auto;
-    font-size: clamp(2.25rem, 10.2vw, 3.08rem);
-    line-height: 0.98;
+    margin-bottom: 0.9rem;
+    font-size: clamp(2.05rem, 9.15vw, 2.78rem);
+    font-weight: 520;
+    line-height: 1;
     text-align: center;
     white-space: nowrap;
   }
 
+  .current-home .v2-hero-section h1 {
+    margin-top: 0;
+  }
+
   .v2-hero-section h1 span + span {
-    margin-left: 0.1em;
+    margin-left: 0.08em;
   }
 
   .v2-hero-section .hero-eyebrow {
-    margin-bottom: 0.95rem;
-    font-size: 0.62rem;
-    letter-spacing: 0.36em;
-    opacity: 0.38;
+    margin-bottom: 0.85rem;
+    font-size: 0.58rem;
+    letter-spacing: 0.28em;
+    opacity: 0.48;
+    animation-fill-mode: forwards;
   }
 
   .v2-hero-intro {
-    max-width: 20rem;
+    max-width: 18.5rem;
     margin-right: auto;
     margin-left: auto;
-    font-size: clamp(0.86rem, 3.6vw, 1rem);
-    line-height: 1.38;
+    font-size: clamp(0.7rem, 2.65vw, 0.78rem);
+    line-height: 1.5;
     text-wrap: balance;
   }
 
   .v2-hero-intro span {
-    display: contents;
+    display: block;
   }
 
   .v2-flow-grid {
@@ -1789,19 +2093,25 @@ h3 {
   .v2-bio .bio-inner {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.8rem;
+    gap: 1.4rem;
+  }
+
+  .dark-bio .bio-card-shell {
+    padding: 1.15rem;
   }
 
   .v2-bio .eyebrow {
-    font-size: 0.54rem;
+    margin-bottom: 0.75rem;
+    font-size: 0.36rem;
     font-weight: 520;
-    letter-spacing: 0.28em;
+    letter-spacing: 0.14em;
   }
 
   .v2-bio h2 {
     max-width: 100%;
-    font-size: clamp(1.9rem, 7.2vw, 2.35rem);
-    line-height: 1.02;
+    margin-bottom: 1rem;
+    font-size: clamp(1.55rem, 5.8vw, 1.9rem);
+    line-height: 1.05;
   }
 
   .v2-bio .bio-copy p {

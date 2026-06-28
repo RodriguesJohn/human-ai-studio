@@ -3,6 +3,9 @@ import { createRoot } from "react-dom/client";
 import profilePicture from "./assets/Profile Picture.jpg";
 import "./styles.css";
 
+const bookingUrl = "https://calendly.com/johnrodrigues94/1on1chat?month=2026-06";
+const bookingEmbedUrl = `${bookingUrl}&embed_domain=humanaistudio.io&embed_type=Inline`;
+
 const offerings = [
   {
     title: "Build 0->1 AI-Native Products",
@@ -52,19 +55,19 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "AI Agents and Systems Development",
+    title: "0→1 AI-Native Products",
     description:
-      "Design and build practical AI agents, internal systems, and workflow tools that fit how your business actually operates."
+      "Design and develop agents, AI systems, and end-to-end products for real user problems."
   },
   {
-    title: "Design Engineering Services",
+    title: "Design Engineering",
     description:
-      "Turn product ideas, AI workflows, and internal tools into polished interfaces and working software with strong product craft."
+      "Agentic design systems, components, animations, and web/mobile app interfaces."
   },
   {
-    title: "AI Enablement, Trainings, and Workshops",
+    title: "AI Training & Enablement",
     description:
-      "Help teams understand AI, apply it to real work, and build the confidence to use new systems and workflows effectively."
+      "Custom workshops that help teams adopt AI tools, improve workflows, and work faster."
   }
 ];
 
@@ -330,7 +333,7 @@ function OriginalHome() {
           <span className="brand-mark" aria-hidden="true" />
           Human AI Studio
         </a>
-        <a className="nav-link" href="mailto:hello@humanai.studio">
+        <a className="nav-link" href={bookingUrl}>
           Book a call
         </a>
       </nav>
@@ -348,7 +351,7 @@ function OriginalHome() {
               Independent product studio based in the SF Bay Area by John Rodrigues, helping businesses build 0-&gt;1 AI-native products and agentic operating systems.
             </p>
             <div className="hero-actions">
-              <a className="button" href="mailto:hello@humanai.studio">
+              <a className="button" href={bookingUrl}>
                 <span className="button-avatar" aria-hidden="true">
                   <img src={profilePicture} alt="" />
                 </span>
@@ -461,7 +464,7 @@ function OriginalHome() {
             <span>Have an AI product, workflow,</span>
             <span>or team question?</span>
           </h2>
-          <a className="button" href="mailto:hello@humanai.studio">
+          <a className="button" href={bookingUrl}>
             Book discovery call
           </a>
         </div>
@@ -497,7 +500,7 @@ function OriginalHome() {
           <div className="footer-column">
             <p>Contact</p>
             <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
-            <a href="mailto:hello@humanai.studio">Book discovery call</a>
+            <a href={bookingUrl}>Book discovery call</a>
           </div>
         </div>
       </footer>
@@ -511,13 +514,13 @@ function StudioHome({ isHistory = false }) {
   const principlesList = isHistory ? v2Principles : homePrinciples;
 
   return (
-    <main className="page-shell">
+    <main className={`page-shell ${isHistory ? "history-home" : "current-home"}`}>
       <nav className="nav nav-dark" aria-label="Primary">
         <a className="brand" href="/#top" aria-label="Human AI Studio home">
           <span className="brand-mark" aria-hidden="true" />
           Human AI Studio
         </a>
-        <a className="nav-link" href="mailto:hello@humanai.studio">
+        <a className="nav-link" href={bookingUrl}>
           Book a call
         </a>
       </nav>
@@ -526,9 +529,7 @@ function StudioHome({ isHistory = false }) {
         <DotMatrixBackground className="v2-hero-entrance-dots" intensity={3.2} dotScale={1.15} />
         <div className="hero-inner">
           <div className="hero-copy">
-            <p className="eyebrow hero-eyebrow">
-              {isHistory ? "Agentic Operating Systems" : "Independent AI Studio"}
-            </p>
+            {isHistory && <p className="eyebrow hero-eyebrow">Agentic Operating Systems</p>}
             <h1>
               <span>Human</span>
               <span>AI</span>
@@ -542,13 +543,13 @@ function StudioHome({ isHistory = false }) {
                 </>
               ) : (
                 <>
-                  <span>An independent studio by John Rodrigues building AI systems</span>{" "}
-                  <span>that augment human abilities and business outcomes.</span>
+                  <span>An independent product and design studio led by John Rodrigues in the SF Bay Area,</span>
+                  <span>helping businesses design and develop 0→1 AI-native products, agentic systems, and AI enablement.</span>
                 </>
               )}
             </p>
             <div className="hero-actions">
-              <a className="button" href="mailto:hello@humanai.studio">
+              <a className="button" href={bookingUrl}>
                 <span className="button-avatar" aria-hidden="true">
                   <img src={profilePicture} alt="" />
                 </span>
@@ -564,18 +565,18 @@ function StudioHome({ isHistory = false }) {
         aria-labelledby="v2-how-title"
         data-nav-theme={isHistory ? "light" : "dark"}
       >
-        <div className="section-heading reveal">
+        <div className={`section-heading reveal ${isHistory ? "" : "no-section-note"}`}>
           <div>
             <p className="eyebrow">{isHistory ? "How It Works" : "Offerings"}</p>
             <h2 className="v2-how-heading" id="v2-how-title">
               {isHistory ? "From Workflow Pain to AI System" : "Three Ways to Work Together"}
             </h2>
           </div>
-          <p className="section-note">
-            {isHistory
-              ? "A forward-deployed process for understanding the business problem, designing the workflow, and shipping AI agents into real operations."
-              : "Focused support across AI product development, design engineering, and hands-on team enablement."}
-          </p>
+          {isHistory && (
+            <p className="section-note">
+              A forward-deployed process for understanding the business problem, designing the workflow, and shipping AI agents into real operations.
+            </p>
+          )}
         </div>
 
         <div className={`offering-grid v2-flow-grid ${isHistory ? "" : "v2-offer-grid"}`}>
@@ -591,6 +592,13 @@ function StudioHome({ isHistory = false }) {
               <div className="offering-copy">
                 <h3>{step.title}</h3>
                 <p>{step.description}</p>
+                {step.logos && (
+                  <div className="logo-proof" aria-label={`${step.title} credibility`}>
+                    {step.logos.map((logo) => (
+                      <span key={logo}>{logo}</span>
+                    ))}
+                  </div>
+                )}
               </div>
             </article>
           ))}
@@ -604,7 +612,7 @@ function StudioHome({ isHistory = false }) {
             <h2 id="v2-approach-title">
               {isHistory
                 ? "Forward-deployed design and engineering for your business."
-                : "Product-Minded AI Work Across Strategy, Craft, and Adoption."}
+                : "Product-Minded AI Work, From Strategy to Execution."}
             </h2>
           </div>
           <div className="principle-list">
@@ -615,13 +623,23 @@ function StudioHome({ isHistory = false }) {
         </div>
       </section>
 
-      <section className="bio v2-bio" aria-labelledby="v2-bio-title" data-nav-theme="light">
-        <div className="bio-inner">
+      <section
+        className={`bio v2-bio ${isHistory ? "" : "dark-bio"}`}
+        aria-labelledby="v2-bio-title"
+        data-nav-theme={isHistory ? "light" : "dark"}
+      >
+        <div className={`bio-inner ${isHistory ? "" : "bio-card-shell"}`}>
           <div className="bio-copy reveal">
             <p className="eyebrow">Work Directly With John</p>
             <h2 id="v2-bio-title">
-              <span>Work 1:1 with John</span>
-              <span>From Strategy to Launch.</span>
+              {isHistory ? (
+                <>
+                  <span>Work 1:1 With John</span>
+                  <span>From Strategy to Launch.</span>
+                </>
+              ) : (
+                <span>Work 1:1 With John.</span>
+              )}
             </h2>
             <p>
               {isHistory
@@ -681,7 +699,7 @@ function StudioHome({ isHistory = false }) {
               </>
             )}
           </h2>
-          <a className="button" href="mailto:hello@humanai.studio">
+          <a className="button" href={bookingUrl}>
             Book discovery call
           </a>
         </div>
@@ -697,7 +715,7 @@ function StudioHome({ isHistory = false }) {
             <p>
               {isHistory
                 ? "Human AI Studio by Human Inspire Studio. AI agent operating system design and development studio run by John Rodrigues."
-                : "Human AI Studio by Human Inspire Studio. AI systems, design engineering, and enablement studio run by John Rodrigues."}
+                : "Human AI Studio by Human Inspire Studio. Independent product and design studio run by John Rodrigues in the SF Bay Area."}
             </p>
           </div>
 
@@ -711,9 +729,9 @@ function StudioHome({ isHistory = false }) {
               </>
             ) : (
               <>
-                <a href="/#top">AI agents and systems</a>
+                <a href="/#top">0→1 AI-native products</a>
                 <a href="/#top">Design engineering</a>
-                <a href="/#top">AI enablement</a>
+                <a href="/#top">AI training and enablement</a>
               </>
             )}
           </div>
@@ -721,14 +739,14 @@ function StudioHome({ isHistory = false }) {
           <div className="footer-column">
             <p>Studio</p>
             <span>San Francisco Bay Area</span>
-            <span>Design engineering</span>
+            <span>Product and design studio</span>
             <span>Direct 1:1 collaboration</span>
           </div>
 
           <div className="footer-column">
             <p>Contact</p>
             <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
-            <a href="mailto:hello@humanai.studio">Book discovery call</a>
+            <a href={bookingUrl}>Book discovery call</a>
           </div>
         </div>
       </footer>
@@ -736,11 +754,72 @@ function StudioHome({ isHistory = false }) {
   );
 }
 
+function BookingModal({ isOpen, onClose }) {
+  React.useEffect(() => {
+    if (!isOpen) return undefined;
+
+    const handleKeyDown = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen, onClose]);
+
+  if (!isOpen) return null;
+
+  return (
+    <div className="booking-modal" role="dialog" aria-modal="true" aria-label="Book a discovery call">
+      <button className="booking-modal-backdrop" type="button" aria-label="Close booking modal" onClick={onClose} />
+      <div className="booking-modal-panel">
+        <div className="booking-modal-header">
+          <div>
+            <p>Book a discovery call</p>
+            <span>Pick a time with John</span>
+          </div>
+          <button className="booking-modal-close" type="button" aria-label="Close booking modal" onClick={onClose}>
+            ×
+          </button>
+        </div>
+        <iframe
+          title="Book a discovery call with John Rodrigues"
+          src={bookingEmbedUrl}
+          loading="lazy"
+        />
+      </div>
+    </div>
+  );
+}
+
 function App() {
+  const [isBookingOpen, setIsBookingOpen] = React.useState(false);
   const route = window.location.pathname.replace(/\/+$/, "") || "/";
   const isHistory = route === "/history";
 
-  return <StudioHome isHistory={isHistory} />;
+  React.useEffect(() => {
+    const handleClick = (event) => {
+      const bookingLink = event.target.closest(`a[href="${bookingUrl}"]`);
+      if (!bookingLink) return;
+      event.preventDefault();
+      setIsBookingOpen(true);
+    };
+
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+  }, []);
+
+  return (
+    <>
+      <StudioHome isHistory={isHistory} />
+      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
+    </>
+  );
 }
 
 createRoot(document.getElementById("root")).render(<App />);
