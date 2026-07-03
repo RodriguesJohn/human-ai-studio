@@ -1,6 +1,9 @@
 node_modules/
 dist/
 .DS_Store
+
+# Reference-only source project (not part of the site)
+MyPortfolio/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

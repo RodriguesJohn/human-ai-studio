@@ -1,10 +1,73 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { motion, useReducedMotion } from "framer-motion";
+import * as THREE from "three";
 import profilePicture from "./assets/Profile Picture.jpg";
+import studioAbstract from "./assets/studio-abstract.png";
+import evaAiVideo from "./assets/EvaAIV2.mov";
+import pureFiVideo from "./assets/PureFi.MOV";
+import outfixWorkVideo from "./assets/work/OutfixV2.mp4";
+import outfixWorkPoster from "./assets/work/outfixHero.png";
+import ollieWorkVideo from "./assets/work/OllieAIDemo.mp4";
+import ollieWorkPoster from "./assets/work/OllieAIV1.png";
+import balanceTransferWorkVideo from "./assets/work/BT.mp4";
+import tocaWorkVideo from "./assets/work/MyTocaApp.mp4";
+import noScrollWorkImage from "./assets/work/NoScrollApp.png";
+import codexLogo from "./assets/logos/claude-code.png";
+import vercelLogo from "./assets/logos/codex.png";
+import cursorLogo from "./assets/logos/cursor.webp";
+import linearLogo from "./assets/logos/linear.jpeg";
+import nextLogo from "./assets/logos/nextjs.png";
+import reactLogo from "./assets/logos/react.png";
+import swiftUiLogo from "./assets/logos/swiftui.png";
+import claudeCodeLogo from "./assets/logos/vercel.png";
+import xcodeLogo from "./assets/logos/xcode.png";
+import figmaLogo from "./assets/logos/Figma.png";
+import wonderLogo from "./assets/logos/Wonder.png";
+import tocaCompanyLogo from "./assets/companies/Toca.png";
+import citiCompanyLogo from "./assets/companies/Citi.svg.png";
+import chaseCompanyLogo from "./assets/companies/ChaseLightMOde.png";
+import appleCompanyLogo from "./assets/companies/Apple-Logo.png";
+import googleCompanyLogo from "./assets/companies/GoogleLogog.png";
+import metaCompanyLogo from "./assets/companies/Meta-Emblem.png";
 import "./styles.css";
 
 const bookingUrl = "https://calendly.com/johnrodrigues94/1on1chat?month=2026-06";
 const bookingEmbedUrl = `${bookingUrl}&embed_domain=humanaistudio.io&embed_type=Inline`;
+
+function BookingButton({ showAvatar = false }) {
+  const shouldReduceMotion = useReducedMotion();
+  const hoverMotion = shouldReduceMotion
+    ? {}
+    : {
+        y: -2,
+        scale: 1.018,
+        transition: { type: "spring", stiffness: 520, damping: 28, mass: 0.6 }
+      };
+  const tapMotion = shouldReduceMotion
+    ? {}
+    : {
+        y: 0,
+        scale: 0.985,
+        transition: { type: "spring", stiffness: 620, damping: 32, mass: 0.55 }
+      };
+
+  return (
+    <motion.a
+      className="button"
+      href={bookingUrl}
+      whileHover={hoverMotion}
+      whileTap={tapMotion}
+    >
+      {showAvatar && (
+        <span className="button-avatar" aria-hidden="true">
+          <img src={profilePicture} alt="" />
+        </span>
+      )}
+      <span className="button-label">Book discovery call</span>
+    </motion.a>
+  );
+}
 
 const offerings = [
   {
@@ -55,19 +118,157 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "0→1 AI-Native Products",
+    title: "0→1 AI-Native Products & Agents",
     description:
-      "Design and develop agents, AI systems, and end-to-end products for real user problems."
+      "Design and develop agents, AI systems, and end-to-end products for real user problems.",
+    slug: "ai-native-products"
   },
   {
     title: "Design Engineering",
     description:
-      "Agentic design systems, components, animations, and web/mobile app interfaces."
+      "Agentic design systems, components, animations, and web/mobile app interfaces.",
+    slug: "design-engineering"
+  },
+  {
+    title: "AI Consulting",
+    description:
+      "Identify where AI can improve workflows, solve problems, and create real leverage.",
+    slug: "ai-consulting"
   },
   {
     title: "AI Training & Enablement",
     description:
-      "Custom workshops that help teams adopt AI tools, improve workflows, and work faster."
+      "Custom workshops that help teams adopt AI tools, improve workflows, and work faster.",
+    slug: "ai-training-enablement",
+    link: "https://maven.com/humanaistudio",
+    external: true
+  }
+];
+
+const offeringPages = {
+  "ai-native-products": {
+    eyebrow: "Offering 01",
+    title: "0→1 AI-Native Products & Agents",
+    intro:
+      "From a blank page to a shipped product. I design and build AI-native applications and autonomous agents that solve real user problems — not demos.",
+    status: "placeholder",
+    sections: [
+      {
+        heading: "What this looks like",
+        body: "End-to-end product development: discovery, interface design, agent architecture, and production engineering — all handled by one senior operator."
+      },
+      {
+        heading: "Where it fits",
+        body: "Founders and teams who need to go from idea to a working, AI-native product fast, without stitching together a fragmented team."
+      }
+    ]
+  },
+  "design-engineering": {
+    eyebrow: "Offering 02",
+    title: "Design Engineering",
+    intro:
+      "Agentic design systems, components, animations, and polished web and mobile interfaces — designed and coded by the same person.",
+    status: "placeholder",
+    sections: [
+      {
+        heading: "What this looks like",
+        body: "Design systems and interfaces built as production code. Motion, components, and tokens that ship straight into your app."
+      },
+      {
+        heading: "Where it fits",
+        body: "Teams that want design and engineering to move as one, with an interface layer that actually feels considered."
+      }
+    ]
+  },
+  "ai-consulting": {
+    eyebrow: "Offering 03",
+    title: "AI Consulting",
+    intro:
+      "Identify where AI can improve workflows, solve business problems, and create practical leverage — with a clear, honest plan.",
+    status: "placeholder",
+    sections: [
+      {
+        heading: "What this looks like",
+        body: "A focused engagement to map your workflows, find the highest-leverage AI opportunities, and lay out a realistic path to build them."
+      },
+      {
+        heading: "Where it fits",
+        body: "Leaders who want a clear-eyed take on where AI helps, where it doesn't, and what to do next."
+      }
+    ]
+  },
+  "ai-training-enablement": {
+    eyebrow: "Offering 04",
+    title: "AI Training & Enablement",
+    intro:
+      "Custom workshops that help teams adopt AI tools, improve workflows, and work faster — hands-on and tailored to how your team actually works.",
+    status: "live",
+    sections: [
+      {
+        heading: "What you get",
+        body: "Live, hands-on workshops built around your real workflows. Teams leave with practical AI habits, prompts, and systems they use the next day."
+      },
+      {
+        heading: "Format",
+        body: "Half-day or multi-session engagements, in-person or remote, sized to your team. Follow-up materials and playbooks included."
+      },
+      {
+        heading: "Outcomes",
+        body: "Faster execution, higher-quality output, and a team that treats AI as a core tool rather than a novelty."
+      }
+    ]
+  }
+};
+
+const workItems = [
+  {
+    label: "AI Operating System",
+    title: "Orbi Agent",
+    video: evaAiVideo,
+    image: studioAbstract,
+    position: "44% 50%"
+  },
+  {
+    label: "AI Styling · 0 → 1 Product",
+    title: "Outfix AI",
+    video: outfixWorkVideo,
+    image: outfixWorkPoster,
+    position: "center"
+  },
+  {
+    label: "Figma Plugin · Claude Code",
+    title: "Ollie AI",
+    video: ollieWorkVideo,
+    image: ollieWorkPoster,
+    position: "center"
+  },
+  {
+    label: "Mobile App / AI-Ready Design System",
+    title: "PureFi",
+    video: pureFiVideo,
+    image: studioAbstract,
+    position: "72% 46%"
+  },
+  {
+    label: "iOS · 4.6★ · 50K Users",
+    title: "No Scroll",
+    image: noScrollWorkImage,
+    position: "center",
+    fit: "contain"
+  },
+  {
+    label: "$25M Raised · Early-Stage",
+    title: "TOCA Football",
+    video: tocaWorkVideo,
+    image: studioAbstract,
+    position: "center"
+  },
+  {
+    label: "Citi · Consumer Banking",
+    title: "Balance Transfer",
+    video: balanceTransferWorkVideo,
+    image: studioAbstract,
+    position: "center"
   }
 ];
 
@@ -82,6 +283,203 @@ const homePrinciples = [
   "Design and build practical tools with clear product craft",
   "Enable teams to adopt AI with confidence inside real work"
 ];
+
+const toolStack = [
+  { name: "Linear", icon: linearLogo },
+  { name: "Claude Code", icon: claudeCodeLogo },
+  { name: "Codex", icon: codexLogo },
+  { name: "Cursor", icon: cursorLogo },
+  { name: "Figma", icon: figmaLogo },
+  { name: "Wonder", icon: wonderLogo, contain: true },
+  { name: "Vercel", icon: vercelLogo },
+  { name: "Xcode", icon: xcodeLogo },
+  { name: "React", icon: reactLogo },
+  { name: "SwiftUI", icon: swiftUiLogo },
+  { name: "Next.js", icon: nextLogo }
+];
+
+const toolStackRowOne = toolStack.filter((_, index) => index % 2 === 0);
+const toolStackRowTwo = toolStack.filter((_, index) => index % 2 === 1);
+
+const bioCompanies = [
+  { name: "TOCA", icon: tocaCompanyLogo },
+  { name: "Citi", icon: citiCompanyLogo },
+  { name: "Chase", icon: chaseCompanyLogo }
+];
+
+const newsletterCompanies = [
+  { name: "Meta", icon: metaCompanyLogo },
+  { name: "Google", icon: googleCompanyLogo },
+  { name: "Apple", icon: appleCompanyLogo },
+  { name: "Chase", icon: chaseCompanyLogo }
+];
+
+const newsletterUrl = "https://substack.com/@johnrodrigues";
+
+const testimonials = [
+  {
+    quote:
+      "Yay!!! Thank you John! You literally explained auto layout today so effortlessly. I understand it more now than ever before. I'm considering taking your course to take my Figma skills up a notch.",
+    name: "Yariela B",
+    role: "UX Designer",
+    logo: googleCompanyLogo
+  },
+  {
+    quote:
+      "Had an amazing chat with John. We exchanged some interesting resources and talked about the importance of understanding the value of a designer.",
+    name: "Lucas W",
+    role: "Product Designer",
+    logo: appleCompanyLogo
+  },
+  {
+    quote:
+      "John has shown tremendous value as a UX designer. This year, he has answered every challenge in taking on additional responsibility in project management, client relationship building, and increased design ownership and delivery.",
+    name: "Zachary E",
+    role: "Creative Director, VP",
+    logo: citiCompanyLogo
+  },
+  {
+    quote:
+      "His thoughtful ideas and entrepreneurship have enhanced our team's collaboration. His design work has significantly boosted visibility and impact across all product areas. His keen eye for UX and resourcefulness with new technologies are impressive.",
+    name: "Kristian K",
+    role: "Product Designer, VP",
+    logo: chaseCompanyLogo
+  },
+  {
+    quote:
+      "Working with John has been a real pleasure. He brought a clear process from beginning to end, responded quickly, and delivered high-quality work. The new design makes No Scroll feel like a brand new app. If you're considering working with John, don't hesitate.",
+    name: "Andrew",
+    role: "Founder of No Scroll App"
+  },
+  {
+    quote:
+      "Collaborating with John was both easy and productive. John provided valuable insights into product development and user experience that truly enhanced our project and moved it to the next level. I highly recommend John.",
+    name: "Edward Petkovicz",
+    role: "faxion.ai"
+  }
+];
+
+function HeroNebulaShader({ className = "" }) {
+  const containerRef = React.useRef(null);
+  const materialRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return undefined;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const clock = new THREE.Clock();
+
+    const vertexShader = `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 1.0);
+      }
+    `;
+
+    const fragmentShader = `
+      precision mediump float;
+      uniform vec2 iResolution;
+      uniform float iTime;
+      varying vec2 vUv;
+
+      mat2 rot(float a) {
+        float c = cos(a);
+        float s = sin(a);
+        return mat2(c, -s, s, c);
+      }
+
+      float field(vec3 p) {
+        float t = iTime * 0.42;
+        p.xz *= rot(t * 0.28);
+        p.xy *= rot(t * 0.18);
+        vec3 q = p * 2.0 + t;
+        return length(p + vec3(sin(t * 0.55))) * log(length(p) + 1.0)
+          + sin(q.x + sin(q.z + sin(q.y))) * 0.45 - 1.0;
+      }
+
+      void main() {
+        vec2 uv = (vUv * iResolution - 0.5 * iResolution) / min(iResolution.x, iResolution.y);
+        uv.x *= 1.05;
+        uv.y *= 1.18;
+
+        vec3 col = vec3(0.0);
+        float d = 2.2;
+
+        for (int i = 0; i < 6; i++) {
+          vec3 p = vec3(0.0, 0.0, 4.7) + normalize(vec3(uv, -1.0)) * d;
+          float rz = field(p);
+          float f = clamp((rz - field(p + 0.08)) * 0.55, -0.08, 1.0);
+          vec3 base = vec3(0.10, 0.14, 0.16) + vec3(1.65, 0.72, 0.5) * f;
+          col = col * base + smoothstep(2.45, 0.0, rz) * 0.58 * base;
+          d += min(rz, 1.0);
+        }
+
+        float radius = length(uv);
+        float vignette = smoothstep(0.88, 0.18, radius);
+        float edge = smoothstep(0.16, 0.72, radius);
+        col *= vignette;
+        col = mix(col * 0.32, col, edge);
+
+        float alpha = smoothstep(0.82, 0.18, radius) * 0.82;
+        gl_FragColor = vec4(col, alpha);
+      }
+    `;
+
+    const uniforms = {
+      iTime: { value: 0 },
+      iResolution: { value: new THREE.Vector2() }
+    };
+
+    const material = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      uniforms,
+      transparent: true,
+      depthWrite: false
+    });
+    materialRef.current = material;
+
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+    scene.add(mesh);
+
+    const onResize = () => {
+      const width = Math.max(1, container.clientWidth);
+      const height = Math.max(1, container.clientHeight);
+      renderer.setSize(width, height, false);
+      uniforms.iResolution.value.set(width, height);
+    };
+
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(container);
+    onResize();
+
+    renderer.setAnimationLoop(() => {
+      uniforms.iTime.value = clock.getElapsedTime();
+      renderer.render(scene, camera);
+    });
+
+    return () => {
+      renderer.setAnimationLoop(null);
+      resizeObserver.disconnect();
+      if (renderer.domElement.parentNode === container) {
+        container.removeChild(renderer.domElement);
+      }
+      material.dispose();
+      mesh.geometry.dispose();
+      renderer.dispose();
+    };
+  }, []);
+
+  return <div ref={containerRef} className={`hero-side-shader ${className}`} aria-hidden="true" />;
+}
 
 function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, connections = false }) {
   const canvasRef = React.useRef(null);
@@ -351,12 +749,7 @@ function OriginalHome() {
               Independent product studio based in the SF Bay Area by John Rodrigues, helping businesses build 0-&gt;1 AI-native products and agentic operating systems.
             </p>
             <div className="hero-actions">
-              <a className="button" href={bookingUrl}>
-                <span className="button-avatar" aria-hidden="true">
-                  <img src={profilePicture} alt="" />
-                </span>
-                Book discovery call
-              </a>
+              <BookingButton showAvatar />
             </div>
           </div>
         </div>
@@ -464,9 +857,7 @@ function OriginalHome() {
             <span>Have an AI product, workflow,</span>
             <span>or team question?</span>
           </h2>
-          <a className="button" href={bookingUrl}>
-            Book discovery call
-          </a>
+          <BookingButton />
         </div>
       </section>
 
@@ -520,9 +911,19 @@ function StudioHome({ isHistory = false }) {
           <span className="brand-mark" aria-hidden="true" />
           Human AI Studio
         </a>
-        <a className="nav-link" href={bookingUrl}>
-          Book a call
-        </a>
+        <div className="nav-actions">
+          <a
+            className="nav-text-link"
+            href="https://substack.com/@johnrodrigues"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Newsletter
+          </a>
+          <a className="nav-link" href={bookingUrl}>
+            Book a call
+          </a>
+        </div>
       </nav>
 
       <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
@@ -543,24 +944,38 @@ function StudioHome({ isHistory = false }) {
                 </>
               ) : (
                 <>
-                  <span>An independent product and design studio led by John Rodrigues in the SF Bay Area,</span>
-                  <span>helping businesses design and develop 0→1 AI-native products, agentic systems, and AI enablement.</span>
+                  <span>Independent design engineering studio by John Rodrigues, SF-based,</span>
+                  <span>building 0→1 AI-native products.</span>
                 </>
               )}
             </p>
             <div className="hero-actions">
-              <a className="button" href={bookingUrl}>
-                <span className="button-avatar" aria-hidden="true">
-                  <img src={profilePicture} alt="" />
-                </span>
-                Book discovery call
-              </a>
+              <BookingButton showAvatar />
             </div>
+            {!isHistory && (
+              <div className="hero-meta">
+                <div className="hero-impact" aria-label="Studio impact">
+                  <div>
+                    <strong>$53M+</strong>
+                    <span>client funding</span>
+                  </div>
+                  <div>
+                    <strong>100K+</strong>
+                    <span>users served</span>
+                  </div>
+                  <div>
+                    <strong>25+</strong>
+                    <span>products shipped</span>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
 
       <section
+        id="offerings"
         className={`offerings ${isHistory ? "" : "dark-offerings"}`}
         aria-labelledby="v2-how-title"
         data-nav-theme={isHistory ? "light" : "dark"}
@@ -569,7 +984,7 @@ function StudioHome({ isHistory = false }) {
           <div>
             <p className="eyebrow">{isHistory ? "How It Works" : "Offerings"}</p>
             <h2 className="v2-how-heading" id="v2-how-title">
-              {isHistory ? "From Workflow Pain to AI System" : "Three Ways to Work Together"}
+              {isHistory ? "From Workflow Pain to AI System" : "Four Ways to Work Together"}
             </h2>
           </div>
           {isHistory && (
@@ -599,26 +1014,132 @@ function StudioHome({ isHistory = false }) {
                     ))}
                   </div>
                 )}
+                {!isHistory && (step.slug || step.link) && (
+                  <a
+                    className="offering-learn-more"
+                    href={step.link || `/offerings/${step.slug}`}
+                    aria-label={`Learn more about ${step.title}`}
+                    {...(step.external
+                      ? { target: "_blank", rel: "noreferrer" }
+                      : {})}
+                  >
+                    <span>Learn more</span>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path
+                        d="M3 7h8M7.5 3.5 11 7l-3.5 3.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                )}
               </div>
             </article>
           ))}
         </div>
       </section>
 
+      {!isHistory && (
+        <section className="work-showcase" aria-labelledby="work-title" data-nav-theme="dark">
+          <div className="work-showcase-inner">
+            <div className="section-heading no-section-note reveal">
+              <div>
+                <p className="eyebrow">Work</p>
+                <h2 id="work-title">Selected Projects</h2>
+              </div>
+            </div>
+          </div>
+          <div className="work-marquee" aria-label="Selected work">
+            <div className="work-track">
+              {[...workItems, ...workItems].map((item, index) => (
+                <article
+                  className="work-card"
+                  key={`${item.title}-${index}`}
+                  aria-hidden={index >= workItems.length}
+                >
+                  <div className={`work-card-media${item.fit === "contain" ? " work-card-media-contain" : ""}`}>
+                    {item.video ? (
+                      <video
+                        src={item.video}
+                        poster={item.image}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        style={{ objectPosition: item.position }}
+                      />
+                    ) : (
+                      <img src={item.image} alt="" style={{ objectPosition: item.position }} />
+                    )}
+                  </div>
+                  <div className="work-card-meta">
+                    <strong>{item.title}</strong>
+                    <span>{item.label}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
         <div className="approach-inner reveal">
           <div>
-            <p className="eyebrow">Approach</p>
+            <p className="eyebrow">{isHistory ? "Approach" : "Stack"}</p>
             <h2 id="v2-approach-title">
               {isHistory
                 ? "Forward-deployed design and engineering for your business."
-                : "Product-Minded AI Work, From Strategy to Execution."}
+                : "Tools for Designing and Shipping AI Products."}
             </h2>
           </div>
-          <div className="principle-list">
-            {principlesList.map((principle) => (
-              <p key={principle}>{principle}</p>
-            ))}
+          <div className="approach-details">
+            {isHistory && (
+              <div className="principle-list">
+                {principlesList.map((principle) => (
+                  <p key={principle}>{principle}</p>
+                ))}
+              </div>
+            )}
+            {!isHistory && (
+              <div className="stack-card" aria-label="Tool stack">
+                <div className="stack-card-rows">
+                  <div className="stack-card-row">
+                    <div className="stack-card-track">
+                      {[...toolStackRowOne, ...toolStackRowOne].map((tool, index) => (
+                        <span
+                          className={`stack-logo${tool.contain ? " stack-logo-contain" : ""}`}
+                          key={`row1-${tool.name}-${index}`}
+                          aria-hidden={index >= toolStackRowOne.length}
+                        >
+                          <img src={tool.icon} alt={tool.name} loading="lazy" />
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="stack-card-row">
+                    <div className="stack-card-track stack-card-track-reverse">
+                      {[...toolStackRowTwo, ...toolStackRowTwo].map((tool, index) => (
+                        <span
+                          className={`stack-logo${tool.contain ? " stack-logo-contain" : ""}`}
+                          key={`row2-${tool.name}-${index}`}
+                          aria-hidden={index >= toolStackRowTwo.length}
+                        >
+                          <img src={tool.icon} alt={tool.name} loading="lazy" />
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                <div className="stack-card-copy">
+                  <strong>An AI-native design &amp; build stack</strong>
+                  <span>The tools I design, engineer, and ship with every day.</span>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </section>
@@ -630,26 +1151,26 @@ function StudioHome({ isHistory = false }) {
       >
         <div className={`bio-inner ${isHistory ? "" : "bio-card-shell"}`}>
           <div className="bio-copy reveal">
-            <p className="eyebrow">Work Directly With John</p>
+            {isHistory && <p className="eyebrow">Work Directly With John</p>}
             <h2 id="v2-bio-title">
               {isHistory ? (
                 <>
-                  <span>Work 1:1 With John</span>
+                  <span>Work 1:1 With John Rodrigues</span>
                   <span>From Strategy to Launch.</span>
                 </>
               ) : (
-                <span>Work 1:1 With John.</span>
+                <span>Work 1:1 With John Rodrigues.</span>
               )}
             </h2>
             <p>
               {isHistory
                 ? "Work directly with John Rodrigues across strategy, product design, design engineering, AI agent development, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."
-                : "Work directly with John Rodrigues across AI agent development, product design, design engineering, enablement, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."}
+                : "Fractional product, design, and AI engineering support for teams that need senior execution without adding headcount."}
             </p>
             <p>
               {isHistory
                 ? "John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, agentic systems, internal tools, and AI-native products that teams can understand, trust, and operate."
-                : "John brings AI credibility through hands-on product work: turning ambiguous ideas into prototypes, interfaces, internal tools, AI workflows, and workshops that teams can understand, trust, and use."}
+                : "I help scope, design, integrate, and ship practical AI systems, interfaces, and workflows inside real business contexts."}
             </p>
             <div className="bio-actions">
               <a
@@ -669,6 +1190,16 @@ function StudioHome({ isHistory = false }) {
               Substack
               </a>
             </div>
+            {!isHistory && (
+              <div className="bio-logos" aria-label="Experience with teams at leading companies">
+                <span className="bio-logos-label">Experience with teams at</span>
+                <div className="bio-logos-row">
+                  {bioCompanies.map((company) => (
+                    <img key={company.name} src={company.icon} alt={company.name} />
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
           <figure className="profile-card reveal" style={{ "--reveal-delay": "130ms" }}>
             <div className="profile-image">
@@ -682,30 +1213,98 @@ function StudioHome({ isHistory = false }) {
         </div>
       </section>
 
+      {!isHistory && (
+        <section className="testimonials" aria-labelledby="testimonials-title" data-nav-theme="dark">
+          <div className="testimonials-inner">
+            <div className="section-heading no-section-note reveal">
+              <div>
+                <p className="eyebrow">Testimonials</p>
+                <h2 id="testimonials-title">What People Say</h2>
+              </div>
+            </div>
+            <div className="testimonial-marquee" aria-label="Testimonials">
+              <div className="testimonial-track">
+                {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <article
+                  className="testimonial-card"
+                  key={`${testimonial.name}-${index}`}
+                  aria-hidden={index >= testimonials.length}
+                >
+                  <p>“{testimonial.quote}”</p>
+                  <footer>
+                    <span className="testimonial-name">{testimonial.name}</span>
+                    <span className="testimonial-role">{testimonial.role}</span>
+                    {testimonial.logo && (
+                      <img className="testimonial-logo" src={testimonial.logo} alt="" />
+                    )}
+                  </footer>
+                </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
         <DotMatrixBackground />
-        <div className="final-cta-inner reveal">
-          <p className="eyebrow">Start Here</p>
-          <h2 id="v2-cta-title">
-            {isHistory ? (
-              <>
+        <div className={`final-cta-inner reveal${isHistory ? "" : " final-cta-inner--newsletter"}`}>
+          {isHistory ? (
+            <>
+              <p className="eyebrow">Start Here</p>
+              <h2 id="v2-cta-title">
                 <span>Need an AI operating</span>
                 <span>system for your business?</span>
-              </>
-            ) : (
-              <>
-                <span>Need AI Product, Design,</span>
-                <span>or Team Enablement?</span>
-              </>
-            )}
-          </h2>
-          <a className="button" href={bookingUrl}>
-            Book discovery call
-          </a>
+              </h2>
+              <BookingButton />
+            </>
+          ) : (
+            <div className="newsletter-cta">
+              <div className="newsletter-copy">
+                <p className="eyebrow">Newsletter</p>
+                <h2 id="v2-cta-title">Join 4,000+ readers of the Human AI Studio newsletter.</h2>
+                <p className="final-cta-sub">
+                  Practical essays on AI-native product design, design engineering, and building 0→1 — straight to your inbox.
+                </p>
+                <div className="newsletter-actions">
+                  <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
+                    <span className="button-label">Join the newsletter</span>
+                  </a>
+                  <div className="cta-logos-row" aria-label="Read by people at leading companies">
+                    {newsletterCompanies.map((company) => (
+                      <img key={company.name} src={company.icon} alt={company.name} />
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="newsletter-visual" aria-hidden="true">
+                <div className="issue-card">
+                  <div className="issue-card-head">
+                    <span className="issue-mark" />
+                    <div className="issue-card-meta">
+                      <span className="issue-card-name">Human AI Studio</span>
+                      <span className="issue-card-sub">Weekly · Issue #12</span>
+                    </div>
+                    <span className="issue-card-pill">Subscribed</span>
+                  </div>
+                  <p className="issue-card-body">
+                    Get weekly updates on studio research, new industry shifts, and practical ways to level up your business.
+                  </p>
+                  <div className="issue-card-foot">
+                    <div className="newsletter-avatars issue-card-avatars">
+                      <span /><span /><span />
+                    </div>
+                    <span className="issue-card-foot-label">Delivered to 4,000+ inboxes</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
       <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
+        {!isHistory && <HeroNebulaShader className="footer-side-shader" />}
         <div className="site-footer-inner">
           <div className="footer-brand">
             <a className="brand" href="/#top" aria-label="Human AI Studio home">
@@ -715,39 +1314,39 @@ function StudioHome({ isHistory = false }) {
             <p>
               {isHistory
                 ? "Human AI Studio by Human Inspire Studio. AI agent operating system design and development studio run by John Rodrigues."
-                : "Human AI Studio by Human Inspire Studio. Independent product and design studio run by John Rodrigues in the SF Bay Area."}
+                : "Human AI Studio is an independent company by Human Inspire Studio."}
             </p>
           </div>
 
-          <div className="footer-column">
-            <p>Services</p>
-            {isHistory ? (
-              <>
+          {isHistory && (
+            <>
+              <div className="footer-column">
+                <p>Services</p>
                 <a href="/#top">Agentic operating systems</a>
                 <a href="/#top">AI agent development</a>
                 <a href="/#top">Operations integration</a>
-              </>
-            ) : (
-              <>
-                <a href="/#top">0→1 AI-native products</a>
-                <a href="/#top">Design engineering</a>
-                <a href="/#top">AI training and enablement</a>
-              </>
-            )}
-          </div>
+              </div>
 
-          <div className="footer-column">
-            <p>Studio</p>
-            <span>San Francisco Bay Area</span>
-            <span>Product and design studio</span>
-            <span>Direct 1:1 collaboration</span>
-          </div>
+              <div className="footer-column">
+                <p>Studio</p>
+                <span>San Francisco Bay Area</span>
+                <span>Product and design studio</span>
+                <span>Direct 1:1 collaboration</span>
+              </div>
+            </>
+          )}
 
           <div className="footer-column">
             <p>Contact</p>
+            {!isHistory && (
+              <a href={newsletterUrl} target="_blank" rel="noreferrer">Newsletter</a>
+            )}
             <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
-            <a href={bookingUrl}>Book discovery call</a>
+            <a href={bookingUrl}>Book a call</a>
           </div>
+        </div>
+        <div className="footer-wordmark reveal" aria-hidden="true">
+          Human AI Studio
         </div>
       </footer>
     </main>
@@ -755,6 +1354,21 @@ function StudioHome({ isHistory = false }) {
 }
 
 function BookingModal({ isOpen, onClose }) {
+  const [isRendered, setIsRendered] = React.useState(isOpen);
+  const [isVisible, setIsVisible] = React.useState(false);
+
+  React.useEffect(() => {
+    if (isOpen) {
+      setIsRendered(true);
+      const raf = requestAnimationFrame(() => setIsVisible(true));
+      return () => cancelAnimationFrame(raf);
+    }
+
+    setIsVisible(false);
+    const timer = window.setTimeout(() => setIsRendered(false), 380);
+    return () => window.clearTimeout(timer);
+  }, [isOpen]);
+
   React.useEffect(() => {
     if (!isOpen) return undefined;
 
@@ -772,10 +1386,15 @@ function BookingModal({ isOpen, onClose }) {
     };
   }, [isOpen, onClose]);
 
-  if (!isOpen) return null;
+  if (!isRendered) return null;
 
   return (
-    <div className="booking-modal" role="dialog" aria-modal="true" aria-label="Book a discovery call">
+    <div
+      className={`booking-modal ${isVisible ? "is-open" : ""}`}
+      role="dialog"
+      aria-modal="true"
+      aria-label="Book a discovery call"
+    >
       <button className="booking-modal-backdrop" type="button" aria-label="Close booking modal" onClick={onClose} />
       <div className="booking-modal-panel">
         <div className="booking-modal-header">
@@ -797,10 +1416,175 @@ function BookingModal({ isOpen, onClose }) {
   );
 }
 
+function OfferingPage({ slug }) {
+  useRevealAnimation();
+  const page = offeringPages[slug];
+
+  if (!page) {
+    return (
+      <main className="page-shell current-home offering-page">
+        <nav className="nav nav-dark" aria-label="Primary">
+          <a className="brand" href="/#top" aria-label="Human AI Studio home">
+            <span className="brand-mark" aria-hidden="true" />
+            Human AI Studio
+          </a>
+          <div className="nav-actions">
+            <a
+              className="nav-text-link"
+              href="https://substack.com/@johnrodrigues"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Newsletter
+            </a>
+            <a className="nav-link" href={bookingUrl}>
+              Book a call
+            </a>
+          </div>
+        </nav>
+        <section className="offering-hero" data-nav-theme="dark">
+          <div className="offering-hero-inner reveal">
+            <a className="offering-back" href="/#offerings">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path
+                  d="M11 7H3M6.5 3.5 3 7l3.5 3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span>Back to offerings</span>
+            </a>
+            <h1>Offering not found</h1>
+            <p className="offering-intro">
+              This page doesn’t exist yet. Head back to explore the ways we can work together.
+            </p>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  return (
+    <main className="page-shell current-home offering-page">
+      <nav className="nav nav-dark" aria-label="Primary">
+        <a className="brand" href="/#top" aria-label="Human AI Studio home">
+          <span className="brand-mark" aria-hidden="true" />
+          Human AI Studio
+        </a>
+        <div className="nav-actions">
+          <a
+            className="nav-text-link"
+            href="https://substack.com/@johnrodrigues"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Newsletter
+          </a>
+          <a className="nav-link" href={bookingUrl}>
+            Book a call
+          </a>
+        </div>
+      </nav>
+
+      <section className="offering-hero" data-nav-theme="dark">
+        <div className="offering-hero-inner reveal">
+          <a className="offering-back" href="/#offerings">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path
+                d="M11 7H3M6.5 3.5 3 7l3.5 3.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span>Back to offerings</span>
+          </a>
+          <p className="eyebrow">{page.eyebrow}</p>
+          <h1>{page.title}</h1>
+          <p className="offering-intro">{page.intro}</p>
+          {page.status === "placeholder" && (
+            <span className="offering-badge">More details coming soon</span>
+          )}
+          <div className="offering-hero-actions">
+            <BookingButton showAvatar />
+          </div>
+        </div>
+      </section>
+
+      <section className="offering-body" data-nav-theme="dark">
+        <div className="offering-body-inner">
+          {page.sections.map((section, index) => (
+            <article
+              className="offering-detail reveal"
+              key={section.heading}
+              style={{ "--reveal-delay": `${120 + index * 120}ms` }}
+            >
+              <span className="offering-detail-index">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h2>{section.heading}</h2>
+                <p>{section.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="final-cta v2-final-cta" aria-labelledby="offering-cta-title" data-nav-theme="dark">
+        <DotMatrixBackground />
+        <div className="final-cta-inner reveal">
+          <p className="eyebrow">Start Here</p>
+          <h2 id="offering-cta-title">
+            <span>Let’s talk about</span>
+            <span>{page.title}.</span>
+          </h2>
+          <BookingButton />
+        </div>
+      </section>
+
+      <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
+        <div className="site-footer-inner">
+          <div className="footer-brand">
+            <a className="brand" href="/#top" aria-label="Human AI Studio home">
+              <span className="brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </a>
+            <p>Independent product and design studio by John Rodrigues.</p>
+          </div>
+          <div className="footer-column">
+            <p>Offerings</p>
+            {homeOffers.map((offer) => (
+              <a
+                key={offer.slug}
+                href={offer.link || `/offerings/${offer.slug}`}
+                {...(offer.external ? { target: "_blank", rel: "noreferrer" } : {})}
+              >
+                {offer.title}
+              </a>
+            ))}
+          </div>
+          <div className="footer-column">
+            <p>Contact</p>
+            <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
+            <a href={bookingUrl}>Book discovery call</a>
+          </div>
+        </div>
+        <div className="footer-wordmark reveal" aria-hidden="true">
+          Human AI Studio
+        </div>
+      </footer>
+    </main>
+  );
+}
+
 function App() {
   const [isBookingOpen, setIsBookingOpen] = React.useState(false);
   const route = window.location.pathname.replace(/\/+$/, "") || "/";
   const isHistory = route === "/history";
+  const offeringMatch = route.match(/^\/offerings\/([^/]+)$/);
+  const offeringSlug = offeringMatch ? offeringMatch[1] : null;
 
   React.useEffect(() => {
     const handleClick = (event) => {
@@ -816,7 +1600,11 @@ function App() {
 
   return (
     <>
-      <StudioHome isHistory={isHistory} />
+      {offeringSlug ? (
+        <OfferingPage slug={offeringSlug} />
+      ) : (
+        <StudioHome isHistory={isHistory} />
+      )}
       <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </>
   );
