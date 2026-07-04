@@ -1,5 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { Analytics } from "@vercel/analytics/react";
 import { motion, useReducedMotion } from "framer-motion";
 import * as THREE from "three";
 import profilePicture from "./assets/Profile Picture.jpg";
@@ -1728,6 +1729,7 @@ function App() {
       ) : (
         <StudioHome isHistory={isHistory} />
       )}
+      <Analytics />
     </>
   );
 }
