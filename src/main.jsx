@@ -32,8 +32,53 @@ import googleCompanyLogo from "./assets/companies/GoogleLogog.png";
 import metaCompanyLogo from "./assets/companies/Meta-Emblem.png";
 import "./styles.css";
 
-const bookingUrl = "https://calendly.com/johnrodrigues94/1on1chat?month=2026-06";
-const bookingEmbedUrl = `${bookingUrl}&embed_domain=humanaistudio.io&embed_type=Inline`;
+const bookingLink = "john-rodrigues-ssafph/15min";
+const bookingNamespace = "15min";
+const bookingUrl = `https://cal.com/${bookingLink}`;
+const bookingConfig = {
+  layout: "month_view",
+  useSlotsViewOnSmallScreen: "true"
+};
+const bookingAttributes = {
+  "data-cal-link": bookingLink,
+  "data-cal-namespace": bookingNamespace,
+  "data-cal-config": JSON.stringify(bookingConfig)
+};
+
+function openBookingModal(event) {
+  if (
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  ) {
+    return;
+  }
+
+  const calApi = window.Cal?.ns?.[bookingNamespace] || window.Cal;
+  if (!calApi) return;
+
+  event.preventDefault();
+  calApi("modal", {
+    calLink: bookingLink,
+    config: bookingConfig
+  });
+}
+
+function BookingTextLink({ className, children }) {
+  return (
+    <a
+      className={className}
+      href={bookingUrl}
+      onClick={openBookingModal}
+      {...bookingAttributes}
+    >
+      {children}
+    </a>
+  );
+}
 
 function BookingButton({ showAvatar = false }) {
   const shouldReduceMotion = useReducedMotion();
@@ -56,6 +101,8 @@ function BookingButton({ showAvatar = false }) {
     <motion.a
       className="button"
       href={bookingUrl}
+      onClick={openBookingModal}
+      {...bookingAttributes}
       whileHover={hoverMotion}
       whileTap={tapMotion}
     >
@@ -222,6 +269,13 @@ const offeringPages = {
 
 const workItems = [
   {
+    label: "Mobile App / AI-Ready Design System",
+    title: "PureFi",
+    video: pureFiVideo,
+    image: studioAbstract,
+    position: "72% 46%"
+  },
+  {
     label: "AI Operating System",
     title: "Orbi Agent",
     video: evaAiVideo,
@@ -241,13 +295,6 @@ const workItems = [
     video: ollieWorkVideo,
     image: ollieWorkPoster,
     position: "center"
-  },
-  {
-    label: "Mobile App / AI-Ready Design System",
-    title: "PureFi",
-    video: pureFiVideo,
-    image: studioAbstract,
-    position: "72% 46%"
   },
   {
     label: "iOS · 4.6★ · 50K Users",
@@ -721,6 +768,123 @@ function useRevealAnimation() {
   }, []);
 }
 
+function useMarqueeStart() {
+  React.useEffect(() => {
+    const marquee = document.querySelector(".work-marquee");
+    const track = marquee?.querySelector(".work-track");
+    if (!marquee || !track) return undefined;
+
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const speed = 0.5; // px per frame for the auto-scroll
+    let rafId = null;
+    let inView = false;
+    let paused = false;
+    let idleTimer = null;
+
+    const loopWidth = () => track.scrollWidth / 2; // items are duplicated
+
+    const step = () => {
+      if (inView && !paused && !prefersReduced) {
+        marquee.scrollLeft += speed;
+        const half = loopWidth();
+        if (marquee.scrollLeft >= half) {
+          marquee.scrollLeft -= half;
+        }
+      }
+      rafId = requestAnimationFrame(step);
+    };
+
+    const holdThenResume = (ms) => {
+      paused = true;
+      if (idleTimer) window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(() => {
+        paused = false;
+      }, ms);
+    };
+
+    const cardStep = () => {
+      const card = track.querySelector(".work-card");
+      const styles = getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+      return card ? card.getBoundingClientRect().width + gap : 400;
+    };
+
+    const nudge = (dir) => {
+      const half = loopWidth();
+      // Wrap seamlessly when stepping backwards past the start.
+      if (dir < 0 && marquee.scrollLeft < cardStep()) {
+        marquee.scrollLeft += half;
+      }
+      marquee.scrollBy({ left: dir * cardStep(), behavior: "smooth" });
+      holdThenResume(2600);
+    };
+
+    const onEnter = () => {
+      paused = true;
+    };
+    const onLeave = () => {
+      paused = false;
+    };
+    const onUserScroll = () => holdThenResume(2600);
+
+    const prevBtn = document.querySelector(".work-nav-prev");
+    const nextBtn = document.querySelector(".work-nav-next");
+    const onPrev = () => nudge(-1);
+    const onNext = () => nudge(1);
+
+    marquee.addEventListener("mouseenter", onEnter);
+    marquee.addEventListener("mouseleave", onLeave);
+    marquee.addEventListener("wheel", onUserScroll, { passive: true });
+    marquee.addEventListener("touchstart", onUserScroll, { passive: true });
+    prevBtn?.addEventListener("click", onPrev);
+    nextBtn?.addEventListener("click", onNext);
+
+    let started = false;
+    const observer =
+      "IntersectionObserver" in window
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  if (!started) {
+                    marquee.scrollLeft = 0; // begin on the first project (PureFi)
+                    started = true;
+                  }
+                  inView = true;
+                } else {
+                  inView = false;
+                }
+              });
+            },
+            { threshold: 0.2 }
+          )
+        : null;
+
+    if (observer) {
+      observer.observe(marquee);
+    } else {
+      inView = true;
+    }
+
+    rafId = requestAnimationFrame(step);
+
+    return () => {
+      if (rafId != null) cancelAnimationFrame(rafId);
+      if (idleTimer) window.clearTimeout(idleTimer);
+      if (observer) observer.disconnect();
+      marquee.removeEventListener("mouseenter", onEnter);
+      marquee.removeEventListener("mouseleave", onLeave);
+      marquee.removeEventListener("wheel", onUserScroll);
+      marquee.removeEventListener("touchstart", onUserScroll);
+      prevBtn?.removeEventListener("click", onPrev);
+      nextBtn?.removeEventListener("click", onNext);
+    };
+  }, []);
+}
+
 function OriginalHome() {
   useRevealAnimation();
 
@@ -731,9 +895,9 @@ function OriginalHome() {
           <span className="brand-mark" aria-hidden="true" />
           Human AI Studio
         </a>
-        <a className="nav-link" href={bookingUrl}>
+        <BookingTextLink className="nav-link">
           Book a call
-        </a>
+        </BookingTextLink>
       </nav>
 
       <section className="hero" id="top" data-nav-theme="dark">
@@ -891,7 +1055,7 @@ function OriginalHome() {
           <div className="footer-column">
             <p>Contact</p>
             <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
-            <a href={bookingUrl}>Book discovery call</a>
+            <BookingTextLink>Book discovery call</BookingTextLink>
           </div>
         </div>
       </footer>
@@ -901,6 +1065,7 @@ function OriginalHome() {
 
 function StudioHome({ isHistory = false }) {
   useRevealAnimation();
+  useMarqueeStart();
   const cards = isHistory ? v2HowItWorks : homeOffers;
   const principlesList = isHistory ? v2Principles : homePrinciples;
 
@@ -920,9 +1085,9 @@ function StudioHome({ isHistory = false }) {
           >
             Newsletter
           </a>
-          <a className="nav-link" href={bookingUrl}>
+          <BookingTextLink className="nav-link">
             Book a call
-          </a>
+          </BookingTextLink>
         </div>
       </nav>
 
@@ -1044,10 +1209,44 @@ function StudioHome({ isHistory = false }) {
       {!isHistory && (
         <section className="work-showcase" aria-labelledby="work-title" data-nav-theme="dark">
           <div className="work-showcase-inner">
-            <div className="section-heading no-section-note reveal">
+            <div className="section-heading no-section-note work-heading reveal">
               <div>
                 <p className="eyebrow">Work</p>
                 <h2 id="work-title">Selected Projects</h2>
+              </div>
+              <div className="work-nav">
+                <button
+                  type="button"
+                  className="work-nav-btn work-nav-prev"
+                  aria-label="Previous projects"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M15 5l-7 7 7 7"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  className="work-nav-btn work-nav-next"
+                  aria-label="Next projects"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M9 5l7 7-7 7"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
               </div>
             </div>
           </div>
@@ -1089,7 +1288,7 @@ function StudioHome({ isHistory = false }) {
       <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
         <div className="approach-inner reveal">
           <div>
-            <p className="eyebrow">{isHistory ? "Approach" : "Stack"}</p>
+            <p className="eyebrow">{isHistory ? "Approach" : "AI Native From Day One"}</p>
             <h2 id="v2-approach-title">
               {isHistory
                 ? "Forward-deployed design and engineering for your business."
@@ -1270,15 +1469,12 @@ function StudioHome({ isHistory = false }) {
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
                     <span className="button-label">Join the newsletter</span>
                   </a>
-                  <div className="cta-logos-row" aria-label="Read by people at leading companies">
-                    {newsletterCompanies.map((company) => (
-                      <img key={company.name} src={company.icon} alt={company.name} />
-                    ))}
-                  </div>
                 </div>
               </div>
               <div className="newsletter-visual" aria-hidden="true">
-                <div className="issue-card">
+                <div className="issue-card-deck">
+                <div className="issue-card issue-card--back" />
+                <div className="issue-card issue-card--front">
                   <div className="issue-card-head">
                     <span className="issue-mark" />
                     <div className="issue-card-meta">
@@ -1291,11 +1487,14 @@ function StudioHome({ isHistory = false }) {
                     Get weekly updates on studio research, new industry shifts, and practical ways to level up your business.
                   </p>
                   <div className="issue-card-foot">
-                    <div className="newsletter-avatars issue-card-avatars">
-                      <span /><span /><span />
+                    <span className="issue-card-foot-label">Read by people at</span>
+                    <div className="issue-card-logos">
+                      {newsletterCompanies.map((company) => (
+                        <img key={company.name} src={company.icon} alt={company.name} />
+                      ))}
                     </div>
-                    <span className="issue-card-foot-label">Delivered to 4,000+ inboxes</span>
                   </div>
+                </div>
                 </div>
               </div>
             </div>
@@ -1342,7 +1541,7 @@ function StudioHome({ isHistory = false }) {
               <a href={newsletterUrl} target="_blank" rel="noreferrer">Newsletter</a>
             )}
             <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
-            <a href={bookingUrl}>Book a call</a>
+            <BookingTextLink>Book a call</BookingTextLink>
           </div>
         </div>
         <div className="footer-wordmark reveal" aria-hidden="true">
@@ -1350,69 +1549,6 @@ function StudioHome({ isHistory = false }) {
         </div>
       </footer>
     </main>
-  );
-}
-
-function BookingModal({ isOpen, onClose }) {
-  const [isRendered, setIsRendered] = React.useState(isOpen);
-  const [isVisible, setIsVisible] = React.useState(false);
-
-  React.useEffect(() => {
-    if (isOpen) {
-      setIsRendered(true);
-      const raf = requestAnimationFrame(() => setIsVisible(true));
-      return () => cancelAnimationFrame(raf);
-    }
-
-    setIsVisible(false);
-    const timer = window.setTimeout(() => setIsRendered(false), 380);
-    return () => window.clearTimeout(timer);
-  }, [isOpen]);
-
-  React.useEffect(() => {
-    if (!isOpen) return undefined;
-
-    const handleKeyDown = (event) => {
-      if (event.key === "Escape") onClose();
-    };
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [isOpen, onClose]);
-
-  if (!isRendered) return null;
-
-  return (
-    <div
-      className={`booking-modal ${isVisible ? "is-open" : ""}`}
-      role="dialog"
-      aria-modal="true"
-      aria-label="Book a discovery call"
-    >
-      <button className="booking-modal-backdrop" type="button" aria-label="Close booking modal" onClick={onClose} />
-      <div className="booking-modal-panel">
-        <div className="booking-modal-header">
-          <div>
-            <p>Book a discovery call</p>
-            <span>Pick a time with John</span>
-          </div>
-          <button className="booking-modal-close" type="button" aria-label="Close booking modal" onClick={onClose}>
-            ×
-          </button>
-        </div>
-        <iframe
-          title="Book a discovery call with John Rodrigues"
-          src={bookingEmbedUrl}
-          loading="lazy"
-        />
-      </div>
-    </div>
   );
 }
 
@@ -1437,9 +1573,9 @@ function OfferingPage({ slug }) {
             >
               Newsletter
             </a>
-            <a className="nav-link" href={bookingUrl}>
+            <BookingTextLink className="nav-link">
               Book a call
-            </a>
+            </BookingTextLink>
           </div>
         </nav>
         <section className="offering-hero" data-nav-theme="dark">
@@ -1482,9 +1618,9 @@ function OfferingPage({ slug }) {
           >
             Newsletter
           </a>
-          <a className="nav-link" href={bookingUrl}>
+          <BookingTextLink className="nav-link">
             Book a call
-          </a>
+          </BookingTextLink>
         </div>
       </nav>
 
@@ -1568,7 +1704,7 @@ function OfferingPage({ slug }) {
           <div className="footer-column">
             <p>Contact</p>
             <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
-            <a href={bookingUrl}>Book discovery call</a>
+            <BookingTextLink>Book discovery call</BookingTextLink>
           </div>
         </div>
         <div className="footer-wordmark reveal" aria-hidden="true">
@@ -1580,23 +1716,10 @@ function OfferingPage({ slug }) {
 }
 
 function App() {
-  const [isBookingOpen, setIsBookingOpen] = React.useState(false);
   const route = window.location.pathname.replace(/\/+$/, "") || "/";
   const isHistory = route === "/history";
   const offeringMatch = route.match(/^\/offerings\/([^/]+)$/);
   const offeringSlug = offeringMatch ? offeringMatch[1] : null;
-
-  React.useEffect(() => {
-    const handleClick = (event) => {
-      const bookingLink = event.target.closest(`a[href="${bookingUrl}"]`);
-      if (!bookingLink) return;
-      event.preventDefault();
-      setIsBookingOpen(true);
-    };
-
-    document.addEventListener("click", handleClick);
-    return () => document.removeEventListener("click", handleClick);
-  }, []);
 
   return (
     <>
@@ -1605,7 +1728,6 @@ function App() {
       ) : (
         <StudioHome isHistory={isHistory} />
       )}
-      <BookingModal isOpen={isBookingOpen} onClose={() => setIsBookingOpen(false)} />
     </>
   );
 }

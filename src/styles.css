@@ -1805,8 +1805,8 @@ h3 {
 
 .dark-bio .bio-card-shell {
   border: none;
-  border-radius: 1.35rem;
-  padding: clamp(1.6rem, 2.6vw, 2.5rem) clamp(1.4rem, 2.2vw, 2rem);
+  border-radius: 1.5rem;
+  padding: clamp(2.4rem, 3.6vw, 3.5rem) clamp(2.1rem, 3.2vw, 3.25rem);
   background: var(--section-charcoal);
   box-shadow: 0 0.4rem 1.1rem rgba(0, 0, 0, 0.1);
 }
@@ -1825,6 +1825,8 @@ h3 {
 
 .dark-bio .bio-copy p {
   color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(0.9rem, 1.05vw, 1rem);
+  line-height: 1.6;
 }
 
 .bio-copy p:last-child {
@@ -1983,16 +1985,78 @@ h3 {
   z-index: 0;
 }
 
-.issue-card {
+.issue-card-deck {
   position: relative;
   z-index: 1;
   width: min(100%, 25rem);
+  perspective: 1400px;
+}
+
+.issue-card {
+  width: 100%;
   padding: 1.55rem;
   border-radius: 1.25rem;
   border: 1px solid rgba(255, 255, 255, 0.09);
   background: linear-gradient(180deg, #1d2025 0%, #131519 100%);
   box-shadow: 0 34px 90px rgba(0, 0, 0, 0.55);
-  transform: rotate(-1.4deg);
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.issue-card--front {
+  position: relative;
+  z-index: 2;
+  rotate: -1.4deg;
+  animation: issueFloat 7s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+.issue-card--back {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  translate: 22px -18px;
+  rotate: 4deg;
+  scale: 0.955;
+  opacity: 0.6;
+  background: linear-gradient(180deg, #191c21 0%, #101215 100%);
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.5);
+  animation: issueFloat 7s ease-in-out infinite;
+  animation-delay: -3.5s;
+}
+
+/* Spread the deck apart on hover for a tactile, 3D feel */
+.issue-card--front {
+  transition: rotate 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    scale 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.issue-card--back {
+  transition: rotate 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    translate 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    scale 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.6s ease;
+}
+
+.newsletter-visual:hover .issue-card--front {
+  rotate: -2.8deg;
+  scale: 1.02;
+}
+
+.newsletter-visual:hover .issue-card--back {
+  translate: 36px -30px;
+  rotate: 6.5deg;
+  scale: 0.92;
+  opacity: 0.75;
+}
+
+@keyframes issueFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-12px);
+  }
 }
 
 .issue-card-head {
@@ -2075,8 +2139,9 @@ h3 {
 
 .issue-card-foot {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.9rem;
   padding-top: 1.15rem;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
@@ -2089,8 +2154,26 @@ h3 {
 }
 
 .issue-card-foot-label {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.issue-card-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(0.9rem, 2.4vw, 1.35rem);
+}
+
+.issue-card-logos img {
+  width: auto;
+  height: 0.95rem;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.62;
 }
 
 .bio-logos {
@@ -2208,7 +2291,7 @@ h3 {
   display: flex;
   width: max-content;
   gap: clamp(1rem, 2vw, 1.35rem);
-  animation: testimonialMarquee 34s linear infinite;
+  animation: testimonialMarquee 55s linear infinite;
   will-change: transform;
 }
 
@@ -2306,34 +2389,79 @@ h3 {
   line-height: 1.02;
 }
 
+.section-heading.work-heading {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.work-nav {
+  display: flex;
+  gap: 0.6rem;
+  align-self: center;
+}
+
+.work-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.9rem;
+  height: 2.9rem;
+  padding: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.04);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.work-nav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.28);
+  color: #ffffff;
+}
+
+.work-nav-btn:active {
+  transform: scale(0.94);
+}
+
+.work-nav-btn svg {
+  width: 1.15rem;
+  height: 1.15rem;
+}
+
 .work-marquee {
   position: relative;
   width: var(--home-rail);
   max-width: none;
   margin: 0 auto;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
   mask-image: linear-gradient(90deg, #000 0%, #000 92%, transparent 100%);
   -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 92%, transparent 100%);
+}
+
+.work-marquee::-webkit-scrollbar {
+  display: none;
 }
 
 .work-track {
   display: flex;
   width: max-content;
   gap: clamp(1rem, 2vw, 1.5rem);
-  animation: workMarquee 55s linear infinite;
-  will-change: transform;
-}
-
-.work-marquee:hover .work-track {
-  animation-play-state: paused;
 }
 
 .work-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: clamp(28rem, 44vw, 42rem);
+  width: clamp(20rem, 30vw, 30rem);
   flex: 0 0 auto;
+  cursor: default;
+  user-select: none;
 }
 
 .work-card-media {
@@ -2351,10 +2479,11 @@ h3 {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  pointer-events: none;
 }
 
 .work-card-media-contain {
-  background: #0a0a0a;
+  background: radial-gradient(135% 125% at 50% 40%, #ffffff 0%, #f8f8f8 55%, #f4f4f4 100%);
 }
 
 .work-card-media-contain img,
@@ -2370,16 +2499,16 @@ h3 {
 
 .work-card-meta strong {
   color: rgba(255, 255, 255, 0.95);
-  font-size: clamp(1.1rem, 1.4vw, 1.4rem);
+  font-size: clamp(0.92rem, 1.05vw, 1.1rem);
   font-weight: 560;
   line-height: 1.15;
 }
 
 .work-card-meta span {
   color: rgba(255, 255, 255, 0.5);
-  font-size: clamp(0.66rem, 0.78vw, 0.76rem);
+  font-size: clamp(0.6rem, 0.7vw, 0.7rem);
   font-weight: 500;
-  letter-spacing: 0.075em;
+  letter-spacing: 0.07em;
   line-height: 1.2;
   text-transform: uppercase;
 }
@@ -3779,7 +3908,7 @@ h3 {
 
   .testimonial-track {
     gap: 0.85rem;
-    animation-duration: 28s;
+    animation-duration: 46s;
   }
 
   .testimonial-card {
@@ -3824,7 +3953,7 @@ h3 {
     width: calc(100% - 0.75rem);
     margin-right: auto;
     margin-left: auto;
-    padding: 1.15rem;
+    padding: 1.75rem 1.5rem;
   }
 
   .v2-bio .eyebrow {
@@ -3923,8 +4052,18 @@ h3 {
     width: 100%;
   }
 
-  .issue-card {
-    transform: rotate(-1.2deg) scale(0.96);
+  .issue-card-deck {
+    margin-inline: auto;
+  }
+
+  .issue-card--front {
+    rotate: -1.2deg;
+    scale: 0.97;
+  }
+
+  .issue-card--back {
+    translate: 16px -13px;
+    scale: 0.93;
   }
 }
 
@@ -3934,6 +4073,11 @@ h3 {
   }
 
   .hero-work-slider {
+    animation: none;
+  }
+
+  .issue-card--front,
+  .issue-card--back {
     animation: none;
   }
 
