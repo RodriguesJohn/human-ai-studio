@@ -32,7 +32,7 @@ import googleCompanyLogo from "./assets/companies/GoogleLogog.png";
 import metaCompanyLogo from "./assets/companies/Meta-Emblem.png";
 import "./styles.css";
 
-const bookingLink = "john-rodrigues-ssafph/15min";
+const bookingLink = "john-rodrigues-rqt2lg/15min";
 const bookingNamespace = "15min";
 const bookingUrl = `https://cal.com/${bookingLink}`;
 const bookingConfig = {
