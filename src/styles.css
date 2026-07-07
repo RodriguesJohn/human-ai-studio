@@ -2364,6 +2364,7 @@ h3 {
 .work-showcase {
   display: grid;
   min-height: 82vh;
+  --work-rail: min(100% - var(--page-padding) * 2, 96rem);
   padding: clamp(5.25rem, 8vw, 8rem) 0 clamp(6rem, 9vw, 9rem);
   align-content: center;
   border-top: 1px solid var(--section-line-soft);
@@ -2372,7 +2373,7 @@ h3 {
 }
 
 .work-showcase-inner {
-  width: var(--home-rail);
+  width: var(--work-rail);
   max-width: none;
   margin: 0 auto clamp(2rem, 3.5vw, 3rem);
 }
@@ -2433,7 +2434,7 @@ h3 {
 
 .work-marquee {
   position: relative;
-  width: var(--home-rail);
+  width: var(--work-rail);
   max-width: none;
   margin: 0 auto;
   overflow-x: auto;
@@ -2451,14 +2452,14 @@ h3 {
 .work-track {
   display: flex;
   width: max-content;
-  gap: clamp(1rem, 2vw, 1.5rem);
+  gap: clamp(1.25rem, 2.8vw, 2.5rem);
 }
 
 .work-card {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: clamp(20rem, 30vw, 30rem);
+  width: clamp(28rem, 44vw, 48rem);
   flex: 0 0 auto;
   cursor: default;
   user-select: none;
@@ -2468,7 +2469,7 @@ h3 {
   position: relative;
   aspect-ratio: 16 / 9.6;
   overflow: hidden;
-  border-radius: 1.15rem;
+  border-radius: 1.5rem;
   background: var(--section-charcoal);
   box-shadow: 0 1.2rem 2.8rem rgba(0, 0, 0, 0.32);
 }
@@ -2493,20 +2494,20 @@ h3 {
 
 .work-card-meta {
   display: grid;
-  gap: 0.3rem;
-  padding: clamp(0.85rem, 1.2vw, 1.1rem) 0.35rem 0;
+  gap: 0.45rem;
+  padding: clamp(1.1rem, 1.55vw, 1.45rem) 0.35rem 0;
 }
 
 .work-card-meta strong {
   color: rgba(255, 255, 255, 0.95);
-  font-size: clamp(0.92rem, 1.05vw, 1.1rem);
+  font-size: clamp(1.18rem, 1.45vw, 1.6rem);
   font-weight: 560;
   line-height: 1.15;
 }
 
 .work-card-meta span {
   color: rgba(255, 255, 255, 0.5);
-  font-size: clamp(0.6rem, 0.7vw, 0.7rem);
+  font-size: clamp(0.74rem, 0.88vw, 0.95rem);
   font-weight: 500;
   letter-spacing: 0.07em;
   line-height: 1.2;
