@@ -2364,7 +2364,7 @@ h3 {
 .work-showcase {
   display: grid;
   min-height: 82vh;
-  --work-rail: min(100% - var(--page-padding) * 2, 96rem);
+  --work-rail: min(100% - clamp(3rem, 14vw, 13rem), 88rem);
   padding: clamp(5.25rem, 8vw, 8rem) 0 clamp(6rem, 9vw, 9rem);
   align-content: center;
   border-top: 1px solid var(--section-line-soft);
