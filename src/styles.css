@@ -696,7 +696,7 @@ h1 span:nth-child(3) {
 }
 
 .hero-meta {
-  display: flex;
+  display: none;
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
@@ -1032,7 +1032,7 @@ h2 {
 }
 
 .dark-offerings {
-  background: var(--section-charcoal);
+  background: #08090a;
   border-top: 1px solid var(--section-line-soft);
   color: #ffffff;
 }
@@ -1509,7 +1509,7 @@ h3 {
 
 .current-home .approach {
   min-height: 74vh;
-  background: var(--section-charcoal);
+  background: #08090a;
 }
 
 .approach-inner {
@@ -1614,8 +1614,8 @@ h3 {
   display: grid;
   flex: 0 0 auto;
   place-items: center;
-  width: clamp(4.1rem, 6vw, 5.4rem);
-  height: clamp(4.1rem, 6vw, 5.4rem);
+  width: clamp(3.1rem, 4.4vw, 4.05rem);
+  height: clamp(3.1rem, 4.4vw, 4.05rem);
   overflow: hidden;
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 1.25rem;
@@ -1756,7 +1756,7 @@ h3 {
   font-size: 0.68rem;
   font-weight: 520;
   letter-spacing: 0.08em;
-  white-space: nowrap;
+  white-space: normal;
   text-transform: uppercase;
 }
 
@@ -1886,7 +1886,7 @@ h3 {
 /* Two-column newsletter CTA */
 .newsletter-cta {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.92fr);
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr));
   align-items: center;
   gap: clamp(2.5rem, 5vw, 5.5rem);
   width: 100%;
@@ -2253,7 +2253,7 @@ h3 {
   padding: clamp(4.25rem, 7vw, 6.5rem) var(--page-padding);
   align-content: center;
   border-top: 1px solid var(--section-line-soft);
-  background: var(--section-charcoal);
+  background: #08090a;
   color: #ffffff;
 }
 
@@ -2602,8 +2602,8 @@ h3 {
 
 @media (max-width: 640px) {
   .footer-wordmark {
-    font-size: clamp(2.25rem, 15vw, 5rem);
-    white-space: normal;
+    font-size: clamp(1.5rem, 9vw, 5rem);
+    white-space: nowrap;
   }
 }
 

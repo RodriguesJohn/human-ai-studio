@@ -172,9 +172,9 @@ const homeOffers = [
     slug: "ai-native-products"
   },
   {
-    title: "Design Engineering",
+    title: "Agentic Design Systems",
     description:
-      "Agentic design systems, components, animations, and web/mobile app interfaces.",
+      "AI-ready design systems that help teams ship faster, then evolve to automate repetitive work.",
     slug: "design-engineering"
   },
   {
@@ -213,18 +213,18 @@ const offeringPages = {
   },
   "design-engineering": {
     eyebrow: "Offering 02",
-    title: "Design Engineering",
+    title: "Agentic Design Systems",
     intro:
-      "Agentic design systems, components, animations, and polished web and mobile interfaces — designed and coded by the same person.",
+      "AI-ready design systems that help product and design teams ship faster, then evolve into agentic systems that automate repetitive work and improve operational efficiency.",
     status: "placeholder",
     sections: [
       {
         heading: "What this looks like",
-        body: "Design systems and interfaces built as production code. Motion, components, and tokens that ship straight into your app."
+        body: "Design systems, components, motion, and product interfaces built as production code, with reusable patterns that are ready for AI-assisted product development."
       },
       {
         heading: "Where it fits",
-        body: "Teams that want design and engineering to move as one, with an interface layer that actually feels considered."
+        body: "Product and design teams that need to move faster now, while building toward agentic workflows that reduce repetitive work and improve day-to-day execution."
       }
     ]
   },
@@ -1055,7 +1055,7 @@ function OriginalHome() {
 
           <div className="footer-column">
             <p>Contact</p>
-            <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
+            <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
             <BookingTextLink>Book discovery call</BookingTextLink>
           </div>
         </div>
@@ -1464,7 +1464,7 @@ function StudioHome({ isHistory = false }) {
                 <p className="eyebrow">Newsletter</p>
                 <h2 id="v2-cta-title">Join 4,000+ readers of the Human AI Studio newsletter.</h2>
                 <p className="final-cta-sub">
-                  Practical essays on AI-native product design, design engineering, and building 0→1 — straight to your inbox.
+                  Practical essays on AI-native product design, design engineering, and building 0→1, straight to your inbox.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
@@ -1541,7 +1541,7 @@ function StudioHome({ isHistory = false }) {
             {!isHistory && (
               <a href={newsletterUrl} target="_blank" rel="noreferrer">Newsletter</a>
             )}
-            <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
+            <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
             <BookingTextLink>Book a call</BookingTextLink>
           </div>
         </div>
@@ -1704,7 +1704,7 @@ function OfferingPage({ slug }) {
           </div>
           <div className="footer-column">
             <p>Contact</p>
-            <a href="mailto:hello@humanai.studio">hello@humanai.studio</a>
+            <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
             <BookingTextLink>Book discovery call</BookingTextLink>
           </div>
         </div>
