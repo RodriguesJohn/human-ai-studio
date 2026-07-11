@@ -189,9 +189,11 @@ function CinematicHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          Designing AI systems and agentic design systems
-          <br className="hero-cinematic-break" /> that drive real user impact and
-          business outcomes.
+          AI systems and agentic design systems
+          <br />
+          <span className="hero-cinematic-subtitle-line">
+            that drive real user impact and business outcomes for B2B startups.
+          </span>
         </motion.p>
 
         <motion.a
@@ -479,7 +481,11 @@ const toolStack = [
 
 const toolStackRowOne = toolStack.filter((_, index) => index % 2 === 0);
 const toolStackRowTwo = toolStack.filter((_, index) => index % 2 === 1);
-const toolStackRowThree = [...toolStack].reverse();
+const toolStackRowThree = [
+  { name: "OpenClaw" },
+  { name: "Hermes Agents" },
+  ...toolStack
+].reverse();
 
 const bioCompanies = [
   { name: "TOCA", icon: tocaCompanyLogo },
@@ -1577,11 +1583,15 @@ function StudioHome({ isHistory = false }) {
                     <div className="stack-card-track">
                       {[...toolStackRowThree, ...toolStackRowThree].map((tool, index) => (
                         <span
-                          className={`stack-logo${tool.contain ? " stack-logo-contain" : ""}`}
+                          className={`stack-logo${tool.contain ? " stack-logo-contain" : ""}${tool.icon ? "" : " stack-logo-text"}`}
                           key={`row3-${tool.name}-${index}`}
                           aria-hidden={index >= toolStackRowThree.length}
                         >
-                          <img src={tool.icon} alt={tool.name} loading="lazy" />
+                          {tool.icon ? (
+                            <img src={tool.icon} alt={tool.name} loading="lazy" />
+                          ) : (
+                            <span>{tool.name}</span>
+                          )}
                         </span>
                       ))}
                     </div>
