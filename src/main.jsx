@@ -449,6 +449,8 @@ const workItems = [
   }
 ];
 
+const showSelectedProjects = false;
+
 const v2Principles = [
   "Scope the business problem and customer workflow",
   "Design the agent workflow around real team handoffs",
@@ -1445,7 +1447,7 @@ function StudioHome({ isHistory = false }) {
         </div>
       </section>
 
-      {!isHistory && (
+      {!isHistory && showSelectedProjects && (
         <section className="work-showcase" aria-labelledby="work-title" data-nav-theme="dark">
           <div className="work-showcase-inner">
             <div className="section-heading no-section-note work-heading reveal">
