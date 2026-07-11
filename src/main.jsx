@@ -305,13 +305,13 @@ const homeOffers = [
   {
     title: "Agentic Design Systems",
     description:
-      "Design systems with agents that integrate into them, built in React and TypeScript to help teams ship faster.",
+      "AI-ready design systems with agent interfaces so teams can ship faster without AI slop and scale operations.",
     slug: "design-engineering",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Workshops & Cohorts",
+    title: "AI Enablmenrt",
     description:
       "Hands-on workshops and cohorts that make your team AI-native.",
     slug: "ai-training-enablement",
@@ -376,7 +376,7 @@ const offeringPages = {
   },
   "ai-training-enablement": {
     eyebrow: "Offering 03",
-    title: "Workshops & Cohorts",
+    title: "AI Enablmenrt",
     intro:
       "Custom workshops and cohorts for your teams to become truly AI-native — hands-on and tailored to how your team actually works.",
     status: "live",
