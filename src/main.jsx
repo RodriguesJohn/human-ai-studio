@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { Analytics } from "@vercel/analytics/react";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, useReducedMotion, useInView } from "framer-motion";
 import * as THREE from "three";
 import profilePicture from "./assets/Profile Picture.jpg";
 import studioAbstract from "./assets/studio-abstract.png";
@@ -78,6 +78,102 @@ function BookingTextLink({ className, children }) {
     >
       {children}
     </a>
+  );
+}
+
+function StaggeredFade({ text, baseDelay = 0 }) {
+  const ref = React.useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const characters = Array.from(text);
+
+  return (
+    <span ref={ref} className="staggered-fade" aria-label={text}>
+      {characters.map((char, i) => (
+        <motion.span
+          key={`${char}-${i}`}
+          aria-hidden="true"
+          initial={{ opacity: 0, y: 8 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+          transition={{
+            duration: 0.6,
+            delay: baseDelay + i * 0.07,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+        >
+          {char === " " ? " " : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+const cinematicHeroVideo =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4";
+
+function CinematicHero() {
+  return (
+    <section
+      className="hero-cinematic"
+      id="top"
+      data-nav-theme="dark"
+      aria-label="Human AI Studio"
+    >
+      <video
+        className="hero-cinematic-video"
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        aria-hidden="true"
+        src={cinematicHeroVideo}
+      />
+      <div className="hero-cinematic-scrim" aria-hidden="true" />
+
+      <div className="hero-cinematic-content">
+        <h1 className="hero-cinematic-title">
+          <motion.span
+            className="hero-cinematic-line"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Human AI
+          </motion.span>
+          <motion.span
+            className="hero-cinematic-line"
+            initial={{ opacity: 0, y: 16 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.75, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Studio
+          </motion.span>
+        </h1>
+
+        <motion.p
+          className="hero-cinematic-subtitle"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.6, ease: "easeOut" }}
+        >
+          Independent AI systems studio founded by John Rodrigues,
+          <br className="hero-cinematic-break" /> designing AI systems and
+          agentic design systems to drive user impact and business outcomes.
+        </motion.p>
+
+        <motion.a
+          className="hero-cinematic-cta liquid-glass"
+          href={bookingUrl}
+          onClick={openBookingModal}
+          {...bookingAttributes}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 2.0, ease: "easeOut" }}
+        >
+          Book discovery call
+        </motion.a>
+      </div>
+    </section>
   );
 }
 
@@ -166,48 +262,48 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "0→1 AI-Native Products & Agents",
+    title: "AI Systems",
     description:
-      "Design and develop agents, AI systems, and end-to-end products for real user problems.",
-    slug: "ai-native-products"
+      "AI operating systems that improve workflows and drive real business outcomes.",
+    slug: "ai-native-products",
+    color1: "#3b82f6",
+    color2: "#bae6fd"
   },
   {
     title: "Agentic Design Systems",
     description:
-      "AI-ready design systems that help teams ship faster, then evolve to automate repetitive work.",
-    slug: "design-engineering"
+      "Design systems with agents that integrate into them, built in React and TypeScript to help teams ship faster.",
+    slug: "design-engineering",
+    color1: "#8b5cf6",
+    color2: "#ddd6fe"
   },
   {
-    title: "AI Consulting",
+    title: "Workshops & Cohorts",
     description:
-      "Identify where AI can improve workflows, solve problems, and create real leverage.",
-    slug: "ai-consulting"
-  },
-  {
-    title: "AI Training & Enablement",
-    description:
-      "Custom workshops that help teams adopt AI tools, improve workflows, and work faster.",
+      "Hands-on workshops and cohorts that make your team AI-native.",
     slug: "ai-training-enablement",
     link: "https://maven.com/humanaistudio",
-    external: true
+    external: true,
+    color1: "#10b981",
+    color2: "#a7f3d0"
   }
 ];
 
 const offeringPages = {
   "ai-native-products": {
     eyebrow: "Offering 01",
-    title: "0→1 AI-Native Products & Agents",
+    title: "AI Systems",
     intro:
-      "From a blank page to a shipped product. I design and build AI-native applications and autonomous agents that solve real user problems — not demos.",
+      "We create AI operating systems for your business — improving your workflows, driving real business outcomes and revenue, and optimizing how your operations run day to day.",
     status: "placeholder",
     sections: [
       {
         heading: "What this looks like",
-        body: "End-to-end product development: discovery, interface design, agent architecture, and production engineering — all handled by one senior operator."
+        body: "End-to-end AI systems: discovery, interface design, agent architecture, and production engineering — designed around the decisions and workflows that move your business."
       },
       {
         heading: "Where it fits",
-        body: "Founders and teams who need to go from idea to a working, AI-native product fast, without stitching together a fragmented team."
+        body: "Founders and teams who want AI woven into how the business actually operates — driving outcomes and revenue, not just shipping a demo."
       }
     ]
   },
@@ -246,10 +342,10 @@ const offeringPages = {
     ]
   },
   "ai-training-enablement": {
-    eyebrow: "Offering 04",
-    title: "AI Training & Enablement",
+    eyebrow: "Offering 03",
+    title: "Workshops & Cohorts",
     intro:
-      "Custom workshops that help teams adopt AI tools, improve workflows, and work faster — hands-on and tailored to how your team actually works.",
+      "Custom workshops and cohorts for your teams to become truly AI-native — hands-on and tailored to how your team actually works.",
     status: "live",
     sections: [
       {
@@ -527,6 +623,212 @@ function HeroNebulaShader({ className = "" }) {
   }, []);
 
   return <div ref={containerRef} className={`hero-side-shader ${className}`} aria-hidden="true" />;
+}
+
+function OfferingShader({ color1 = "#38bdf8", color2 = "#0b1220", seed = 0 }) {
+  const containerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return undefined;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const clock = new THREE.Clock();
+
+    const vertexShader = `
+      precision highp float;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 1.0);
+      }
+    `;
+
+    const fragmentShader = `
+      precision highp float;
+      uniform float time;
+      uniform float intensity;
+      uniform float seed;
+      uniform vec3 color1;
+      uniform vec3 color2;
+      varying vec2 vUv;
+
+      void main() {
+        vec2 uv = vUv;
+        // seed shifts phase so every card flows differently
+        float t = time * 1.15 + seed * 12.0;
+
+        // Domain warp — swirls the field for lively, organic movement
+        vec2 w = uv;
+        w.x += sin(uv.y * 3.0 + t * 0.9 + seed * 4.0) * 0.30;
+        w.y += cos(uv.x * 3.4 - t * 0.8 + seed * 2.3) * 0.30;
+
+        // Low-frequency animated noise (soft, blurry) driven by the warped coords
+        float noise = sin(w.x * 3.2 + t) * cos(w.y * 2.6 + t * 0.8);
+        noise += sin(w.x * 4.8 - t * 1.4 + seed) * cos(w.y * 3.6 + t * 1.2) * 0.5;
+        noise *= 0.5;
+
+        // Flowing color mix between the two hues
+        vec3 color = mix(color1, color2, noise * 0.5 + 0.5);
+
+        // Lift bright & airy (much lighter overall)
+        color = mix(color, vec3(1.0), 0.42);
+        // Extra bloom along the crests
+        color = mix(color, vec3(1.0), pow(abs(noise), 2.0) * intensity * 0.45);
+
+        // Deepen toward the bottom into a richer shade of the same hue
+        // (colored, not black) so the title stays legible without a dark scrim.
+        float shade = smoothstep(0.0, 0.6, vUv.y);
+        color *= mix(0.42, 1.0, shade);
+
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `;
+
+    const uniforms = {
+      time: { value: 0 },
+      intensity: { value: 1.0 },
+      seed: { value: seed },
+      color1: { value: new THREE.Color(color1) },
+      color2: { value: new THREE.Color(color2) }
+    };
+
+    const material = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      uniforms,
+      transparent: true,
+      depthWrite: false
+    });
+
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, 32, 32), material);
+    scene.add(mesh);
+
+    const onResize = () => {
+      const width = Math.max(1, container.clientWidth);
+      const height = Math.max(1, container.clientHeight);
+      renderer.setSize(width, height, false);
+    };
+
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(container);
+    onResize();
+
+    renderer.setAnimationLoop(() => {
+      const t = clock.getElapsedTime();
+      uniforms.time.value = t;
+      uniforms.intensity.value = 1.0 + Math.sin(t * 2.0) * 0.3;
+      renderer.render(scene, camera);
+    });
+
+    return () => {
+      renderer.setAnimationLoop(null);
+      resizeObserver.disconnect();
+      if (renderer.domElement.parentNode === container) {
+        container.removeChild(renderer.domElement);
+      }
+      material.dispose();
+      mesh.geometry.dispose();
+      renderer.dispose();
+    };
+  }, [color1, color2, seed]);
+
+  return <div ref={containerRef} className="offering-shader" aria-hidden="true" />;
+}
+
+function StackLinks() {
+  const canvasRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return undefined;
+    const card = canvas.closest(".stack-card");
+    if (!card) return undefined;
+
+    const ctx = canvas.getContext("2d");
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const reduceMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+    let raf;
+
+    const render = (tMs) => {
+      const t = tMs * 0.001;
+      const rect = canvas.getBoundingClientRect();
+      const w = rect.width;
+      const h = rect.height;
+      const pw = Math.floor(w * dpr);
+      const ph = Math.floor(h * dpr);
+      if (canvas.width !== pw) canvas.width = pw;
+      if (canvas.height !== ph) canvas.height = ph;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      ctx.clearRect(0, 0, w, h);
+
+      const pts = [];
+      card.querySelectorAll(".stack-logo").forEach((el) => {
+        const r = el.getBoundingClientRect();
+        const x = r.left + r.width / 2 - rect.left;
+        const y = r.top + r.height / 2 - rect.top;
+        if (x > -30 && x < w + 30 && y > -30 && y < h + 30) {
+          pts.push({ x, y });
+        }
+      });
+
+      const threshold = 150;
+      for (let i = 0; i < pts.length; i++) {
+        for (let j = i + 1; j < pts.length; j++) {
+          const dx = pts[j].x - pts[i].x;
+          const dy = pts[j].y - pts[i].y;
+          const d = Math.hypot(dx, dy);
+          if (d >= threshold) continue;
+
+          const strength = 1 - d / threshold;
+          ctx.strokeStyle = `rgba(255, 255, 255, ${strength * 0.26})`;
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(pts[i].x, pts[i].y);
+          ctx.lineTo(pts[j].x, pts[j].y);
+          ctx.stroke();
+
+          // Multiple pulses traveling slowly along each connection
+          const speed = 0.13;
+          const dotCount = 3;
+          const edgeOffset = (i * 13 + j * 7) * 0.037;
+          for (let k = 0; k < dotCount; k++) {
+            const phase = reduceMotion
+              ? (k + 0.5) / dotCount
+              : (t * speed + edgeOffset + k / dotCount) % 1;
+            const px = pts[i].x + dx * phase;
+            const py = pts[i].y + dy * phase;
+            // fade in/out near the endpoints so dots don't pop at the logos
+            const fade = Math.sin(phase * Math.PI);
+            const glow = strength * fade * 0.85;
+            if (glow <= 0.01) continue;
+            ctx.beginPath();
+            ctx.arc(px, py, 1.6, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(255, 255, 255, ${glow})`;
+            ctx.shadowColor = "rgba(190, 215, 255, 0.9)";
+            ctx.shadowBlur = 7;
+            ctx.fill();
+            ctx.shadowBlur = 0;
+          }
+        }
+      }
+
+      raf = requestAnimationFrame(render);
+    };
+
+    raf = requestAnimationFrame(render);
+    return () => cancelAnimationFrame(raf);
+  }, []);
+
+  return <canvas ref={canvasRef} className="stack-card-links" aria-hidden="true" />;
 }
 
 function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, connections = false }) {
@@ -1092,53 +1394,30 @@ function StudioHome({ isHistory = false }) {
         </div>
       </nav>
 
-      <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
-        <DotMatrixBackground className="v2-hero-entrance-dots" intensity={3.2} dotScale={1.15} />
-        <div className="hero-inner">
-          <div className="hero-copy">
-            {isHistory && <p className="eyebrow hero-eyebrow">Agentic Operating Systems</p>}
-            <h1>
-              <span>Human</span>
-              <span>AI</span>
-              <span>Studio</span>
-            </h1>
-            <p className="intro v2-hero-intro">
-              {isHistory ? (
-                <>
-                  <span>AI agent and agentic operating system development to help businesses</span>{" "}
-                  <span>scale operations and grow revenue.</span>
-                </>
-              ) : (
-                <>
-                  <span>Independent design engineering studio by John Rodrigues, SF-based,</span>
-                  <span>building 0→1 AI-native products.</span>
-                </>
-              )}
-            </p>
-            <div className="hero-actions">
-              <BookingButton showAvatar />
-            </div>
-            {!isHistory && (
-              <div className="hero-meta">
-                <div className="hero-impact" aria-label="Studio impact">
-                  <div>
-                    <strong>$53M+</strong>
-                    <span>client funding</span>
-                  </div>
-                  <div>
-                    <strong>100K+</strong>
-                    <span>users served</span>
-                  </div>
-                  <div>
-                    <strong>25+</strong>
-                    <span>products shipped</span>
-                  </div>
-                </div>
+      {isHistory ? (
+        <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
+          <DotMatrixBackground className="v2-hero-entrance-dots" intensity={3.2} dotScale={1.15} />
+          <div className="hero-inner">
+            <div className="hero-copy">
+              <p className="eyebrow hero-eyebrow">Agentic Operating Systems</p>
+              <h1>
+                <span>Human</span>
+                <span>AI</span>
+                <span>Studio</span>
+              </h1>
+              <p className="intro v2-hero-intro">
+                <span>AI agent and agentic operating system development to help businesses</span>{" "}
+                <span>scale operations and grow revenue.</span>
+              </p>
+              <div className="hero-actions">
+                <BookingButton showAvatar />
               </div>
-            )}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      ) : (
+        <CinematicHero />
+      )}
 
       <section
         id="offerings"
@@ -1150,7 +1429,7 @@ function StudioHome({ isHistory = false }) {
           <div>
             <p className="eyebrow">{isHistory ? "How It Works" : "Offerings"}</p>
             <h2 className="v2-how-heading" id="v2-how-title">
-              {isHistory ? "From Workflow Pain to AI System" : "Four Ways to Work Together"}
+              {isHistory ? "From Workflow Pain to AI System" : "Three Ways to Work Together"}
             </h2>
           </div>
           {isHistory && (
@@ -1167,11 +1446,26 @@ function StudioHome({ isHistory = false }) {
               key={step.title}
               style={{ "--reveal-delay": `${120 + index * 140}ms` }}
             >
-              <div className="offering-topline">
-                <span className="number">{String(index + 1).padStart(2, "0")}</span>
-              </div>
+              {!isHistory && (
+                <div className="offering-thumb">
+                  <OfferingShader
+                    color1={step.color1}
+                    color2={step.color2}
+                    seed={index * 3.7 + 1.3}
+                  />
+                  <span className="offering-thumb-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="offering-thumb-title">{step.title}</h3>
+                </div>
+              )}
+              {isHistory && (
+                <div className="offering-topline">
+                  <span className="number">{String(index + 1).padStart(2, "0")}</span>
+                </div>
+              )}
               <div className="offering-copy">
-                <h3>{step.title}</h3>
+                {isHistory && <h3>{step.title}</h3>}
                 <p>{step.description}</p>
                 {step.logos && (
                   <div className="logo-proof" aria-label={`${step.title} credibility`}>
@@ -1293,7 +1587,7 @@ function StudioHome({ isHistory = false }) {
             <h2 id="v2-approach-title">
               {isHistory
                 ? "Forward-deployed design and engineering for your business."
-                : "Tools for Designing and Shipping AI Products."}
+                : "Connecting tools into systems that drive outcomes."}
             </h2>
           </div>
           <div className="approach-details">
@@ -1307,6 +1601,7 @@ function StudioHome({ isHistory = false }) {
             {!isHistory && (
               <div className="stack-card" aria-label="Tool stack">
                 <div className="stack-card-rows">
+                  <StackLinks />
                   <div className="stack-card-row">
                     <div className="stack-card-track">
                       {[...toolStackRowOne, ...toolStackRowOne].map((tool, index) => (
@@ -1335,8 +1630,8 @@ function StudioHome({ isHistory = false }) {
                   </div>
                 </div>
                 <div className="stack-card-copy">
-                  <strong>An AI-native design &amp; build stack</strong>
-                  <span>The tools I design, engineer, and ship with every day.</span>
+                  <strong>An AI-native design &amp; build system</strong>
+                  <span>The tools I connect into systems to design, engineer, and ship.</span>
                 </div>
               </div>
             )}
@@ -1365,12 +1660,12 @@ function StudioHome({ isHistory = false }) {
             <p>
               {isHistory
                 ? "Work directly with John Rodrigues across strategy, product design, design engineering, AI agent development, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."
-                : "Fractional product, design, and AI engineering support for teams that need senior execution without adding headcount."}
+                : "I'm a design engineer focused on AI systems, agentic design systems, and AI workflows. My background spans design and engineering, plus an AI program at Stanford, with work shipped everywhere from early-stage startups to enterprises."}
             </p>
             <p>
               {isHistory
                 ? "John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, agentic systems, internal tools, and AI-native products that teams can understand, trust, and operate."
-                : "I help scope, design, integrate, and ship practical AI systems, interfaces, and workflows inside real business contexts."}
+                : "I've been writing about AI since 2021 on my Substack, now read by more than 4,000 subscribers. Across all of it, I stay focused on driving real user impact and business outcomes."}
             </p>
             <div className="bio-actions">
               <a
@@ -1464,7 +1759,7 @@ function StudioHome({ isHistory = false }) {
                 <p className="eyebrow">Newsletter</p>
                 <h2 id="v2-cta-title">Join 4,000+ readers of the Human AI Studio newsletter.</h2>
                 <p className="final-cta-sub">
-                  Practical essays on AI-native product design, design engineering, and building 0→1, straight to your inbox.
+                  Publishing research, development projects, and industry trends, straight to your inbox.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
@@ -1545,8 +1840,8 @@ function StudioHome({ isHistory = false }) {
             <BookingTextLink>Book a call</BookingTextLink>
           </div>
         </div>
-        <div className="footer-wordmark reveal" aria-hidden="true">
-          Human AI Studio
+        <div className="footer-wordmark" aria-hidden="true">
+          <StaggeredFade text="Human AI Studio" />
         </div>
       </footer>
     </main>
@@ -1708,8 +2003,8 @@ function OfferingPage({ slug }) {
             <BookingTextLink>Book discovery call</BookingTextLink>
           </div>
         </div>
-        <div className="footer-wordmark reveal" aria-hidden="true">
-          Human AI Studio
+        <div className="footer-wordmark" aria-hidden="true">
+          <StaggeredFade text="Human AI Studio" />
         </div>
       </footer>
     </main>
