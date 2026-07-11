@@ -111,6 +111,28 @@ const cinematicHeroVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4";
 
 function CinematicHero() {
+  const videoRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return undefined;
+    // Some browsers (esp. iOS Safari) only autoplay when muted is set as a
+    // property, not just the attribute — and otherwise show a play button.
+    v.muted = true;
+    v.defaultMuted = true;
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    };
+    tryPlay();
+    v.addEventListener("loadeddata", tryPlay);
+    v.addEventListener("canplay", tryPlay);
+    return () => {
+      v.removeEventListener("loadeddata", tryPlay);
+      v.removeEventListener("canplay", tryPlay);
+    };
+  }, []);
+
   return (
     <section
       className="hero-cinematic"
@@ -119,6 +141,7 @@ function CinematicHero() {
       aria-label="Human AI Studio"
     >
       <video
+        ref={videoRef}
         className="hero-cinematic-video"
         autoPlay
         muted
@@ -156,9 +179,9 @@ function CinematicHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1.6, ease: "easeOut" }}
         >
-          Independent AI systems studio founded by John Rodrigues,
-          <br className="hero-cinematic-break" /> designing AI systems and
-          agentic design systems to drive user impact and business outcomes.
+          Designing AI systems and agentic design systems
+          <br className="hero-cinematic-break" /> that drive real user impact and
+          business outcomes.
         </motion.p>
 
         <motion.a
@@ -444,6 +467,7 @@ const toolStack = [
 
 const toolStackRowOne = toolStack.filter((_, index) => index % 2 === 0);
 const toolStackRowTwo = toolStack.filter((_, index) => index % 2 === 1);
+const toolStackRowThree = [...toolStack].reverse();
 
 const bioCompanies = [
   { name: "TOCA", icon: tocaCompanyLogo },
@@ -741,96 +765,6 @@ function OfferingShader({ color1 = "#38bdf8", color2 = "#0b1220", seed = 0 }) {
 
   return <div ref={containerRef} className="offering-shader" aria-hidden="true" />;
 }
-
-function StackLinks() {
-  const canvasRef = React.useRef(null);
-
-  React.useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return undefined;
-    const card = canvas.closest(".stack-card");
-    if (!card) return undefined;
-
-    const ctx = canvas.getContext("2d");
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-    let raf;
-
-    const render = (tMs) => {
-      const t = tMs * 0.001;
-      const rect = canvas.getBoundingClientRect();
-      const w = rect.width;
-      const h = rect.height;
-      const pw = Math.floor(w * dpr);
-      const ph = Math.floor(h * dpr);
-      if (canvas.width !== pw) canvas.width = pw;
-      if (canvas.height !== ph) canvas.height = ph;
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      ctx.clearRect(0, 0, w, h);
-
-      const pts = [];
-      card.querySelectorAll(".stack-logo").forEach((el) => {
-        const r = el.getBoundingClientRect();
-        const x = r.left + r.width / 2 - rect.left;
-        const y = r.top + r.height / 2 - rect.top;
-        if (x > -30 && x < w + 30 && y > -30 && y < h + 30) {
-          pts.push({ x, y });
-        }
-      });
-
-      const threshold = 150;
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[j].x - pts[i].x;
-          const dy = pts[j].y - pts[i].y;
-          const d = Math.hypot(dx, dy);
-          if (d >= threshold) continue;
-
-          const strength = 1 - d / threshold;
-          ctx.strokeStyle = `rgba(255, 255, 255, ${strength * 0.26})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.stroke();
-
-          // Multiple pulses traveling slowly along each connection
-          const speed = 0.13;
-          const dotCount = 3;
-          const edgeOffset = (i * 13 + j * 7) * 0.037;
-          for (let k = 0; k < dotCount; k++) {
-            const phase = reduceMotion
-              ? (k + 0.5) / dotCount
-              : (t * speed + edgeOffset + k / dotCount) % 1;
-            const px = pts[i].x + dx * phase;
-            const py = pts[i].y + dy * phase;
-            // fade in/out near the endpoints so dots don't pop at the logos
-            const fade = Math.sin(phase * Math.PI);
-            const glow = strength * fade * 0.85;
-            if (glow <= 0.01) continue;
-            ctx.beginPath();
-            ctx.arc(px, py, 1.6, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(255, 255, 255, ${glow})`;
-            ctx.shadowColor = "rgba(190, 215, 255, 0.9)";
-            ctx.shadowBlur = 7;
-            ctx.fill();
-            ctx.shadowBlur = 0;
-          }
-        }
-      }
-
-      raf = requestAnimationFrame(render);
-    };
-
-    raf = requestAnimationFrame(render);
-    return () => cancelAnimationFrame(raf);
-  }, []);
-
-  return <canvas ref={canvasRef} className="stack-card-links" aria-hidden="true" />;
-}
-
 function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, connections = false }) {
   const canvasRef = React.useRef(null);
 
@@ -1601,7 +1535,6 @@ function StudioHome({ isHistory = false }) {
             {!isHistory && (
               <div className="stack-card" aria-label="Tool stack">
                 <div className="stack-card-rows">
-                  <StackLinks />
                   <div className="stack-card-row">
                     <div className="stack-card-track">
                       {[...toolStackRowOne, ...toolStackRowOne].map((tool, index) => (
@@ -1628,10 +1561,19 @@ function StudioHome({ isHistory = false }) {
                       ))}
                     </div>
                   </div>
-                </div>
-                <div className="stack-card-copy">
-                  <strong>An AI-native design &amp; build system</strong>
-                  <span>The tools I connect into systems to design, engineer, and ship.</span>
+                  <div className="stack-card-row">
+                    <div className="stack-card-track">
+                      {[...toolStackRowThree, ...toolStackRowThree].map((tool, index) => (
+                        <span
+                          className={`stack-logo${tool.contain ? " stack-logo-contain" : ""}`}
+                          key={`row3-${tool.name}-${index}`}
+                          aria-hidden={index >= toolStackRowThree.length}
+                        >
+                          <img src={tool.icon} alt={tool.name} loading="lazy" />
+                        </span>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
             )}
@@ -1757,7 +1699,7 @@ function StudioHome({ isHistory = false }) {
             <div className="newsletter-cta">
               <div className="newsletter-copy">
                 <p className="eyebrow">Newsletter</p>
-                <h2 id="v2-cta-title">Join 4,000+ readers of the Human AI Studio newsletter.</h2>
+                <h2 id="v2-cta-title">Join 4,000+ readers of the newsletter.</h2>
                 <p className="final-cta-sub">
                   Publishing research, development projects, and industry trends, straight to your inbox.
                 </p>

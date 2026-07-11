@@ -1666,20 +1666,6 @@ h3 {
   gap: clamp(1rem, 1.9vw, 1.55rem);
 }
 
-.stack-card-links {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
-
-.stack-card-row {
-  position: relative;
-  z-index: 1;
-}
-
 .stack-card-row {
   overflow: hidden;
 }
@@ -3447,7 +3433,8 @@ h3 {
   }
 
   .approach-inner,
-  .bio-inner {
+  .bio-inner,
+  .v2-bio .bio-inner {
     grid-template-columns: 1fr;
   }
 
@@ -3457,6 +3444,14 @@ h3 {
 
   .bio-inner {
     gap: 2rem;
+  }
+
+  .v2-bio .bio-inner {
+    gap: 2rem;
+  }
+
+  .v2-bio h2 {
+    white-space: normal;
   }
 
   .offering-grid {
