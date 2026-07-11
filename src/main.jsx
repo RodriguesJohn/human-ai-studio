@@ -116,20 +116,30 @@ function CinematicHero() {
   React.useEffect(() => {
     const v = videoRef.current;
     if (!v) return undefined;
-    // Some browsers (esp. iOS Safari) only autoplay when muted is set as a
-    // property, not just the attribute — and otherwise show a play button.
+    // iOS Safari is strict: it only autoplays when the video is muted AND
+    // inline as DOM properties/attributes, otherwise it shows a play button.
     v.muted = true;
     v.defaultMuted = true;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "true");
+
     const tryPlay = () => {
       const p = v.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
     };
     tryPlay();
-    v.addEventListener("loadeddata", tryPlay);
-    v.addEventListener("canplay", tryPlay);
+
+    const events = ["loadeddata", "canplay", "canplaythrough"];
+    events.forEach((e) => v.addEventListener(e, tryPlay));
+    const onVisible = () => {
+      if (!document.hidden) tryPlay();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+
     return () => {
-      v.removeEventListener("loadeddata", tryPlay);
-      v.removeEventListener("canplay", tryPlay);
+      events.forEach((e) => v.removeEventListener(e, tryPlay));
+      document.removeEventListener("visibilitychange", onVisible);
     };
   }, []);
 
@@ -157,17 +167,17 @@ function CinematicHero() {
         <h1 className="hero-cinematic-title">
           <motion.span
             className="hero-cinematic-line"
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
             Human AI
           </motion.span>
           <motion.span
             className="hero-cinematic-line"
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.75, delay: 0.32, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
             Studio
           </motion.span>
@@ -175,9 +185,9 @@ function CinematicHero() {
 
         <motion.p
           className="hero-cinematic-subtitle"
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.6, ease: "easeOut" }}
+          transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           Designing AI systems and agentic design systems
           <br className="hero-cinematic-break" /> that drive real user impact and
@@ -189,9 +199,9 @@ function CinematicHero() {
           href={bookingUrl}
           onClick={openBookingModal}
           {...bookingAttributes}
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 2.0, ease: "easeOut" }}
+          transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
         >
           Book discovery call
         </motion.a>
@@ -1782,8 +1792,8 @@ function StudioHome({ isHistory = false }) {
             <BookingTextLink>Book a call</BookingTextLink>
           </div>
         </div>
-        <div className="footer-wordmark" aria-hidden="true">
-          <StaggeredFade text="Human AI Studio" />
+        <div className="footer-wordmark reveal" aria-hidden="true">
+          Human AI Studio
         </div>
       </footer>
     </main>
@@ -1945,8 +1955,8 @@ function OfferingPage({ slug }) {
             <BookingTextLink>Book discovery call</BookingTextLink>
           </div>
         </div>
-        <div className="footer-wordmark" aria-hidden="true">
-          <StaggeredFade text="Human AI Studio" />
+        <div className="footer-wordmark reveal" aria-hidden="true">
+          Human AI Studio
         </div>
       </footer>
     </main>

@@ -4222,6 +4222,21 @@ h3 {
 /* ============================================================
    Cinematic video hero
    ============================================================ */
+/* On-load entrance for the nav — part of the coordinated hero reveal.
+   Opacity-only so it never leaves a transform that would break sticky. */
+@keyframes navEntrance {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.current-home .nav {
+  animation: navEntrance 0.65s ease both;
+}
+
 .current-home .hero-cinematic {
   position: relative;
   z-index: 1;
