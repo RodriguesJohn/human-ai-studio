@@ -4280,6 +4280,15 @@ h3 {
   pointer-events: none;
 }
 
+.hero-cinematic-video::-webkit-media-controls,
+.hero-cinematic-video::-webkit-media-controls-panel,
+.hero-cinematic-video::-webkit-media-controls-start-playback-button {
+  display: none !important;
+  -webkit-appearance: none;
+  opacity: 0;
+  pointer-events: none;
+}
+
 .hero-cinematic-scrim {
   position: absolute;
   inset: 0;

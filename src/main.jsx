@@ -5,6 +5,7 @@ import { motion, useReducedMotion, useInView } from "framer-motion";
 import * as THREE from "three";
 import profilePicture from "./assets/Profile Picture.jpg";
 import studioAbstract from "./assets/studio-abstract.png";
+import cinematicHeroMobileVideo from "./assets/hero-cinematic-mobile.mp4";
 import evaAiVideo from "./assets/EvaAIV2.mov";
 import pureFiVideo from "./assets/PureFi.MOV";
 import outfixWorkVideo from "./assets/work/OutfixV2.mp4";
@@ -25,6 +26,8 @@ import claudeCodeLogo from "./assets/logos/vercel.png";
 import xcodeLogo from "./assets/logos/xcode.png";
 import figmaLogo from "./assets/logos/Figma.png";
 import wonderLogo from "./assets/logos/Wonder.png";
+import hermesLogo from "./assets/logos/Hermes.jpeg";
+import openClawLogo from "./assets/logos/OpenClaw.png";
 import tocaCompanyLogo from "./assets/companies/Toca.png";
 import citiCompanyLogo from "./assets/companies/Citi.svg.png";
 import chaseCompanyLogo from "./assets/companies/ChaseLightMOde.png";
@@ -112,6 +115,21 @@ const cinematicHeroVideo =
 
 function CinematicHero() {
   const videoRef = React.useRef(null);
+  const setHeroVideoRef = React.useCallback((node) => {
+    videoRef.current = node;
+    if (!node) return;
+
+    node.muted = true;
+    node.defaultMuted = true;
+    node.playsInline = true;
+    node.autoplay = true;
+    node.controls = false;
+    node.setAttribute("autoplay", "");
+    node.setAttribute("muted", "");
+    node.setAttribute("playsinline", "");
+    node.setAttribute("webkit-playsinline", "true");
+    node.removeAttribute("controls");
+  }, []);
 
   React.useEffect(() => {
     const v = videoRef.current;
@@ -151,16 +169,24 @@ function CinematicHero() {
       aria-label="Human AI Studio"
     >
       <video
-        ref={videoRef}
+        ref={setHeroVideoRef}
         className="hero-cinematic-video"
         autoPlay
         muted
+        defaultMuted
         loop
         playsInline
+        webkit-playsinline="true"
         preload="auto"
+        controls={false}
+        controlsList="nodownload noplaybackrate noremoteplayback"
+        disablePictureInPicture
+        disableRemotePlayback
         aria-hidden="true"
-        src={cinematicHeroVideo}
-      />
+      >
+        <source src={cinematicHeroMobileVideo} media="(max-width: 640px)" type="video/mp4" />
+        <source src={cinematicHeroVideo} type="video/mp4" />
+      </video>
       <div className="hero-cinematic-scrim" aria-hidden="true" />
 
       <div className="hero-cinematic-content">
@@ -299,7 +325,7 @@ const homeOffers = [
   {
     title: "AI Systems",
     description:
-      "AI operating systems that improve workflows and drive real business outcomes.",
+      "AI operating systems that streamline operations, improve revenue streams, and drive measurable growth.",
     slug: "ai-native-products",
     color1: "#3b82f6",
     color2: "#bae6fd"
@@ -313,7 +339,7 @@ const homeOffers = [
     color2: "#ddd6fe"
   },
   {
-    title: "AI Enablmenrt",
+    title: "AI Enablement",
     description:
       "Hands-on workshops and cohorts that make your team AI-native.",
     slug: "ai-training-enablement",
@@ -329,7 +355,7 @@ const offeringPages = {
     eyebrow: "Offering 01",
     title: "AI Systems",
     intro:
-      "We create AI operating systems for your business — improving your workflows, driving real business outcomes and revenue, and optimizing how your operations run day to day.",
+      "We create AI operating systems for your business that streamline operations, improve revenue streams, and increase measurable growth.",
     status: "placeholder",
     sections: [
       {
@@ -482,8 +508,8 @@ const toolStack = [
 const toolStackRowOne = toolStack.filter((_, index) => index % 2 === 0);
 const toolStackRowTwo = toolStack.filter((_, index) => index % 2 === 1);
 const toolStackRowThree = [
-  { name: "OpenClaw" },
-  { name: "Hermes Agents" },
+  { name: "OpenClaw", icon: openClawLogo },
+  { name: "Hermes Agents", icon: hermesLogo },
   ...toolStack
 ].reverse();
 
