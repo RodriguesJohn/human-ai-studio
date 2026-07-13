@@ -43,6 +43,8 @@ a {
 
 .current-home {
   --home-rail: min(100% - var(--page-padding) * 2, 74rem);
+  --body-copy-size: clamp(1.04rem, 1.18vw, 1.16rem);
+  --body-copy-line-height: 1.58;
   --section-black: #000000;
   --section-charcoal: #17191c;
   --section-charcoal-soft: #101112;
@@ -1010,8 +1012,8 @@ h2 {
   max-width: 31rem;
   margin: 0 0 0.35rem;
   color: rgba(255, 255, 255, 0.58);
-  font-size: 0.96rem;
-  line-height: 1.62;
+  font-size: var(--body-copy-size, 0.96rem);
+  line-height: var(--body-copy-line-height, 1.62);
 }
 
 .offerings .eyebrow {
@@ -1091,8 +1093,8 @@ h2 {
   display: grid;
   gap: 1.2rem;
   color: #ffffff;
-  font-size: clamp(1.15rem, 1.4vw, 1.34rem);
-  line-height: 1.62;
+  font-size: var(--body-copy-size);
+  line-height: var(--body-copy-line-height);
 }
 
 .agent-consumers-copy p {
@@ -1338,8 +1340,8 @@ h2 {
 
 .dark-offerings .v2-offer-grid .offering-card p {
   max-width: none;
-  font-size: clamp(0.88rem, 0.95vw, 0.98rem);
-  line-height: 1.42;
+  font-size: var(--body-copy-size);
+  line-height: var(--body-copy-line-height);
 }
 
 .offering-learn-more {
@@ -1618,9 +1620,9 @@ h3 {
   max-width: 34rem;
   margin: clamp(1rem, 2vw, 1.35rem) 0 0;
   color: rgba(255, 255, 255, 0.66);
-  font-size: clamp(0.98rem, 1.25vw, 1.16rem);
+  font-size: var(--body-copy-size);
   font-weight: 390;
-  line-height: 1.5;
+  line-height: var(--body-copy-line-height);
 }
 
 .offering-card p {
@@ -2005,14 +2007,14 @@ h3 {
 .bio-copy p {
   margin-bottom: 1.15rem;
   color: rgba(0, 0, 0, 0.72);
-  font-size: clamp(1rem, 1.35vw, 1.16rem);
-  line-height: 1.65;
+  font-size: var(--body-copy-size);
+  line-height: var(--body-copy-line-height);
 }
 
 .dark-bio .bio-copy p {
   color: rgba(255, 255, 255, 0.68);
-  font-size: clamp(0.9rem, 1.05vw, 1rem);
-  line-height: 1.6;
+  font-size: var(--body-copy-size);
+  line-height: var(--body-copy-line-height);
 }
 
 .bio-copy p:last-child {
@@ -2504,9 +2506,9 @@ h3 {
   overflow: hidden;
   margin: 0;
   color: rgba(255, 255, 255, 0.78);
-  font-size: clamp(1rem, 1.35vw, 1.14rem);
+  font-size: var(--body-copy-size);
   font-weight: 390;
-  line-height: 1.55;
+  line-height: var(--body-copy-line-height);
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 6;
 }
@@ -2565,6 +2567,18 @@ h3 {
   white-space: nowrap;
 }
 
+@property --shader-x {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 18%;
+}
+
+@property --shader-y {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 16%;
+}
+
 .cohort-card {
   --shader-x: 18%;
   --shader-y: 16%;
@@ -2588,6 +2602,8 @@ h3 {
     inset 0 1px 0 rgba(255, 255, 255, 0.06),
     0 1.25rem 3rem rgba(0, 0, 0, 0.22);
   transition:
+    --shader-x 520ms cubic-bezier(0.22, 1, 0.36, 1),
+    --shader-y 520ms cubic-bezier(0.22, 1, 0.36, 1),
     border-color 220ms ease,
     transform 220ms ease,
     box-shadow 220ms ease;
@@ -2599,19 +2615,18 @@ h3 {
   inset: -45%;
   z-index: 0;
   background:
-    radial-gradient(circle at var(--shader-x) var(--shader-y), rgba(174, 194, 255, 0.5), transparent 17rem),
-    radial-gradient(circle at calc(var(--shader-x) + 18%) calc(var(--shader-y) + 26%), rgba(122, 101, 210, 0.34), transparent 24rem),
-    radial-gradient(circle at calc(var(--shader-x) - 18%) calc(var(--shader-y) + 18%), rgba(122, 148, 255, 0.2), transparent 20rem),
-    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 56%);
-  opacity: 0.9;
+    radial-gradient(ellipse 42rem 24rem at var(--shader-x) var(--shader-y), rgba(168, 188, 255, 0.28), transparent 62%),
+    radial-gradient(ellipse 38rem 28rem at calc(var(--shader-x) + 20%) calc(var(--shader-y) + 26%), rgba(116, 96, 206, 0.26), transparent 64%),
+    radial-gradient(ellipse 34rem 22rem at calc(var(--shader-x) - 22%) calc(var(--shader-y) + 20%), rgba(83, 123, 202, 0.18), transparent 66%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.045), transparent 60%);
+  opacity: 0.94;
   pointer-events: none;
-  filter: blur(18px) saturate(1.2);
+  filter: blur(34px) saturate(1.18);
   transform: translate3d(0, 0, 0) scale(1.02);
   transition:
-    opacity 220ms ease,
-    background-position 260ms ease,
-    filter 260ms ease;
-  animation: cohortGradientDrift 12s ease-in-out infinite;
+    opacity 520ms ease,
+    filter 520ms ease;
+  animation: cohortGradientDrift 14s ease-in-out infinite;
 }
 
 .cohort-card::after {
@@ -2620,12 +2635,13 @@ h3 {
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(circle at var(--shader-x) var(--shader-y), rgba(255, 255, 255, 0.16), transparent 13rem),
-    linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.055) 48%, transparent 72%);
+    radial-gradient(ellipse 28rem 18rem at var(--shader-x) var(--shader-y), rgba(255, 255, 255, 0.08), transparent 68%),
+    linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.035) 48%, transparent 74%);
   opacity: 0;
   pointer-events: none;
-  mix-blend-mode: screen;
-  transition: opacity 220ms ease;
+  filter: blur(10px);
+  mix-blend-mode: soft-light;
+  transition: opacity 520ms ease;
 }
 
 .cohort-card-copy {
@@ -2647,8 +2663,8 @@ h3 {
 
 .cohort-card:hover::before {
   opacity: 1;
-  filter: blur(20px) saturate(1.45);
-  animation-duration: 7s;
+  filter: blur(38px) saturate(1.32);
+  animation-duration: 9s;
 }
 
 .cohort-card:hover::after {
@@ -2674,9 +2690,9 @@ h3 {
   max-width: 35rem;
   margin: 0;
   color: rgba(255, 255, 255, 0.68);
-  font-size: clamp(1rem, 1.2vw, 1.14rem);
+  font-size: var(--body-copy-size);
   font-weight: 390;
-  line-height: 1.5;
+  line-height: var(--body-copy-line-height);
 }
 
 .cohort-card-meta {
@@ -2714,18 +2730,18 @@ h3 {
 
 @keyframes cohortGradientDrift {
   0% {
-    opacity: 0.72;
-    transform: translate3d(-3%, -3%, 0) scale(1.02) rotate(0deg);
+    opacity: 0.78;
+    transform: translate3d(-2.5%, -2%, 0) scale(1.03) rotate(0deg);
   }
 
   50% {
-    opacity: 0.96;
-    transform: translate3d(3%, 4%, 0) scale(1.1) rotate(3deg);
+    opacity: 0.98;
+    transform: translate3d(2.5%, 3%, 0) scale(1.12) rotate(4deg);
   }
 
   100% {
-    opacity: 0.72;
-    transform: translate3d(-3%, -3%, 0) scale(1.02) rotate(0deg);
+    opacity: 0.78;
+    transform: translate3d(-2.5%, -2%, 0) scale(1.03) rotate(0deg);
   }
 }
 
@@ -3949,8 +3965,8 @@ h3 {
 
   .intro {
     max-width: 23rem;
-    font-size: clamp(0.78rem, 3vw, 0.86rem);
-    line-height: 1.45;
+    font-size: var(--body-copy-size);
+    line-height: var(--body-copy-line-height);
   }
 
   .offering-grid {
@@ -4082,8 +4098,8 @@ h3 {
 
   .v2-offer-grid .offering-card p {
     max-width: 28rem;
-    font-size: 0.88rem;
-    line-height: 1.45;
+    font-size: var(--body-copy-size);
+    line-height: var(--body-copy-line-height);
   }
 
   .dark-offerings .offering-card h3 {
@@ -4112,8 +4128,8 @@ h3 {
 
   .approach-subhead {
     max-width: 24rem;
-    font-size: 0.9rem;
-    line-height: 1.45;
+    font-size: var(--body-copy-size);
+    line-height: var(--body-copy-line-height);
   }
 
   .cohort-section .section-heading h2 {
@@ -4122,8 +4138,8 @@ h3 {
 
   .principle-list p {
     padding: 1rem 0;
-    font-size: clamp(0.9rem, 3.55vw, 1rem);
-    line-height: 1.42;
+    font-size: var(--body-copy-size);
+    line-height: var(--body-copy-line-height);
   }
 
   .principle-list p::before {
@@ -4357,8 +4373,8 @@ h3 {
   }
 
   .testimonial-card > p {
-    font-size: 0.92rem;
-    line-height: 1.5;
+    font-size: var(--body-copy-size);
+    line-height: var(--body-copy-line-height);
   }
 
   .testimonial-card footer {
@@ -4400,8 +4416,8 @@ h3 {
   }
 
   .v2-bio .bio-copy p {
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: var(--body-copy-size);
+    line-height: var(--body-copy-line-height);
   }
 
   .v2-bio .profile-card {
@@ -4551,6 +4567,11 @@ h3 {
 }
 
 @media (max-width: 640px) {
+  .current-home {
+    --body-copy-size: 0.95rem;
+    --body-copy-line-height: 1.55;
+  }
+
   .agent-consumers,
   .approach,
   .v2-bio,
@@ -4576,8 +4597,8 @@ h3 {
   }
 
   .agent-consumers-copy {
-    font-size: 0.95rem;
-    line-height: 1.55;
+    font-size: var(--body-copy-size);
+    line-height: var(--body-copy-line-height);
   }
 
   .cohort-card {
@@ -4591,8 +4612,8 @@ h3 {
   }
 
   .cohort-card-copy > p:not(.eyebrow) {
-    font-size: 0.94rem;
-    line-height: 1.48;
+    font-size: var(--body-copy-size);
+    line-height: var(--body-copy-line-height);
   }
 
   .cohort-card-meta span {
@@ -4647,6 +4668,9 @@ h3 {
 
 .hero-cinematic-video::-webkit-media-controls,
 .hero-cinematic-video::-webkit-media-controls-panel,
+.hero-cinematic-video::-webkit-media-controls-play-button,
+.hero-cinematic-video::-webkit-media-controls-overlay-play-button,
+.hero-cinematic-video::-webkit-media-controls-enclosure,
 .hero-cinematic-video::-webkit-media-controls-start-playback-button {
   display: none !important;
   -webkit-appearance: none;

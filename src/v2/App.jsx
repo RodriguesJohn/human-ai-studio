@@ -130,6 +130,8 @@ function CinematicHero() {
     node.setAttribute("muted", "");
     node.setAttribute("playsinline", "");
     node.setAttribute("webkit-playsinline", "true");
+    node.setAttribute("x5-playsinline", "true");
+    node.setAttribute("x5-video-player-type", "h5");
     node.removeAttribute("controls");
   }, []);
 
@@ -143,23 +145,35 @@ function CinematicHero() {
     v.setAttribute("muted", "");
     v.setAttribute("playsinline", "");
     v.setAttribute("webkit-playsinline", "true");
+    v.setAttribute("x5-playsinline", "true");
+    v.setAttribute("x5-video-player-type", "h5");
+    v.controls = false;
+    v.disablePictureInPicture = true;
 
     const tryPlay = () => {
+      v.muted = true;
+      v.defaultMuted = true;
+      v.controls = false;
       const p = v.play();
       if (p && typeof p.catch === "function") p.catch(() => {});
     };
     tryPlay();
 
-    const events = ["loadeddata", "canplay", "canplaythrough"];
+    const events = ["loadedmetadata", "loadeddata", "canplay", "canplaythrough", "playing"];
     events.forEach((e) => v.addEventListener(e, tryPlay));
     const onVisible = () => {
       if (!document.hidden) tryPlay();
     };
+    const onFirstGesture = () => tryPlay();
     document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("touchstart", onFirstGesture, { once: true, passive: true });
+    window.addEventListener("pointerdown", onFirstGesture, { once: true });
 
     return () => {
       events.forEach((e) => v.removeEventListener(e, tryPlay));
       document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("touchstart", onFirstGesture);
+      window.removeEventListener("pointerdown", onFirstGesture);
     };
   }, []);
 
@@ -184,6 +198,14 @@ function CinematicHero() {
         controlsList="nodownload noplaybackrate noremoteplayback"
         disablePictureInPicture
         disableRemotePlayback
+        onLoadedMetadata={(event) => {
+          event.currentTarget.muted = true;
+          event.currentTarget.play().catch(() => {});
+        }}
+        onCanPlay={(event) => {
+          event.currentTarget.muted = true;
+          event.currentTarget.play().catch(() => {});
+        }}
         aria-hidden="true"
       >
         <source src={cinematicHeroMobileVideo} media="(max-width: 640px)" type="video/mp4" />
@@ -339,13 +361,13 @@ const homeOffers = [
   {
     title: "AI-Ready Design System Transformation",
     description:
-      "Turn your design system into infrastructure for humans, AI, and automation.",
+      "Turn your design system into infrastructure for humans, AI, and automation, and automate repetitive work to scale operations.",
     slug: "design-engineering",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Design System Support",
+    title: "Design Engineer Embedded",
     description:
       "Get support building components, variables, tokens, setup, and the system foundations your team needs.",
     slug: "ai-training-enablement",
