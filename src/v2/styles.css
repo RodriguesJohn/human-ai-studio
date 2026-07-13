@@ -1041,7 +1041,7 @@ h2 {
   min-height: 0;
   align-content: start;
   padding-top: clamp(4.75rem, 7vw, 6.5rem);
-  padding-bottom: clamp(5rem, 7.5vw, 7rem);
+  padding-bottom: clamp(5.75rem, 8vw, 8rem);
   background: #08090a;
   border-top: 1px solid var(--section-line-soft);
   color: #ffffff;
@@ -1057,7 +1057,7 @@ h2 {
 }
 
 .agent-consumers {
-  padding: clamp(5rem, 7.5vw, 7rem) var(--page-padding);
+  padding: clamp(5.75rem, 8vw, 8rem) var(--page-padding);
   background: #08090a;
   border-top: 1px solid var(--section-line-soft);
   color: #ffffff;
@@ -1671,7 +1671,7 @@ h3 {
 .current-home .approach {
   min-height: auto;
   align-content: start;
-  padding-top: clamp(5rem, 7.5vw, 7rem);
+  padding-top: clamp(5.75rem, 8vw, 8rem);
   padding-bottom: clamp(2.5rem, 4vw, 3.5rem);
   background: #08090a;
 }
@@ -1865,7 +1865,7 @@ h3 {
 .current-home .bio {
   min-height: auto;
   padding-top: clamp(2.5rem, 4vw, 3.5rem);
-  padding-bottom: clamp(5rem, 7.5vw, 7rem);
+  padding-bottom: clamp(5.75rem, 8vw, 8rem);
 }
 
 .current-home .v2-bio {
@@ -2437,7 +2437,7 @@ h3 {
 .testimonials {
   display: grid;
   min-height: auto;
-  padding: clamp(5rem, 7.5vw, 7rem) var(--page-padding);
+  padding: clamp(5.75rem, 8vw, 8rem) var(--page-padding);
   align-content: center;
   border-top: 1px solid var(--section-line-soft);
   background: #08090a;
@@ -2539,7 +2539,7 @@ h3 {
 }
 
 .cohort-section {
-  padding: clamp(5rem, 7.5vw, 7rem) var(--page-padding);
+  padding: clamp(5.75rem, 8vw, 8rem) var(--page-padding);
   border-top: 1px solid var(--section-line-soft);
   background: #08090a;
   color: #ffffff;
@@ -2847,8 +2847,8 @@ h3 {
 
 .current-home .final-cta {
   min-height: auto;
-  padding-top: clamp(5rem, 7.5vw, 7rem);
-  padding-bottom: clamp(5rem, 7.5vw, 7rem);
+  padding-top: clamp(5.75rem, 8vw, 8rem);
+  padding-bottom: clamp(5.75rem, 8vw, 8rem);
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.012), transparent 14rem),
     var(--section-black);
@@ -4247,8 +4247,8 @@ h3 {
 
   .testimonials {
     min-height: auto;
-    padding-top: 4.25rem;
-    padding-bottom: 4.25rem;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
   }
 
   .testimonials-inner {
@@ -4297,7 +4297,7 @@ h3 {
   .v2-bio {
     min-height: auto;
     padding-top: 2.25rem;
-    padding-bottom: 4.25rem;
+    padding-bottom: 4.5rem;
   }
 
   .v2-bio .bio-inner {
@@ -4486,8 +4486,8 @@ h3 {
   .v2-final-cta,
   .testimonials,
   .cohort-section {
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
   }
 
   .current-home .approach {
