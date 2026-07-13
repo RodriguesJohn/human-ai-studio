@@ -1833,7 +1833,7 @@ function StudioHome({ isHistory = false }) {
                 </div>
                 <h3>Become an AI Native Designer Cohort</h3>
                 <p>
-                  A live cohort with a group of designers learning how to use AI across research, design systems, prototyping, and delivery without losing craft.
+                  Live cohort with a group of designers learning how to use AI across research, design systems, prototyping, and delivery without losing craft.
                 </p>
                 <span className="cohort-card-action">Join the cohort</span>
               </div>
