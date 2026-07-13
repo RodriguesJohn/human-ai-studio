@@ -1059,7 +1059,7 @@ h2 {
 }
 
 .agent-consumers {
-  padding: clamp(7rem, 10vw, 10rem) var(--page-padding);
+  padding: clamp(8.5rem, 12vw, 12rem) var(--page-padding) clamp(7rem, 10vw, 10rem);
   background: #08090a;
   border-top: 1px solid var(--section-line-soft);
   color: #ffffff;
