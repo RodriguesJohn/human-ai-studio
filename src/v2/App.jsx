@@ -1,0 +1,2135 @@
+import React from "react";
+import { Analytics } from "@vercel/analytics/react";
+import { motion, useReducedMotion, useInView } from "framer-motion";
+import * as THREE from "three";
+import profilePicture from "../assets/Profile Picture.jpg";
+import studioAbstract from "../assets/studio-abstract.png";
+import cinematicHeroMobileVideo from "../assets/hero-cinematic-mobile.mp4";
+import evaAiVideo from "../assets/EvaAIV2.mov";
+import pureFiVideo from "../assets/PureFi.MOV";
+import outfixWorkVideo from "../assets/work/OutfixV2.mp4";
+import outfixWorkPoster from "../assets/work/outfixHero.png";
+import ollieWorkVideo from "../assets/work/OllieAIDemo.mp4";
+import ollieWorkPoster from "../assets/work/OllieAIV1.png";
+import balanceTransferWorkVideo from "../assets/work/BT.mp4";
+import tocaWorkVideo from "../assets/work/MyTocaApp.mp4";
+import noScrollWorkImage from "../assets/work/NoScrollApp.png";
+import codexLogo from "../assets/logos/claude-code.png";
+import vercelLogo from "../assets/logos/codex.png";
+import cursorLogo from "../assets/logos/cursor.webp";
+import linearLogo from "../assets/logos/linear.jpeg";
+import nextLogo from "../assets/logos/nextjs.png";
+import reactLogo from "../assets/logos/react.png";
+import swiftUiLogo from "../assets/logos/swiftui.png";
+import claudeCodeLogo from "../assets/logos/vercel.png";
+import xcodeLogo from "../assets/logos/xcode.png";
+import figmaLogo from "../assets/logos/Figma.png";
+import wonderLogo from "../assets/logos/Wonder.png";
+import hermesLogo from "../assets/logos/Hermes.jpeg";
+import openClawLogo from "../assets/logos/OpenClaw.png";
+import githubLogo from "../assets/logos/github.svg";
+import storybookLogo from "../assets/logos/storybook.png";
+import typescriptLogo from "../assets/logos/typescript.webp";
+import tocaCompanyLogo from "../assets/companies/Toca.png";
+import citiCompanyLogo from "../assets/companies/Citi.svg.png";
+import chaseCompanyLogo from "../assets/companies/ChaseLightMOde.png";
+import appleCompanyLogo from "../assets/companies/Apple-Logo.png";
+import googleCompanyLogo from "../assets/companies/GoogleLogog.png";
+import metaCompanyLogo from "../assets/companies/Meta-Emblem.png";
+import "./styles.css";
+
+const bookingLink = "john-rodrigues-rqt2lg/15min";
+const bookingNamespace = "15min";
+const bookingUrl = `https://cal.com/${bookingLink}`;
+const bookingConfig = {
+  layout: "month_view",
+  useSlotsViewOnSmallScreen: "true"
+};
+const bookingAttributes = {
+  "data-cal-link": bookingLink,
+  "data-cal-namespace": bookingNamespace,
+  "data-cal-config": JSON.stringify(bookingConfig)
+};
+
+function openBookingModal(event) {
+  if (
+    event.defaultPrevented ||
+    event.button !== 0 ||
+    event.metaKey ||
+    event.ctrlKey ||
+    event.shiftKey ||
+    event.altKey
+  ) {
+    return;
+  }
+
+  const calApi = window.Cal?.ns?.[bookingNamespace] || window.Cal;
+  if (!calApi) return;
+
+  event.preventDefault();
+  calApi("modal", {
+    calLink: bookingLink,
+    config: bookingConfig
+  });
+}
+
+function BookingTextLink({ className, children }) {
+  return (
+    <a
+      className={className}
+      href={bookingUrl}
+      onClick={openBookingModal}
+      {...bookingAttributes}
+    >
+      {children}
+    </a>
+  );
+}
+
+function StaggeredFade({ text, baseDelay = 0 }) {
+  const ref = React.useRef(null);
+  const inView = useInView(ref, { once: true, margin: "-10% 0px" });
+  const characters = Array.from(text);
+
+  return (
+    <span ref={ref} className="staggered-fade" aria-label={text}>
+      {characters.map((char, i) => (
+        <motion.span
+          key={`${char}-${i}`}
+          aria-hidden="true"
+          initial={{ opacity: 0, y: 8 }}
+          animate={inView ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+          transition={{
+            duration: 0.6,
+            delay: baseDelay + i * 0.07,
+            ease: [0.22, 1, 0.36, 1]
+          }}
+        >
+          {char === " " ? " " : char}
+        </motion.span>
+      ))}
+    </span>
+  );
+}
+
+const cinematicHeroVideo =
+  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4";
+
+function CinematicHero() {
+  const videoRef = React.useRef(null);
+  const setHeroVideoRef = React.useCallback((node) => {
+    videoRef.current = node;
+    if (!node) return;
+
+    node.muted = true;
+    node.defaultMuted = true;
+    node.playsInline = true;
+    node.autoplay = true;
+    node.controls = false;
+    node.setAttribute("autoplay", "");
+    node.setAttribute("muted", "");
+    node.setAttribute("playsinline", "");
+    node.setAttribute("webkit-playsinline", "true");
+    node.removeAttribute("controls");
+  }, []);
+
+  React.useEffect(() => {
+    const v = videoRef.current;
+    if (!v) return undefined;
+    // iOS Safari is strict: it only autoplays when the video is muted AND
+    // inline as DOM properties/attributes, otherwise it shows a play button.
+    v.muted = true;
+    v.defaultMuted = true;
+    v.setAttribute("muted", "");
+    v.setAttribute("playsinline", "");
+    v.setAttribute("webkit-playsinline", "true");
+
+    const tryPlay = () => {
+      const p = v.play();
+      if (p && typeof p.catch === "function") p.catch(() => {});
+    };
+    tryPlay();
+
+    const events = ["loadeddata", "canplay", "canplaythrough"];
+    events.forEach((e) => v.addEventListener(e, tryPlay));
+    const onVisible = () => {
+      if (!document.hidden) tryPlay();
+    };
+    document.addEventListener("visibilitychange", onVisible);
+
+    return () => {
+      events.forEach((e) => v.removeEventListener(e, tryPlay));
+      document.removeEventListener("visibilitychange", onVisible);
+    };
+  }, []);
+
+  return (
+    <section
+      className="hero-cinematic"
+      id="top"
+      data-nav-theme="dark"
+      aria-label="Human AI Studio"
+    >
+      <video
+        ref={setHeroVideoRef}
+        className="hero-cinematic-video"
+        autoPlay
+        muted
+        defaultMuted
+        loop
+        playsInline
+        webkit-playsinline="true"
+        preload="auto"
+        controls={false}
+        controlsList="nodownload noplaybackrate noremoteplayback"
+        disablePictureInPicture
+        disableRemotePlayback
+        aria-hidden="true"
+      >
+        <source src={cinematicHeroMobileVideo} media="(max-width: 640px)" type="video/mp4" />
+        <source src={cinematicHeroVideo} type="video/mp4" />
+      </video>
+      <div className="hero-cinematic-scrim" aria-hidden="true" />
+
+      <div className="hero-cinematic-content">
+        <motion.p
+          className="eyebrow hero-eyebrow"
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 0.55, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.02, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Human AI Studio
+        </motion.p>
+        <h1 className="hero-cinematic-title">
+          <motion.span
+            className="hero-cinematic-line"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+          >
+            Agentic Design Systems
+          </motion.span>
+          <motion.span
+            className="hero-cinematic-line"
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+          >
+            for Humans and AI
+          </motion.span>
+        </h1>
+
+        <motion.p
+          className="hero-cinematic-subtitle"
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
+          We help B2B product teams transform their design system into infrastructure for humans and AI Agents so every team can ship fast without shipping AI slop.
+        </motion.p>
+
+        <motion.a
+          className="hero-cinematic-cta liquid-glass"
+          href={bookingUrl}
+          onClick={openBookingModal}
+          {...bookingAttributes}
+          initial={{ opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+        >
+          Book discovery call
+        </motion.a>
+      </div>
+    </section>
+  );
+}
+
+function BookingButton({ showAvatar = false }) {
+  const shouldReduceMotion = useReducedMotion();
+  const hoverMotion = shouldReduceMotion
+    ? {}
+    : {
+        y: -2,
+        scale: 1.018,
+        transition: { type: "spring", stiffness: 520, damping: 28, mass: 0.6 }
+      };
+  const tapMotion = shouldReduceMotion
+    ? {}
+    : {
+        y: 0,
+        scale: 0.985,
+        transition: { type: "spring", stiffness: 620, damping: 32, mass: 0.55 }
+      };
+
+  return (
+    <motion.a
+      className="button"
+      href={bookingUrl}
+      onClick={openBookingModal}
+      {...bookingAttributes}
+      whileHover={hoverMotion}
+      whileTap={tapMotion}
+    >
+      {showAvatar && (
+        <span className="button-avatar" aria-hidden="true">
+          <img src={profilePicture} alt="" />
+        </span>
+      )}
+      <span className="button-label">Book discovery call</span>
+    </motion.a>
+  );
+}
+
+const offerings = [
+  {
+    title: "Build 0->1 AI-Native Products",
+    description:
+      "0->1 product design and design engineering, from an idea to a fully functional product."
+  },
+  {
+    title: "AI Consulting",
+    description:
+      "Identify business needs, pain points, and bottlenecks where AI can augment your workflows."
+  },
+  {
+    title: "Workshops for Teams",
+    description:
+      "Hands-on AI sessions for teams to prototype, apply, and improve real workflows."
+  }
+];
+
+const principles = [
+  "Human judgment first and design-centered approach",
+  "Prototype before theory",
+  "Systems that move business needles over demos"
+];
+
+const v2HowItWorks = [
+  {
+    title: "Strategy Workshop",
+    description:
+      "Understand your business model, customer journey, revenue motion, tools, data, and team workflows before building."
+  },
+  {
+    title: "AI Agent and Systems Development",
+    description:
+      "Design and develop AI agents around the decisions, handoffs, and operating needs that matter most to the business."
+  },
+  {
+    title: "Workflow Integration",
+    description:
+      "Connect agents into your systems, knowledge bases, team processes, and client-facing workflows so they fit real operations."
+  },
+  {
+    title: "Support and Monitoring",
+    description:
+      "Refine the system after launch with monitoring, iteration, workflow tuning, and support as your operations scale."
+  }
+];
+
+const homeOffers = [
+  {
+    title: "AI Agent Readiness\nOne-to-One Audit",
+    description:
+      "Unsure if your design system is agent-ready. Get a clear audit with practical recommendations.",
+    slug: "ai-native-products",
+    color1: "#3b82f6",
+    color2: "#bae6fd"
+  },
+  {
+    title: "AI-Ready Design System Transformation",
+    description:
+      "Turn your design system into infrastructure for humans, AI, and automation.",
+    slug: "design-engineering",
+    color1: "#8b5cf6",
+    color2: "#ddd6fe"
+  },
+  {
+    title: "Design System Support",
+    description:
+      "Get support building components, variables, tokens, setup, and the system foundations your team needs.",
+    slug: "ai-training-enablement",
+    color1: "#10b981",
+    color2: "#a7f3d0"
+  }
+];
+
+const offeringPages = {
+  "ai-native-products": {
+    eyebrow: "Offering 01",
+    title: "AI Systems",
+    intro:
+      "We create AI operating systems for your business that streamline operations, improve revenue streams, and increase measurable growth.",
+    status: "placeholder",
+    sections: [
+      {
+        heading: "What this looks like",
+        body: "End-to-end AI systems: discovery, interface design, agent architecture, and production engineering — designed around the decisions and workflows that move your business."
+      },
+      {
+        heading: "Where it fits",
+        body: "Founders and teams who want AI woven into how the business actually operates — driving outcomes and revenue, not just shipping a demo."
+      }
+    ]
+  },
+  "design-engineering": {
+    eyebrow: "Offering 02",
+    title: "Agentic Design Systems",
+    intro:
+      "AI-ready design systems that help product and design teams ship faster, then evolve into agentic systems that automate repetitive work and improve operational efficiency.",
+    status: "placeholder",
+    sections: [
+      {
+        heading: "What this looks like",
+        body: "Design systems, components, motion, and product interfaces built as production code, with reusable patterns that are ready for AI-assisted product development."
+      },
+      {
+        heading: "Where it fits",
+        body: "Product and design teams that need to move faster now, while building toward agentic workflows that reduce repetitive work and improve day-to-day execution."
+      }
+    ]
+  },
+  "ai-consulting": {
+    eyebrow: "Offering 03",
+    title: "AI Consulting",
+    intro:
+      "Identify where AI can improve workflows, solve business problems, and create practical leverage — with a clear, honest plan.",
+    status: "placeholder",
+    sections: [
+      {
+        heading: "What this looks like",
+        body: "A focused engagement to map your workflows, find the highest-leverage AI opportunities, and lay out a realistic path to build them."
+      },
+      {
+        heading: "Where it fits",
+        body: "Leaders who want a clear-eyed take on where AI helps, where it doesn't, and what to do next."
+      }
+    ]
+  },
+  "ai-training-enablement": {
+    eyebrow: "Offering 03",
+    title: "AI Enablmenrt",
+    intro:
+      "Custom workshops and cohorts for your teams to become truly AI-native — hands-on and tailored to how your team actually works.",
+    status: "live",
+    sections: [
+      {
+        heading: "What you get",
+        body: "Live, hands-on workshops built around your real workflows. Teams leave with practical AI habits, prompts, and systems they use the next day."
+      },
+      {
+        heading: "Format",
+        body: "Half-day or multi-session engagements, in-person or remote, sized to your team. Follow-up materials and playbooks included."
+      },
+      {
+        heading: "Outcomes",
+        body: "Faster execution, higher-quality output, and a team that treats AI as a core tool rather than a novelty."
+      }
+    ]
+  }
+};
+
+const workItems = [
+  {
+    label: "Mobile App / AI-Ready Design System",
+    title: "PureFi",
+    video: pureFiVideo,
+    image: studioAbstract,
+    position: "72% 46%"
+  },
+  {
+    label: "AI Operating System",
+    title: "Orbi Agent",
+    video: evaAiVideo,
+    image: studioAbstract,
+    position: "44% 50%"
+  },
+  {
+    label: "AI Styling · 0 → 1 Product",
+    title: "Outfix AI",
+    video: outfixWorkVideo,
+    image: outfixWorkPoster,
+    position: "center"
+  },
+  {
+    label: "Figma Plugin · Claude Code",
+    title: "Ollie AI",
+    video: ollieWorkVideo,
+    image: ollieWorkPoster,
+    position: "center"
+  },
+  {
+    label: "iOS · 4.6★ · 50K Users",
+    title: "No Scroll",
+    image: noScrollWorkImage,
+    position: "center",
+    fit: "contain"
+  },
+  {
+    label: "$25M Raised · Early-Stage",
+    title: "TOCA Football",
+    video: tocaWorkVideo,
+    image: studioAbstract,
+    position: "center"
+  },
+  {
+    label: "Citi · Consumer Banking",
+    title: "Balance Transfer",
+    video: balanceTransferWorkVideo,
+    image: studioAbstract,
+    position: "center"
+  }
+];
+
+const showSelectedProjects = false;
+
+const v2Principles = [
+  "Scope the business problem and customer workflow",
+  "Design the agent workflow around real team handoffs",
+  "Build, integrate, and improve the system inside the business"
+];
+
+const homePrinciples = [
+  "Start with business context, product goals, and team readiness",
+  "Design and build practical tools with clear product craft",
+  "Enable teams to adopt AI with confidence inside real work"
+];
+
+const toolStack = [
+  { name: "Linear", icon: linearLogo },
+  { name: "Claude Code", icon: claudeCodeLogo },
+  { name: "Codex", icon: codexLogo },
+  { name: "Cursor", icon: cursorLogo },
+  { name: "Figma", icon: figmaLogo },
+  { name: "Wonder", icon: wonderLogo, contain: true },
+  { name: "Vercel", icon: vercelLogo },
+  { name: "Xcode", icon: xcodeLogo },
+  { name: "React", icon: reactLogo },
+  { name: "TypeScript", icon: typescriptLogo },
+  { name: "GitHub", icon: githubLogo },
+  { name: "Storybook", icon: storybookLogo },
+  { name: "SwiftUI", icon: swiftUiLogo },
+  { name: "Next.js", icon: nextLogo }
+];
+
+const toolStackRowOne = toolStack.slice(0, 5);
+const toolStackRowTwo = toolStack.slice(5, 10);
+const toolStackRowThree = [
+  ...toolStack.slice(10),
+  { name: "OpenClaw", icon: openClawLogo },
+  { name: "Hermes Agents", icon: hermesLogo }
+];
+
+const bioCompanies = [
+  { name: "TOCA", icon: tocaCompanyLogo },
+  { name: "Citi", icon: citiCompanyLogo },
+  { name: "Chase", icon: chaseCompanyLogo }
+];
+
+const newsletterCompanies = [
+  { name: "Meta", icon: metaCompanyLogo },
+  { name: "Google", icon: googleCompanyLogo },
+  { name: "Apple", icon: appleCompanyLogo },
+  { name: "Chase", icon: chaseCompanyLogo }
+];
+
+const newsletterUrl = "https://substack.com/@johnrodrigues";
+const cohortUrl = "https://maven.com/humanaistudio";
+
+const testimonials = [
+  {
+    quote:
+      "Yay!!! Thank you John! You literally explained auto layout today so effortlessly. I understand it more now than ever before. I'm considering taking your course to take my Figma skills up a notch.",
+    name: "Yariela B",
+    role: "UX Designer",
+    logo: googleCompanyLogo
+  },
+  {
+    quote:
+      "Had an amazing chat with John. We exchanged some interesting resources and talked about the importance of understanding the value of a designer.",
+    name: "Lucas W",
+    role: "Product Designer",
+    logo: appleCompanyLogo
+  },
+  {
+    quote:
+      "John has shown tremendous value as a UX designer. This year, he has answered every challenge in taking on additional responsibility in project management, client relationship building, and increased design ownership and delivery.",
+    name: "Zachary E",
+    role: "Creative Director, VP",
+    logo: citiCompanyLogo
+  },
+  {
+    quote:
+      "His thoughtful ideas and entrepreneurship have enhanced our team's collaboration. His design work has significantly boosted visibility and impact across all product areas. His keen eye for UX and resourcefulness with new technologies are impressive.",
+    name: "Kristian K",
+    role: "Product Designer, VP",
+    logo: chaseCompanyLogo
+  },
+  {
+    quote:
+      "Working with John has been a real pleasure. He brought a clear process from beginning to end, responded quickly, and delivered high-quality work. The new design makes No Scroll feel like a brand new app. If you're considering working with John, don't hesitate.",
+    name: "Andrew",
+    role: "Founder of No Scroll App"
+  },
+  {
+    quote:
+      "Collaborating with John was both easy and productive. John provided valuable insights into product development and user experience that truly enhanced our project and moved it to the next level. I highly recommend John.",
+    name: "Edward Petkovicz",
+    role: "faxion.ai"
+  }
+];
+
+function HeroNebulaShader({ className = "" }) {
+  const containerRef = React.useRef(null);
+  const materialRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return undefined;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const clock = new THREE.Clock();
+
+    const vertexShader = `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 1.0);
+      }
+    `;
+
+    const fragmentShader = `
+      precision mediump float;
+      uniform vec2 iResolution;
+      uniform float iTime;
+      varying vec2 vUv;
+
+      mat2 rot(float a) {
+        float c = cos(a);
+        float s = sin(a);
+        return mat2(c, -s, s, c);
+      }
+
+      float field(vec3 p) {
+        float t = iTime * 0.42;
+        p.xz *= rot(t * 0.28);
+        p.xy *= rot(t * 0.18);
+        vec3 q = p * 2.0 + t;
+        return length(p + vec3(sin(t * 0.55))) * log(length(p) + 1.0)
+          + sin(q.x + sin(q.z + sin(q.y))) * 0.45 - 1.0;
+      }
+
+      void main() {
+        vec2 uv = (vUv * iResolution - 0.5 * iResolution) / min(iResolution.x, iResolution.y);
+        uv.x *= 1.05;
+        uv.y *= 1.18;
+
+        vec3 col = vec3(0.0);
+        float d = 2.2;
+
+        for (int i = 0; i < 6; i++) {
+          vec3 p = vec3(0.0, 0.0, 4.7) + normalize(vec3(uv, -1.0)) * d;
+          float rz = field(p);
+          float f = clamp((rz - field(p + 0.08)) * 0.55, -0.08, 1.0);
+          vec3 base = vec3(0.10, 0.14, 0.16) + vec3(1.65, 0.72, 0.5) * f;
+          col = col * base + smoothstep(2.45, 0.0, rz) * 0.58 * base;
+          d += min(rz, 1.0);
+        }
+
+        float radius = length(uv);
+        float vignette = smoothstep(0.88, 0.18, radius);
+        float edge = smoothstep(0.16, 0.72, radius);
+        col *= vignette;
+        col = mix(col * 0.32, col, edge);
+
+        float alpha = smoothstep(0.82, 0.18, radius) * 0.82;
+        gl_FragColor = vec4(col, alpha);
+      }
+    `;
+
+    const uniforms = {
+      iTime: { value: 0 },
+      iResolution: { value: new THREE.Vector2() }
+    };
+
+    const material = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      uniforms,
+      transparent: true,
+      depthWrite: false
+    });
+    materialRef.current = material;
+
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material);
+    scene.add(mesh);
+
+    const onResize = () => {
+      const width = Math.max(1, container.clientWidth);
+      const height = Math.max(1, container.clientHeight);
+      renderer.setSize(width, height, false);
+      uniforms.iResolution.value.set(width, height);
+    };
+
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(container);
+    onResize();
+
+    renderer.setAnimationLoop(() => {
+      uniforms.iTime.value = clock.getElapsedTime();
+      renderer.render(scene, camera);
+    });
+
+    return () => {
+      renderer.setAnimationLoop(null);
+      resizeObserver.disconnect();
+      if (renderer.domElement.parentNode === container) {
+        container.removeChild(renderer.domElement);
+      }
+      material.dispose();
+      mesh.geometry.dispose();
+      renderer.dispose();
+    };
+  }, []);
+
+  return <div ref={containerRef} className={`hero-side-shader ${className}`} aria-hidden="true" />;
+}
+
+function OfferingShader({ color1 = "#38bdf8", color2 = "#0b1220", seed = 0 }) {
+  const containerRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return undefined;
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer.setClearColor(0x000000, 0);
+    container.appendChild(renderer.domElement);
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+    const clock = new THREE.Clock();
+
+    const vertexShader = `
+      precision highp float;
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 1.0);
+      }
+    `;
+
+    const fragmentShader = `
+      precision highp float;
+      uniform float time;
+      uniform float intensity;
+      uniform float seed;
+      uniform vec3 color1;
+      uniform vec3 color2;
+      varying vec2 vUv;
+
+      void main() {
+        vec2 uv = vUv;
+        // seed shifts phase so every card flows differently
+        float t = time * 1.15 + seed * 12.0;
+
+        // Domain warp — swirls the field for lively, organic movement
+        vec2 w = uv;
+        w.x += sin(uv.y * 3.0 + t * 0.9 + seed * 4.0) * 0.30;
+        w.y += cos(uv.x * 3.4 - t * 0.8 + seed * 2.3) * 0.30;
+
+        // Low-frequency animated noise (soft, blurry) driven by the warped coords
+        float noise = sin(w.x * 3.2 + t) * cos(w.y * 2.6 + t * 0.8);
+        noise += sin(w.x * 4.8 - t * 1.4 + seed) * cos(w.y * 3.6 + t * 1.2) * 0.5;
+        noise *= 0.5;
+
+        // Flowing color mix between the two hues
+        vec3 color = mix(color1, color2, noise * 0.5 + 0.5);
+
+        // Lift bright & airy (much lighter overall)
+        color = mix(color, vec3(1.0), 0.42);
+        // Extra bloom along the crests
+        color = mix(color, vec3(1.0), pow(abs(noise), 2.0) * intensity * 0.45);
+
+        // Deepen toward the bottom into a richer shade of the same hue
+        // (colored, not black) so the title stays legible without a dark scrim.
+        float shade = smoothstep(0.0, 0.6, vUv.y);
+        color *= mix(0.42, 1.0, shade);
+
+        gl_FragColor = vec4(color, 1.0);
+      }
+    `;
+
+    const uniforms = {
+      time: { value: 0 },
+      intensity: { value: 1.0 },
+      seed: { value: seed },
+      color1: { value: new THREE.Color(color1) },
+      color2: { value: new THREE.Color(color2) }
+    };
+
+    const material = new THREE.ShaderMaterial({
+      vertexShader,
+      fragmentShader,
+      uniforms,
+      transparent: true,
+      depthWrite: false
+    });
+
+    const mesh = new THREE.Mesh(new THREE.PlaneGeometry(2, 2, 32, 32), material);
+    scene.add(mesh);
+
+    const onResize = () => {
+      const width = Math.max(1, container.clientWidth);
+      const height = Math.max(1, container.clientHeight);
+      renderer.setSize(width, height, false);
+    };
+
+    const resizeObserver = new ResizeObserver(onResize);
+    resizeObserver.observe(container);
+    onResize();
+
+    renderer.setAnimationLoop(() => {
+      const t = clock.getElapsedTime();
+      uniforms.time.value = t;
+      uniforms.intensity.value = 1.0 + Math.sin(t * 2.0) * 0.3;
+      renderer.render(scene, camera);
+    });
+
+    return () => {
+      renderer.setAnimationLoop(null);
+      resizeObserver.disconnect();
+      if (renderer.domElement.parentNode === container) {
+        container.removeChild(renderer.domElement);
+      }
+      material.dispose();
+      mesh.geometry.dispose();
+      renderer.dispose();
+    };
+  }, [color1, color2, seed]);
+
+  return <div ref={containerRef} className="offering-shader" aria-hidden="true" />;
+}
+function DotMatrixBackground({ className = "", intensity = 1, dotScale = 1, connections = false }) {
+  const canvasRef = React.useRef(null);
+
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return undefined;
+
+    const context = canvas.getContext("2d");
+    let animationFrame = 0;
+    let startedAt = performance.now();
+    let dots = [];
+    let meshNodes = [];
+    let meshLinks = [];
+
+    const resize = () => {
+      const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
+      const { width, height } = canvas.getBoundingClientRect();
+      canvas.width = Math.floor(width * pixelRatio);
+      canvas.height = Math.floor(height * pixelRatio);
+      context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
+
+      const gap = window.innerWidth < 560 ? 22 : 26;
+      dots = [];
+      meshNodes = [];
+      meshLinks = [];
+
+      for (let y = gap / 2, row = 0; y < height; y += gap, row += 1) {
+        for (let x = gap / 2, column = 0; x < width; x += gap, column += 1) {
+          dots.push({
+            column,
+            row,
+            x,
+            y,
+            seed: Math.random(),
+            phase: Math.random() * Math.PI * 2
+          });
+        }
+      }
+
+      if (connections) {
+        const nodeCount = window.innerWidth < 560 ? 86 : 170;
+        const radiusX = width * 0.42;
+        const radiusY = height * 0.26;
+
+        for (let index = 0; index < nodeCount; index += 1) {
+          const angle = Math.random() * Math.PI * 2;
+          const radius = Math.pow(Math.random(), 0.55);
+          const clusterBias = Math.sin(index * 1.7) * 0.18;
+
+          meshNodes.push({
+            x: width / 2 + Math.cos(angle) * radiusX * (radius + clusterBias) + (Math.random() - 0.5) * 90,
+            y: height / 2 + Math.sin(angle) * radiusY * radius + (Math.random() - 0.5) * 70,
+            phase: Math.random() * Math.PI * 2,
+            seed: Math.random(),
+            size: 0.75 + Math.random() * 1.8
+          });
+        }
+
+        meshNodes.forEach((node, index) => {
+          const nearest = meshNodes
+            .map((candidate, candidateIndex) => ({
+              candidateIndex,
+              distance: candidateIndex === index ? Infinity : Math.hypot(candidate.x - node.x, candidate.y - node.y)
+            }))
+            .sort((a, b) => a.distance - b.distance)
+            .slice(0, 3);
+
+          nearest.forEach(({ candidateIndex, distance }, neighborIndex) => {
+            if (candidateIndex <= index || distance > Math.min(width, height) * 0.34) return;
+
+            meshLinks.push({
+              from: index,
+              to: candidateIndex,
+              strength: 1 - neighborIndex * 0.2,
+              phase: Math.random() * Math.PI * 2
+            });
+          });
+        });
+      }
+
+      startedAt = performance.now();
+    };
+
+    const draw = (now) => {
+      const { width, height } = canvas.getBoundingClientRect();
+      const elapsed = (now - startedAt) / 1000;
+      const centerX = width / 2;
+      const centerY = height / 2;
+      const maxDistance = Math.hypot(centerX, centerY);
+      const delayedElapsed = Math.max(elapsed - 0.55, 0);
+      const revealRadius = Math.min(delayedElapsed * 0.42, 1.2);
+      const shimmerWidth = 0.045;
+
+      context.clearRect(0, 0, width, height);
+
+      if (connections) {
+        const meshReveal = Math.min(Math.max((elapsed - 0.55) / 1.6, 0), 1);
+        const drawnMeshNodes = meshNodes.map((node) => {
+          const driftX = Math.sin(elapsed * 0.18 + node.phase) * 7 + Math.sin(elapsed * 0.42 + node.y * 0.012) * 2.5;
+          const driftY = Math.cos(elapsed * 0.2 + node.phase * 0.8) * 5 + Math.sin(elapsed * 0.36 + node.x * 0.01) * 2;
+          const distance = Math.hypot(node.x - centerX, node.y - centerY);
+          const edgeFade = 1 - Math.min(distance / maxDistance, 1) * 0.62;
+          const pulse = 0.68 + Math.sin(elapsed * 0.75 + node.phase) * 0.32;
+
+          return {
+            ...node,
+            drawX: node.x + driftX,
+            drawY: node.y + driftY,
+            opacity: Math.min(edgeFade * pulse * meshReveal * 0.34, 0.34)
+          };
+        });
+
+        context.lineCap = "round";
+        context.lineJoin = "round";
+
+        meshLinks.forEach((link) => {
+          const from = drawnMeshNodes[link.from];
+          const to = drawnMeshNodes[link.to];
+          if (!from || !to) return;
+
+          const flow = 0.58 + Math.sin(elapsed * 0.75 + link.phase) * 0.42;
+          const lineOpacity = Math.min(Math.min(from.opacity, to.opacity) * link.strength * flow * 0.78, 0.13);
+          if (lineOpacity <= 0.01) return;
+
+          context.beginPath();
+          context.strokeStyle = `rgba(210, 236, 255, ${lineOpacity})`;
+          context.lineWidth = 0.55 + link.strength * 0.35;
+          context.moveTo(from.drawX, from.drawY);
+          context.lineTo(to.drawX, to.drawY);
+          context.stroke();
+        });
+
+        drawnMeshNodes.forEach((node) => {
+          if (node.opacity <= 0.01) return;
+
+          context.beginPath();
+          context.fillStyle = `rgba(255, 255, 255, ${Math.min(node.opacity * 1.15, 0.42)})`;
+          context.arc(node.drawX, node.drawY, node.size * dotScale, 0, Math.PI * 2);
+          context.fill();
+        });
+      }
+
+      const drawnDots = dots.map((dot) => {
+        const distance = Math.hypot(dot.x - centerX, dot.y - centerY);
+        const normalizedDistance = distance / maxDistance;
+        const angleFromCenter = Math.atan2(dot.y - centerY, dot.x - centerX);
+        const radialWave = Math.sin(elapsed * 0.9 - normalizedDistance * 18 + dot.phase) * 1.6;
+        const diagonalWave = Math.sin(elapsed * 0.55 + (dot.x + dot.y) * 0.018 + dot.phase) * 0.75;
+        const drawX = dot.x + Math.cos(angleFromCenter) * radialWave + diagonalWave;
+        const drawY = dot.y + Math.sin(angleFromCenter) * radialWave - diagonalWave * 0.45;
+        const reveal = Math.min(Math.max((revealRadius - normalizedDistance) / 0.34, 0), 1);
+        const shimmerDistance = Math.abs(normalizedDistance - revealRadius);
+        const shimmer = Math.max(1 - shimmerDistance / shimmerWidth, 0);
+        const pulse = 0.45 + Math.sin(elapsed * 1.2 + dot.phase) * 0.25;
+        const ambientPulse = 0.72 + Math.sin(elapsed * 0.75 + dot.phase + dot.seed * 6) * 0.28;
+        const edgeFade = 1 - Math.min(distance / maxDistance, 1) * 0.72;
+        const baseOpacity = 0.035 + dot.seed * 0.075 + pulse * 0.025;
+        const opacity = Math.min(edgeFade * (reveal * baseOpacity * ambientPulse + shimmer * 0.09) * intensity, 0.42);
+
+        return {
+          ...dot,
+          drawX,
+          drawY,
+          opacity,
+          shimmer
+        };
+      });
+
+      drawnDots.forEach((dot) => {
+        if (dot.opacity <= 0.01) return;
+
+        context.beginPath();
+        context.fillStyle = `rgba(255, 255, 255, ${dot.opacity})`;
+        context.arc(dot.drawX, dot.drawY, (dot.shimmer > 0.18 ? 1.35 : dot.seed > 0.82 ? 1.1 : 0.85) * dotScale, 0, Math.PI * 2);
+        context.fill();
+      });
+
+      animationFrame = requestAnimationFrame(draw);
+    };
+
+    resize();
+    animationFrame = requestAnimationFrame(draw);
+    window.addEventListener("resize", resize);
+
+    return () => {
+      cancelAnimationFrame(animationFrame);
+      window.removeEventListener("resize", resize);
+    };
+  }, [connections, dotScale, intensity]);
+
+  return <canvas className={`dot-matrix-background ${className}`} ref={canvasRef} aria-hidden="true" />;
+}
+
+function useRevealAnimation() {
+  React.useEffect(() => {
+    const revealElements = document.querySelectorAll(".reveal");
+
+    revealElements.forEach((element) => element.classList.add("reveal-pending"));
+
+    if (!("IntersectionObserver" in window)) {
+      revealElements.forEach((element) => {
+        element.classList.remove("reveal-pending");
+        element.classList.add("is-visible");
+      });
+      return undefined;
+    }
+
+    const revealElement = (element) => {
+      element.classList.remove("reveal-pending");
+      element.classList.add("is-visible");
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          revealElement(entry.target);
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        rootMargin: "0px 0px -12% 0px",
+        threshold: 0.18
+      }
+    );
+
+    revealElements.forEach((element) => observer.observe(element));
+
+    const fallbackTimer = window.setTimeout(() => {
+      revealElements.forEach(revealElement);
+      observer.disconnect();
+    }, 2200);
+
+    return () => {
+      window.clearTimeout(fallbackTimer);
+      observer.disconnect();
+    };
+  }, []);
+}
+
+function useMarqueeStart() {
+  React.useEffect(() => {
+    const marquee = document.querySelector(".work-marquee");
+    const track = marquee?.querySelector(".work-track");
+    if (!marquee || !track) return undefined;
+
+    const prefersReduced = window.matchMedia(
+      "(prefers-reduced-motion: reduce)"
+    ).matches;
+
+    const speed = 0.5; // px per frame for the auto-scroll
+    let rafId = null;
+    let inView = false;
+    let paused = false;
+    let idleTimer = null;
+
+    const loopWidth = () => track.scrollWidth / 2; // items are duplicated
+
+    const step = () => {
+      if (inView && !paused && !prefersReduced) {
+        marquee.scrollLeft += speed;
+        const half = loopWidth();
+        if (marquee.scrollLeft >= half) {
+          marquee.scrollLeft -= half;
+        }
+      }
+      rafId = requestAnimationFrame(step);
+    };
+
+    const holdThenResume = (ms) => {
+      paused = true;
+      if (idleTimer) window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(() => {
+        paused = false;
+      }, ms);
+    };
+
+    const cardStep = () => {
+      const card = track.querySelector(".work-card");
+      const styles = getComputedStyle(track);
+      const gap = parseFloat(styles.columnGap || styles.gap || "0") || 0;
+      return card ? card.getBoundingClientRect().width + gap : 400;
+    };
+
+    const nudge = (dir) => {
+      const half = loopWidth();
+      // Wrap seamlessly when stepping backwards past the start.
+      if (dir < 0 && marquee.scrollLeft < cardStep()) {
+        marquee.scrollLeft += half;
+      }
+      marquee.scrollBy({ left: dir * cardStep(), behavior: "smooth" });
+      holdThenResume(2600);
+    };
+
+    const onEnter = () => {
+      paused = true;
+    };
+    const onLeave = () => {
+      paused = false;
+    };
+    const onUserScroll = () => holdThenResume(2600);
+
+    const prevBtn = document.querySelector(".work-nav-prev");
+    const nextBtn = document.querySelector(".work-nav-next");
+    const onPrev = () => nudge(-1);
+    const onNext = () => nudge(1);
+
+    marquee.addEventListener("mouseenter", onEnter);
+    marquee.addEventListener("mouseleave", onLeave);
+    marquee.addEventListener("wheel", onUserScroll, { passive: true });
+    marquee.addEventListener("touchstart", onUserScroll, { passive: true });
+    prevBtn?.addEventListener("click", onPrev);
+    nextBtn?.addEventListener("click", onNext);
+
+    let started = false;
+    const observer =
+      "IntersectionObserver" in window
+        ? new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  if (!started) {
+                    marquee.scrollLeft = 0; // begin on the first project (PureFi)
+                    started = true;
+                  }
+                  inView = true;
+                } else {
+                  inView = false;
+                }
+              });
+            },
+            { threshold: 0.2 }
+          )
+        : null;
+
+    if (observer) {
+      observer.observe(marquee);
+    } else {
+      inView = true;
+    }
+
+    rafId = requestAnimationFrame(step);
+
+    return () => {
+      if (rafId != null) cancelAnimationFrame(rafId);
+      if (idleTimer) window.clearTimeout(idleTimer);
+      if (observer) observer.disconnect();
+      marquee.removeEventListener("mouseenter", onEnter);
+      marquee.removeEventListener("mouseleave", onLeave);
+      marquee.removeEventListener("wheel", onUserScroll);
+      marquee.removeEventListener("touchstart", onUserScroll);
+      prevBtn?.removeEventListener("click", onPrev);
+      nextBtn?.removeEventListener("click", onNext);
+    };
+  }, []);
+}
+
+function OriginalHome() {
+  useRevealAnimation();
+
+  return (
+    <main className="page-shell">
+      <nav className="nav nav-dark" aria-label="Primary">
+        <a className="brand" href="#top" aria-label="Human AI Studio home">
+          <span className="brand-mark" aria-hidden="true" />
+          Human AI Studio
+        </a>
+        <BookingTextLink className="nav-link">
+          Book a call
+        </BookingTextLink>
+      </nav>
+
+      <section className="hero" id="top" data-nav-theme="dark">
+        <div className="hero-inner">
+          <div className="hero-copy">
+            <p className="eyebrow hero-eyebrow">AI product studio</p>
+            <h1>
+              <span>Human</span>
+              <span>AI</span>
+              <span>Studio</span>
+            </h1>
+            <p className="intro">
+              Independent product studio based in the SF Bay Area by John Rodrigues, helping businesses build 0-&gt;1 AI-native products and agentic operating systems.
+            </p>
+            <div className="hero-actions">
+              <BookingButton showAvatar />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="offerings" aria-labelledby="offerings-title" data-nav-theme="light">
+        <div className="section-heading reveal">
+          <div>
+            <p className="eyebrow">Offerings</p>
+            <h2 id="offerings-title">Three ways to work together</h2>
+          </div>
+          <p className="section-note">
+            Focused support for founders, teams, and organizations turning AI
+            ideas into useful products and practices.
+          </p>
+        </div>
+
+        <div className="offering-grid">
+          {offerings.map((offering, index) => (
+            <article
+              className="offering-card reveal"
+              key={offering.title}
+              style={{ "--reveal-delay": `${120 + index * 140}ms` }}
+            >
+              <div className="offering-topline">
+                <span className="number">{String(index + 1).padStart(2, "0")}</span>
+              </div>
+              <div className="offering-copy">
+                <h3>{offering.title}</h3>
+                <p>{offering.description}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="approach" aria-labelledby="approach-title" data-nav-theme="dark">
+        <div className="approach-inner">
+          <div>
+            <p className="eyebrow">Approach</p>
+            <h2 id="approach-title">
+              Product thinking, craft, and design engineering for business impact.
+            </h2>
+          </div>
+          <div className="principle-list">
+            {principles.map((principle) => (
+              <p key={principle}>{principle}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="bio" aria-labelledby="bio-title" data-nav-theme="light">
+        <div className="bio-inner">
+          <div className="bio-copy reveal">
+            <p className="eyebrow">Work directly with John</p>
+            <h2 id="bio-title">Direct, hands-on AI product work.</h2>
+            <p>
+              Human AI Studio is led by John Rodrigues. Every engagement is
+              hands-on, practical, and close to the work: product thinking,
+              system design, prototyping, implementation, and the human side of
+              helping people make sense of AI.
+            </p>
+            <p>
+              Add John&apos;s bio here: background, perspective, recent work,
+              and the kind of collaborators, founders, teams, or organizations
+              he works best with.
+            </p>
+            <div className="bio-actions">
+              <a
+                className="secondary-button"
+                href="https://www.linkedin.com/in/john-rodrigues4?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                target="_blank"
+                rel="noreferrer"
+              >
+                LinkedIn
+              </a>
+              <a
+                className="secondary-button"
+                href="https://johnrodrigues.substack.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+                Substack
+              </a>
+            </div>
+          </div>
+          <figure className="profile-card reveal" style={{ "--reveal-delay": "130ms" }}>
+            <div className="profile-image">
+              <img src={profilePicture} alt="John Rodrigues" />
+            </div>
+            <figcaption>
+              <span>John Rodrigues</span>
+              <span>Design Engineer | Founder of Human AI Studio</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section className="final-cta" aria-labelledby="cta-title" data-nav-theme="dark">
+        <DotMatrixBackground />
+        <div className="final-cta-inner reveal">
+          <p className="eyebrow">Start here</p>
+          <h2 id="cta-title">
+            <span>Have an AI product, workflow,</span>
+            <span>or team question?</span>
+          </h2>
+          <BookingButton />
+        </div>
+      </section>
+
+      <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
+        <div className="site-footer-inner">
+          <div className="footer-brand">
+            <a className="brand" href="#top" aria-label="Human AI Studio home">
+              <span className="brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </a>
+            <p>
+              Human AI Studio by Human Inspire Studio. Independent AI product
+              studio run by John Rodrigues in the SF Bay Area.
+            </p>
+          </div>
+
+          <div className="footer-column">
+            <p>Services</p>
+            <a href="#top">AI-native products</a>
+            <a href="#top">AI operating systems</a>
+            <a href="#top">AI workshops</a>
+          </div>
+
+          <div className="footer-column">
+            <p>Studio</p>
+            <span>San Francisco Bay Area</span>
+            <span>Design engineering</span>
+            <span>Product systems</span>
+          </div>
+
+          <div className="footer-column">
+            <p>Contact</p>
+            <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+            <BookingTextLink>Book discovery call</BookingTextLink>
+          </div>
+        </div>
+      </footer>
+    </main>
+  );
+}
+
+function StudioHome({ isHistory = false }) {
+  useRevealAnimation();
+  useMarqueeStart();
+  const cards = isHistory ? v2HowItWorks : homeOffers;
+  const principlesList = isHistory ? v2Principles : homePrinciples;
+
+  return (
+    <main className={`page-shell ${isHistory ? "history-home" : "current-home"}`}>
+      <nav className="nav nav-dark" aria-label="Primary">
+        <a className="brand" href="/#top" aria-label="Human AI Studio home">
+          <span className="brand-mark" aria-hidden="true" />
+          Human AI Studio
+        </a>
+        <div className="nav-actions">
+          <a
+            className="nav-text-link"
+            href="https://substack.com/@johnrodrigues"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Newsletter
+          </a>
+          <BookingTextLink className="nav-link">
+            Book a call
+          </BookingTextLink>
+        </div>
+      </nav>
+
+      {isHistory ? (
+        <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
+          <DotMatrixBackground className="v2-hero-entrance-dots" intensity={3.2} dotScale={1.15} />
+          <div className="hero-inner">
+            <div className="hero-copy">
+              <p className="eyebrow hero-eyebrow">Human AI Studio</p>
+              <h1>
+                <span>Agentic Design Systems</span>
+                <span>for Humans and AI</span>
+              </h1>
+              <p className="intro v2-hero-intro">
+                <span>AI agent and agentic operating system development to help businesses</span>{" "}
+                <span>scale operations and grow revenue.</span>
+              </p>
+              <div className="hero-actions">
+                <BookingButton showAvatar />
+              </div>
+            </div>
+          </div>
+        </section>
+      ) : (
+        <CinematicHero />
+      )}
+
+      <section
+        id="offerings"
+        className={`offerings ${isHistory ? "" : "dark-offerings"}`}
+        aria-labelledby="v2-how-title"
+        data-nav-theme={isHistory ? "light" : "dark"}
+      >
+        <div className={`section-heading reveal ${isHistory ? "" : "no-section-note"}`}>
+          <div>
+            <p className="eyebrow">{isHistory ? "How It Works" : "Offerings"}</p>
+            <h2 className="v2-how-heading" id="v2-how-title">
+              {isHistory ? "From Workflow Pain to AI System" : "Three Ways to Work Together"}
+            </h2>
+          </div>
+          {isHistory && (
+            <p className="section-note">
+              A forward-deployed process for understanding the business problem, designing the workflow, and shipping AI agents into real operations.
+            </p>
+          )}
+        </div>
+
+        <div className={`offering-grid v2-flow-grid ${isHistory ? "" : "v2-offer-grid"}`}>
+          {cards.map((step, index) => (
+            <article
+              className="offering-card v2-offering-card reveal"
+              key={step.title}
+              style={{
+                "--reveal-delay": `${120 + index * 140}ms`,
+                "--card-color-1": step.color1,
+                "--card-color-2": step.color2
+              }}
+            >
+              {!isHistory && (
+                <div className="offering-thumb">
+                  <OfferingShader
+                    color1={step.color1}
+                    color2={step.color2}
+                    seed={index * 3.7 + 1.3}
+                  />
+                  <span className="offering-thumb-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="offering-thumb-title">{step.title}</h3>
+                </div>
+              )}
+              {isHistory && (
+                <div className="offering-topline">
+                  <span className="number">{String(index + 1).padStart(2, "0")}</span>
+                </div>
+              )}
+              <div className="offering-copy">
+                {isHistory && <h3>{step.title}</h3>}
+                <p>{step.description}</p>
+                {step.logos && (
+                  <div className="logo-proof" aria-label={`${step.title} credibility`}>
+                    {step.logos.map((logo) => (
+                      <span key={logo}>{logo}</span>
+                    ))}
+                  </div>
+                )}
+                {false && !isHistory && (step.slug || step.link) && (
+                  <a
+                    className="offering-learn-more"
+                    href={step.link || `/offerings/${step.slug}`}
+                    aria-label={`Learn more about ${step.title}`}
+                    {...(step.external
+                      ? { target: "_blank", rel: "noreferrer" }
+                      : {})}
+                  >
+                    <span>Learn more</span>
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                      <path
+                        d="M3 7h8M7.5 3.5 11 7l-3.5 3.5"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {!isHistory && (
+        <section className="agent-consumers" aria-labelledby="agent-consumers-title" data-nav-theme="dark">
+          <div className="agent-consumers-inner reveal">
+            <p className="eyebrow">Agentic Infrastructure</p>
+            <h2 id="agent-consumers-title">
+              Your design system was built for humans. Agents are consumers now.
+            </h2>
+            <div className="agent-consumers-copy">
+              <p>
+                Most design systems were built for one consumer: humans. Designers read the docs. Engineers follow the components. Judgment filled the gaps. That model is no longer enough.
+              </p>
+              <p>
+                Today, AI tools are part of the workflow too. They help teams explore UI, prototype features, and move faster, but they also expose where design intent gets lost in translation between product, design, and engineering. When the system is not structured for both people and AI-assisted workflows, the cost shows up as product inconsistencies, off-brand prototypes, longer QA cycles, harder maintenance, and more frustration between teams.
+              </p>
+              <p>
+                We help teams ship at the pace the market demands, without shipping AI slop.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {!isHistory && showSelectedProjects && (
+        <section className="work-showcase" aria-labelledby="work-title" data-nav-theme="dark">
+          <div className="work-showcase-inner">
+            <div className="section-heading no-section-note work-heading reveal">
+              <div>
+                <p className="eyebrow">Work</p>
+                <h2 id="work-title">Selected Projects</h2>
+              </div>
+              <div className="work-nav">
+                <button
+                  type="button"
+                  className="work-nav-btn work-nav-prev"
+                  aria-label="Previous projects"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M15 5l-7 7 7 7"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+                <button
+                  type="button"
+                  className="work-nav-btn work-nav-next"
+                  aria-label="Next projects"
+                >
+                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                    <path
+                      d="M9 5l7 7-7 7"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="1.7"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="work-marquee" aria-label="Selected work">
+            <div className="work-track">
+              {[...workItems, ...workItems].map((item, index) => (
+                <article
+                  className="work-card"
+                  key={`${item.title}-${index}`}
+                  aria-hidden={index >= workItems.length}
+                >
+                  <div className={`work-card-media${item.fit === "contain" ? " work-card-media-contain" : ""}`}>
+                    {item.video ? (
+                      <video
+                        src={item.video}
+                        poster={item.image}
+                        autoPlay
+                        muted
+                        loop
+                        playsInline
+                        preload="metadata"
+                        style={{ objectPosition: item.position }}
+                      />
+                    ) : (
+                      <img src={item.image} alt="" style={{ objectPosition: item.position }} />
+                    )}
+                  </div>
+                  <div className="work-card-meta">
+                    <strong>{item.title}</strong>
+                    <span>{item.label}</span>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
+        <div className="approach-inner reveal">
+          <div>
+            <p className="eyebrow">{isHistory ? "Approach" : "AI Native From Day One"}</p>
+            <h2 id="v2-approach-title">
+              {isHistory
+                ? "Forward-deployed design and engineering for your business."
+                : "Built on the stack you already trust."}
+            </h2>
+            {!isHistory && (
+              <p className="approach-subhead">
+                We extend your existing design system and toolchain, Figma, code, and AI-assisted workflows, so adoption stays practical and change stays manageable.
+              </p>
+            )}
+          </div>
+          <div className="approach-details">
+            {isHistory && (
+              <div className="principle-list">
+                {principlesList.map((principle) => (
+                  <p key={principle}>{principle}</p>
+                ))}
+              </div>
+            )}
+            {!isHistory && (
+              <div className="stack-card" aria-label="Tool stack">
+                <div className="stack-card-rows">
+                  <div className="stack-card-row">
+                    <div className="stack-card-track">
+                      {[...toolStackRowOne, ...toolStackRowOne].map((tool, index) => (
+                        <span
+                          className={`stack-logo${tool.contain ? " stack-logo-contain" : ""}`}
+                          key={`row1-${tool.name}-${index}`}
+                          aria-hidden={index >= toolStackRowOne.length}
+                        >
+                          <img src={tool.icon} alt={tool.name} loading="lazy" />
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="stack-card-row">
+                    <div className="stack-card-track stack-card-track-reverse">
+                      {[...toolStackRowTwo, ...toolStackRowTwo].map((tool, index) => (
+                        <span
+                          className={`stack-logo${tool.contain ? " stack-logo-contain" : ""}`}
+                          key={`row2-${tool.name}-${index}`}
+                          aria-hidden={index >= toolStackRowTwo.length}
+                        >
+                          <img src={tool.icon} alt={tool.name} loading="lazy" />
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="stack-card-row">
+                    <div className="stack-card-track">
+                      {[...toolStackRowThree, ...toolStackRowThree].map((tool, index) => (
+                        <span
+                          className={`stack-logo${tool.contain ? " stack-logo-contain" : ""}${tool.icon ? "" : " stack-logo-text"}`}
+                          key={`row3-${tool.name}-${index}`}
+                          aria-hidden={index >= toolStackRowThree.length}
+                        >
+                          {tool.icon ? (
+                            <img src={tool.icon} alt={tool.name} loading="lazy" />
+                          ) : (
+                            <span>{tool.name}</span>
+                          )}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
+
+      <section
+        className={`bio v2-bio ${isHistory ? "" : "dark-bio"}`}
+        aria-labelledby="v2-bio-title"
+        data-nav-theme={isHistory ? "light" : "dark"}
+      >
+        <div className={`bio-inner ${isHistory ? "" : "bio-card-shell"}`}>
+          <div className="bio-copy reveal">
+            {isHistory && <p className="eyebrow">Work Directly With John</p>}
+            <h2 id="v2-bio-title">
+              {isHistory ? (
+                <>
+                  <span>Work 1:1 With John Rodrigues</span>
+                  <span>From Strategy to Launch.</span>
+                </>
+              ) : (
+                <span>Work 1:1 With John Rodrigues.</span>
+              )}
+            </h2>
+            <p>
+              {isHistory
+                ? "Work directly with John Rodrigues across strategy, product design, design engineering, AI agent development, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."
+                : "I'm a design engineer focused on AI systems, agentic design systems, and AI workflows. My background spans design and engineering, plus an AI program at Stanford, with work shipped everywhere from early-stage startups to enterprises."}
+            </p>
+            <p>
+              {isHistory
+                ? "John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, agentic systems, internal tools, and AI-native products that teams can understand, trust, and operate."
+                : "I've been writing about AI since 2021 on my Substack, now read by more than 4,000 subscribers. Across all of it, I stay focused on driving real user impact and business outcomes."}
+            </p>
+            <div className="bio-actions">
+              <a
+                className="secondary-button"
+                href="https://www.linkedin.com/in/john-rodrigues4?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                target="_blank"
+                rel="noreferrer"
+              >
+              LinkedIn
+              </a>
+              <a
+                className="secondary-button"
+                href="https://johnrodrigues.substack.com/"
+                target="_blank"
+                rel="noreferrer"
+              >
+              Substack
+              </a>
+            </div>
+            {!isHistory && (
+              <div className="bio-logos" aria-label="Experience with teams at leading companies">
+                <span className="bio-logos-label">Experience with teams at</span>
+                <div className="bio-logos-row">
+                  {bioCompanies.map((company) => (
+                    <img key={company.name} src={company.icon} alt={company.name} />
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+          <figure className="profile-card reveal" style={{ "--reveal-delay": "130ms" }}>
+            <div className="profile-image">
+              <img src={profilePicture} alt="John Rodrigues" />
+            </div>
+            <figcaption>
+              <span>John Rodrigues</span>
+              <span>Design Engineer | Founder of Human AI Studio</span>
+            </figcaption>
+          </figure>
+        </div>
+      </section>
+
+      {!isHistory && (
+        <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
+          <DotMatrixBackground />
+          <div className="final-cta-inner reveal final-cta-inner--newsletter">
+            <div className="newsletter-cta">
+              <div className="newsletter-copy">
+                <p className="eyebrow">Newsletter</p>
+                <h2 id="v2-cta-title">Join 4,000+ readers of the newsletter.</h2>
+                <p className="final-cta-sub">
+                  Publishing research, development projects, and industry trends, straight to your inbox.
+                </p>
+                <div className="newsletter-actions">
+                  <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
+                    <span className="button-label">Join the newsletter</span>
+                  </a>
+                </div>
+              </div>
+              <div className="newsletter-visual" aria-hidden="true">
+                <div className="issue-card-deck">
+                  <div className="issue-card issue-card--back" />
+                  <div className="issue-card issue-card--front">
+                    <div className="issue-card-head">
+                      <span className="issue-mark" />
+                      <div className="issue-card-meta">
+                        <span className="issue-card-name">Human AI Studio</span>
+                        <span className="issue-card-sub">Weekly · Issue #12</span>
+                      </div>
+                      <span className="issue-card-pill">Subscribed</span>
+                    </div>
+                    <p className="issue-card-body">
+                      Get weekly updates on studio research, new industry shifts, and practical ways to level up your business.
+                    </p>
+                    <div className="issue-card-foot">
+                      <span className="issue-card-foot-label">Read by people at</span>
+                      <div className="issue-card-logos">
+                        {newsletterCompanies.map((company) => (
+                          <img key={company.name} src={company.icon} alt={company.name} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {!isHistory && (
+        <section className="testimonials" aria-labelledby="testimonials-title" data-nav-theme="dark">
+          <div className="testimonials-inner">
+            <div className="section-heading no-section-note reveal">
+              <div>
+                <p className="eyebrow">Testimonials</p>
+                <h2 id="testimonials-title">What People Say</h2>
+              </div>
+            </div>
+            <div className="testimonial-marquee" aria-label="Testimonials">
+              <div className="testimonial-track">
+                {[...testimonials, ...testimonials].map((testimonial, index) => (
+                <article
+                  className="testimonial-card"
+                  key={`${testimonial.name}-${index}`}
+                  aria-hidden={index >= testimonials.length}
+                >
+                  <p>“{testimonial.quote}”</p>
+                  <footer>
+                    <span className="testimonial-name">{testimonial.name}</span>
+                    <span className="testimonial-role">{testimonial.role}</span>
+                    {testimonial.logo && (
+                      <img className="testimonial-logo" src={testimonial.logo} alt="" />
+                    )}
+                  </footer>
+                </article>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {!isHistory && (
+        <section className="cohort-section" aria-labelledby="cohort-title" data-nav-theme="dark">
+          <div className="cohort-section-inner reveal">
+            <div className="section-heading no-section-note">
+              <div>
+                <h2 id="cohort-title">AI enablement for your teams.</h2>
+              </div>
+            </div>
+            <a className="cohort-card" href={cohortUrl} target="_blank" rel="noreferrer">
+              <div className="cohort-card-copy">
+                <div className="cohort-card-meta" aria-label="Cohort highlights">
+                  <span>4.6 out of 5 rating</span>
+                  <span>Featured on the design track</span>
+                </div>
+                <h3>Become an AI Native Designer Cohort</h3>
+                <p>
+                  A live cohort with a group of designers learning how to use AI across research, design systems, prototyping, and delivery without losing craft.
+                </p>
+                <span className="cohort-card-action">Join the cohort</span>
+              </div>
+            </a>
+          </div>
+        </section>
+      )}
+
+      {isHistory && (
+      <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
+        <DotMatrixBackground />
+        <div className={`final-cta-inner reveal${isHistory ? "" : " final-cta-inner--newsletter"}`}>
+          {isHistory ? (
+            <>
+              <p className="eyebrow">Start Here</p>
+              <h2 id="v2-cta-title">
+                <span>Need an AI operating</span>
+                <span>system for your business?</span>
+              </h2>
+              <BookingButton />
+            </>
+          ) : (
+            <div className="newsletter-cta">
+              <div className="newsletter-copy">
+                <p className="eyebrow">Newsletter</p>
+                <h2 id="v2-cta-title">Join 4,000+ readers of the newsletter.</h2>
+                <p className="final-cta-sub">
+                  Publishing research, development projects, and industry trends, straight to your inbox.
+                </p>
+                <div className="newsletter-actions">
+                  <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
+                    <span className="button-label">Join the newsletter</span>
+                  </a>
+                </div>
+              </div>
+              <div className="newsletter-visual" aria-hidden="true">
+                <div className="issue-card-deck">
+                <div className="issue-card issue-card--back" />
+                <div className="issue-card issue-card--front">
+                  <div className="issue-card-head">
+                    <span className="issue-mark" />
+                    <div className="issue-card-meta">
+                      <span className="issue-card-name">Human AI Studio</span>
+                      <span className="issue-card-sub">Weekly · Issue #12</span>
+                    </div>
+                    <span className="issue-card-pill">Subscribed</span>
+                  </div>
+                  <p className="issue-card-body">
+                    Get weekly updates on studio research, new industry shifts, and practical ways to level up your business.
+                  </p>
+                  <div className="issue-card-foot">
+                    <span className="issue-card-foot-label">Read by people at</span>
+                    <div className="issue-card-logos">
+                      {newsletterCompanies.map((company) => (
+                        <img key={company.name} src={company.icon} alt={company.name} />
+                      ))}
+                    </div>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      </section>
+      )}
+
+      <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
+        {!isHistory && <HeroNebulaShader className="footer-side-shader" />}
+        <div className="site-footer-inner">
+          <div className="footer-brand">
+            <a className="brand" href="/#top" aria-label="Human AI Studio home">
+              <span className="brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </a>
+            <p>
+              {isHistory
+                ? "Human AI Studio by Human Inspire Studio. AI agent operating system design and development studio run by John Rodrigues."
+                : "Human AI Studio is an independent company by Human Inspire Studio."}
+            </p>
+          </div>
+
+          {isHistory && (
+            <>
+              <div className="footer-column">
+                <p>Services</p>
+                <a href="/#top">Agentic operating systems</a>
+                <a href="/#top">AI agent development</a>
+                <a href="/#top">Operations integration</a>
+              </div>
+
+              <div className="footer-column">
+                <p>Studio</p>
+                <span>San Francisco Bay Area</span>
+                <span>Product and design studio</span>
+                <span>Direct 1:1 collaboration</span>
+              </div>
+            </>
+          )}
+
+          <div className="footer-column">
+            <p>Contact</p>
+            {!isHistory && (
+              <a href={newsletterUrl} target="_blank" rel="noreferrer">Newsletter</a>
+            )}
+            <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+            <BookingTextLink>Book a call</BookingTextLink>
+          </div>
+        </div>
+        <div className="footer-wordmark reveal" aria-hidden="true">
+          Human AI Studio
+        </div>
+      </footer>
+    </main>
+  );
+}
+
+function OfferingPage({ slug }) {
+  useRevealAnimation();
+  const page = offeringPages[slug];
+
+  if (!page) {
+    return (
+      <main className="page-shell current-home offering-page">
+        <nav className="nav nav-dark" aria-label="Primary">
+          <a className="brand" href="/#top" aria-label="Human AI Studio home">
+            <span className="brand-mark" aria-hidden="true" />
+            Human AI Studio
+          </a>
+          <div className="nav-actions">
+            <a
+              className="nav-text-link"
+              href="https://substack.com/@johnrodrigues"
+              target="_blank"
+              rel="noreferrer"
+            >
+              Newsletter
+            </a>
+            <BookingTextLink className="nav-link">
+              Book a call
+            </BookingTextLink>
+          </div>
+        </nav>
+        <section className="offering-hero" data-nav-theme="dark">
+          <div className="offering-hero-inner reveal">
+            <a className="offering-back" href="/#offerings">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                <path
+                  d="M11 7H3M6.5 3.5 3 7l3.5 3.5"
+                  stroke="currentColor"
+                  strokeWidth="1.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              <span>Back to offerings</span>
+            </a>
+            <h1>Offering not found</h1>
+            <p className="offering-intro">
+              This page doesn’t exist yet. Head back to explore the ways we can work together.
+            </p>
+          </div>
+        </section>
+      </main>
+    );
+  }
+
+  return (
+    <main className="page-shell current-home offering-page">
+      <nav className="nav nav-dark" aria-label="Primary">
+        <a className="brand" href="/#top" aria-label="Human AI Studio home">
+          <span className="brand-mark" aria-hidden="true" />
+          Human AI Studio
+        </a>
+        <div className="nav-actions">
+          <a
+            className="nav-text-link"
+            href="https://substack.com/@johnrodrigues"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Newsletter
+          </a>
+          <BookingTextLink className="nav-link">
+            Book a call
+          </BookingTextLink>
+        </div>
+      </nav>
+
+      <section className="offering-hero" data-nav-theme="dark">
+        <div className="offering-hero-inner reveal">
+          <a className="offering-back" href="/#offerings">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path
+                d="M11 7H3M6.5 3.5 3 7l3.5 3.5"
+                stroke="currentColor"
+                strokeWidth="1.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span>Back to offerings</span>
+          </a>
+          <p className="eyebrow">{page.eyebrow}</p>
+          <h1>{page.title}</h1>
+          <p className="offering-intro">{page.intro}</p>
+          {page.status === "placeholder" && (
+            <span className="offering-badge">More details coming soon</span>
+          )}
+          <div className="offering-hero-actions">
+            <BookingButton showAvatar />
+          </div>
+        </div>
+      </section>
+
+      <section className="offering-body" data-nav-theme="dark">
+        <div className="offering-body-inner">
+          {page.sections.map((section, index) => (
+            <article
+              className="offering-detail reveal"
+              key={section.heading}
+              style={{ "--reveal-delay": `${120 + index * 120}ms` }}
+            >
+              <span className="offering-detail-index">{String(index + 1).padStart(2, "0")}</span>
+              <div>
+                <h2>{section.heading}</h2>
+                <p>{section.body}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="final-cta v2-final-cta" aria-labelledby="offering-cta-title" data-nav-theme="dark">
+        <DotMatrixBackground />
+        <div className="final-cta-inner reveal">
+          <p className="eyebrow">Start Here</p>
+          <h2 id="offering-cta-title">
+            <span>Let’s talk about</span>
+            <span>{page.title}.</span>
+          </h2>
+          <BookingButton />
+        </div>
+      </section>
+
+      <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
+        <div className="site-footer-inner">
+          <div className="footer-brand">
+            <a className="brand" href="/#top" aria-label="Human AI Studio home">
+              <span className="brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </a>
+            <p>Independent product and design studio by John Rodrigues.</p>
+          </div>
+          <div className="footer-column">
+            <p>Offerings</p>
+            {homeOffers.map((offer) => (
+              <a
+                key={offer.slug}
+                href={offer.link || `/offerings/${offer.slug}`}
+                {...(offer.external ? { target: "_blank", rel: "noreferrer" } : {})}
+              >
+                {offer.title}
+              </a>
+            ))}
+          </div>
+          <div className="footer-column">
+            <p>Contact</p>
+            <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+            <BookingTextLink>Book discovery call</BookingTextLink>
+          </div>
+        </div>
+        <div className="footer-wordmark reveal" aria-hidden="true">
+          Human AI Studio
+        </div>
+      </footer>
+    </main>
+  );
+}
+
+function App() {
+  const route = window.location.pathname.replace(/\/+$/, "") || "/";
+  const isHistory = route === "/history";
+  const offeringMatch = route.match(/^\/offerings\/([^/]+)$/);
+  const offeringSlug = offeringMatch ? offeringMatch[1] : null;
+
+  return (
+    <>
+      {offeringSlug ? (
+        <OfferingPage slug={offeringSlug} />
+      ) : (
+        <StudioHome isHistory={isHistory} />
+      )}
+      <Analytics />
+    </>
+  );
+}
+
+export default App;
