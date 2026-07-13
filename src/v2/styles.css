@@ -1863,14 +1863,14 @@ h3 {
 
 .current-home .bio {
   min-height: auto;
-  padding-top: 0;
+  padding-top: clamp(1.35rem, 2.5vw, 2.35rem);
   padding-bottom: clamp(3.25rem, 5vw, 4.75rem);
 }
 
 .current-home .v2-bio {
   min-height: auto;
   align-content: start;
-  padding-top: 0;
+  padding-top: clamp(1.35rem, 2.5vw, 2.35rem);
 }
 
 .dark-bio .eyebrow {
@@ -4295,7 +4295,7 @@ h3 {
 
   .v2-bio {
     min-height: auto;
-    padding-top: 0;
+    padding-top: 1.25rem;
     padding-bottom: 3.75rem;
   }
 
@@ -4494,7 +4494,7 @@ h3 {
   }
 
   .current-home .v2-bio {
-    padding-top: 0;
+    padding-top: 1.25rem;
   }
 
   .agent-consumers h2,
