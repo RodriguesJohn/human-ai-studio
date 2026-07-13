@@ -214,14 +214,6 @@ function CinematicHero() {
       <div className="hero-cinematic-scrim" aria-hidden="true" />
 
       <div className="hero-cinematic-content">
-        <motion.p
-          className="eyebrow hero-eyebrow"
-          initial={{ opacity: 0, y: 14 }}
-          animate={{ opacity: 0.55, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.02, ease: [0.22, 1, 0.36, 1] }}
-        >
-          Human AI Studio
-        </motion.p>
         <h1 className="hero-cinematic-title">
           <motion.span
             className="hero-cinematic-line"
@@ -361,7 +353,7 @@ const homeOffers = [
   {
     title: "AI-Ready Design System Transformation",
     description:
-      "Turn your design system into agentic design systems infrastructure for humans and AI, with workflows that scale operations.",
+      "Turn your design system into agentic design systems infrastructure for humans and AI, with automated workflows that scale operations.",
     slug: "design-engineering",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
@@ -1534,7 +1526,7 @@ function StudioHome({ isHistory = false }) {
           <div className="agent-consumers-inner reveal">
             <p className="eyebrow">Agentic Infrastructure</p>
             <h2 id="agent-consumers-title">
-              Your design system was built for humans. Agents are consumers now.
+              Support your team to ship faster without losing system quality.
             </h2>
             <div className="agent-consumers-copy">
               <p>
@@ -1633,7 +1625,7 @@ function StudioHome({ isHistory = false }) {
       <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
         <div className="approach-inner reveal">
           <div>
-            <p className="eyebrow">{isHistory ? "Approach" : "AI Native From Day One"}</p>
+            {isHistory && <p className="eyebrow">Approach</p>}
             <h2 id="v2-approach-title">
               {isHistory
                 ? "Forward-deployed design and engineering for your business."
