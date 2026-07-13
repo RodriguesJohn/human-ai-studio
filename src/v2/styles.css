@@ -1672,7 +1672,7 @@ h3 {
   min-height: auto;
   align-content: start;
   padding-top: clamp(7rem, 10vw, 10rem);
-  padding-bottom: clamp(3.5rem, 5vw, 5rem);
+  padding-bottom: clamp(5rem, 7vw, 7rem);
   background: #08090a;
 }
 
@@ -1864,14 +1864,14 @@ h3 {
 
 .current-home .bio {
   min-height: auto;
-  padding-top: clamp(3.5rem, 5vw, 5rem);
+  padding-top: clamp(5rem, 7vw, 7rem);
   padding-bottom: clamp(7rem, 10vw, 10rem);
 }
 
 .current-home .v2-bio {
   min-height: auto;
   align-content: start;
-  padding-top: clamp(3.5rem, 5vw, 5rem);
+  padding-top: clamp(5rem, 7vw, 7rem);
 }
 
 .dark-bio .eyebrow {
@@ -2566,7 +2566,10 @@ h3 {
 }
 
 .cohort-card {
+  position: relative;
+  isolation: isolate;
   display: grid;
+  overflow: hidden;
   width: 100%;
   align-items: end;
   gap: clamp(1.4rem, 3vw, 2.6rem);
@@ -2586,6 +2589,20 @@ h3 {
     border-color 220ms ease,
     transform 220ms ease,
     box-shadow 220ms ease;
+}
+
+.cohort-card::before {
+  content: "";
+  position: absolute;
+  inset: -35%;
+  z-index: -1;
+  background:
+    radial-gradient(circle at 18% 16%, rgba(153, 178, 255, 0.36), transparent 23rem),
+    radial-gradient(circle at 80% 70%, rgba(111, 88, 183, 0.28), transparent 28rem),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 56%);
+  opacity: 0.82;
+  pointer-events: none;
+  animation: cohortGradientDrift 11s ease-in-out infinite;
 }
 
 .cohort-card-copy {
@@ -2658,6 +2675,23 @@ h3 {
   font-weight: 620;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+@keyframes cohortGradientDrift {
+  0% {
+    opacity: 0.72;
+    transform: translate3d(-5%, -4%, 0) scale(1);
+  }
+
+  50% {
+    opacity: 0.96;
+    transform: translate3d(6%, 5%, 0) scale(1.08);
+  }
+
+  100% {
+    opacity: 0.72;
+    transform: translate3d(-5%, -4%, 0) scale(1);
+  }
 }
 
 @keyframes testimonialMarquee {
@@ -3078,7 +3112,9 @@ h3 {
 
 @media (prefers-reduced-motion: reduce) {
   .booking-modal-backdrop,
-  .booking-modal-panel {
+  .booking-modal-panel,
+  .cohort-card::before {
+    animation: none;
     transition-duration: 1ms;
   }
 }
