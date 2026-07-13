@@ -2566,6 +2566,8 @@ h3 {
 }
 
 .cohort-card {
+  --shader-x: 18%;
+  --shader-y: 16%;
   position: relative;
   isolation: isolate;
   display: grid;
@@ -2594,18 +2596,41 @@ h3 {
 .cohort-card::before {
   content: "";
   position: absolute;
-  inset: -35%;
-  z-index: -1;
+  inset: -45%;
+  z-index: 0;
   background:
-    radial-gradient(circle at 18% 16%, rgba(153, 178, 255, 0.36), transparent 23rem),
-    radial-gradient(circle at 80% 70%, rgba(111, 88, 183, 0.28), transparent 28rem),
+    radial-gradient(circle at var(--shader-x) var(--shader-y), rgba(174, 194, 255, 0.5), transparent 17rem),
+    radial-gradient(circle at calc(var(--shader-x) + 18%) calc(var(--shader-y) + 26%), rgba(122, 101, 210, 0.34), transparent 24rem),
+    radial-gradient(circle at calc(var(--shader-x) - 18%) calc(var(--shader-y) + 18%), rgba(122, 148, 255, 0.2), transparent 20rem),
     linear-gradient(135deg, rgba(255, 255, 255, 0.08), transparent 56%);
-  opacity: 0.82;
+  opacity: 0.9;
   pointer-events: none;
-  animation: cohortGradientDrift 11s ease-in-out infinite;
+  filter: blur(18px) saturate(1.2);
+  transform: translate3d(0, 0, 0) scale(1.02);
+  transition:
+    opacity 220ms ease,
+    background-position 260ms ease,
+    filter 260ms ease;
+  animation: cohortGradientDrift 12s ease-in-out infinite;
+}
+
+.cohort-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(circle at var(--shader-x) var(--shader-y), rgba(255, 255, 255, 0.16), transparent 13rem),
+    linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.055) 48%, transparent 72%);
+  opacity: 0;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  transition: opacity 220ms ease;
 }
 
 .cohort-card-copy {
+  position: relative;
+  z-index: 1;
   display: grid;
   max-width: 50rem;
   gap: 1.1rem;
@@ -2618,6 +2643,16 @@ h3 {
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 1.6rem 3.5rem rgba(0, 0, 0, 0.32);
+}
+
+.cohort-card:hover::before {
+  opacity: 1;
+  filter: blur(20px) saturate(1.45);
+  animation-duration: 7s;
+}
+
+.cohort-card:hover::after {
+  opacity: 1;
 }
 
 .cohort-card .eyebrow {
@@ -2680,17 +2715,17 @@ h3 {
 @keyframes cohortGradientDrift {
   0% {
     opacity: 0.72;
-    transform: translate3d(-5%, -4%, 0) scale(1);
+    transform: translate3d(-3%, -3%, 0) scale(1.02) rotate(0deg);
   }
 
   50% {
     opacity: 0.96;
-    transform: translate3d(6%, 5%, 0) scale(1.08);
+    transform: translate3d(3%, 4%, 0) scale(1.1) rotate(3deg);
   }
 
   100% {
     opacity: 0.72;
-    transform: translate3d(-5%, -4%, 0) scale(1);
+    transform: translate3d(-3%, -3%, 0) scale(1.02) rotate(0deg);
   }
 }
 

@@ -536,6 +536,23 @@ const newsletterCompanies = [
 const newsletterUrl = "https://substack.com/@johnrodrigues";
 const cohortUrl = "https://maven.com/humanaistudio";
 
+function handleCohortShaderMove(event) {
+  const card = event.currentTarget;
+  const rect = card.getBoundingClientRect();
+  const x = ((event.clientX - rect.left) / rect.width) * 100;
+  const y = ((event.clientY - rect.top) / rect.height) * 100;
+
+  card.style.setProperty("--shader-x", `${x.toFixed(2)}%`);
+  card.style.setProperty("--shader-y", `${y.toFixed(2)}%`);
+}
+
+function handleCohortShaderLeave(event) {
+  const card = event.currentTarget;
+
+  card.style.setProperty("--shader-x", "18%");
+  card.style.setProperty("--shader-y", "16%");
+}
+
 const testimonials = [
   {
     quote:
@@ -1825,7 +1842,14 @@ function StudioHome({ isHistory = false }) {
                 <h2 id="cohort-title">AI enablement for your teams.</h2>
               </div>
             </div>
-            <a className="cohort-card" href={cohortUrl} target="_blank" rel="noreferrer">
+            <a
+              className="cohort-card"
+              href={cohortUrl}
+              target="_blank"
+              rel="noreferrer"
+              onPointerMove={handleCohortShaderMove}
+              onPointerLeave={handleCohortShaderLeave}
+            >
               <div className="cohort-card-copy">
                 <div className="cohort-card-meta" aria-label="Cohort highlights">
                   <span>4.6 out of 5 rating</span>
