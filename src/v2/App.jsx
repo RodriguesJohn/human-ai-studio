@@ -367,7 +367,7 @@ const homeOffers = [
     color2: "#ddd6fe"
   },
   {
-    title: "Design Engineer Embedded",
+    title: "Design Engineer Embedded\nin Design Systems Team",
     description:
       "Get support building components, variables, tokens, setup, and the system foundations your team needs.",
     slug: "ai-training-enablement",
