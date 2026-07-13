@@ -1091,8 +1091,8 @@ h2 {
   display: grid;
   gap: 1.2rem;
   color: #ffffff;
-  font-size: clamp(1rem, 1.18vw, 1.12rem);
-  line-height: 1.68;
+  font-size: clamp(1.15rem, 1.4vw, 1.34rem);
+  line-height: 1.62;
 }
 
 .agent-consumers-copy p {
