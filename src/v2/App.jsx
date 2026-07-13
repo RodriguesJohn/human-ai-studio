@@ -351,7 +351,7 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "AI Agent Readiness\nOne-to-One Audit",
+    title: "AI Agent Readiness\n1:1 Audit",
     description:
       "Unsure if your design system is agent-ready. Get a clear audit with practical recommendations.",
     slug: "ai-native-products",
@@ -361,7 +361,7 @@ const homeOffers = [
   {
     title: "AI-Ready Design System Transformation",
     description:
-      "Turn your design system into infrastructure for humans, AI, and automation, and automate repetitive work to scale operations.",
+      "Turn your design system into agentic design systems infrastructure for humans and AI, with workflows that scale operations.",
     slug: "design-engineering",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
