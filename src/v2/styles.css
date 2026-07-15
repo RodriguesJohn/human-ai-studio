@@ -1101,6 +1101,32 @@ h2 {
   margin: 0;
 }
 
+.context-demo {
+  padding: 0 var(--page-padding) clamp(7rem, 10vw, 10rem);
+  background: #08090a;
+  color: #ffffff;
+}
+
+.context-demo-inner {
+  width: min(100%, 92rem);
+  margin: 0 auto;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: clamp(0.85rem, 1.5vw, 1.25rem);
+  background: #101112;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 1.5rem 4rem rgba(0, 0, 0, 0.34);
+}
+
+.context-demo video {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
 .current-home .section-heading,
 .current-home .approach-inner,
 .current-home .bio-inner,
@@ -2585,6 +2611,7 @@ h3 {
   position: relative;
   isolation: isolate;
   display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(17rem, 22rem);
   overflow: hidden;
   width: 100%;
   align-items: end;
@@ -2680,7 +2707,7 @@ h3 {
   margin: 0;
   max-width: 19ch;
   color: #ffffff;
-  font-size: clamp(2.15rem, 3.65vw, 3.9rem);
+  font-size: clamp(2rem, 3.2vw, 3.4rem);
   font-weight: 560;
   line-height: 0.98;
   letter-spacing: -0.02em;
@@ -2726,6 +2753,76 @@ h3 {
   font-weight: 620;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+
+.cohort-testimonial {
+  position: relative;
+  z-index: 1;
+  align-self: stretch;
+  min-height: 17rem;
+  padding: clamp(1.35rem, 2.4vw, 2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 1rem;
+  background: rgba(10, 12, 17, 0.46);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 1.25rem 2.8rem rgba(0, 0, 0, 0.18);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.cohort-testimonial-mark {
+  color: rgba(255, 255, 255, 0.24);
+  font-family: Georgia, serif;
+  font-size: 3.2rem;
+  line-height: 0.7;
+}
+
+.cohort-testimonial blockquote {
+  margin: 1.1rem 0 1.8rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(1rem, 1.3vw, 1.2rem);
+  font-weight: 480;
+  line-height: 1.5;
+}
+
+.cohort-testimonial footer {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.cohort-testimonial-avatar {
+  width: 2.35rem;
+  height: 2.35rem;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.7rem;
+  font-weight: 650;
+}
+
+.cohort-testimonial footer > span:last-child {
+  display: grid;
+  gap: 0.12rem;
+}
+
+.cohort-testimonial strong {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: 0.78rem;
+  font-weight: 620;
+}
+
+.cohort-testimonial small {
+  color: rgba(255, 255, 255, 0.46);
+  font-size: 0.68rem;
 }
 
 @keyframes cohortGradientDrift {
@@ -4559,6 +4656,10 @@ h3 {
     aspect-ratio: 16 / 9;
   }
 
+  .current-home .dark-offerings .v2-offer-grid .offering-card h3.offering-thumb-title {
+    font-size: clamp(1.05rem, 5.2vw, 1.3rem);
+  }
+
   .dark-offerings .v2-offer-grid .offering-copy {
     grid-column: 1;
     grid-row: 2;
@@ -4602,6 +4703,7 @@ h3 {
   }
 
   .cohort-card {
+    grid-template-columns: 1fr;
     min-height: 20rem;
     padding: 1.35rem;
   }
@@ -4618,6 +4720,11 @@ h3 {
 
   .cohort-card-meta span {
     font-size: 0.7rem;
+  }
+
+  .cohort-testimonial {
+    min-height: 15rem;
+    margin-top: 0.4rem;
   }
 }
 
@@ -4709,14 +4816,16 @@ h3 {
   align-items: center;
   width: 100%;
   max-width: min(92vw, 64rem);
+  transform: translateY(-5vh);
 }
 
 .current-home .hero-cinematic-title {
   margin: 0 0 clamp(1.5rem, 3vw, 2rem);
+  padding-inline: clamp(1.5rem, 4vw, 5rem);
   color: #ffffff;
   font-weight: 520;
-  font-size: 76px;
-  line-height: 1.08;
+  font-size: clamp(54px, 4.25vw, 72px);
+  line-height: 1.02;
   letter-spacing: 0;
   text-wrap: balance;
 }
@@ -4730,6 +4839,10 @@ h3 {
 .current-home .hero-cinematic-line {
   display: block;
   white-space: nowrap;
+}
+
+.current-home .hero-cinematic-line + .hero-cinematic-line {
+  margin-top: 0.14em;
 }
 
 .staggered-fade {
@@ -4838,9 +4951,18 @@ h3 {
   }
 
   .current-home .hero-cinematic-title {
-    font-size: clamp(25px, 7.4vw, 34px);
-    line-height: 1.1;
+    padding-inline: 0;
+    font-size: clamp(21px, 6.6vw, 30px);
+    line-height: 1.02;
     letter-spacing: 0;
+  }
+
+  .current-home .hero-cinematic-line + .hero-cinematic-line {
+    margin-top: 0.1em;
+  }
+
+  .current-home .hero-cinematic-content {
+    transform: translateY(-2.5vh);
   }
 
   .current-home .hero-cinematic-subtitle {

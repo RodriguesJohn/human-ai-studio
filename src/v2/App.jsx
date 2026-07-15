@@ -7,6 +7,7 @@ import studioAbstract from "../assets/studio-abstract.png";
 import cinematicHeroMobileVideo from "../assets/hero-cinematic-mobile.mp4";
 import evaAiVideo from "../assets/EvaAIV2.mov";
 import pureFiVideo from "../assets/PureFi.MOV";
+import productContextVideo from "../assets/ultramock-product-context.mp4";
 import outfixWorkVideo from "../assets/work/OutfixV2.mp4";
 import outfixWorkPoster from "../assets/work/outfixHero.png";
 import ollieWorkVideo from "../assets/work/OllieAIDemo.mp4";
@@ -30,6 +31,7 @@ import openClawLogo from "../assets/logos/OpenClaw.png";
 import githubLogo from "../assets/logos/github.svg";
 import storybookLogo from "../assets/logos/storybook.png";
 import typescriptLogo from "../assets/logos/typescript.webp";
+import ProductPage from "./ProductPage.jsx";
 import tocaCompanyLogo from "../assets/companies/Toca.png";
 import citiCompanyLogo from "../assets/companies/Citi.svg.png";
 import chaseCompanyLogo from "../assets/companies/ChaseLightMOde.png";
@@ -221,7 +223,7 @@ function CinematicHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            Agentic Design Systems
+            Design Systems for
           </motion.span>
           <motion.span
             className="hero-cinematic-line"
@@ -229,7 +231,7 @@ function CinematicHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
-            for Humans and AI
+            Product Teams and AI Agents
           </motion.span>
         </h1>
 
@@ -239,7 +241,7 @@ function CinematicHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          We help B2B product teams transform their design system into infrastructure for humans and AI Agents so every team can ship fast without shipping AI slop.
+          We help product and design teams evolve design systems, establish AI workflows, and build agent-ready systems so you can ship fast without shipping AI slop.
         </motion.p>
 
         <motion.a
@@ -343,25 +345,25 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "AI Agent Readiness\n1:1 Audit",
+    title: "Design Systems\nEstablishment & Support",
     description:
-      "Unsure if your design system is agent-ready. Get a clear audit with practical recommendations.",
+      "Establish a design system from the ground up or strengthen the one you have with component contributions, standards, documentation, and whatever your team needs.",
     slug: "ai-native-products",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "AI-Ready Design System Transformation",
+    title: "AI Workflow\nDesign & Development",
     description:
-      "Turn your design system into agentic design systems infrastructure for humans and AI, with automated workflows that scale operations.",
+      "Partner with product and design teams to identify, prototype, and build AI workflows that fit how your team actually works.",
     slug: "design-engineering",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Design Engineer Embedded\nin Design Systems Team",
+    title: "Fractional\u00a0Design\u00a0Engineer\nEmbedded",
     description:
-      "Get support building components, variables, tokens, setup, and the system foundations your team needs.",
+      "Add hands-on support for prototyping, component development, token setup, migrations, and the product work needed to ship with quality.",
     slug: "ai-training-enablement",
     color1: "#10b981",
     color2: "#a7f3d0"
@@ -1524,21 +1526,34 @@ function StudioHome({ isHistory = false }) {
       {!isHistory && (
         <section className="agent-consumers" aria-labelledby="agent-consumers-title" data-nav-theme="dark">
           <div className="agent-consumers-inner reveal">
-            <p className="eyebrow">Agentic Infrastructure</p>
+            <p className="eyebrow">Design Engineering</p>
             <h2 id="agent-consumers-title">
-              Support your team to ship faster without losing system quality.
+              Support your team across product, systems, and AI.
             </h2>
             <div className="agent-consumers-copy">
               <p>
-                Most design systems were built for one consumer: humans. Designers read the docs. Engineers follow the components. Judgment filled the gaps. That model is no longer enough.
+                We work alongside product and design teams to establish or evolve design systems, contribute components and tokens, support migrations, prototype new experiences, and build AI workflows that fit the way your team actually works.
               </p>
               <p>
-                Today, AI tools are part of the workflow too. They help teams explore UI, prototype features, and move faster, but they also expose where design intent gets lost in translation between product, design, and engineering. When the system is not structured for both people and AI-assisted workflows, the cost shows up as product inconsistencies, off-brand prototypes, longer QA cycles, harder maintenance, and more frustration between teams.
-              </p>
-              <p>
-                We help teams ship at the pace the market demands, without shipping AI slop.
+                Bring us in for a focused initiative or as embedded fractional support—wherever the work needs to move faster without losing quality.
               </p>
             </div>
+          </div>
+        </section>
+      )}
+
+      {!isHistory && (
+        <section className="context-demo" aria-label="Product context platform demonstration" data-nav-theme="dark">
+          <div className="context-demo-inner reveal">
+            <video
+              src={productContextVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-label="Product and AI workflow platform demonstration"
+            />
           </div>
         </section>
       )}
@@ -1633,7 +1648,7 @@ function StudioHome({ isHistory = false }) {
             </h2>
             {!isHistory && (
               <p className="approach-subhead">
-                We extend your existing design system and toolchain, Figma, code, and AI-assisted workflows, so adoption stays practical and change stays manageable.
+                We work with the tools your team already uses across design, product, engineering, and AI, so collaboration stays practical and new workflows are easy to adopt.
               </p>
             )}
           </div>
@@ -1866,15 +1881,27 @@ function StudioHome({ isHistory = false }) {
             >
               <div className="cohort-card-copy">
                 <div className="cohort-card-meta" aria-label="Cohort highlights">
-                  <span>4.6 out of 5 rating</span>
-                  <span>Featured on the design track</span>
+                  <span>4.6/5 rating</span>
                 </div>
-                <h3>Become an AI Native Designer Cohort</h3>
+                <h3>Become an AI Native Designer</h3>
                 <p>
                   Live cohort with a group of designers learning how to use AI across research, design systems, prototyping, and delivery without losing craft.
                 </p>
                 <span className="cohort-card-action">Join the cohort</span>
               </div>
+              <aside className="cohort-testimonial" aria-label="Participant testimonial">
+                <span className="cohort-testimonial-mark" aria-hidden="true">“</span>
+                <blockquote>
+                  You literally explained auto layout so effortlessly. I understand it more now than ever before.
+                </blockquote>
+                <footer>
+                  <span className="cohort-testimonial-avatar">YB</span>
+                  <span>
+                    <strong>Yariela B</strong>
+                    <small>UX Designer</small>
+                  </span>
+                </footer>
+              </aside>
             </a>
           </div>
         </section>
@@ -2155,12 +2182,15 @@ function OfferingPage({ slug }) {
 function App() {
   const route = window.location.pathname.replace(/\/+$/, "") || "/";
   const isHistory = route === "/history";
+  const isProduct = route === "/product";
   const offeringMatch = route.match(/^\/offerings\/([^/]+)$/);
   const offeringSlug = offeringMatch ? offeringMatch[1] : null;
 
   return (
     <>
-      {offeringSlug ? (
+      {isProduct ? (
+        <ProductPage />
+      ) : offeringSlug ? (
         <OfferingPage slug={offeringSlug} />
       ) : (
         <StudioHome isHistory={isHistory} />
