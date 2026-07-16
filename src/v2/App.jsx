@@ -1,6 +1,6 @@
 import React from "react";
 import { Analytics } from "@vercel/analytics/react";
-import { motion, useReducedMotion, useInView } from "framer-motion";
+import { AnimatePresence, motion, useReducedMotion, useInView } from "framer-motion";
 import * as THREE from "three";
 import profilePicture from "../assets/Profile Picture.jpg";
 import studioAbstract from "../assets/studio-abstract.png";
@@ -112,6 +112,14 @@ function StaggeredFade({ text, baseDelay = 0 }) {
       ))}
     </span>
   );
+}
+
+function createWebGLRenderer(options) {
+  try {
+    return new THREE.WebGLRenderer(options);
+  } catch {
+    return null;
+  }
 }
 
 const cinematicHeroVideo =
@@ -612,6 +620,96 @@ const testimonials = [
   }
 ];
 
+const cohortTestimonials = [
+  {
+    quote:
+      "Incredibly useful course which gave me amazing insights on AI. Rather than only learning theory, we rolled up our sleeves and used LLMs and AI tools in real time. John is patient and makes sure everyone understands the tools he introduces.",
+    name: "Dan",
+    role: "UX design leader · ex JP Morgan Chase, Razorfish",
+    cohort: "Cohort 3",
+    rating: 5
+  },
+  {
+    quote:
+      "I’m leaving this course feeling truly confident in my AI fluency, and my AI tool belt feels up-to-date. I joined to upskill and understand how AI will shape my workflow, and the course delivered. I genuinely feel more competitive in the job market.",
+    name: "Dana",
+    role: "Lead Product Designer · ex Rite Aid",
+    cohort: "Cohort 2",
+    rating: 5
+  },
+  {
+    quote:
+      "I gained valuable experience building an AI product using AI tools from strategy and wireframes to a functional prototype. The course covered Relume, Lovable, Figma Make, n8n, and more. John was available, accessible, and extremely knowledgeable. Highly recommend.",
+    name: "Dan",
+    role: "UX Designer · RTI International",
+    cohort: "Cohort 2",
+    rating: 4
+  },
+  {
+    quote:
+      "John equipped me with an understanding of the AI possibility space and helped me turn initial ideas into working POCs for my portfolio, employer, or even something of my own. He’s also building a network we can all draw inspiration from.",
+    name: "Brett",
+    role: "Product Designer · Simpson Strong-Tie",
+    cohort: "Cohort 2",
+    rating: 4
+  }
+];
+
+function CohortTestimonialRotator() {
+  const shouldReduceMotion = useReducedMotion();
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const activeTestimonial = cohortTestimonials[activeIndex];
+
+  React.useEffect(() => {
+    if (shouldReduceMotion) return undefined;
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % cohortTestimonials.length);
+    }, 5200);
+
+    return () => window.clearInterval(interval);
+  }, [shouldReduceMotion]);
+
+  return (
+    <aside className="cohort-testimonial" aria-label="Participant testimonials">
+      <span className="cohort-testimonial-mark" aria-hidden="true">“</span>
+      <div className="cohort-testimonial-viewport">
+        <AnimatePresence mode="wait" initial={false}>
+          <motion.div
+            className="cohort-testimonial-slide"
+            key={activeIndex}
+            initial={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, rotateX: -22, y: 18 }}
+            animate={{ opacity: 1, rotateX: 0, y: 0 }}
+            exit={shouldReduceMotion ? { opacity: 0 } : { opacity: 0, rotateX: 22, y: -18 }}
+            transition={{ duration: shouldReduceMotion ? 0.18 : 0.58, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <div
+              className="cohort-testimonial-rating"
+              aria-label={`${activeTestimonial.rating} out of 5 stars`}
+            >
+              <span aria-hidden="true">{"★".repeat(activeTestimonial.rating)}</span>
+              <span aria-hidden="true">{"☆".repeat(5 - activeTestimonial.rating)}</span>
+            </div>
+            <blockquote>{activeTestimonial.quote}</blockquote>
+            <footer>
+              <span className="cohort-testimonial-avatar">{activeTestimonial.name.slice(0, 2).toUpperCase()}</span>
+              <span>
+                <strong>{activeTestimonial.name}</strong>
+                <small>{activeTestimonial.role} · {activeTestimonial.cohort}</small>
+              </span>
+            </footer>
+          </motion.div>
+        </AnimatePresence>
+      </div>
+      <div className="cohort-testimonial-dots" aria-hidden="true">
+        {cohortTestimonials.map((testimonial, index) => (
+          <span className={index === activeIndex ? "is-active" : ""} key={`${testimonial.name}-${index}`} />
+        ))}
+      </div>
+    </aside>
+  );
+}
+
 function HeroNebulaShader({ className = "" }) {
   const containerRef = React.useRef(null);
   const materialRef = React.useRef(null);
@@ -620,7 +718,11 @@ function HeroNebulaShader({ className = "" }) {
     const container = containerRef.current;
     if (!container) return undefined;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = createWebGLRenderer({ antialias: true, alpha: true });
+    if (!renderer) {
+      container.dataset.webglUnavailable = "true";
+      return undefined;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
@@ -741,7 +843,11 @@ function OfferingShader({ color1 = "#38bdf8", color2 = "#0b1220", seed = 0 }) {
     const container = containerRef.current;
     if (!container) return undefined;
 
-    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+    const renderer = createWebGLRenderer({ antialias: true, alpha: true });
+    if (!renderer) {
+      container.dataset.webglUnavailable = "true";
+      return undefined;
+    }
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setClearColor(0x000000, 0);
     container.appendChild(renderer.domElement);
@@ -1889,19 +1995,7 @@ function StudioHome({ isHistory = false }) {
                 </p>
                 <span className="cohort-card-action">Join the cohort</span>
               </div>
-              <aside className="cohort-testimonial" aria-label="Participant testimonial">
-                <span className="cohort-testimonial-mark" aria-hidden="true">“</span>
-                <blockquote>
-                  You literally explained auto layout so effortlessly. I understand it more now than ever before.
-                </blockquote>
-                <footer>
-                  <span className="cohort-testimonial-avatar">YB</span>
-                  <span>
-                    <strong>Yariela B</strong>
-                    <small>UX Designer</small>
-                  </span>
-                </footer>
-              </aside>
+              <CohortTestimonialRotator />
             </a>
           </div>
         </section>

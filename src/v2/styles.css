@@ -2611,7 +2611,7 @@ h3 {
   position: relative;
   isolation: isolate;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(17rem, 22rem);
+  grid-template-columns: minmax(0, 1fr) minmax(22rem, 28rem);
   overflow: hidden;
   width: 100%;
   align-items: end;
@@ -2677,7 +2677,13 @@ h3 {
   display: grid;
   max-width: 50rem;
   gap: 1.1rem;
-  align-content: end;
+  align-content: center;
+}
+
+@media (min-width: 641px) {
+  .cohort-card-copy {
+    transform: translateY(clamp(-2.5rem, -2.4vw, -1.5rem));
+  }
 }
 
 .cohort-card:hover {
@@ -2711,6 +2717,13 @@ h3 {
   font-weight: 560;
   line-height: 0.98;
   letter-spacing: -0.02em;
+}
+
+@media (min-width: 1100px) {
+  .cohort-card h3 {
+    max-width: none;
+    white-space: nowrap;
+  }
 }
 
 .cohort-card-copy > p:not(.eyebrow) {
@@ -2758,8 +2771,11 @@ h3 {
 .cohort-testimonial {
   position: relative;
   z-index: 1;
-  align-self: stretch;
-  min-height: 17rem;
+  width: 100%;
+  height: 24rem;
+  min-height: 24rem;
+  align-self: center;
+  overflow: hidden;
   padding: clamp(1.35rem, 2.4vw, 2rem);
   display: flex;
   flex-direction: column;
@@ -2772,6 +2788,32 @@ h3 {
     0 1.25rem 2.8rem rgba(0, 0, 0, 0.18);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
+}
+
+.cohort-testimonial-viewport {
+  display: flex;
+  flex: 1;
+  perspective: 900px;
+}
+
+.cohort-testimonial-slide {
+  display: flex;
+  width: 100%;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  justify-content: space-between;
+  transform-origin: center center;
+  transform-style: preserve-3d;
+}
+
+.cohort-testimonial-rating {
+  display: flex;
+  margin-top: 1rem;
+  color: #f5aa3c;
+  font-size: 0.92rem;
+  letter-spacing: 0.08em;
+  line-height: 1;
 }
 
 .cohort-testimonial-mark {
@@ -2823,6 +2865,26 @@ h3 {
 .cohort-testimonial small {
   color: rgba(255, 255, 255, 0.46);
   font-size: 0.68rem;
+  line-height: 1.35;
+}
+
+.cohort-testimonial-dots {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 1.1rem;
+}
+
+.cohort-testimonial-dots span {
+  width: 0.38rem;
+  height: 0.38rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.22);
+  transition: width 220ms ease, background 220ms ease;
+}
+
+.cohort-testimonial-dots span.is-active {
+  width: 1.25rem;
+  background: rgba(255, 255, 255, 0.72);
 }
 
 @keyframes cohortGradientDrift {
@@ -4723,8 +4785,18 @@ h3 {
   }
 
   .cohort-testimonial {
-    min-height: 15rem;
+    height: 34rem;
+    min-height: 34rem;
     margin-top: 0.4rem;
+  }
+
+  .cohort-testimonial blockquote {
+    font-size: 0.9rem;
+    line-height: 1.42;
+  }
+
+  .cohort-testimonial-rating {
+    font-size: 0.82rem;
   }
 }
 
@@ -4945,16 +5017,22 @@ h3 {
 /* Cinematic hero — mobile */
 @media (max-width: 640px) {
   .current-home .hero-cinematic {
-    min-height: 92vh;
-    min-height: 92svh;
-    padding: 4.5rem 1.25rem clamp(2.5rem, 8vh, 4rem);
+    min-height: 100vh;
+    min-height: 100svh;
+    padding: calc(5.75rem + env(safe-area-inset-top)) 1.25rem clamp(2.5rem, 8vh, 4rem);
   }
 
   .current-home .hero-cinematic-title {
+    width: 100%;
+    max-width: 100%;
     padding-inline: 0;
-    font-size: clamp(21px, 6.6vw, 30px);
+    font-size: clamp(20px, 5.4vw, 23px);
     line-height: 1.02;
     letter-spacing: 0;
+  }
+
+  .current-home .hero-cinematic-line {
+    white-space: normal;
   }
 
   .current-home .hero-cinematic-line + .hero-cinematic-line {
@@ -4962,13 +5040,19 @@ h3 {
   }
 
   .current-home .hero-cinematic-content {
-    transform: translateY(-2.5vh);
+    min-width: 0;
+    max-width: calc(100vw - 2.5rem);
+    transform: translateY(clamp(1.5rem, 4vh, 2.75rem));
   }
 
   .current-home .hero-cinematic-subtitle {
-    max-width: 92%;
+    max-width: 100%;
     font-size: 17px;
     line-height: 1.55;
+  }
+
+  .current-home .nav-text-link {
+    display: none;
   }
 
   .hero-cinematic-cta {
