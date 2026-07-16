@@ -4888,7 +4888,7 @@ h3 {
   align-items: center;
   width: 100%;
   max-width: min(92vw, 64rem);
-  transform: translateY(-5vh);
+  transform: translateY(1.5vh);
 }
 
 .current-home .hero-cinematic-title {
