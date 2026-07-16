@@ -2713,7 +2713,7 @@ h3 {
   margin: 0;
   max-width: 19ch;
   color: #ffffff;
-  font-size: clamp(2rem, 3.2vw, 3.4rem);
+  font-size: clamp(2rem, 2.65vw, 3rem);
   font-weight: 560;
   line-height: 0.98;
   letter-spacing: -0.02em;
@@ -2723,6 +2723,12 @@ h3 {
   .cohort-card h3 {
     max-width: none;
     white-space: nowrap;
+  }
+}
+
+@media (min-width: 1100px) and (max-width: 1500px) {
+  .cohort-card h3 {
+    font-size: clamp(2rem, 2.45vw, 2.65rem);
   }
 }
 
