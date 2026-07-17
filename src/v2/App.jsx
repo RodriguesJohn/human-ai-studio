@@ -231,7 +231,7 @@ function CinematicHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
           >
-            Design Systems for
+            Design Engineering Studio for
           </motion.span>
           <motion.span
             className="hero-cinematic-line"
@@ -239,7 +239,7 @@ function CinematicHero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
           >
-            Product Teams and AI Agents
+            Growth-Stage AI Startups
           </motion.span>
         </h1>
 
@@ -249,7 +249,7 @@ function CinematicHero() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
-          We help product and design teams evolve design systems, establish AI workflows, and build agent-ready systems so you can ship fast without shipping AI slop.
+          We help Series A–C teams ship AI products people trust through thoughtful experience design and scalable design systems.
         </motion.p>
 
         <motion.a
@@ -353,25 +353,25 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "Design Systems\nEstablishment & Support",
+    title: "AI Product\nExperience Design",
     description:
-      "Establish a design system from the ground up or strengthen the one you have with component contributions, standards, documentation, and whatever your team needs.",
+      "Turn complex AI capabilities into clear, thoughtful product experiences that customers understand, trust, and want to use.",
     slug: "ai-native-products",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "AI Workflow\nDesign & Development",
+    title: "Scalable\nDesign Systems",
     description:
-      "Partner with product and design teams to identify, prototype, and build AI workflows that fit how your team actually works.",
+      "Build the components, patterns, tokens, and documentation your team needs to ship a consistent product faster as you scale.",
     slug: "design-engineering",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Fractional\u00a0Design\u00a0Engineer\nEmbedded",
+    title: "Embedded\nDesign Engineering",
     description:
-      "Add hands-on support for prototyping, component development, token setup, migrations, and the product work needed to ship with quality.",
+      "Add senior, hands-on support to prototype ideas, build production-ready interfaces, and help your team ship with confidence.",
     slug: "ai-training-enablement",
     color1: "#10b981",
     color2: "#a7f3d0"
@@ -455,18 +455,11 @@ const offeringPages = {
 
 const workItems = [
   {
-    label: "Mobile App / AI-Ready Design System",
-    title: "PureFi",
-    video: pureFiVideo,
+    label: "Design System · Product Platform",
+    title: "Agentic Design System",
+    video: productContextVideo,
     image: studioAbstract,
-    position: "72% 46%"
-  },
-  {
-    label: "AI Operating System",
-    title: "Orbi Agent",
-    video: evaAiVideo,
-    image: studioAbstract,
-    position: "44% 50%"
+    position: "center"
   },
   {
     label: "AI Styling · 0 → 1 Product",
@@ -476,6 +469,13 @@ const workItems = [
     position: "center"
   },
   {
+    label: "AI Operating System",
+    title: "Orbi Agent",
+    video: evaAiVideo,
+    image: studioAbstract,
+    position: "44% 50%"
+  },
+  {
     label: "Figma Plugin · Claude Code",
     title: "Ollie AI",
     video: ollieWorkVideo,
@@ -483,11 +483,11 @@ const workItems = [
     position: "center"
   },
   {
-    label: "iOS · 4.6★ · 50K Users",
-    title: "No Scroll",
-    image: noScrollWorkImage,
-    position: "center",
-    fit: "contain"
+    label: "Mobile App · AI-Ready Design System",
+    title: "PureFi",
+    video: pureFiVideo,
+    image: studioAbstract,
+    position: "72% 46%"
   },
   {
     label: "$25M Raised · Early-Stage",
@@ -502,10 +502,17 @@ const workItems = [
     video: balanceTransferWorkVideo,
     image: studioAbstract,
     position: "center"
+  },
+  {
+    label: "iOS · 4.6★ · 50K Users",
+    title: "No Scroll",
+    image: noScrollWorkImage,
+    position: "center",
+    fit: "contain"
   }
 ];
 
-const showSelectedProjects = false;
+const showSelectedProjects = true;
 
 const v2Principles = [
   "Scope the business problem and customer workflow",
@@ -1629,26 +1636,7 @@ function StudioHome({ isHistory = false }) {
         </div>
       </section>
 
-      {!isHistory && (
-        <section className="agent-consumers" aria-labelledby="agent-consumers-title" data-nav-theme="dark">
-          <div className="agent-consumers-inner reveal">
-            <p className="eyebrow">Design Engineering</p>
-            <h2 id="agent-consumers-title">
-              Support your team across product, systems, and AI.
-            </h2>
-            <div className="agent-consumers-copy">
-              <p>
-                We work alongside product and design teams to establish or evolve design systems, contribute components and tokens, support migrations, prototype new experiences, and build AI workflows that fit the way your team actually works.
-              </p>
-              <p>
-                Bring us in for a focused initiative or as embedded fractional support—wherever the work needs to move faster without losing quality.
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
-
-      {!isHistory && (
+      {!isHistory && !showSelectedProjects && (
         <section className="context-demo" aria-label="Product context platform demonstration" data-nav-theme="dark">
           <div className="context-demo-inner reveal">
             <video
@@ -1743,6 +1731,27 @@ function StudioHome({ isHistory = false }) {
         </section>
       )}
 
+      {!isHistory && (
+        <section className="agent-consumers" aria-labelledby="agent-consumers-title" data-nav-theme="dark">
+          <div className="agent-consumers-inner reveal">
+            <p className="eyebrow">Design Engineering</p>
+            <h2 id="agent-consumers-title">
+              Build AI products
+              <br />
+              people trust.
+            </h2>
+            <div className="agent-consumers-copy">
+              <p>
+                We help Series A–C AI startups turn complex capabilities into product experiences people understand and trust.
+              </p>
+              <p>
+                Bring us in for product design, scalable design systems, or embedded design engineering.
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
+
       <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
         <div className="approach-inner reveal">
           <div>
@@ -1754,7 +1763,7 @@ function StudioHome({ isHistory = false }) {
             </h2>
             {!isHistory && (
               <p className="approach-subhead">
-                We work with the tools your team already uses across design, product, engineering, and AI, so collaboration stays practical and new workflows are easy to adopt.
+                We plug into the tools your team already uses across design, product, engineering, and AI—keeping collaboration practical, handoffs clear, and new workflows easy to adopt.
               </p>
             )}
           </div>
@@ -1840,12 +1849,12 @@ function StudioHome({ isHistory = false }) {
             <p>
               {isHistory
                 ? "Work directly with John Rodrigues across strategy, product design, design engineering, AI agent development, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."
-                : "I'm a design engineer focused on AI systems, agentic design systems, and AI workflows. My background spans design and engineering, plus an AI program at Stanford, with work shipped everywhere from early-stage startups to enterprises."}
+                : "I'm a product designer and design engineer specializing in AI-native products. I've shipped zero-to-one work for Outfix AI, No Scroll, TOCA, and PAM, and built AI tools and banking experiences at JPMorgan and Citi."}
             </p>
             <p>
               {isHistory
                 ? "John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, agentic systems, internal tools, and AI-native products that teams can understand, trust, and operate."
-                : "I've been writing about AI since 2021 on my Substack, now read by more than 4,000 subscribers. Across all of it, I stay focused on driving real user impact and business outcomes."}
+                : "I bring 10 years of industry experience, a master's in Interaction Design, and a bachelor's in Engineering. I also write The AI Design Playbook, read by thousands of designers and product leaders."}
             </p>
             <div className="bio-actions">
               <a
