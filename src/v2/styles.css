@@ -5032,8 +5032,9 @@ h3 {
     width: 100%;
     max-width: 100%;
     padding-inline: 0;
-    font-size: clamp(20px, 5.4vw, 23px);
-    line-height: 1.02;
+    margin-bottom: 1.5rem;
+    font-size: clamp(30px, 8.4vw, 38px);
+    line-height: 1.05;
     letter-spacing: 0;
   }
 
@@ -5048,13 +5049,14 @@ h3 {
   .current-home .hero-cinematic-content {
     min-width: 0;
     max-width: calc(100vw - 2.5rem);
-    transform: translateY(clamp(1.5rem, 4vh, 2.75rem));
+    transform: translateY(clamp(-3.5rem, -5vh, -2rem));
   }
 
   .current-home .hero-cinematic-subtitle {
-    max-width: 100%;
-    font-size: 17px;
-    line-height: 1.55;
+    max-width: 34rem;
+    margin-bottom: 2rem;
+    font-size: 18px;
+    line-height: 1.5;
   }
 
   .current-home .nav-text-link {
@@ -5062,8 +5064,8 @@ h3 {
   }
 
   .hero-cinematic-cta {
-    padding: 0.9rem 1.9rem;
-    font-size: 0.72rem;
+    padding: 1rem 2rem;
+    font-size: 0.76rem;
     letter-spacing: 0.16em;
   }
 }
