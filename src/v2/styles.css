@@ -3018,7 +3018,7 @@ h3 {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: clamp(22rem, 34vw, 38rem);
+  width: clamp(20rem, 46vw, 52rem);
   flex: 0 0 auto;
   cursor: default;
   user-select: none;
@@ -3028,7 +3028,7 @@ h3 {
   position: relative;
   aspect-ratio: 16 / 9.6;
   overflow: hidden;
-  border-radius: 1.5rem;
+  border-radius: 0.75rem;
   background: var(--section-charcoal);
   box-shadow: 0 1.2rem 2.8rem rgba(0, 0, 0, 0.32);
 }
@@ -4868,6 +4868,7 @@ h3 {
   inset: 0;
   z-index: 1;
   background:
+    linear-gradient(rgba(0, 0, 0, 0.26), rgba(0, 0, 0, 0.26)),
     radial-gradient(120% 90% at 50% 55%, transparent 30%, rgba(1, 1, 1, 0.55) 100%),
     linear-gradient(180deg, rgba(1, 1, 1, 0.5) 0%, rgba(1, 1, 1, 0.12) 34%, rgba(1, 1, 1, 0.62) 100%);
   pointer-events: none;
@@ -4894,7 +4895,7 @@ h3 {
   align-items: center;
   width: 100%;
   max-width: min(92vw, 64rem);
-  transform: translateY(1.5vh);
+  transform: translateY(7vh);
 }
 
 .current-home .hero-cinematic-title {
@@ -4934,7 +4935,7 @@ h3 {
 
 .current-home .hero-cinematic-subtitle {
   margin: 0 0 clamp(2rem, 4vw, 2.75rem);
-  max-width: min(84%, 58rem);
+  max-width: min(72%, 44rem);
   color: rgba(255, 255, 255, 0.75);
   font-weight: 300;
   font-size: 23px;
@@ -5022,24 +5023,54 @@ h3 {
 
 /* Cinematic hero — mobile */
 @media (max-width: 640px) {
+  .work-card {
+    width: min(88vw, 26rem);
+  }
+
+  .current-home .nav {
+    padding: calc(0.95rem + env(safe-area-inset-top)) 1rem 0.85rem;
+  }
+
+  .current-home .brand {
+    gap: 0.55rem;
+    font-size: 0.82rem;
+  }
+
+  .current-home .brand-mark {
+    width: 1rem;
+    height: 0.75rem;
+  }
+
+  .current-home .brand-mark::before,
+  .current-home .brand-mark::after {
+    width: 0.66rem;
+    height: 0.66rem;
+  }
+
+  .current-home .nav .nav-link {
+    min-height: 2.5rem;
+    padding: 0.65rem 0.9rem;
+    font-size: 0.78rem;
+  }
+
   .current-home .hero-cinematic {
     min-height: 100vh;
     min-height: 100svh;
-    padding: calc(5.75rem + env(safe-area-inset-top)) 1.25rem clamp(2.5rem, 8vh, 4rem);
+    padding: calc(5.25rem + env(safe-area-inset-top)) 1.15rem clamp(2.5rem, 8vh, 4rem);
   }
 
   .current-home .hero-cinematic-title {
     width: 100%;
     max-width: 100%;
     padding-inline: 0;
-    margin-bottom: 1.5rem;
-    font-size: clamp(30px, 8.4vw, 38px);
-    line-height: 1.05;
-    letter-spacing: 0;
+    margin-bottom: 1.35rem;
+    font-size: clamp(18px, 6vw, 27px);
+    line-height: 1.03;
+    letter-spacing: -0.02em;
   }
 
   .current-home .hero-cinematic-line {
-    white-space: normal;
+    white-space: nowrap;
   }
 
   .current-home .hero-cinematic-line + .hero-cinematic-line {
@@ -5048,15 +5079,15 @@ h3 {
 
   .current-home .hero-cinematic-content {
     min-width: 0;
-    max-width: calc(100vw - 2.5rem);
-    transform: translateY(clamp(-3.5rem, -5vh, -2rem));
+    max-width: calc(100vw - 2.3rem);
+    transform: translateY(clamp(1rem, 3vh, 1.75rem));
   }
 
   .current-home .hero-cinematic-subtitle {
-    max-width: 34rem;
-    margin-bottom: 2rem;
-    font-size: 18px;
-    line-height: 1.5;
+    max-width: 31rem;
+    margin-bottom: 1.75rem;
+    font-size: clamp(15.5px, 4.4vw, 17px);
+    line-height: 1.45;
   }
 
   .current-home .nav-text-link {
@@ -5064,8 +5095,8 @@ h3 {
   }
 
   .hero-cinematic-cta {
-    padding: 1rem 2rem;
-    font-size: 0.76rem;
+    padding: 0.9rem 1.7rem;
+    font-size: 0.72rem;
     letter-spacing: 0.16em;
   }
 }
