@@ -14,7 +14,6 @@ import florenceWorkImage from "../assets/work/Florence.png";
 import ollieWorkVideo from "../assets/work/OllieAIDemo.mp4";
 import ollieWorkPoster from "../assets/work/OllieAIV1.png";
 import balanceTransferWorkVideo from "../assets/work/BT.mp4";
-import tocaWorkVideo from "../assets/work/MyTocaApp.mp4";
 import noScrollWorkImage from "../assets/work/NoScrollApp.png";
 import codexLogo from "../assets/logos/claude-code.png";
 import vercelLogo from "../assets/logos/codex.png";
@@ -516,13 +515,6 @@ const workItems = [
     title: "Ollie AI",
     video: ollieWorkVideo,
     image: ollieWorkPoster,
-    position: "center"
-  },
-  {
-    label: "$25M Raised · Early-Stage",
-    title: "TOCA Football",
-    video: tocaWorkVideo,
-    image: studioAbstract,
     position: "center"
   },
   {
