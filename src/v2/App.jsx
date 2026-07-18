@@ -383,7 +383,7 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "AI Product\nExperience Design",
+    title: "AI Native\nProduct Design",
     description:
       "Turn complex AI capabilities into clear, thoughtful product experiences that customers understand, trust, and want to use.",
     slug: "ai-native-products",
@@ -1745,7 +1745,6 @@ function StudioHome({ isHistory = false }) {
       {!isHistory && (
         <section className="agent-consumers" aria-labelledby="agent-consumers-title" data-nav-theme="dark">
           <div className="agent-consumers-inner reveal">
-            <p className="eyebrow">Design Engineering</p>
             <h2 id="agent-consumers-title">
               Build AI products
               <br />
@@ -1753,10 +1752,7 @@ function StudioHome({ isHistory = false }) {
             </h2>
             <div className="agent-consumers-copy">
               <p>
-                We help Series A to C AI startups turn complex capabilities into product experiences people understand and trust.
-              </p>
-              <p>
-                Bring us in for product design, scalable design systems, or embedded design engineering.
+                We help Series A to C AI startups turn complex capabilities into product experiences people understand and trust. Bring us in for product design, scalable design systems, or embedded design engineering.
               </p>
             </div>
           </div>
