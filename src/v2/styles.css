@@ -1043,7 +1043,7 @@ h2 {
   min-height: 0;
   align-content: start;
   padding-top: clamp(4.75rem, 7vw, 6.5rem);
-  padding-bottom: clamp(7rem, 10vw, 10rem);
+  padding-bottom: clamp(3.5rem, 5vw, 5rem);
   background: #08090a;
   border-top: 1px solid var(--section-line-soft);
   color: #ffffff;
@@ -1075,10 +1075,11 @@ h2 {
 }
 
 .agent-consumers h2 {
-  max-width: 17ch;
+  max-width: 19ch;
   margin: 0;
   color: #ffffff;
-  font-size: clamp(1.55rem, 2.55vw, 2.7rem);
+  font-size: clamp(1.55rem, 2.65vw, 2.55rem);
+  font-weight: 520;
   line-height: 1.08;
   letter-spacing: 0;
 }
@@ -1092,9 +1093,10 @@ h2 {
 .agent-consumers-copy {
   display: grid;
   gap: 1.2rem;
-  color: #ffffff;
-  font-size: var(--body-copy-size);
-  line-height: var(--body-copy-line-height);
+  color: rgba(255, 255, 255, 0.66);
+  font-size: clamp(0.94rem, 1.02vw, 1.02rem);
+  font-weight: 390;
+  line-height: 1.56;
 }
 
 .agent-consumers-copy p {
@@ -2924,7 +2926,7 @@ h3 {
   display: grid;
   min-height: 82vh;
   --work-rail: var(--home-rail);
-  padding: clamp(5.25rem, 8vw, 8rem) 0 clamp(6rem, 9vw, 9rem);
+  padding: clamp(3.5rem, 5vw, 5rem) 0 clamp(6rem, 9vw, 9rem);
   align-content: center;
   border-top: 1px solid var(--section-line-soft);
   background: #000000;
@@ -2944,8 +2946,8 @@ h3 {
 
 .work-showcase .section-heading h2 {
   max-width: 18ch;
-  font-size: clamp(2rem, 3.2vw, 3.2rem);
-  font-weight: 540;
+  font-size: clamp(1.75rem, 2.4vw, 2.5rem);
+  font-weight: 430;
   line-height: 1.02;
 }
 
@@ -2993,9 +2995,9 @@ h3 {
 
 .work-marquee {
   position: relative;
-  width: var(--work-rail);
+  width: 100%;
   max-width: none;
-  margin: 0 auto;
+  margin: 0;
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
@@ -3018,7 +3020,7 @@ h3 {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: clamp(20rem, 46vw, 52rem);
+  width: clamp(26rem, 52vw, 64rem);
   flex: 0 0 auto;
   cursor: default;
   user-select: none;
@@ -3070,7 +3072,6 @@ h3 {
   font-weight: 500;
   letter-spacing: 0.07em;
   line-height: 1.2;
-  text-transform: uppercase;
 }
 
 @keyframes workMarquee {
@@ -4742,6 +4743,31 @@ h3 {
   }
 
   .agent-consumers,
+  .current-home .approach {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .agent-consumers-inner,
+  .current-home .approach-inner {
+    display: flex;
+    min-width: 0;
+    width: 100%;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
+    margin-right: 0;
+    margin-left: 0;
+  }
+
+  .agent-consumers-inner > *,
+  .current-home .approach-inner > *,
+  .current-home .approach-inner > div {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .agent-consumers,
   .approach,
   .v2-bio,
   .v2-final-cta,
@@ -4760,12 +4786,18 @@ h3 {
   }
 
   .agent-consumers h2,
+  .current-home .approach h2,
   .cohort-section .section-heading h2 {
+    max-width: 100%;
     font-size: clamp(1.7rem, 9vw, 2.25rem);
+    font-weight: 520;
     line-height: 1.05;
   }
 
-  .agent-consumers-copy {
+  .agent-consumers-copy,
+  .approach-subhead {
+    width: 100%;
+    max-width: 100%;
     font-size: var(--body-copy-size);
     line-height: var(--body-copy-line-height);
   }

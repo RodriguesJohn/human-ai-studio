@@ -10,6 +10,7 @@ import pureFiVideo from "../assets/PureFi.MOV";
 import productContextVideo from "../assets/ultramock-product-context.mp4";
 import outfixWorkVideo from "../assets/work/OutfixV2.mp4";
 import outfixWorkPoster from "../assets/work/outfixHero.png";
+import florenceWorkImage from "../assets/work/Florence.png";
 import ollieWorkVideo from "../assets/work/OllieAIDemo.mp4";
 import ollieWorkPoster from "../assets/work/OllieAIV1.png";
 import balanceTransferWorkVideo from "../assets/work/BT.mp4";
@@ -125,8 +126,40 @@ function createWebGLRenderer(options) {
 const cinematicHeroVideo =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4";
 
+const entranceContainer = {
+  hidden: {
+    opacity: 0,
+    filter: "blur(8px)"
+  },
+  visible: {
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: {
+      staggerChildren: 0.08,
+      opacity: { duration: 0.7 },
+      filter: { duration: 0.7 }
+    }
+  }
+};
+
+const entranceChild = {
+  hidden: {
+    opacity: 0,
+    y: 16
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      opacity: { duration: 0.7 },
+      y: { type: "spring", duration: 1.4, bounce: 0 }
+    }
+  }
+};
+
 function CinematicHero() {
   const videoRef = React.useRef(null);
+  const shouldReduceMotion = useReducedMotion();
   const setHeroVideoRef = React.useCallback((node) => {
     videoRef.current = node;
     if (!node) return;
@@ -223,21 +256,22 @@ function CinematicHero() {
       </video>
       <div className="hero-cinematic-scrim" aria-hidden="true" />
 
-      <div className="hero-cinematic-content">
+      <motion.div
+        className="hero-cinematic-content"
+        variants={entranceContainer}
+        initial={shouldReduceMotion ? false : "hidden"}
+        animate="visible"
+      >
         <h1 className="hero-cinematic-title">
           <motion.span
             className="hero-cinematic-line"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+            variants={entranceChild}
           >
             Design Engineering Studio for
           </motion.span>
           <motion.span
             className="hero-cinematic-line"
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.22, ease: [0.22, 1, 0.36, 1] }}
+            variants={entranceChild}
           >
             Growth-Stage AI Startups
           </motion.span>
@@ -245,11 +279,9 @@ function CinematicHero() {
 
         <motion.p
           className="hero-cinematic-subtitle"
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+          variants={entranceChild}
         >
-          We help Series A–C teams ship AI products people trust through thoughtful experience design and scalable design systems.
+          We help Series A to C teams ship AI products people trust through thoughtful experience design and scalable design systems.
         </motion.p>
 
         <motion.a
@@ -257,13 +289,11 @@ function CinematicHero() {
           href={bookingUrl}
           onClick={openBookingModal}
           {...bookingAttributes}
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          variants={entranceChild}
         >
           Book discovery call
         </motion.a>
-      </div>
+      </motion.div>
     </section>
   );
 }
@@ -388,11 +418,11 @@ const offeringPages = {
     sections: [
       {
         heading: "What this looks like",
-        body: "End-to-end AI systems: discovery, interface design, agent architecture, and production engineering — designed around the decisions and workflows that move your business."
+        body: "End-to-end AI systems: discovery, interface design, agent architecture, and production engineering, designed around the decisions and workflows that move your business."
       },
       {
         heading: "Where it fits",
-        body: "Founders and teams who want AI woven into how the business actually operates — driving outcomes and revenue, not just shipping a demo."
+        body: "Founders and teams who want AI woven into how the business actually operates, driving outcomes and revenue, not just shipping a demo."
       }
     ]
   },
@@ -417,7 +447,7 @@ const offeringPages = {
     eyebrow: "Offering 03",
     title: "AI Consulting",
     intro:
-      "Identify where AI can improve workflows, solve business problems, and create practical leverage — with a clear, honest plan.",
+      "Identify where AI can improve workflows, solve business problems, and create practical leverage with a clear, honest plan.",
     status: "placeholder",
     sections: [
       {
@@ -434,7 +464,7 @@ const offeringPages = {
     eyebrow: "Offering 03",
     title: "AI Enablmenrt",
     intro:
-      "Custom workshops and cohorts for your teams to become truly AI-native — hands-on and tailored to how your team actually works.",
+      "Custom workshops and cohorts for your teams to become truly AI-native, with hands-on guidance tailored to how your team actually works.",
     status: "live",
     sections: [
       {
@@ -455,10 +485,16 @@ const offeringPages = {
 
 const workItems = [
   {
-    label: "Design System · Product Platform",
-    title: "Agentic Design System",
-    video: productContextVideo,
+    label: "Native Mobile Redesign and AI Ready Design System",
+    title: "PureFi",
+    video: pureFiVideo,
     image: studioAbstract,
+    position: "72% 46%"
+  },
+  {
+    label: "Agent Ready Design System",
+    title: "Florence",
+    image: florenceWorkImage,
     position: "center"
   },
   {
@@ -481,13 +517,6 @@ const workItems = [
     video: ollieWorkVideo,
     image: ollieWorkPoster,
     position: "center"
-  },
-  {
-    label: "Mobile App · AI-Ready Design System",
-    title: "PureFi",
-    video: pureFiVideo,
-    image: studioAbstract,
-    position: "72% 46%"
   },
   {
     label: "$25M Raised · Early-Stage",
@@ -1209,36 +1238,13 @@ function useMarqueeStart() {
     const track = marquee?.querySelector(".work-track");
     if (!marquee || !track) return undefined;
 
-    const prefersReduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)"
-    ).matches;
-
-    const speed = 0.5; // px per frame for the auto-scroll
-    let rafId = null;
-    let inView = false;
-    let paused = false;
-    let idleTimer = null;
-
     const loopWidth = () => track.scrollWidth / 2; // items are duplicated
-
-    const step = () => {
-      if (inView && !paused && !prefersReduced) {
-        marquee.scrollLeft += speed;
-        const half = loopWidth();
-        if (marquee.scrollLeft >= half) {
-          marquee.scrollLeft -= half;
-        }
-      }
-      rafId = requestAnimationFrame(step);
-    };
-
-    const holdThenResume = (ms) => {
-      paused = true;
-      if (idleTimer) window.clearTimeout(idleTimer);
-      idleTimer = window.setTimeout(() => {
-        paused = false;
-      }, ms);
-    };
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const glideSpeed = 46; // pixels per second
+    let animationFrame = null;
+    let lastTimestamp = null;
+    let paused = false;
+    let resumeTimer = null;
 
     const cardStep = () => {
       const card = track.querySelector(".work-card");
@@ -1253,67 +1259,65 @@ function useMarqueeStart() {
       if (dir < 0 && marquee.scrollLeft < cardStep()) {
         marquee.scrollLeft += half;
       }
+      if (dir > 0 && marquee.scrollLeft >= half - cardStep() / 2) {
+        marquee.scrollLeft -= half;
+      }
       marquee.scrollBy({ left: dir * cardStep(), behavior: "smooth" });
-      holdThenResume(2600);
     };
-
-    const onEnter = () => {
-      paused = true;
-    };
-    const onLeave = () => {
-      paused = false;
-    };
-    const onUserScroll = () => holdThenResume(2600);
 
     const prevBtn = document.querySelector(".work-nav-prev");
     const nextBtn = document.querySelector(".work-nav-next");
-    const onPrev = () => nudge(-1);
-    const onNext = () => nudge(1);
+    const pause = () => {
+      paused = true;
+      if (resumeTimer) window.clearTimeout(resumeTimer);
+    };
+    const resume = () => {
+      paused = false;
+      lastTimestamp = null;
+    };
+    const pauseThenResume = () => {
+      pause();
+      resumeTimer = window.setTimeout(resume, 1600);
+    };
+    const glide = (timestamp) => {
+      if (!paused && !prefersReducedMotion) {
+        if (lastTimestamp != null) {
+          marquee.scrollLeft += ((timestamp - lastTimestamp) / 1000) * glideSpeed;
+          const half = loopWidth();
+          if (marquee.scrollLeft >= half) marquee.scrollLeft -= half;
+        }
+        lastTimestamp = timestamp;
+      } else {
+        lastTimestamp = null;
+      }
+      animationFrame = window.requestAnimationFrame(glide);
+    };
 
-    marquee.addEventListener("mouseenter", onEnter);
-    marquee.addEventListener("mouseleave", onLeave);
-    marquee.addEventListener("wheel", onUserScroll, { passive: true });
-    marquee.addEventListener("touchstart", onUserScroll, { passive: true });
+    const onPrev = () => {
+      nudge(-1);
+      pauseThenResume();
+    };
+    const onNext = () => {
+      nudge(1);
+      pauseThenResume();
+    };
+
+    marquee.scrollLeft = 0;
+    marquee.addEventListener("mouseenter", pause);
+    marquee.addEventListener("mouseleave", resume);
+    marquee.addEventListener("wheel", pauseThenResume, { passive: true });
+    marquee.addEventListener("touchstart", pauseThenResume, { passive: true });
     prevBtn?.addEventListener("click", onPrev);
     nextBtn?.addEventListener("click", onNext);
-
-    let started = false;
-    const observer =
-      "IntersectionObserver" in window
-        ? new IntersectionObserver(
-            (entries) => {
-              entries.forEach((entry) => {
-                if (entry.isIntersecting) {
-                  if (!started) {
-                    marquee.scrollLeft = 0; // begin on the first project (PureFi)
-                    started = true;
-                  }
-                  inView = true;
-                } else {
-                  inView = false;
-                }
-              });
-            },
-            { threshold: 0.2 }
-          )
-        : null;
-
-    if (observer) {
-      observer.observe(marquee);
-    } else {
-      inView = true;
-    }
-
-    rafId = requestAnimationFrame(step);
+    animationFrame = window.requestAnimationFrame(glide);
 
     return () => {
-      if (rafId != null) cancelAnimationFrame(rafId);
-      if (idleTimer) window.clearTimeout(idleTimer);
-      if (observer) observer.disconnect();
-      marquee.removeEventListener("mouseenter", onEnter);
-      marquee.removeEventListener("mouseleave", onLeave);
-      marquee.removeEventListener("wheel", onUserScroll);
-      marquee.removeEventListener("touchstart", onUserScroll);
+      if (animationFrame) window.cancelAnimationFrame(animationFrame);
+      if (resumeTimer) window.clearTimeout(resumeTimer);
+      marquee.removeEventListener("mouseenter", pause);
+      marquee.removeEventListener("mouseleave", resume);
+      marquee.removeEventListener("wheel", pauseThenResume);
+      marquee.removeEventListener("touchstart", pauseThenResume);
       prevBtn?.removeEventListener("click", onPrev);
       nextBtn?.removeEventListener("click", onNext);
     };
@@ -1501,12 +1505,19 @@ function OriginalHome() {
 function StudioHome({ isHistory = false }) {
   useRevealAnimation();
   useMarqueeStart();
+  const shouldReduceMotion = useReducedMotion();
   const cards = isHistory ? v2HowItWorks : homeOffers;
   const principlesList = isHistory ? v2Principles : homePrinciples;
 
   return (
     <main className={`page-shell ${isHistory ? "history-home" : "current-home"}`}>
-      <nav className="nav nav-dark" aria-label="Primary">
+      <motion.nav
+        className="nav nav-dark"
+        aria-label="Primary"
+        variants={entranceChild}
+        initial={shouldReduceMotion ? false : "hidden"}
+        animate="visible"
+      >
         <a className="brand" href="/#top" aria-label="Human AI Studio home">
           <span className="brand-mark" aria-hidden="true" />
           Human AI Studio
@@ -1524,7 +1535,7 @@ function StudioHome({ isHistory = false }) {
             Book a call
           </BookingTextLink>
         </div>
-      </nav>
+      </motion.nav>
 
       {isHistory ? (
         <section className="hero v2-hero-section" id="top" data-nav-theme="dark">
@@ -1742,7 +1753,7 @@ function StudioHome({ isHistory = false }) {
             </h2>
             <div className="agent-consumers-copy">
               <p>
-                We help Series A–C AI startups turn complex capabilities into product experiences people understand and trust.
+                We help Series A to C AI startups turn complex capabilities into product experiences people understand and trust.
               </p>
               <p>
                 Bring us in for product design, scalable design systems, or embedded design engineering.
@@ -1763,7 +1774,7 @@ function StudioHome({ isHistory = false }) {
             </h2>
             {!isHistory && (
               <p className="approach-subhead">
-                We plug into the tools your team already uses across design, product, engineering, and AI—keeping collaboration practical, handoffs clear, and new workflows easy to adopt.
+                We plug into the tools your team already uses across design, product, engineering, and AI, keeping collaboration practical, handoffs clear, and new workflows easy to adopt.
               </p>
             )}
           </div>
