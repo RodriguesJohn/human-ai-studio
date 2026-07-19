@@ -430,7 +430,7 @@ const homeOffers = [
   {
     title: "AI Native\nProduct Design",
     description:
-      "End-to-end product design for AI, including experience design and the design systems that keep the product clear and consistent as you scale.",
+      "End-to-end AI-native product design and design systems that scale with your product.",
     slug: "ai-native-products",
     color1: "#3b82f6",
     color2: "#bae6fd"
@@ -567,7 +567,7 @@ const workItems = [
     position: "center"
   },
   {
-    label: "AI Operating System",
+    label: "Voice Todo",
     title: "Orbi Agent",
     video: evaAiVideo,
     image: studioAbstract,
