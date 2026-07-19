@@ -156,6 +156,49 @@ const entranceChild = {
   }
 };
 
+const entranceViewport = {
+  once: true,
+  amount: 0.22,
+  margin: "0px 0px -10% 0px"
+};
+
+const scrollEntranceContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.08
+    }
+  }
+};
+
+function Entrance({ as = "div", className, children, ...props }) {
+  const shouldReduceMotion = useReducedMotion();
+  const MotionTag = motion[as] || motion.div;
+
+  return (
+    <MotionTag
+      className={className}
+      variants={scrollEntranceContainer}
+      initial={shouldReduceMotion ? false : "hidden"}
+      whileInView="visible"
+      viewport={entranceViewport}
+      {...props}
+    >
+      {children}
+    </MotionTag>
+  );
+}
+
+function EntranceItem({ as = "div", className, children, ...props }) {
+  const MotionTag = motion[as] || motion.div;
+
+  return (
+    <MotionTag className={className} variants={entranceChild} {...props}>
+      {children}
+    </MotionTag>
+  );
+}
+
 function CinematicHero() {
   const videoRef = React.useRef(null);
   const shouldReduceMotion = useReducedMotion();
@@ -280,7 +323,7 @@ function CinematicHero() {
           className="hero-cinematic-subtitle"
           variants={entranceChild}
         >
-          We help Series A to C startups ship AI-native products with thoughtful experience design, design systems, and growth strategies.
+          We help growth stage startups ship AI-native products with thoughtful experience design, design systems, and growth strategies.
         </motion.p>
 
         <motion.a
@@ -403,7 +446,7 @@ const homeOffers = [
   {
     title: "Growth\nStrategies",
     description:
-      "Product positioning, brand building, and conversion and retention work that helps the product hit business goals.",
+      "Product positioning, AI agent integration, conversion and retention, and revenue growth work that helps the product hit business goals.",
     slug: "growth-strategies",
     color1: "#10b981",
     color2: "#a7f3d0"
@@ -487,16 +530,16 @@ const offeringPages = {
     eyebrow: "Offering 03",
     title: "Growth Strategies",
     intro:
-      "Product positioning, brand building, and conversion and retention work tied to business goals.",
+      "Product positioning, AI agent integration, conversion and retention, and revenue growth tied to business goals.",
     status: "placeholder",
     sections: [
       {
         heading: "What this looks like",
-        body: "Clarify how the product shows up in market, tighten conversion and retention in the product, and connect the work to the business goals that matter."
+        body: "Clarify product positioning, integrate AI agents where they drive outcomes, and tighten conversion and retention so revenue grows with the product."
       },
       {
         heading: "Where it fits",
-        body: "Founders who need positioning, brand, and product conversion and retention to move in the same direction."
+        body: "Founders who need positioning, AI integration, and conversion and retention to pull toward the same business goals."
       }
     ]
   }
@@ -1232,13 +1275,7 @@ function useRevealAnimation() {
 
     revealElements.forEach((element) => observer.observe(element));
 
-    const fallbackTimer = window.setTimeout(() => {
-      revealElements.forEach(revealElement);
-      observer.disconnect();
-    }, 2200);
-
     return () => {
-      window.clearTimeout(fallbackTimer);
       observer.disconnect();
     };
   }, []);
@@ -1579,32 +1616,70 @@ function StudioHome({ isHistory = false }) {
         aria-labelledby="v2-how-title"
         data-nav-theme={isHistory ? "light" : "dark"}
       >
-        <div className={`section-heading reveal ${isHistory ? "" : "no-section-note"}`}>
-          <div>
-            <p className="eyebrow">{isHistory ? "How It Works" : "Offerings"}</p>
-            <h2 className="v2-how-heading" id="v2-how-title">
-              {isHistory ? "From Workflow Pain to AI System" : "Three Ways to Work Together"}
-            </h2>
-          </div>
-          {isHistory && (
+        {isHistory ? (
+          <div className="section-heading reveal">
+            <div>
+              <p className="eyebrow">How It Works</p>
+              <h2 className="v2-how-heading" id="v2-how-title">
+                From Workflow Pain to AI System
+              </h2>
+            </div>
             <p className="section-note">
               A forward-deployed process for understanding the business problem, designing the workflow, and shipping AI agents into real operations.
             </p>
-          )}
-        </div>
+          </div>
+        ) : (
+          <Entrance className="section-heading no-section-note">
+            <EntranceItem>
+              <p className="eyebrow">Offerings</p>
+              <h2 className="v2-how-heading" id="v2-how-title">
+                Three Ways to Work Together
+              </h2>
+            </EntranceItem>
+          </Entrance>
+        )}
 
-        <div className={`offering-grid v2-flow-grid ${isHistory ? "" : "v2-offer-grid"}`}>
-          {cards.map((step, index) => (
-            <article
-              className="offering-card v2-offering-card reveal"
-              key={step.title}
-              style={{
-                "--reveal-delay": `${120 + index * 140}ms`,
-                "--card-color-1": step.color1,
-                "--card-color-2": step.color2
-              }}
-            >
-              {!isHistory && (
+        {isHistory ? (
+          <div className="offering-grid v2-flow-grid">
+            {cards.map((step, index) => (
+              <article
+                className="offering-card v2-offering-card reveal"
+                key={step.title}
+                style={{
+                  "--reveal-delay": `${120 + index * 140}ms`,
+                  "--card-color-1": step.color1,
+                  "--card-color-2": step.color2
+                }}
+              >
+                <div className="offering-topline">
+                  <span className="number">{String(index + 1).padStart(2, "0")}</span>
+                </div>
+                <div className="offering-copy">
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                  {step.logos && (
+                    <div className="logo-proof" aria-label={`${step.title} credibility`}>
+                      {step.logos.map((logo) => (
+                        <span key={logo}>{logo}</span>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
+        ) : (
+          <Entrance className="offering-grid v2-flow-grid v2-offer-grid" viewport={{ once: true, amount: 0.12, margin: "0px 0px -8% 0px" }}>
+            {cards.map((step, index) => (
+              <EntranceItem
+                as="article"
+                className="offering-card v2-offering-card"
+                key={step.title}
+                style={{
+                  "--card-color-1": step.color1,
+                  "--card-color-2": step.color2
+                }}
+              >
                 <div className="offering-thumb">
                   <OfferingShader
                     color1={step.color1}
@@ -1616,74 +1691,42 @@ function StudioHome({ isHistory = false }) {
                   </span>
                   <h3 className="offering-thumb-title">{step.title}</h3>
                 </div>
-              )}
-              {isHistory && (
-                <div className="offering-topline">
-                  <span className="number">{String(index + 1).padStart(2, "0")}</span>
+                <div className="offering-copy">
+                  <p>{step.description}</p>
                 </div>
-              )}
-              <div className="offering-copy">
-                {isHistory && <h3>{step.title}</h3>}
-                <p>{step.description}</p>
-                {step.logos && (
-                  <div className="logo-proof" aria-label={`${step.title} credibility`}>
-                    {step.logos.map((logo) => (
-                      <span key={logo}>{logo}</span>
-                    ))}
-                  </div>
-                )}
-                {false && !isHistory && (step.slug || step.link) && (
-                  <a
-                    className="offering-learn-more"
-                    href={step.link || `/offerings/${step.slug}`}
-                    aria-label={`Learn more about ${step.title}`}
-                    {...(step.external
-                      ? { target: "_blank", rel: "noreferrer" }
-                      : {})}
-                  >
-                    <span>Learn more</span>
-                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                      <path
-                        d="M3 7h8M7.5 3.5 11 7l-3.5 3.5"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </a>
-                )}
-              </div>
-            </article>
-          ))}
-        </div>
+              </EntranceItem>
+            ))}
+          </Entrance>
+        )}
       </section>
 
       {!isHistory && !showSelectedProjects && (
         <section className="context-demo" aria-label="Product context platform demonstration" data-nav-theme="dark">
-          <div className="context-demo-inner reveal">
-            <video
-              src={productContextVideo}
-              autoPlay
-              muted
-              loop
-              playsInline
-              preload="metadata"
-              aria-label="Product and AI workflow platform demonstration"
-            />
-          </div>
+          <Entrance className="context-demo-inner">
+            <EntranceItem>
+              <video
+                src={productContextVideo}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Product and AI workflow platform demonstration"
+              />
+            </EntranceItem>
+          </Entrance>
         </section>
       )}
 
       {!isHistory && showSelectedProjects && (
         <section className="work-showcase" aria-labelledby="work-title" data-nav-theme="dark">
           <div className="work-showcase-inner">
-            <div className="section-heading no-section-note work-heading reveal">
-              <div>
+            <Entrance className="section-heading no-section-note work-heading">
+              <EntranceItem>
                 <p className="eyebrow">Work</p>
                 <h2 id="work-title">Selected Projects</h2>
-              </div>
-              <div className="work-nav">
+              </EntranceItem>
+              <EntranceItem className="work-nav">
                 <button
                   type="button"
                   className="work-nav-btn work-nav-prev"
@@ -1716,8 +1759,8 @@ function StudioHome({ isHistory = false }) {
                     />
                   </svg>
                 </button>
-              </div>
-            </div>
+              </EntranceItem>
+            </Entrance>
           </div>
           <div className="work-marquee" aria-label="Selected work">
             <div className="work-track">
@@ -1754,47 +1797,32 @@ function StudioHome({ isHistory = false }) {
         </section>
       )}
 
-      {!isHistory && (
-        <section className="agent-consumers" aria-labelledby="agent-consumers-title" data-nav-theme="dark">
-          <div className="agent-consumers-inner reveal">
-            <h2 id="agent-consumers-title">
-              Build AI products
-              <br />
-              people trust.
-            </h2>
-            <div className="agent-consumers-copy">
-              <p>
-                We help Series A to C AI startups turn complex capabilities into clear, useful product experiences. Bring us in for product design, design engineering, or growth strategies.
-              </p>
-            </div>
-          </div>
-        </section>
-      )}
-
       <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
-        <div className="approach-inner reveal">
-          <div>
-            {isHistory && <p className="eyebrow">Approach</p>}
-            <h2 id="v2-approach-title">
-              {isHistory
-                ? "Forward-deployed design and engineering for your business."
-                : "Built for your existing stack."}
-            </h2>
-            {!isHistory && (
-              <p className="approach-subhead">
-                We plug into the tools your team already uses across design, product, engineering, and AI, keeping collaboration practical, handoffs clear, and new workflows easy to adopt.
-              </p>
-            )}
-          </div>
-          <div className="approach-details">
-            {isHistory && (
+        {isHistory ? (
+          <div className="approach-inner reveal">
+            <div>
+              <p className="eyebrow">Approach</p>
+              <h2 id="v2-approach-title">
+                Forward-deployed design and engineering for your business.
+              </h2>
+            </div>
+            <div className="approach-details">
               <div className="principle-list">
                 {principlesList.map((principle) => (
                   <p key={principle}>{principle}</p>
                 ))}
               </div>
-            )}
-            {!isHistory && (
+            </div>
+          </div>
+        ) : (
+          <Entrance className="approach-inner">
+            <EntranceItem>
+              <h2 id="v2-approach-title">Built for your existing stack.</h2>
+              <p className="approach-subhead">
+                We plug into the tools your team already uses across design, product, engineering, and AI, keeping collaboration practical, handoffs clear, and new workflows easy to adopt.
+              </p>
+            </EntranceItem>
+            <EntranceItem className="approach-details">
               <div className="stack-card" aria-label="Tool stack">
                 <div className="stack-card-rows">
                   <div className="stack-card-row">
@@ -1842,9 +1870,9 @@ function StudioHome({ isHistory = false }) {
                   </div>
                 </div>
               </div>
-            )}
-          </div>
-        </div>
+            </EntranceItem>
+          </Entrance>
+        )}
       </section>
 
       <section
@@ -1853,75 +1881,107 @@ function StudioHome({ isHistory = false }) {
         data-nav-theme={isHistory ? "light" : "dark"}
       >
         <div className={`bio-inner ${isHistory ? "" : "bio-card-shell"}`}>
-          <div className="bio-copy reveal">
-            {isHistory && <p className="eyebrow">Work Directly With John</p>}
-            <h2 id="v2-bio-title">
-              {isHistory ? (
-                <>
-                  <span>Work 1:1 With John Rodrigues</span>
-                  <span>From Strategy to Launch.</span>
-                </>
-              ) : (
-                <span>Work 1:1 With John Rodrigues.</span>
-              )}
-            </h2>
-            <p>
-              {isHistory
-                ? "Work directly with John Rodrigues across strategy, product design, design engineering, AI agent development, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process."
-                : "I'm a product designer and design engineer specializing in AI-native products. I've shipped zero-to-one work for Outfix AI, No Scroll, TOCA, and PAM, and built AI tools and banking experiences at JPMorgan and Citi."}
-            </p>
-            <p>
-              {isHistory
-                ? "John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, agentic systems, internal tools, and AI-native products that teams can understand, trust, and operate."
-                : "I bring 10 years of industry experience, a master's in Interaction Design, and a bachelor's in Engineering. I also write The AI Design Playbook, read by 4.2K designers and product leaders."}
-            </p>
-            <div className="bio-actions">
-              <a
-                className="secondary-button"
-                href="https://www.linkedin.com/in/john-rodrigues4?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
-                target="_blank"
-                rel="noreferrer"
-              >
-              LinkedIn
-              </a>
-              <a
-                className="secondary-button"
-                href="https://johnrodrigues.substack.com/"
-                target="_blank"
-                rel="noreferrer"
-              >
-              Substack
-              </a>
+          {isHistory ? (
+            <div className="bio-copy reveal">
+              <p className="eyebrow">Work Directly With John</p>
+              <h2 id="v2-bio-title">
+                <span>Work 1:1 With John Rodrigues</span>
+                <span>From Strategy to Launch.</span>
+              </h2>
+              <p>
+                Work directly with John Rodrigues across strategy, product design, design engineering, AI agent development, and implementation. You get the personal touch of a close 1:1 collaboration instead of a handoff-heavy agency process.
+              </p>
+              <p>
+                John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, agentic systems, internal tools, and AI-native products that teams can understand, trust, and operate.
+              </p>
+              <div className="bio-actions">
+                <a
+                  className="secondary-button"
+                  href="https://www.linkedin.com/in/john-rodrigues4?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  className="secondary-button"
+                  href="https://johnrodrigues.substack.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Substack
+                </a>
+              </div>
             </div>
-            {!isHistory && (
-              <div className="bio-logos" aria-label="Experience with teams at leading companies">
+          ) : (
+            <Entrance className="bio-copy">
+              <EntranceItem as="h2" id="v2-bio-title">
+                <span>Work 1:1 With John Rodrigues.</span>
+              </EntranceItem>
+              <EntranceItem as="p">
+                I'm a product designer and design engineer specializing in AI-native products. I've shipped zero-to-one work for Outfix AI, No Scroll, TOCA, and PAM, and built AI tools and banking experiences at JPMorgan and Citi.
+              </EntranceItem>
+              <EntranceItem as="p">
+                I bring 10 years of industry experience, a master's in Interaction Design, and a bachelor's in Engineering. I also write The AI Design Playbook, read by 4.2K designers and product leaders.
+              </EntranceItem>
+              <EntranceItem className="bio-actions">
+                <a
+                  className="secondary-button"
+                  href="https://www.linkedin.com/in/john-rodrigues4?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  LinkedIn
+                </a>
+                <a
+                  className="secondary-button"
+                  href="https://johnrodrigues.substack.com/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Substack
+                </a>
+              </EntranceItem>
+              <EntranceItem className="bio-logos" aria-label="Experience with teams at leading companies">
                 <span className="bio-logos-label">Experience with teams at</span>
                 <div className="bio-logos-row">
                   {bioCompanies.map((company) => (
                     <img key={company.name} src={company.icon} alt={company.name} />
                   ))}
                 </div>
+              </EntranceItem>
+            </Entrance>
+          )}
+          {isHistory ? (
+            <figure className="profile-card reveal" style={{ "--reveal-delay": "130ms" }}>
+              <div className="profile-image">
+                <img src={profilePicture} alt="John Rodrigues" />
               </div>
-            )}
-          </div>
-          <figure className="profile-card reveal" style={{ "--reveal-delay": "130ms" }}>
-            <div className="profile-image">
-              <img src={profilePicture} alt="John Rodrigues" />
-            </div>
-            <figcaption>
-              <span>John Rodrigues</span>
-              <span>Design Engineer | Founder of Human AI Studio</span>
-            </figcaption>
-          </figure>
+              <figcaption>
+                <span>John Rodrigues</span>
+                <span>Design Engineer | Founder of Human AI Studio</span>
+              </figcaption>
+            </figure>
+          ) : (
+            <Entrance as="figure" className="profile-card">
+              <EntranceItem className="profile-image">
+                <img src={profilePicture} alt="John Rodrigues" />
+              </EntranceItem>
+              <EntranceItem as="figcaption">
+                <span>John Rodrigues</span>
+                <span>Design Engineer | Founder of Human AI Studio</span>
+              </EntranceItem>
+            </Entrance>
+          )}
         </div>
       </section>
 
       {!isHistory && (
         <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
           <DotMatrixBackground />
-          <div className="final-cta-inner reveal final-cta-inner--newsletter">
+          <Entrance className="final-cta-inner final-cta-inner--newsletter">
             <div className="newsletter-cta">
-              <div className="newsletter-copy">
+              <EntranceItem className="newsletter-copy">
                 <p className="eyebrow">Newsletter</p>
                 <h2 id="v2-cta-title">Join 4,000+ readers of the newsletter.</h2>
                 <p className="final-cta-sub">
@@ -1932,8 +1992,8 @@ function StudioHome({ isHistory = false }) {
                     <span className="button-label">Join the newsletter</span>
                   </a>
                 </div>
-              </div>
-              <div className="newsletter-visual" aria-hidden="true">
+              </EntranceItem>
+              <EntranceItem className="newsletter-visual" aria-hidden="true">
                 <div className="issue-card-deck">
                   <div className="issue-card issue-card--back" />
                   <div className="issue-card issue-card--front">
@@ -1958,21 +2018,21 @@ function StudioHome({ isHistory = false }) {
                     </div>
                   </div>
                 </div>
-              </div>
+              </EntranceItem>
             </div>
-          </div>
+          </Entrance>
         </section>
       )}
 
       {!isHistory && (
         <section className="testimonials" aria-labelledby="testimonials-title" data-nav-theme="dark">
           <div className="testimonials-inner">
-            <div className="section-heading no-section-note reveal">
-              <div>
+            <Entrance className="section-heading no-section-note">
+              <EntranceItem>
                 <p className="eyebrow">Testimonials</p>
                 <h2 id="testimonials-title">What People Say</h2>
-              </div>
-            </div>
+              </EntranceItem>
+            </Entrance>
             <div className="testimonial-marquee" aria-label="Testimonials">
               <div className="testimonial-track">
                 {[...testimonials, ...testimonials].map((testimonial, index) => (
@@ -1999,13 +2059,14 @@ function StudioHome({ isHistory = false }) {
 
       {!isHistory && (
         <section className="cohort-section" aria-labelledby="cohort-title" data-nav-theme="dark">
-          <div className="cohort-section-inner reveal">
-            <div className="section-heading no-section-note">
+          <Entrance className="cohort-section-inner">
+            <EntranceItem className="section-heading no-section-note">
               <div>
                 <h2 id="cohort-title">AI enablement for your teams.</h2>
               </div>
-            </div>
-            <a
+            </EntranceItem>
+            <EntranceItem
+              as="a"
               className="cohort-card"
               href={cohortUrl}
               target="_blank"
@@ -2024,8 +2085,8 @@ function StudioHome({ isHistory = false }) {
                 <span className="cohort-card-action">Join the cohort</span>
               </div>
               <CohortTestimonialRotator />
-            </a>
-          </div>
+            </EntranceItem>
+          </Entrance>
         </section>
       )}
 
@@ -2091,17 +2152,27 @@ function StudioHome({ isHistory = false }) {
       <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
         {!isHistory && <HeroNebulaShader className="footer-side-shader" />}
         <div className="site-footer-inner">
-          <div className="footer-brand">
-            <a className="brand" href="/#top" aria-label="Human AI Studio home">
-              <span className="brand-mark" aria-hidden="true" />
-              Human AI Studio
-            </a>
-            <p>
-              {isHistory
-                ? "Human AI Studio by Human Inspire Studio. AI agent operating system design and development studio run by John Rodrigues."
-                : "Human AI Studio is a company of Human Inspire Studio LLC."}
-            </p>
-          </div>
+          {isHistory ? (
+            <div className="footer-brand">
+              <a className="brand" href="/#top" aria-label="Human AI Studio home">
+                <span className="brand-mark" aria-hidden="true" />
+                Human AI Studio
+              </a>
+              <p>
+                Human AI Studio by Human Inspire Studio. AI agent operating system design and development studio run by John Rodrigues.
+              </p>
+            </div>
+          ) : (
+            <Entrance className="footer-brand">
+              <EntranceItem as="a" className="brand" href="/#top" aria-label="Human AI Studio home">
+                <span className="brand-mark" aria-hidden="true" />
+                Human AI Studio
+              </EntranceItem>
+              <EntranceItem as="p">
+                Human AI Studio is a company of Human Inspire Studio LLC.
+              </EntranceItem>
+            </Entrance>
+          )}
 
           {isHistory && (
             <>
@@ -2121,18 +2192,43 @@ function StudioHome({ isHistory = false }) {
             </>
           )}
 
-          <div className="footer-column">
-            <p>Contact</p>
-            {!isHistory && (
-              <a href={newsletterUrl} target="_blank" rel="noreferrer">Newsletter</a>
-            )}
-            <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
-            <BookingTextLink>Book a call</BookingTextLink>
+          {isHistory ? (
+            <div className="footer-column">
+              <p>Contact</p>
+              <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+              <BookingTextLink>Book a call</BookingTextLink>
+            </div>
+          ) : (
+            <Entrance className="footer-column">
+              <EntranceItem as="p">Contact</EntranceItem>
+              <EntranceItem as="a" href={newsletterUrl} target="_blank" rel="noreferrer">
+                Newsletter
+              </EntranceItem>
+              <EntranceItem as="a" href="mailto:john@humanaistudio.ai">
+                john@humanaistudio.ai
+              </EntranceItem>
+              <EntranceItem as="span">
+                <BookingTextLink>Book a call</BookingTextLink>
+              </EntranceItem>
+            </Entrance>
+          )}
+        </div>
+        {isHistory ? (
+          <div className="footer-wordmark reveal" aria-hidden="true">
+            Human AI Studio
           </div>
-        </div>
-        <div className="footer-wordmark reveal" aria-hidden="true">
-          Human AI Studio
-        </div>
+        ) : (
+          <EntranceItem
+            as="div"
+            className="footer-wordmark"
+            aria-hidden="true"
+            initial={shouldReduceMotion ? false : "hidden"}
+            whileInView="visible"
+            viewport={entranceViewport}
+          >
+            Human AI Studio
+          </EntranceItem>
+        )}
       </footer>
     </main>
   );
