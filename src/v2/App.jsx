@@ -387,24 +387,24 @@ const homeOffers = [
   {
     title: "AI Native\nProduct Design",
     description:
-      "Turn complex AI capabilities into clear, thoughtful product experiences that customers understand, trust, and want to use.",
+      "End-to-end product design for AI, including experience design and the design systems that keep the product clear and consistent as you scale.",
     slug: "ai-native-products",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Scalable\nDesign Systems",
+    title: "Design\nEngineering",
     description:
-      "Build the components, patterns, tokens, and documentation your team needs to ship a consistent product faster as you scale.",
+      "Hands-on prototyping, production-ready interface components, animations, and senior design engineering support to help your team ship.",
     slug: "design-engineering",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Embedded\nDesign Engineering",
+    title: "Growth\nStrategies",
     description:
-      "Add senior, hands-on support to prototype ideas, build production-ready interfaces, and help your team ship with confidence.",
-    slug: "ai-training-enablement",
+      "Product positioning, brand building, and conversion and retention work that helps the product hit business goals.",
+    slug: "growth-strategies",
     color1: "#10b981",
     color2: "#a7f3d0"
   }
@@ -430,18 +430,18 @@ const offeringPages = {
   },
   "design-engineering": {
     eyebrow: "Offering 02",
-    title: "Agentic Design Systems",
+    title: "Design Engineering",
     intro:
-      "AI-ready design systems that help product and design teams ship faster, then evolve into agentic systems that automate repetitive work and improve operational efficiency.",
+      "Hands-on prototyping, production-ready interface components, animations, and senior design engineering support embedded with your team.",
     status: "placeholder",
     sections: [
       {
         heading: "What this looks like",
-        body: "Design systems, components, motion, and product interfaces built as production code, with reusable patterns that are ready for AI-assisted product development."
+        body: "Prototype ideas in days, build production-ready UI and motion, and ship components your engineering team can take forward without another redesign cycle."
       },
       {
         heading: "Where it fits",
-        body: "Product and design teams that need to move faster now, while building toward agentic workflows that reduce repetitive work and improve day-to-day execution."
+        body: "Product teams that need more than mockups — someone who can design, build, and help the interface land in production."
       }
     ]
   },
@@ -480,6 +480,23 @@ const offeringPages = {
       {
         heading: "Outcomes",
         body: "Faster execution, higher-quality output, and a team that treats AI as a core tool rather than a novelty."
+      }
+    ]
+  },
+  "growth-strategies": {
+    eyebrow: "Offering 03",
+    title: "Growth Strategies",
+    intro:
+      "Product positioning, brand building, and conversion and retention work tied to business goals.",
+    status: "placeholder",
+    sections: [
+      {
+        heading: "What this looks like",
+        body: "Clarify how the product shows up in market, tighten conversion and retention in the product, and connect the work to the business goals that matter."
+      },
+      {
+        heading: "Where it fits",
+        body: "Founders who need positioning, brand, and product conversion and retention to move in the same direction."
       }
     ]
   }
@@ -1747,7 +1764,7 @@ function StudioHome({ isHistory = false }) {
             </h2>
             <div className="agent-consumers-copy">
               <p>
-                We help Series A to C AI startups turn complex capabilities into clear, useful product experiences. Bring us in for product design, scalable design systems, or embedded design engineering.
+                We help Series A to C AI startups turn complex capabilities into clear, useful product experiences. Bring us in for product design, design engineering, or growth strategies.
               </p>
             </div>
           </div>
