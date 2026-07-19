@@ -266,13 +266,13 @@ function CinematicHero() {
             className="hero-cinematic-line"
             variants={entranceChild}
           >
-            Design Engineering Studio for
+            Product Studio for
           </motion.span>
           <motion.span
             className="hero-cinematic-line"
             variants={entranceChild}
           >
-            Growth-Stage AI Startups
+            AI-Native Startups
           </motion.span>
         </h1>
 
@@ -280,7 +280,7 @@ function CinematicHero() {
           className="hero-cinematic-subtitle"
           variants={entranceChild}
         >
-          We help Series A to C teams ship AI products people trust through thoughtful experience design and scalable design systems.
+          We help Series A to C startups ship AI-native products with thoughtful experience design, design systems, and growth strategies.
         </motion.p>
 
         <motion.a
@@ -290,7 +290,10 @@ function CinematicHero() {
           {...bookingAttributes}
           variants={entranceChild}
         >
-          Book discovery call
+          <span className="hero-cinematic-avatar" aria-hidden="true">
+            <img src={profilePicture} alt="" />
+          </span>
+          <span>Book discovery call</span>
         </motion.a>
       </motion.div>
     </section>
@@ -1744,7 +1747,7 @@ function StudioHome({ isHistory = false }) {
             </h2>
             <div className="agent-consumers-copy">
               <p>
-                We help Series A to C AI startups turn complex capabilities into product experiences people understand and trust. Bring us in for product design, scalable design systems, or embedded design engineering.
+                We help Series A to C AI startups turn complex capabilities into clear, useful product experiences. Bring us in for product design, scalable design systems, or embedded design engineering.
               </p>
             </div>
           </div>
