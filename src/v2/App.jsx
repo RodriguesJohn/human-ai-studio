@@ -1761,7 +1761,7 @@ function StudioHome({ isHistory = false }) {
             <h2 id="v2-approach-title">
               {isHistory
                 ? "Forward-deployed design and engineering for your business."
-                : "Built on the stack you already trust."}
+                : "Built for your existing stack."}
             </h2>
             {!isHistory && (
               <p className="approach-subhead">
@@ -1856,7 +1856,7 @@ function StudioHome({ isHistory = false }) {
             <p>
               {isHistory
                 ? "John brings AI credibility through hands-on product work: turning ambiguous business workflows into prototypes, agentic systems, internal tools, and AI-native products that teams can understand, trust, and operate."
-                : "I bring 10 years of industry experience, a master's in Interaction Design, and a bachelor's in Engineering. I also write The AI Design Playbook, read by thousands of designers and product leaders."}
+                : "I bring 10 years of industry experience, a master's in Interaction Design, and a bachelor's in Engineering. I also write The AI Design Playbook, read by 4.2K designers and product leaders."}
             </p>
             <div className="bio-actions">
               <a
@@ -2082,7 +2082,7 @@ function StudioHome({ isHistory = false }) {
             <p>
               {isHistory
                 ? "Human AI Studio by Human Inspire Studio. AI agent operating system design and development studio run by John Rodrigues."
-                : "Human AI Studio is an independent company by Human Inspire Studio."}
+                : "Human AI Studio is a company of Human Inspire Studio LLC."}
             </p>
           </div>
 
