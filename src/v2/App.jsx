@@ -650,6 +650,7 @@ const newsletterCompanies = [
 
 const newsletterUrl = "https://substack.com/@johnrodrigues";
 const cohortUrl = "https://maven.com/humanaistudio";
+const academyUrl = "https://www.skool.com/ai-design-academy-6114/about";
 
 function handleCohortShaderMove(event) {
   const card = event.currentTarget;
@@ -2066,11 +2067,8 @@ function StudioHome({ isHistory = false }) {
               </div>
             </EntranceItem>
             <EntranceItem
-              as="a"
+              as="div"
               className="cohort-card"
-              href={cohortUrl}
-              target="_blank"
-              rel="noreferrer"
               onPointerMove={handleCohortShaderMove}
               onPointerLeave={handleCohortShaderLeave}
             >
@@ -2082,7 +2080,24 @@ function StudioHome({ isHistory = false }) {
                 <p>
                   Live cohort with a group of designers learning how to use AI across research, design systems, prototyping, and delivery without losing craft.
                 </p>
-                <span className="cohort-card-action">Join the cohort</span>
+                <div className="cohort-card-actions">
+                  <a
+                    className="cohort-card-action cohort-card-action--primary"
+                    href={cohortUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Join the live cohort
+                  </a>
+                  <a
+                    className="cohort-card-action"
+                    href={academyUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Join the AI academy
+                  </a>
+                </div>
               </div>
               <CohortTestimonialRotator />
             </EntranceItem>
