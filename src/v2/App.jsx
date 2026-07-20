@@ -649,7 +649,7 @@ const newsletterCompanies = [
 ];
 
 const newsletterUrl = "https://substack.com/@johnrodrigues";
-const cohortUrl = "https://maven.com/humanaistudio";
+const cohortUrl = "https://maven.com/humanaistudio/aimasterycohort";
 const academyUrl = "https://www.skool.com/ai-design-academy-6114/about";
 
 function handleCohortShaderMove(event) {
@@ -2076,7 +2076,7 @@ function StudioHome({ isHistory = false }) {
                 <div className="cohort-card-meta" aria-label="Cohort highlights">
                   <span>4.6/5 rating</span>
                 </div>
-                <h3>Become an AI Native Designer</h3>
+                <h3>Join AI Academy</h3>
                 <p>
                   Live cohort with a group of designers learning how to use AI across research, design systems, prototyping, and delivery without losing craft.
                 </p>
