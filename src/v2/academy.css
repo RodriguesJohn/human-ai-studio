@@ -327,7 +327,7 @@
 }
 
 .academy-logo-row img {
-  max-height: 1.55rem;
+  max-height: 2.25rem;
   width: auto;
   object-fit: contain;
   opacity: 1;
@@ -1355,7 +1355,7 @@
   }
 
   .academy-logo-row img {
-    max-height: 1.15rem;
+    max-height: 1.65rem;
   }
 
   .academy-section {

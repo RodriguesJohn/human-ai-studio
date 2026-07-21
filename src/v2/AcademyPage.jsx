@@ -1,6 +1,7 @@
 import React from "react";
 import OfferingShader from "./OfferingShader.jsx";
 import { Entrance, EntranceItem, entranceChild } from "./entrance.jsx";
+import { NavMenu } from "./NavMenu.jsx";
 import { motion, useReducedMotion } from "framer-motion";
 import "./academy.css";
 
@@ -432,6 +433,9 @@ function AcademyPage() {
           <span className="academy-brand-mark" aria-hidden="true" />
           Human AI Studio
         </a>
+        <div className="academy-nav-actions">
+          <NavMenu />
+        </div>
       </motion.header>
 
       <main>

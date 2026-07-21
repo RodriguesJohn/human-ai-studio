@@ -4,6 +4,7 @@ import { AnimatePresence, motion, useReducedMotion, useInView } from "framer-mot
 import * as THREE from "three";
 import OfferingShader from "./OfferingShader.jsx";
 import { Entrance, EntranceItem, entranceChild, entranceViewport } from "./entrance.jsx";
+import { NavMenu } from "./NavMenu.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
 import studioAbstract from "../assets/studio-abstract.png";
 import cinematicHeroMobileVideo from "../assets/hero-cinematic-mobile.mp4";
@@ -92,123 +93,6 @@ function BookingTextLink({ className, children, onClick, ...rest }) {
     >
       {children}
     </a>
-  );
-}
-
-function NavMenu() {
-  const [open, setOpen] = React.useState(false);
-  const rootRef = React.useRef(null);
-  const triggerRef = React.useRef(null);
-  const [panelStyle, setPanelStyle] = React.useState(null);
-
-  const updatePanelPosition = React.useCallback(() => {
-    const trigger = triggerRef.current;
-    if (!trigger) return;
-
-    const rect = trigger.getBoundingClientRect();
-    setPanelStyle({
-      top: `${Math.round(rect.bottom + 10)}px`,
-      right: `${Math.round(window.innerWidth - rect.right)}px`
-    });
-  }, []);
-
-  React.useEffect(() => {
-    if (!open) return undefined;
-
-    updatePanelPosition();
-
-    const onPointerDown = (event) => {
-      if (!rootRef.current?.contains(event.target)) {
-        setOpen(false);
-      }
-    };
-
-    const onKeyDown = (event) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-
-    window.addEventListener("resize", updatePanelPosition);
-    window.addEventListener("scroll", updatePanelPosition, true);
-    document.addEventListener("pointerdown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      window.removeEventListener("resize", updatePanelPosition);
-      window.removeEventListener("scroll", updatePanelPosition, true);
-      document.removeEventListener("pointerdown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open, updatePanelPosition]);
-
-  const close = () => setOpen(false);
-
-  const toggle = () => {
-    if (open) {
-      setOpen(false);
-      return;
-    }
-
-    updatePanelPosition();
-    setOpen(true);
-  };
-
-  return (
-    <div className={`nav-menu${open ? " is-open" : ""}`} ref={rootRef}>
-      <button
-        ref={triggerRef}
-        type="button"
-        className="nav-link nav-menu-trigger"
-        aria-expanded={open}
-        aria-haspopup="menu"
-        aria-controls="primary-nav-menu"
-        onClick={toggle}
-      >
-        <svg
-          className="nav-menu-icon"
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          fill="none"
-          aria-hidden="true"
-        >
-          <path
-            d="M2.5 3.75h9M2.5 7h9M2.5 10.25h9"
-            stroke="currentColor"
-            strokeWidth="1.5"
-            strokeLinecap="round"
-          />
-        </svg>
-        Menu
-      </button>
-      {open && panelStyle ? (
-        <div
-          className="nav-menu-panel"
-          id="primary-nav-menu"
-          role="menu"
-          style={panelStyle}
-        >
-          <a className="nav-menu-item" href={academyUrl} role="menuitem" onClick={close}>
-            Academy
-          </a>
-          <a
-            className="nav-menu-item"
-            href={newsletterUrl}
-            target="_blank"
-            rel="noreferrer"
-            role="menuitem"
-            onClick={close}
-          >
-            Newsletter
-          </a>
-          <BookingTextLink
-            className="nav-menu-item"
-            role="menuitem"
-            onClick={close}
-          >
-            Book a call
-          </BookingTextLink>
-        </div>
-      ) : null}
-    </div>
   );
 }
 
