@@ -1,4 +1,11 @@
 {
+  "redirects": [
+    {
+      "source": "/academy/",
+      "destination": "/academy",
+      "permanent": true
+    }
+  ],
   "rewrites": [
     {
       "source": "/(.*)",
