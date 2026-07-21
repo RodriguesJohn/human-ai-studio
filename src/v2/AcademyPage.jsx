@@ -370,7 +370,7 @@ function AcademyPage() {
           <div className="academy-section-heading academy-section-heading--center">
             <h2>Two ways to get started.</h2>
             <p className="academy-section-sub academy-section-sub--center">
-              Join live if you want a finish line and a certificate. Go self-paced if you want structured tracks on your schedule.
+              Live for a finish line and certificate. Self-paced for structure on your schedule.
             </p>
           </div>
           <div className="academy-path-grid">
