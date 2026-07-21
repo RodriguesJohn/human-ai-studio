@@ -824,7 +824,7 @@
 }
 
 .academy-marquee-track--testimonials {
-  gap: 1.15rem;
+  gap: 2rem;
   animation: academy-scroll 95s linear infinite;
 }
 
@@ -865,6 +865,21 @@
   justify-content: space-between;
   gap: 0.75rem;
   margin-top: auto;
+}
+
+.academy-testimonial-person {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.academy-testimonial-avatar {
+  width: 2.35rem;
+  height: 2.35rem;
+  flex: 0 0 auto;
+  border-radius: 50%;
+  object-fit: cover;
 }
 
 .academy-testimonial-logo {

@@ -319,58 +319,67 @@ const testimonials = [
     quote:
       "I'm leaving this course feeling truly confident in my AI fluency. I'm now ready to build a new portfolio quickly and effectively.",
     name: "Dana",
-    role: "Lead Product Designer, ex Rite Aid"
+    role: "Lead Product Designer, ex Rite Aid",
+    img: "/academy/Dana.jpeg"
   },
   {
     quote:
       "I've gone from not knowing how to code to building my own AI agent. Every session has been engaging, interactive, and deeply impactful.",
     name: "IniOluwa",
     role: "Senior Product Designer, Intercom",
-    logo: IntercomLogo
+    logo: IntercomLogo,
+    img: "/academy/Indi.jpeg"
   },
   {
     quote:
       "John equipped me with understanding the AI possibility space to take my initial ideas and turn them into working POCs.",
     name: "Brett",
-    role: "Product Designer"
+    role: "Product Designer",
+    img: "/academy/Brett.jpeg"
   },
   {
     quote:
       "John emphasizes practical application over lectures, which made the material immediately useful.",
     name: "Sonali",
     role: "Sr. Product Designer, JPMorgan Chase",
-    logo: ChaseLogo
+    logo: ChaseLogo,
+    img: "/academy/Sonali.jpeg"
   },
   {
     quote:
       "His strategic frameworks and live sessions helped me think like both a strategist and a solutionist.",
     name: "Sneh",
-    role: "UX Designer"
+    role: "UX Designer",
+    img: "/academy/Sneh.webp"
   },
   {
     quote:
       "This cohort gave me the foundation to understand AI at a high level, and how to design human-centered AI experiences.",
     name: "Kenneth Hargrove",
-    role: "Product Designer, CoStar"
+    role: "Product Designer, CoStar",
+    img: "/academy/Kenny.jpeg"
   },
   {
     quote:
       "John's course is practical, with demos and real encouragement to explore AI tools specifically for designers.",
     name: "Linda",
     role: "Principal PD, JPMorgan Chase",
-    logo: ChaseLogo
+    logo: ChaseLogo,
+    img: "/academy/Linda.jpeg"
   },
   {
     quote:
       "Always accessible. He creates additional tutorials on demand and is ready to help with patience and care.",
     name: "Aviad",
-    role: "Product Designer"
+    role: "Product Designer",
+    img: "/academy/Avaid.jpeg"
   },
   {
     quote:
       "Crash course in AI tools: Relume, Lovable, Figma Make, n8n, and more. John was extremely knowledgeable.",
     name: "Dan",
-    role: "UX Designer, RTI International"
+    role: "UX Designer, RTI International",
+    img: "/academy/Dan.jpeg"
   }
 ];
 
@@ -389,10 +398,17 @@ function TestimonialScroller() {
           >
             <blockquote>“{testimonial.quote}”</blockquote>
             <figcaption>
-              <span>
-                <strong>{testimonial.name}</strong>
-                <small>{testimonial.role}</small>
-              </span>
+              <div className="academy-testimonial-person">
+                <img
+                  className="academy-testimonial-avatar"
+                  src={testimonial.img}
+                  alt=""
+                />
+                <span>
+                  <strong>{testimonial.name}</strong>
+                  <small>{testimonial.role}</small>
+                </span>
+              </div>
               {testimonial.logo ? (
                 <img className="academy-testimonial-logo" src={testimonial.logo} alt="" />
               ) : null}
@@ -445,11 +461,11 @@ function AcademyPage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1">
-                <span className="academy-hero-line">Level up your AI workflows and work.</span>
-                <span className="academy-hero-line">Build agentic products.</span>
+                <span className="academy-hero-line">Level up your AI workflows.</span>
+                <span className="academy-hero-line">Ship agentic products.</span>
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
-                Build AI fluency that shows up in your work.
+                AI fluency that shows up in your workflow.
                 <br />
                 Live workshop with certification, or self-paced learning at AI Academy.
               </EntranceItem>
