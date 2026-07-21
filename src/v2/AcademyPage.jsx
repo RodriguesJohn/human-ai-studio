@@ -180,6 +180,23 @@ const pricingBenefits = [
 
 const pathOptions = [
   {
+    title: "Weekly articles\nfrom the newsletter",
+    description:
+      "In-depth issues on AI workflows, case studies, and industry trends for designers and builders shipping with AI.",
+    bullets: [
+      "Weekly in-depth issues",
+      "Case studies and research findings",
+      "Insights and industry trends"
+    ],
+    cta: {
+      label: "Subscribe",
+      href: NEWSLETTER_URL,
+      className: "academy-btn academy-btn--primary"
+    },
+    color1: "#38bdf8",
+    color2: "#e0f2fe"
+  },
+  {
     title: "Live workshop\nwith certification",
     description:
       "A live workshop with vibe coding, agent building, and agentic design systems built to take you from curious to shipping.",
@@ -223,7 +240,7 @@ const cohortModules = [
   },
   {
     title: "Tools that\nship",
-    description: "Claude Code, Cursor, Codex, and the tools teams ship with.",
+    description: "Ship full stack apps.",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
@@ -503,7 +520,7 @@ function AcademyPage() {
 
         <section className="academy-section">
           <Entrance className="academy-section-heading">
-            <EntranceItem as="h2">Two ways to get started.</EntranceItem>
+            <EntranceItem as="h2">Three ways to get started.</EntranceItem>
           </Entrance>
           <Entrance className="academy-path-grid">
             {pathOptions.map((path, index) => (

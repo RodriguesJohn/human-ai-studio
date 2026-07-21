@@ -514,7 +514,7 @@
   z-index: 2;
   margin: 0;
   color: rgba(255, 255, 255, 0.92);
-  font-size: clamp(1.85rem, 2.8vw, 2.35rem);
+  font-size: clamp(1.35rem, 2vw, 1.7rem);
   font-weight: 750;
   line-height: 1.08;
   white-space: pre-line;
@@ -538,6 +538,11 @@
   line-height: 1.55;
 }
 
+.academy-path-body > p {
+  font-size: 1.08rem;
+  line-height: 1.55;
+}
+
 .academy-path-body ul,
 .academy-module-body ul,
 .academy-check-list {
@@ -556,10 +561,20 @@
   line-height: 1.45;
 }
 
+.academy-path-body li,
+.academy-path-card .academy-path-body li {
+  font-size: 1.02rem;
+  line-height: 1.5;
+}
+
 .academy-path-body li + li,
 .academy-path-card li + li,
 .academy-check-list li + li {
   margin-top: 0.55rem;
+}
+
+.academy-path-body li + li {
+  margin-top: 0.65rem;
 }
 
 .academy-path-body li::before,
@@ -573,6 +588,10 @@
   height: 0.35rem;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.55);
+}
+
+.academy-path-body li::before {
+  top: 0.55rem;
 }
 
 .academy-path-body .academy-btn,
@@ -1410,7 +1429,7 @@
   }
 
   .academy-path-thumb-title {
-    font-size: 1.7rem;
+    font-size: 1.35rem;
   }
 
   .academy-path-body {
@@ -1554,7 +1573,8 @@
 
 @media (min-width: 960px) {
   .academy-modules,
-  .academy-packages {
+  .academy-packages,
+  .academy-path-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
