@@ -26,7 +26,6 @@ const DanImage = "/academy/Dan.jpeg";
 
 const ACADEMY_HERO_VIDEO = "/academy/hero.mp4";
 const ACADEMY_HERO_VIDEO_MOBILE = "/academy/hero-mobile.mp4";
-const ACADEMY_HERO_POSTER = "/academy/ai-builder-academy-hero.jpg";
 
 function AcademyHeroVideo() {
   const videoRef = React.useRef(null);
@@ -124,28 +123,25 @@ function AcademyHeroVideo() {
       <video
         ref={setVideoRef}
         className="academy-hero-video"
-        poster={ACADEMY_HERO_POSTER}
         autoPlay
         muted
-        defaultMuted
         loop
         playsInline
-        webkit-playsinline="true"
         preload="metadata"
-        controls={false}
         controlsList="nodownload noplaybackrate noremoteplayback"
         disablePictureInPicture
-        disableRemotePlayback
         onLoadedMetadata={(event) => {
-          event.currentTarget.muted = true;
-          event.currentTarget.defaultMuted = true;
-          event.currentTarget.play().catch(() => {});
+          const node = event.currentTarget;
+          node.muted = true;
+          node.defaultMuted = true;
+          node.play().catch(() => {});
         }}
         onCanPlay={(event) => {
-          event.currentTarget.muted = true;
-          event.currentTarget
+          const node = event.currentTarget;
+          node.muted = true;
+          node
             .play()
-            .then(() => event.currentTarget.setAttribute("data-ready", "true"))
+            .then(() => node.setAttribute("data-ready", "true"))
             .catch(() => {});
         }}
       >
@@ -358,11 +354,6 @@ function AcademyPage() {
           <span className="academy-brand-mark" aria-hidden="true" />
           Human AI Studio
         </a>
-        <div className="academy-nav-actions">
-          <a className="academy-nav-cta" href={ACADEMY_URL} target="_blank" rel="noreferrer">
-            Join Academy
-          </a>
-        </div>
       </header>
 
       <main>
@@ -538,7 +529,7 @@ function AcademyPage() {
 
         <section className="academy-section">
           <div className="academy-section-heading academy-section-heading--center">
-            <h2>Professionals are already putting these workflows to work.</h2>
+            <h2>Professionals already shipping.</h2>
           </div>
           <TestimonialScroller />
         </section>

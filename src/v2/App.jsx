@@ -77,16 +77,137 @@ function openBookingModal(event) {
   });
 }
 
-function BookingTextLink({ className, children }) {
+function BookingTextLink({ className, children, onClick, ...rest }) {
   return (
     <a
       className={className}
       href={bookingUrl}
-      onClick={openBookingModal}
+      {...rest}
       {...bookingAttributes}
+      onClick={(event) => {
+        onClick?.(event);
+        openBookingModal(event);
+      }}
     >
       {children}
     </a>
+  );
+}
+
+function NavMenu() {
+  const [open, setOpen] = React.useState(false);
+  const rootRef = React.useRef(null);
+  const triggerRef = React.useRef(null);
+  const [panelStyle, setPanelStyle] = React.useState(null);
+
+  const updatePanelPosition = React.useCallback(() => {
+    const trigger = triggerRef.current;
+    if (!trigger) return;
+
+    const rect = trigger.getBoundingClientRect();
+    setPanelStyle({
+      top: `${Math.round(rect.bottom + 10)}px`,
+      right: `${Math.round(window.innerWidth - rect.right)}px`
+    });
+  }, []);
+
+  React.useEffect(() => {
+    if (!open) return undefined;
+
+    updatePanelPosition();
+
+    const onPointerDown = (event) => {
+      if (!rootRef.current?.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    window.addEventListener("resize", updatePanelPosition);
+    window.addEventListener("scroll", updatePanelPosition, true);
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      window.removeEventListener("resize", updatePanelPosition);
+      window.removeEventListener("scroll", updatePanelPosition, true);
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, updatePanelPosition]);
+
+  const close = () => setOpen(false);
+
+  const toggle = () => {
+    if (open) {
+      setOpen(false);
+      return;
+    }
+
+    updatePanelPosition();
+    setOpen(true);
+  };
+
+  return (
+    <div className={`nav-menu${open ? " is-open" : ""}`} ref={rootRef}>
+      <button
+        ref={triggerRef}
+        type="button"
+        className="nav-link nav-menu-trigger"
+        aria-expanded={open}
+        aria-haspopup="menu"
+        aria-controls="primary-nav-menu"
+        onClick={toggle}
+      >
+        <svg
+          className="nav-menu-icon"
+          width="14"
+          height="14"
+          viewBox="0 0 14 14"
+          fill="none"
+          aria-hidden="true"
+        >
+          <path
+            d="M2.5 3.75h9M2.5 7h9M2.5 10.25h9"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+          />
+        </svg>
+        Menu
+      </button>
+      {open && panelStyle ? (
+        <div
+          className="nav-menu-panel"
+          id="primary-nav-menu"
+          role="menu"
+          style={panelStyle}
+        >
+          <a className="nav-menu-item" href={academyUrl} role="menuitem" onClick={close}>
+            Academy
+          </a>
+          <a
+            className="nav-menu-item"
+            href={newsletterUrl}
+            target="_blank"
+            rel="noreferrer"
+            role="menuitem"
+            onClick={close}
+          >
+            Newsletter
+          </a>
+          <BookingTextLink
+            className="nav-menu-item"
+            role="menuitem"
+            onClick={close}
+          >
+            Book a call
+          </BookingTextLink>
+        </div>
+      ) : null}
+    </div>
   );
 }
 
@@ -1454,17 +1575,7 @@ function StudioHome({ isHistory = false }) {
           Human AI Studio
         </a>
         <div className="nav-actions">
-          <a
-            className="nav-text-link"
-            href="https://substack.com/@johnrodrigues"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Newsletter
-          </a>
-          <BookingTextLink className="nav-link">
-            Book a call
-          </BookingTextLink>
+          <NavMenu />
         </div>
       </motion.nav>
 
@@ -1798,13 +1909,13 @@ function StudioHome({ isHistory = false }) {
           ) : (
             <Entrance className="bio-copy">
               <EntranceItem as="h2" id="v2-bio-title">
-                <span>Work 1:1 With John Rodrigues.</span>
+                <span>Fractional design engineer embedded in your team.</span>
               </EntranceItem>
               <EntranceItem as="p">
-                I'm a product designer and design engineer specializing in AI-native products. I've shipped zero-to-one work for Outfix AI, No Scroll, TOCA, and PAM, and built AI tools and banking experiences at JPMorgan and Citi.
+                I'm a design engineer specializing in AI-native products. I've shipped zero-to-one work for Outfix AI, No Scroll, TOCA, and PAM, and built AI tools and banking experiences at JPMorgan and Citi.
               </EntranceItem>
               <EntranceItem as="p">
-                I bring 10 years of industry experience, a master's in Interaction Design, and a bachelor's in Engineering. I also write The AI Design Playbook, read by 4.2K designers and product leaders.
+                I bring 10 years of industry experience, a master's in Interaction Design, and a bachelor's in Engineering. I publish my findings through my Substack, which is read by 4,000+ industry professionals. I'm the founder of Human AI Studio.
               </EntranceItem>
               <EntranceItem className="bio-actions">
                 <a
@@ -2133,17 +2244,7 @@ function OfferingPage({ slug }) {
             Human AI Studio
           </a>
           <div className="nav-actions">
-            <a
-              className="nav-text-link"
-              href="https://substack.com/@johnrodrigues"
-              target="_blank"
-              rel="noreferrer"
-            >
-              Newsletter
-            </a>
-            <BookingTextLink className="nav-link">
-              Book a call
-            </BookingTextLink>
+            <NavMenu />
           </div>
         </nav>
         <section className="offering-hero" data-nav-theme="dark">
@@ -2178,17 +2279,7 @@ function OfferingPage({ slug }) {
           Human AI Studio
         </a>
         <div className="nav-actions">
-          <a
-            className="nav-text-link"
-            href="https://substack.com/@johnrodrigues"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Newsletter
-          </a>
-          <BookingTextLink className="nav-link">
-            Book a call
-          </BookingTextLink>
+          <NavMenu />
         </div>
       </nav>
 
