@@ -3,6 +3,7 @@ import { Analytics } from "@vercel/analytics/react";
 import { AnimatePresence, motion, useReducedMotion, useInView } from "framer-motion";
 import * as THREE from "three";
 import OfferingShader from "./OfferingShader.jsx";
+import { Entrance, EntranceItem, entranceChild, entranceViewport } from "./entrance.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
 import studioAbstract from "../assets/studio-abstract.png";
 import cinematicHeroMobileVideo from "../assets/hero-cinematic-mobile.mp4";
@@ -263,64 +264,6 @@ const entranceContainer = {
     }
   }
 };
-
-const entranceChild = {
-  hidden: {
-    opacity: 0,
-    y: 16
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      opacity: { duration: 0.7 },
-      y: { type: "spring", duration: 1.4, bounce: 0 }
-    }
-  }
-};
-
-const entranceViewport = {
-  once: true,
-  amount: 0.22,
-  margin: "0px 0px -10% 0px"
-};
-
-const scrollEntranceContainer = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.08
-    }
-  }
-};
-
-function Entrance({ as = "div", className, children, ...props }) {
-  const shouldReduceMotion = useReducedMotion();
-  const MotionTag = motion[as] || motion.div;
-
-  return (
-    <MotionTag
-      className={className}
-      variants={scrollEntranceContainer}
-      initial={shouldReduceMotion ? false : "hidden"}
-      whileInView="visible"
-      viewport={entranceViewport}
-      {...props}
-    >
-      {children}
-    </MotionTag>
-  );
-}
-
-function EntranceItem({ as = "div", className, children, ...props }) {
-  const MotionTag = motion[as] || motion.div;
-
-  return (
-    <MotionTag className={className} variants={entranceChild} {...props}>
-      {children}
-    </MotionTag>
-  );
-}
 
 function CinematicHero() {
   const videoRef = React.useRef(null);

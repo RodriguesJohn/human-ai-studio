@@ -1,28 +1,21 @@
 import React from "react";
 import OfferingShader from "./OfferingShader.jsx";
+import { Entrance, EntranceItem, entranceChild } from "./entrance.jsx";
+import { motion, useReducedMotion } from "framer-motion";
 import "./academy.css";
 
 const COHORT_URL = "https://maven.com/humanaistudio/aimasterycohort";
 const ACADEMY_URL = "https://www.skool.com/ai-design-academy-6114/about";
+const NEWSLETTER_URL = "https://johnrodrigues.substack.com/";
 
 const AppleLogo = "/academy/Apple.png";
 const GoogleLogo = "/academy/Google.svg.png";
-const MetaLogo = "/academy/meta.png";
 const ChaseLogo = "/academy/Chase.png";
 const HubspotLogo = "/academy/Hubspot.svg.png";
 const IntercomLogo = "/academy/intercom-1-logo-png-transparent.png";
 const CursorBlogImage = "/academy/CursorBlog.png";
 const ClaudeCodeBlog = "/academy/ClaudeCodeBlog.png";
 const NativeMobileImage = "/academy/NativeMobile.jpg";
-const DanaImage = "/academy/Dana.jpeg";
-const IniImage = "/academy/Indi.jpeg";
-const BrettImage = "/academy/Brett.jpeg";
-const SonaliImage = "/academy/Sonali.jpeg";
-const SnehImage = "/academy/Sneh.webp";
-const KennyImage = "/academy/Kenny.jpeg";
-const LindaImage = "/academy/Linda.jpeg";
-const AviadImage = "/academy/Avaid.jpeg";
-const DanImage = "/academy/Dan.jpeg";
 
 const ACADEMY_HERO_VIDEO = "/academy/hero.mp4";
 const ACADEMY_HERO_VIDEO_MOBILE = "/academy/hero-mobile.mp4";
@@ -157,10 +150,15 @@ function AcademyHeroVideo() {
 const logos = [
   { src: AppleLogo, alt: "Apple" },
   { src: GoogleLogo, alt: "Google" },
-  { src: MetaLogo, alt: "Meta" },
   { src: ChaseLogo, alt: "JPMorgan Chase" },
   { src: HubspotLogo, alt: "HubSpot" },
   { src: IntercomLogo, alt: "Intercom" }
+];
+
+const newsletterBenefits = [
+  "Weekly in-depth issues",
+  "Case studies and research findings",
+  "Insights and industry trends"
 ];
 
 const cohortPackageBenefits = [
@@ -169,34 +167,67 @@ const cohortPackageBenefits = [
   "Live sessions with John",
   "Ship a real AI product workflow",
   "Recordings of every session",
-  "Private cohorts for teams also available on request"
+  "Private workshops for teams"
 ];
 
 const pricingBenefits = [
-  "Structured courses and tracks for Claude Code, Cursor, Codex, and more",
-  "Stay updated with the latest AI research, news, and trends",
-  "Recordings, resources, prompts, and templates"
+  "Claude Code, Cursor, and Codex tracks",
+  "Latest AI research, news, and trends",
+  "Recordings, prompts, and templates"
+];
+
+const pathOptions = [
+  {
+    title: "Live workshop\nwith certification",
+    description:
+      "A live workshop with vibe coding, agent building, and agentic design systems built to take you from curious to shipping.",
+    bullets: [
+      "4.6/5 rating across workshops",
+      "Live sessions with John",
+      "Ship a real AI product workflow"
+    ],
+    cta: {
+      label: "Join the live workshop",
+      href: COHORT_URL,
+      className: "academy-btn academy-btn--primary"
+    },
+    color1: "#3b82f6",
+    color2: "#bae6fd"
+  },
+  {
+    title: "Self-paced learning\nat AI Academy",
+    description:
+      "A self-paced track for industry professionals with structured courses, recordings, and an ever-growing library for Claude Code, Cursor, and Codex.",
+    bullets: [
+      "Structured courses and tracks for Claude Code, Cursor, Codex, and more",
+      "Stay updated with the latest AI research, news, and trends"
+    ],
+    cta: {
+      label: "Join the Academy",
+      href: ACADEMY_URL,
+      className: "academy-btn academy-btn--primary"
+    },
+    color1: "#8b5cf6",
+    color2: "#ddd6fe"
+  }
 ];
 
 const cohortModules = [
   {
     title: "AI\nfluency",
-    description:
-      "Build AI habits that show up in real product work. Prototype faster, ship clearer systems, and keep a workflow you can run after the course ends.",
+    description: "AI habits that show up in real product work.",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
     title: "Tools that\nship",
-    description:
-      "Get structured with Claude Code, Cursor, Codex, and more. Follow tracks built around the tools teams actually ship with, and keep growing as the library expands.",
+    description: "Claude Code, Cursor, Codex, and the tools teams ship with.",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
     title: "Agents &\nsystems",
-    description:
-      "Go beyond prompts. Build agents that handle real tasks, make your design system agent-ready, and ship work you can show and keep iterating on.",
+    description: "Agents and systems you can ship and keep iterating on.",
     color1: "#10b981",
     color2: "#a7f3d0"
   }
@@ -237,69 +268,107 @@ const bonusResources = [
   { title: "AI Foundation Track" }
 ];
 
+function BonusCardStack() {
+  const [activeIndex, setActiveIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    const prefersReduced =
+      typeof window !== "undefined" &&
+      window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (prefersReduced) return undefined;
+
+    const interval = window.setInterval(() => {
+      setActiveIndex((index) => (index + 1) % bonusResources.length);
+    }, 2400);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  return (
+    <div className="academy-bonus-stack" aria-live="polite">
+      {bonusResources.map((resource, index) => {
+        const offset =
+          (index - activeIndex + bonusResources.length) % bonusResources.length;
+        if (offset > 3) return null;
+
+        return (
+          <article
+            className="academy-bonus-card academy-bonus-card--stack"
+            key={resource.title}
+            data-offset={offset}
+            style={{
+              zIndex: bonusResources.length - offset,
+              "--stack-offset": offset
+            }}
+            aria-hidden={offset !== 0}
+          >
+            <div className="academy-bonus-face">
+              <h3>{resource.title}</h3>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
 const testimonials = [
   {
     quote:
       "I'm leaving this course feeling truly confident in my AI fluency. I'm now ready to build a new portfolio quickly and effectively.",
     name: "Dana",
-    role: "Lead Product Designer, ex Rite Aid",
-    img: DanaImage
+    role: "Lead Product Designer, ex Rite Aid"
   },
   {
     quote:
       "I've gone from not knowing how to code to building my own AI agent. Every session has been engaging, interactive, and deeply impactful.",
     name: "IniOluwa",
     role: "Senior Product Designer, Intercom",
-    img: IniImage
+    logo: IntercomLogo
   },
   {
     quote:
       "John equipped me with understanding the AI possibility space to take my initial ideas and turn them into working POCs.",
     name: "Brett",
-    role: "Product Designer",
-    img: BrettImage
+    role: "Product Designer"
   },
   {
     quote:
       "John emphasizes practical application over lectures, which made the material immediately useful.",
     name: "Sonali",
     role: "Sr. Product Designer, JPMorgan Chase",
-    img: SonaliImage
+    logo: ChaseLogo
   },
   {
     quote:
       "His strategic frameworks and live sessions helped me think like both a strategist and a solutionist.",
     name: "Sneh",
-    role: "UX Designer",
-    img: SnehImage
+    role: "UX Designer"
   },
   {
     quote:
       "This cohort gave me the foundation to understand AI at a high level, and how to design human-centered AI experiences.",
     name: "Kenneth Hargrove",
-    role: "Product Designer, CoStar",
-    img: KennyImage
+    role: "Product Designer, CoStar"
   },
   {
     quote:
       "John's course is practical, with demos and real encouragement to explore AI tools specifically for designers.",
     name: "Linda",
     role: "Principal PD, JPMorgan Chase",
-    img: LindaImage
+    logo: ChaseLogo
   },
   {
     quote:
       "Always accessible. He creates additional tutorials on demand and is ready to help with patience and care.",
     name: "Aviad",
-    role: "Product Designer",
-    img: AviadImage
+    role: "Product Designer"
   },
   {
     quote:
       "Crash course in AI tools: Relume, Lovable, Figma Make, n8n, and more. John was extremely knowledgeable.",
     name: "Dan",
-    role: "UX Designer, RTI International",
-    img: DanImage
+    role: "UX Designer, RTI International"
   }
 ];
 
@@ -316,14 +385,16 @@ function TestimonialScroller() {
             className="academy-testimonial"
             key={`${testimonial.name}-${index}`}
           >
+            <blockquote>“{testimonial.quote}”</blockquote>
             <figcaption>
-              <img src={testimonial.img} alt="" />
               <span>
                 <strong>{testimonial.name}</strong>
                 <small>{testimonial.role}</small>
               </span>
+              {testimonial.logo ? (
+                <img className="academy-testimonial-logo" src={testimonial.logo} alt="" />
+              ) : null}
             </figcaption>
-            <blockquote>“{testimonial.quote}”</blockquote>
           </figure>
         ))}
       </div>
@@ -332,6 +403,8 @@ function TestimonialScroller() {
 }
 
 function AcademyPage() {
+  const shouldReduceMotion = useReducedMotion();
+
   React.useEffect(() => {
     document.title = "AI Academy · Human AI Studio";
     const html = document.documentElement;
@@ -349,35 +422,40 @@ function AcademyPage() {
 
   return (
     <div className="academy-page">
-      <header className="academy-nav">
+      <motion.header
+        className="academy-nav"
+        variants={entranceChild}
+        initial={shouldReduceMotion ? false : "hidden"}
+        animate="visible"
+      >
         <a className="academy-brand" href="/">
           <span className="academy-brand-mark" aria-hidden="true" />
           Human AI Studio
         </a>
-      </header>
+      </motion.header>
 
       <main>
         <section className="academy-hero-wrap academy-hero-wrap--cinematic">
           <AcademyHeroVideo />
           <div className="academy-hero">
-            <div className="academy-hero-copy">
-              <h1 className="academy-fade-rise">
-                <span className="academy-hero-line">Level up your AI workflows.</span>
-                <span className="academy-hero-line">Ship real AI products.</span>
-              </h1>
-              <p className="academy-hero-sub academy-fade-rise-delay">
+            <Entrance className="academy-hero-copy" animate="visible">
+              <EntranceItem as="h1">
+                <span className="academy-hero-line">Level up your AI workflows and work.</span>
+                <span className="academy-hero-line">Build agentic products.</span>
+              </EntranceItem>
+              <EntranceItem as="p" className="academy-hero-sub">
                 Build AI fluency that shows up in your work.
                 <br />
-                Live cohort with certification, or self-paced learning at AI Academy.
-              </p>
-              <div className="academy-hero-actions academy-fade-rise-delay-2">
+                Live workshop with certification, or self-paced learning at AI Academy.
+              </EntranceItem>
+              <EntranceItem className="academy-hero-actions">
                 <a
                   className="academy-btn academy-btn--primary"
                   href={COHORT_URL}
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Join the live cohort
+                  Join the live workshop
                 </a>
                 <a
                   className="academy-btn academy-btn--secondary"
@@ -387,75 +465,74 @@ function AcademyPage() {
                 >
                   Join the Academy
                 </a>
-              </div>
-            </div>
+              </EntranceItem>
+            </Entrance>
           </div>
 
-          <div className="academy-logo-row" aria-label="Professionals from leading companies">
+          <Entrance
+            className="academy-logo-row"
+            aria-label="Professionals from leading companies"
+            animate="visible"
+          >
             {logos.map((logo) => (
-              <img key={logo.alt} src={logo.src} alt={logo.alt} />
+              <EntranceItem as="img" key={logo.alt} src={logo.src} alt={logo.alt} />
             ))}
-          </div>
+          </Entrance>
         </section>
 
         <section className="academy-section">
-          <div className="academy-section-heading academy-section-heading--center">
-            <h2>Two ways to get started.</h2>
-            <p className="academy-section-sub academy-section-sub--center">
-              Live for a finish line and certificate. Self-paced for structure on your schedule.
-            </p>
-          </div>
-          <div className="academy-path-grid">
-            <article className="academy-path-card">
-              <h3>Live cohort with certification</h3>
-              <p>
-                A live cohort with workshops, vibe coding, agent building, and agentic design systems built to take you from curious to shipping.
-              </p>
-              <ul>
-                <li>4.6/5 rating across cohorts</li>
-                <li>Live sessions with John</li>
-                <li>Ship a real AI product workflow</li>
-              </ul>
-              <a
-                className="academy-btn academy-btn--primary"
-                href={COHORT_URL}
-                target="_blank"
-                rel="noreferrer"
+          <Entrance className="academy-section-heading">
+            <EntranceItem as="h2">Two ways to get started.</EntranceItem>
+          </Entrance>
+          <Entrance className="academy-path-grid">
+            {pathOptions.map((path, index) => (
+              <EntranceItem
+                as="article"
+                className="academy-path-card"
+                key={path.title}
+                style={{
+                  "--card-color-1": path.color1,
+                  "--card-color-2": path.color2
+                }}
               >
-                Join the live cohort
-              </a>
-            </article>
-            <article className="academy-path-card academy-path-card--muted">
-              <h3>Self-paced learning at AI Academy</h3>
-              <p>
-                A self-paced track for industry professionals with structured courses, recordings, and an ever-growing library for Claude Code, Cursor, and Codex.
-              </p>
-              <ul>
-                <li>Structured courses and tracks for Claude Code, Cursor, Codex, and more</li>
-                <li>Stay updated with the latest AI research, news, and trends</li>
-              </ul>
-              <a
-                className="academy-btn academy-btn--secondary-dark"
-                href={ACADEMY_URL}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Join the Academy
-              </a>
-            </article>
-          </div>
+                <div className="academy-path-thumb">
+                  <OfferingShader
+                    color1={path.color1}
+                    color2={path.color2}
+                    seed={index * 4.2 + 0.8}
+                    className="academy-path-shader"
+                  />
+                  <h3 className="academy-path-thumb-title">{path.title}</h3>
+                </div>
+                <div className="academy-path-body">
+                  <p>{path.description}</p>
+                  <ul>
+                    {path.bullets.map((bullet) => (
+                      <li key={bullet}>{bullet}</li>
+                    ))}
+                  </ul>
+                  <a
+                    className={path.cta.className}
+                    href={path.cta.href}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {path.cta.label}
+                  </a>
+                </div>
+              </EntranceItem>
+            ))}
+          </Entrance>
         </section>
 
         <section className="academy-section" id="cohort">
-          <div className="academy-section-heading">
-            <h2>What you get</h2>
-            <p className="academy-section-sub">
-              Join the Academy and leave with skills, systems, and tools you can use on real work, not just notes from a workshop.
-            </p>
-          </div>
-          <div className="academy-modules">
+          <Entrance className="academy-section-heading">
+            <EntranceItem as="h2">What you get</EntranceItem>
+          </Entrance>
+          <Entrance className="academy-modules">
             {cohortModules.map((module, index) => (
-              <article
+              <EntranceItem
+                as="article"
                 className="academy-module-card"
                 key={module.title}
                 style={{
@@ -478,18 +555,18 @@ function AcademyPage() {
                 <div className="academy-module-copy">
                   <p>{module.description}</p>
                 </div>
-              </article>
+              </EntranceItem>
             ))}
-          </div>
+          </Entrance>
         </section>
 
         <section className="academy-section">
-          <div className="academy-section-heading">
-            <h2>Tools you’ll actually use.</h2>
-          </div>
-          <div className="academy-course-grid">
+          <Entrance className="academy-section-heading">
+            <EntranceItem as="h2">Tools you’ll actually use.</EntranceItem>
+          </Entrance>
+          <Entrance className="academy-course-grid">
             {courses.map((course) => (
-              <article className="academy-course" key={course.id}>
+              <EntranceItem as="article" className="academy-course" key={course.id}>
                 <div className="academy-course-media">
                   <img src={course.image} alt="" />
                 </div>
@@ -497,100 +574,164 @@ function AcademyPage() {
                   <h3>{course.title}</h3>
                   <p>{course.excerpt}</p>
                 </div>
-              </article>
+              </EntranceItem>
             ))}
-          </div>
+          </Entrance>
+        </section>
+
+        <section className="academy-section academy-section--bonus">
+          <Entrance className="academy-bonus-split">
+            <EntranceItem className="academy-bonus-copy">
+              <h2>More resources and courses for you to level up your skills.</h2>
+            </EntranceItem>
+            <EntranceItem>
+              <BonusCardStack />
+            </EntranceItem>
+          </Entrance>
         </section>
 
         <section className="academy-section">
-          <div className="academy-section-heading">
-            <h2>More resources and courses for you to level up your skills.</h2>
-          </div>
-          <div className="academy-marquee">
-            <div className="academy-marquee-fade academy-marquee-fade--left" />
-            <div className="academy-marquee-fade academy-marquee-fade--right" />
-            <div className="academy-marquee-track academy-marquee-track--bonus">
-              {[...bonusResources, ...bonusResources].map((resource, index) => (
-                <article
-                  className="academy-bonus-card"
-                  key={`${resource.title}-${index}`}
-                >
-                  <div className="academy-bonus-face">
-                    <h3>{resource.title}</h3>
-                  </div>
-                  <div className="academy-bonus-foot">
-                    <p>{resource.title}</p>
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="academy-section">
-          <div className="academy-section-heading academy-section-heading--center">
-            <h2>Professionals already shipping.</h2>
-          </div>
-          <TestimonialScroller />
+          <Entrance className="academy-section-heading">
+            <EntranceItem as="h2">Professionals already shipping.</EntranceItem>
+          </Entrance>
+          <Entrance>
+            <EntranceItem>
+              <TestimonialScroller />
+            </EntranceItem>
+          </Entrance>
         </section>
 
         <section className="academy-section" id="membership">
-          <div className="academy-section-heading academy-section-heading--center">
-            <h2>Choose how you want to learn.</h2>
-            <p className="academy-section-sub">
-              Join the live cohort for a focused month of workshops, or learn self-paced in the Academy.
-            </p>
-          </div>
-          <div className="academy-packages">
-            <article className="academy-package">
-              <h3>Live Cohort</h3>
-              <div className="academy-price">
-                <span>$1,499</span>
+          <Entrance className="academy-section-heading">
+            <EntranceItem as="h2">Choose how you want to learn.</EntranceItem>
+            <EntranceItem as="p" className="academy-section-sub">
+              Newsletter, self-paced Academy, or live workshop.
+            </EntranceItem>
+          </Entrance>
+          <Entrance className="academy-packages">
+            <EntranceItem
+              as="article"
+              className="academy-package"
+              style={{
+                "--card-color-1": "#38bdf8",
+                "--card-color-2": "#e0f2fe"
+              }}
+            >
+              <div className="academy-package-thumb">
+                <OfferingShader
+                  color1="#38bdf8"
+                  color2="#e0f2fe"
+                  seed={1.2}
+                  className="academy-package-shader"
+                />
+                <div className="academy-package-thumb-copy">
+                  <h3>Weekly issues</h3>
+                  <div className="academy-price academy-price--thumb">
+                    <span>$19</span>
+                    <small>/ per month</small>
+                  </div>
+                </div>
               </div>
-              <p>
-                Four live workshops built to take you from curious to shipping, with a certificate of completion when you finish.
-              </p>
-              <ul className="academy-check-list">
-                {cohortPackageBenefits.map((benefit) => (
-                  <li key={benefit}>{benefit}</li>
-                ))}
-              </ul>
-              <a
-                className="academy-btn academy-btn--primary academy-btn--full"
-                href={COHORT_URL}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Join the live cohort
-              </a>
-            </article>
-            <article className="academy-package">
-              <h3>Self-paced</h3>
-              <div className="academy-price">
-                <span>$149</span>
-                <small>/ month</small>
+              <div className="academy-package-body">
+                <ul className="academy-check-list">
+                  {newsletterBenefits.map((benefit) => (
+                    <li key={benefit}>{benefit}</li>
+                  ))}
+                </ul>
+                <a
+                  className="academy-btn academy-btn--primary academy-btn--full"
+                  href={NEWSLETTER_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Subscribe
+                </a>
               </div>
-              <p>
-                Structured tracks, recordings, and an ever-growing library for Claude Code, Cursor, Codex, and more. Plus ongoing AI research, news, and trends at your own pace.
-              </p>
-              <ul className="academy-check-list">
-                {pricingBenefits.map((benefit) => (
-                  <li key={benefit}>{benefit}</li>
-                ))}
-              </ul>
-              <a
-                className="academy-btn academy-btn--secondary academy-btn--full"
-                href={ACADEMY_URL}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Join the Academy
-              </a>
-            </article>
-          </div>
-          <p className="academy-disclaimer">
-            Courses and materials shown on this page may differ from what’s included in each package. Review the individual package details before purchasing.
-          </p>
+            </EntranceItem>
+            <EntranceItem
+              as="article"
+              className="academy-package"
+              style={{
+                "--card-color-1": "#10b981",
+                "--card-color-2": "#a7f3d0"
+              }}
+            >
+              <div className="academy-package-thumb">
+                <OfferingShader
+                  color1="#10b981"
+                  color2="#a7f3d0"
+                  seed={2.4}
+                  className="academy-package-shader"
+                />
+                <div className="academy-package-thumb-copy">
+                  <h3>Self-paced</h3>
+                  <div className="academy-price academy-price--thumb">
+                    <span>$149</span>
+                    <small>/ per month</small>
+                  </div>
+                </div>
+              </div>
+              <div className="academy-package-body">
+                <ul className="academy-check-list">
+                  {pricingBenefits.map((benefit) => (
+                    <li key={benefit}>{benefit}</li>
+                  ))}
+                </ul>
+                <a
+                  className="academy-btn academy-btn--primary academy-btn--full"
+                  href={ACADEMY_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Join the Academy
+                </a>
+              </div>
+            </EntranceItem>
+            <EntranceItem
+              as="article"
+              className="academy-package"
+              style={{
+                "--card-color-1": "#f59e0b",
+                "--card-color-2": "#fde68a"
+              }}
+            >
+              <div className="academy-package-thumb">
+                <OfferingShader
+                  color1="#f59e0b"
+                  color2="#fde68a"
+                  seed={5.1}
+                  className="academy-package-shader"
+                />
+                <div className="academy-package-thumb-copy">
+                  <h3>Live Workshop</h3>
+                  <div className="academy-price academy-price--thumb">
+                    <span>$1,499</span>
+                    <small>/ one-time</small>
+                  </div>
+                </div>
+              </div>
+              <div className="academy-package-body">
+                <ul className="academy-check-list">
+                  {cohortPackageBenefits.map((benefit) => (
+                    <li key={benefit}>{benefit}</li>
+                  ))}
+                </ul>
+                <a
+                  className="academy-btn academy-btn--primary academy-btn--full"
+                  href={COHORT_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Join us live
+                </a>
+              </div>
+            </EntranceItem>
+          </Entrance>
+          <Entrance>
+            <EntranceItem as="p" className="academy-disclaimer">
+              Courses and materials shown on this page may differ from what’s included in each package. Review the individual package details before purchasing.
+            </EntranceItem>
+          </Entrance>
         </section>
       </main>
 
@@ -598,13 +739,13 @@ function AcademyPage() {
         <div className="academy-footer-inner">
           <div>
             <p>
-              AI Academy for industry professionals shipping with AI through live cohorts and self-paced tracks.
+              AI Academy for industry professionals shipping with AI through live workshops and self-paced tracks.
             </p>
           </div>
           <div className="academy-footer-links">
             <a href="/">Studio</a>
             <a href={COHORT_URL} target="_blank" rel="noreferrer">
-              Live cohort
+              Live workshop
             </a>
             <a href={ACADEMY_URL} target="_blank" rel="noreferrer">
               Academy
