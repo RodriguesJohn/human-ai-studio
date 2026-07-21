@@ -26,9 +26,29 @@ const DanImage = "/academy/Dan.jpeg";
 
 const ACADEMY_HERO_VIDEO =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4";
+const ACADEMY_HERO_POSTER = "/academy/ai-builder-academy-hero.jpg";
 
 function AcademyHeroVideo() {
   const videoRef = React.useRef(null);
+
+  const setVideoRef = React.useCallback((node) => {
+    videoRef.current = node;
+    if (!node) return;
+
+    // iOS Safari / Chrome Android only autoplay when muted + inline are set as DOM attrs.
+    node.muted = true;
+    node.defaultMuted = true;
+    node.playsInline = true;
+    node.autoplay = true;
+    node.controls = false;
+    node.setAttribute("autoplay", "");
+    node.setAttribute("muted", "");
+    node.setAttribute("playsinline", "");
+    node.setAttribute("webkit-playsinline", "true");
+    node.setAttribute("x5-playsinline", "true");
+    node.setAttribute("x5-video-player-type", "h5");
+    node.removeAttribute("controls");
+  }, []);
 
   React.useEffect(() => {
     const video = videoRef.current;
@@ -37,79 +57,95 @@ function AcademyHeroVideo() {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) {
       video.pause();
-      video.style.opacity = "0";
+      video.removeAttribute("data-ready");
       return undefined;
     }
-
-    const fadeSeconds = 0.5;
-    let rafId = 0;
-    let restartTimer = 0;
 
     video.muted = true;
     video.defaultMuted = true;
     video.playsInline = true;
     video.controls = false;
+    video.disablePictureInPicture = true;
     video.setAttribute("muted", "");
     video.setAttribute("playsinline", "");
     video.setAttribute("webkit-playsinline", "true");
-    video.style.opacity = "0";
+    video.setAttribute("x5-playsinline", "true");
+
+    const markReady = () => {
+      video.setAttribute("data-ready", "true");
+    };
 
     const tryPlay = () => {
       video.muted = true;
+      video.defaultMuted = true;
+      video.controls = false;
       const playPromise = video.play();
-      if (playPromise && typeof playPromise.catch === "function") {
-        playPromise.catch(() => {});
+      if (playPromise && typeof playPromise.then === "function") {
+        playPromise.then(markReady).catch(() => {});
       }
     };
 
-    const tick = () => {
-      const duration = video.duration;
-      if (duration && Number.isFinite(duration) && duration > 0) {
-        const current = video.currentTime;
-        let opacity = 1;
-        if (current < fadeSeconds) {
-          opacity = current / fadeSeconds;
-        } else if (current > duration - fadeSeconds) {
-          opacity = Math.max(0, (duration - current) / fadeSeconds);
-        }
-        video.style.opacity = String(Math.max(0, Math.min(1, opacity)));
-      }
-      rafId = window.requestAnimationFrame(tick);
-    };
-
-    const onEnded = () => {
-      video.style.opacity = "0";
-      window.clearTimeout(restartTimer);
-      restartTimer = window.setTimeout(() => {
-        video.currentTime = 0;
-        tryPlay();
-      }, 100);
-    };
-
-    video.addEventListener("ended", onEnded);
-    const playEvents = ["loadedmetadata", "loadeddata", "canplay"];
-    playEvents.forEach((eventName) => video.addEventListener(eventName, tryPlay));
     tryPlay();
-    rafId = window.requestAnimationFrame(tick);
+
+    const playEvents = [
+      "loadedmetadata",
+      "loadeddata",
+      "canplay",
+      "canplaythrough",
+      "playing"
+    ];
+    playEvents.forEach((eventName) => video.addEventListener(eventName, tryPlay));
+    video.addEventListener("playing", markReady);
+
+    const onVisible = () => {
+      if (!document.hidden) tryPlay();
+    };
+    const onFirstGesture = () => tryPlay();
+
+    document.addEventListener("visibilitychange", onVisible);
+    window.addEventListener("pageshow", onVisible);
+    window.addEventListener("touchstart", onFirstGesture, { once: true, passive: true });
+    window.addEventListener("pointerdown", onFirstGesture, { once: true });
 
     return () => {
-      window.cancelAnimationFrame(rafId);
-      window.clearTimeout(restartTimer);
-      video.removeEventListener("ended", onEnded);
       playEvents.forEach((eventName) => video.removeEventListener(eventName, tryPlay));
+      video.removeEventListener("playing", markReady);
+      document.removeEventListener("visibilitychange", onVisible);
+      window.removeEventListener("pageshow", onVisible);
+      window.removeEventListener("touchstart", onFirstGesture);
+      window.removeEventListener("pointerdown", onFirstGesture);
     };
   }, []);
 
   return (
     <div className="academy-hero-media" aria-hidden="true">
       <video
-        ref={videoRef}
+        ref={setVideoRef}
         className="academy-hero-video"
         src={ACADEMY_HERO_VIDEO}
+        poster={ACADEMY_HERO_POSTER}
+        autoPlay
         muted
+        defaultMuted
+        loop
         playsInline
+        webkit-playsinline="true"
         preload="auto"
+        controls={false}
+        controlsList="nodownload noplaybackrate noremoteplayback"
         disablePictureInPicture
+        disableRemotePlayback
+        onLoadedMetadata={(event) => {
+          event.currentTarget.muted = true;
+          event.currentTarget.defaultMuted = true;
+        }}
+        onCanPlay={(event) => {
+          event.currentTarget.muted = true;
+          const playPromise = event.currentTarget.play();
+          if (playPromise && typeof playPromise.catch === "function") {
+            playPromise.catch(() => {});
+          }
+        }}
       />
       <div className="academy-hero-video-gradient" />
       <div className="academy-hero-video-vignette" />

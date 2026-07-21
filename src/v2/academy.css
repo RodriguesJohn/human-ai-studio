@@ -178,7 +178,9 @@
   z-index: 0;
   overflow: hidden;
   pointer-events: none;
-  background: #000;
+  background:
+    #000
+    url("/academy/ai-builder-academy-hero.jpg") center / cover no-repeat;
 }
 
 .academy-hero-video {
@@ -188,7 +190,11 @@
   height: 100%;
   object-fit: cover;
   opacity: 0;
-  transition: none;
+  transition: opacity 280ms ease;
+}
+
+.academy-hero-video[data-ready="true"] {
+  opacity: 1;
 }
 
 .academy-hero-video-gradient {
