@@ -181,12 +181,11 @@ const pricingBenefits = [
 const pathOptions = [
   {
     title: "Weekly articles\nfrom the newsletter",
-    description:
-      "In-depth issues on AI workflows, case studies, and industry trends for designers and builders shipping with AI.",
+    description: "AI workflows, case studies, and trends for builders shipping with AI.",
     bullets: [
       "Weekly in-depth issues",
-      "Case studies and research findings",
-      "Insights and industry trends"
+      "Case studies and research",
+      "Industry insights and trends"
     ],
     cta: {
       label: "Subscribe",
@@ -198,12 +197,11 @@ const pathOptions = [
   },
   {
     title: "Live workshop\nwith certification",
-    description:
-      "A live workshop with vibe coding, agent building, and agentic design systems built to take you from curious to shipping.",
+    description: "Vibe coding, agents, and design systems — from curious to shipping.",
     bullets: [
-      "4.6/5 rating across workshops",
+      "4.6/5 across workshops",
       "Live sessions with John",
-      "Ship a real AI product workflow"
+      "Ship a real AI workflow"
     ],
     cta: {
       label: "Join the live workshop",
@@ -215,11 +213,11 @@ const pathOptions = [
   },
   {
     title: "Self-paced learning\nat AI Academy",
-    description:
-      "A self-paced track for industry professionals with structured courses, recordings, and an ever-growing library for Claude Code, Cursor, and Codex.",
+    description: "Structured tracks and recordings for Claude Code, Cursor, and Codex.",
     bullets: [
-      "Structured courses and tracks for Claude Code, Cursor, Codex, and more",
-      "Stay updated with the latest AI research, news, and trends"
+      "Claude Code, Cursor, and Codex tracks",
+      "Recordings, prompts, and templates",
+      "Latest AI research and news"
     ],
     cta: {
       label: "Join the Academy",
@@ -482,9 +480,8 @@ function AcademyPage() {
                 <span className="academy-hero-line">Ship agentic products.</span>
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
-                AI fluency that shows up in your workflow.
-                <br />
-                Live workshop with certification, or self-paced learning at AI Academy.
+                AI fluency that shows up in your workflow. Live workshop with
+                certification, or self-paced learning at AI Academy.
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
                 <a
@@ -639,7 +636,7 @@ function AcademyPage() {
           </Entrance>
         </section>
 
-        <section className="academy-section" id="membership">
+        <section className="academy-section academy-section--tight" id="membership">
           <Entrance className="academy-section-heading">
             <EntranceItem as="h2">Choose how you want to learn.</EntranceItem>
           </Entrance>
@@ -741,7 +738,6 @@ function AcademyPage() {
                   <h3>Live Workshop</h3>
                   <div className="academy-price academy-price--thumb">
                     <span>$1,499</span>
-                    <small>/ one-time</small>
                   </div>
                 </div>
               </div>
