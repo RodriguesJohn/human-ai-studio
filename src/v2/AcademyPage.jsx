@@ -174,7 +174,8 @@ const cohortPackageBenefits = [
 const pricingBenefits = [
   "Claude Code, Cursor, and Codex tracks",
   "Latest AI research, news, and trends",
-  "Recordings, prompts, and templates"
+  "Recordings, prompts, and templates",
+  "Skool community access"
 ];
 
 const pathOptions = [
@@ -608,9 +609,6 @@ function AcademyPage() {
         <section className="academy-section" id="membership">
           <Entrance className="academy-section-heading">
             <EntranceItem as="h2">Choose how you want to learn.</EntranceItem>
-            <EntranceItem as="p" className="academy-section-sub">
-              Newsletter, self-paced Academy, or live workshop.
-            </EntranceItem>
           </Entrance>
           <Entrance className="academy-packages">
             <EntranceItem

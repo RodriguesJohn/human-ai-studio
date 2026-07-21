@@ -1226,7 +1226,6 @@
   color: rgba(255, 255, 255, 0.95);
   font-size: clamp(2.1rem, 3.8vw, 2.75rem);
   font-weight: 750;
-  text-shadow: 0 0.35rem 1.2rem rgba(0, 0, 0, 0.35);
 }
 
 .academy-price small {
