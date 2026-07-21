@@ -1,9 +1,27 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import V2App from "./v2/App.jsx";
 
-createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <V2App />
-  </React.StrictMode>
-);
+const route = window.location.pathname.replace(/\/+$/, "") || "/";
+
+async function boot() {
+  const root = createRoot(document.getElementById("root"));
+
+  if (route === "/academy") {
+    const { default: AcademyPage } = await import("./v2/AcademyPage.jsx");
+    root.render(
+      <React.StrictMode>
+        <AcademyPage />
+      </React.StrictMode>
+    );
+    return;
+  }
+
+  const { default: V2App } = await import("./v2/App.jsx");
+  root.render(
+    <React.StrictMode>
+      <V2App />
+    </React.StrictMode>
+  );
+}
+
+boot();

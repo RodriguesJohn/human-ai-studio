@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev:academy": "node scripts/academy-server.mjs",
     "build": "vite build",
     "preview": "vite preview"
   },
