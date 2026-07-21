@@ -24,8 +24,8 @@ const LindaImage = "/academy/Linda.jpeg";
 const AviadImage = "/academy/Avaid.jpeg";
 const DanImage = "/academy/Dan.jpeg";
 
-const ACADEMY_HERO_VIDEO =
-  "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_083109_283f3553-e28f-428b-a723-d639c617eb2b.mp4";
+const ACADEMY_HERO_VIDEO = "/academy/hero.mp4";
+const ACADEMY_HERO_VIDEO_MOBILE = "/academy/hero-mobile.mp4";
 const ACADEMY_HERO_POSTER = "/academy/ai-builder-academy-hero.jpg";
 
 function AcademyHeroVideo() {
@@ -85,6 +85,8 @@ function AcademyHeroVideo() {
       }
     };
 
+    // Load the selected <source> then attempt playback.
+    video.load();
     tryPlay();
 
     const playEvents = [
@@ -122,7 +124,6 @@ function AcademyHeroVideo() {
       <video
         ref={setVideoRef}
         className="academy-hero-video"
-        src={ACADEMY_HERO_VIDEO}
         poster={ACADEMY_HERO_POSTER}
         autoPlay
         muted
@@ -130,7 +131,7 @@ function AcademyHeroVideo() {
         loop
         playsInline
         webkit-playsinline="true"
-        preload="auto"
+        preload="metadata"
         controls={false}
         controlsList="nodownload noplaybackrate noremoteplayback"
         disablePictureInPicture
@@ -138,15 +139,19 @@ function AcademyHeroVideo() {
         onLoadedMetadata={(event) => {
           event.currentTarget.muted = true;
           event.currentTarget.defaultMuted = true;
+          event.currentTarget.play().catch(() => {});
         }}
         onCanPlay={(event) => {
           event.currentTarget.muted = true;
-          const playPromise = event.currentTarget.play();
-          if (playPromise && typeof playPromise.catch === "function") {
-            playPromise.catch(() => {});
-          }
+          event.currentTarget
+            .play()
+            .then(() => event.currentTarget.setAttribute("data-ready", "true"))
+            .catch(() => {});
         }}
-      />
+      >
+        <source src={ACADEMY_HERO_VIDEO_MOBILE} media="(max-width: 768px)" type="video/mp4" />
+        <source src={ACADEMY_HERO_VIDEO} type="video/mp4" />
+      </video>
       <div className="academy-hero-video-gradient" />
       <div className="academy-hero-video-vignette" />
     </div>
