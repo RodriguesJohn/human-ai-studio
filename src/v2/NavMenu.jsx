@@ -14,7 +14,6 @@ const bookingAttributes = {
   "data-cal-config": JSON.stringify(bookingConfig)
 };
 
-const newsletterUrl = "https://johnrodrigues.substack.com/";
 const academyUrl = "/academy";
 const studioUrl = "/";
 
@@ -136,16 +135,6 @@ export function NavMenu() {
           </a>
           <a className="nav-menu-item" href={academyUrl} role="menuitem" onClick={close}>
             Academy
-          </a>
-          <a
-            className="nav-menu-item"
-            href={newsletterUrl}
-            target="_blank"
-            rel="noreferrer"
-            role="menuitem"
-            onClick={close}
-          >
-            Newsletter
           </a>
           <a
             className="nav-menu-item"

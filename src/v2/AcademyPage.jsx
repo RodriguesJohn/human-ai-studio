@@ -157,9 +157,9 @@ const logos = [
 ];
 
 const newsletterBenefits = [
-  "Weekly in-depth issues",
-  "Case studies and research findings",
-  "Insights and industry trends"
+  "Original research & insights",
+  "Product breakdowns & case studies",
+  "Industry trends & practical frameworks"
 ];
 
 const cohortPackageBenefits = [
@@ -180,15 +180,16 @@ const pricingBenefits = [
 
 const pathOptions = [
   {
-    title: "Weekly articles\nfrom the newsletter",
-    description: "AI workflows, case studies, and trends for builders shipping with AI.",
+    title: "Weekly Publication",
+    description:
+      "Original research, case studies, and practical frameworks for founders, designers, and builders shaping the future of AI products.",
     bullets: [
-      "Weekly in-depth issues",
-      "Case studies and research",
-      "Industry insights and trends"
+      "Original research & insights",
+      "Product breakdowns & case studies",
+      "Industry trends & practical frameworks"
     ],
     cta: {
-      label: "Subscribe",
+      label: "Read the Publication",
       href: "#membership",
       className: "academy-btn academy-btn--primary"
     },
@@ -196,8 +197,8 @@ const pathOptions = [
     color2: "#e0f2fe"
   },
   {
-    title: "Live workshop\nwith certification",
-    description: "Vibe coding, agents, and design systems — from curious to shipping.",
+    title: "Workshops and training",
+    description: "Vibe coding, agents, and design systems, from curious to shipping.",
     bullets: [
       "4.6/5 across workshops",
       "Live sessions with John",
@@ -655,7 +656,7 @@ function AcademyPage() {
                   className="academy-package-shader"
                 />
                 <div className="academy-package-thumb-copy">
-                  <h3>Weekly issues</h3>
+                  <h3>Human AI Studio Publication</h3>
                   <div className="academy-price academy-price--thumb">
                     <span>$19</span>
                     <small>/ per month</small>
@@ -663,6 +664,11 @@ function AcademyPage() {
                 </div>
               </div>
               <div className="academy-package-body">
+                <p>
+                  Original research, case studies, and practical frameworks for
+                  founders, designers, and builders shaping the future of AI
+                  products.
+                </p>
                 <ul className="academy-check-list">
                   {newsletterBenefits.map((benefit) => (
                     <li key={benefit}>{benefit}</li>
@@ -674,7 +680,7 @@ function AcademyPage() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Subscribe
+                  Read the Publication
                 </a>
               </div>
             </EntranceItem>

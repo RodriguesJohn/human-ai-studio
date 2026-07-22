@@ -273,7 +273,9 @@ function CinematicHero() {
           className="hero-cinematic-subtitle"
           variants={entranceChild}
         >
-          We help growth-stage startups build products and create experiences people trust so they drive adoption and retention.
+          We help growth-stage startups build products and create experiences{" "}
+          <span className="motto-emphasis">people trust</span> so they drive
+          adoption and retention.
         </motion.p>
 
         <motion.a
@@ -378,26 +380,29 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "AI Native\nProduct Design",
+    title: "0→1 AI Product Design",
     description:
-      "End-to-end AI-native product design and design systems that scale with your product.",
+      "Transforms complex AI into intuitive, trustworthy product experiences.",
     slug: "ai-native-products",
+    stage: "Design",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Design\nEngineering",
+    title: "Design Engineering",
     description:
-      "Hands-on prototyping, production-ready interface components, animations, and senior design engineering support to help your team ship.",
+      "Technical prototyping, production-ready interfaces, motion, Agentic Design Systems, and interactive AI experiences built to help your team ship faster.",
     slug: "design-engineering",
+    stage: "Build",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Growth\nAgents",
+    title: "AI Growth Systems",
     description:
-      "We embed growth agents and AI systems that improve conversion and retention, grow revenue, and help you hit business goals.",
+      "We design and deploy custom AI agents that automate growth workflows, optimize customer journeys, and increase activation, retention, and revenue.",
     slug: "growth-strategies",
+    stage: "Grow",
     color1: "#10b981",
     color2: "#a7f3d0"
   }
@@ -425,7 +430,7 @@ const offeringPages = {
     eyebrow: "Offering 02",
     title: "Design Engineering",
     intro:
-      "Hands-on prototyping, production-ready interface components, animations, and senior design engineering support embedded with your team.",
+      "Technical prototyping, production-ready interfaces, motion, Agentic Design Systems, and interactive AI experiences built to help your team ship faster.",
     status: "placeholder",
     sections: [
       {
@@ -478,9 +483,9 @@ const offeringPages = {
   },
   "growth-strategies": {
     eyebrow: "Offering 03",
-    title: "Growth Agents",
+    title: "AI Growth Systems",
     intro:
-      "We embed growth agents and AI systems that improve conversion and retention, grow revenue, and help you hit business goals.",
+      "We design and deploy custom AI agents that automate growth workflows, optimize customer journeys, and increase activation, retention, and revenue.",
     status: "placeholder",
     sections: [
       {
@@ -1451,7 +1456,6 @@ function StudioHome({ isHistory = false }) {
         ) : (
           <Entrance className="section-heading no-section-note">
             <EntranceItem>
-              <p className="eyebrow">Offerings</p>
               <h2 className="v2-how-heading" id="v2-how-title">
                 Three Ways to Work Together
               </h2>
@@ -1507,7 +1511,7 @@ function StudioHome({ isHistory = false }) {
                     seed={index * 3.7 + 1.3}
                   />
                   <span className="offering-thumb-number">
-                    {String(index + 1).padStart(2, "0")}
+                    {step.stage || String(index + 1).padStart(2, "0")}
                   </span>
                   <h3 className="offering-thumb-title">{step.title}</h3>
                 </div>
@@ -1735,13 +1739,13 @@ function StudioHome({ isHistory = false }) {
           ) : (
             <Entrance className="bio-copy">
               <EntranceItem as="h2" id="v2-bio-title">
-                <span>Fractional design engineer embedded in your team.</span>
+                <span>Your Product & Design Partner</span>
               </EntranceItem>
               <EntranceItem as="p">
-                I'm a design engineer specializing in AI-native products. I've shipped zero-to-one work for Outfix AI, No Scroll, TOCA, and PAM, and built AI tools and banking experiences at JPMorgan and Citi.
+                Over the past 10+ years, I've partnered with startups and enterprise teams to design and ship products used by millions of people. From 0→1 AI startups to JPMorgan and Citi, I combine product design, design engineering, and AI systems to turn complex technology into intuitive products people trust.
               </EntranceItem>
               <EntranceItem as="p">
-                I bring 10 years of industry experience, a master's in Interaction Design, and a bachelor's in Engineering. I publish my findings through my Substack, which is read by 4,000+ industry professionals. I'm the founder of Human AI Studio.
+                Today, I lead Human AI Studio, where we help AI-native startups design, build, and grow category-defining products.
               </EntranceItem>
               <EntranceItem className="bio-actions">
                 <a
@@ -1801,13 +1805,16 @@ function StudioHome({ isHistory = false }) {
           <Entrance className="final-cta-inner final-cta-inner--newsletter">
             <div className="newsletter-cta">
               <EntranceItem className="newsletter-copy">
-                <h2 id="v2-cta-title">Join 4,000+ readers of the newsletter.</h2>
+                <h2 id="v2-cta-title">Human AI Studio Publication</h2>
+                <p className="final-cta-lede">
+                  Join 4,200+ founders, designers, builders, and product leaders.
+                </p>
                 <p className="final-cta-sub">
-                  Publishing research, development projects, and industry trends, straight to your inbox.
+                  Original research, product breakdowns, development logs, and practical frameworks from Human AI Studio—helping teams design, build, and grow exceptional AI products.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
-                    <span className="button-label">Join the newsletter</span>
+                    <span className="button-label">Read the Publication</span>
                   </a>
                 </div>
               </EntranceItem>
@@ -1819,15 +1826,15 @@ function StudioHome({ isHistory = false }) {
                       <span className="issue-mark" />
                       <div className="issue-card-meta">
                         <span className="issue-card-name">Human AI Studio</span>
-                        <span className="issue-card-sub">Weekly · Issue #12</span>
+                        <span className="issue-card-sub">Research Publication</span>
                       </div>
                       <span className="issue-card-pill">Subscribed</span>
                     </div>
                     <p className="issue-card-body">
-                      Get weekly updates on studio research, new industry shifts, and practical ways to level up your business.
+                      Original research, case studies, and practical frameworks for founders, designers, and builders creating the next generation of AI products.
                     </p>
                     <div className="issue-card-foot">
-                      <span className="issue-card-foot-label">Read by people at</span>
+                      <span className="issue-card-foot-label">Read by professionals at</span>
                       <div className="issue-card-logos">
                         {newsletterCompanies.map((company) => (
                           <img key={company.name} src={company.icon} alt={company.name} />
@@ -1927,14 +1934,16 @@ function StudioHome({ isHistory = false }) {
           ) : (
             <div className="newsletter-cta">
               <div className="newsletter-copy">
-                <p className="eyebrow">Newsletter</p>
-                <h2 id="v2-cta-title">Join 4,000+ readers of the newsletter.</h2>
+                <h2 id="v2-cta-title">Human AI Studio Publication</h2>
+                <p className="final-cta-lede">
+                  Join 4,200+ founders, designers, builders, and product leaders.
+                </p>
                 <p className="final-cta-sub">
-                  Publishing research, development projects, and industry trends, straight to your inbox.
+                  Original research, product breakdowns, development logs, and practical frameworks from Human AI Studio—helping teams design, build, and grow exceptional AI products.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
-                    <span className="button-label">Join the newsletter</span>
+                    <span className="button-label">Read the Publication</span>
                   </a>
                 </div>
               </div>
@@ -1946,15 +1955,15 @@ function StudioHome({ isHistory = false }) {
                     <span className="issue-mark" />
                     <div className="issue-card-meta">
                       <span className="issue-card-name">Human AI Studio</span>
-                      <span className="issue-card-sub">Weekly · Issue #12</span>
+                      <span className="issue-card-sub">Research Publication</span>
                     </div>
                     <span className="issue-card-pill">Subscribed</span>
                   </div>
                   <p className="issue-card-body">
-                    Get weekly updates on studio research, new industry shifts, and practical ways to level up your business.
+                    Original research, case studies, and practical frameworks for founders, designers, and builders creating the next generation of AI products.
                   </p>
                   <div className="issue-card-foot">
-                    <span className="issue-card-foot-label">Read by people at</span>
+                    <span className="issue-card-foot-label">Read by professionals at</span>
                     <div className="issue-card-logos">
                       {newsletterCompanies.map((company) => (
                         <img key={company.name} src={company.icon} alt={company.name} />
@@ -2023,7 +2032,7 @@ function StudioHome({ isHistory = false }) {
             <Entrance className="footer-column">
               <EntranceItem as="p">Contact</EntranceItem>
               <EntranceItem as="a" href={newsletterUrl} target="_blank" rel="noreferrer">
-                Newsletter
+                Publication
               </EntranceItem>
               <EntranceItem as="a" href="mailto:john@humanaistudio.ai">
                 john@humanaistudio.ai

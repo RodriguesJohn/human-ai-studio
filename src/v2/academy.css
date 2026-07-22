@@ -360,7 +360,11 @@ html:has(.academy-page) {
 }
 
 .academy-section--tight {
-  padding-top: clamp(3.5rem, 6vw, 5rem);
+  padding-top: clamp(5.5rem, 9vw, 7.5rem);
+}
+
+#membership {
+  scroll-margin-top: 5.5rem;
 }
 
 .academy-section-heading {
@@ -882,16 +886,16 @@ html:has(.academy-page) {
 
 .academy-testimonial {
   display: flex;
-  width: min(26rem, calc(100vw - 2.5rem));
-  min-height: 15.5rem;
+  width: min(30rem, calc(100vw - 2.5rem));
+  min-height: 17rem;
   margin: 0;
   flex-direction: column;
   flex-shrink: 0;
-  gap: 1.15rem;
+  gap: 1.25rem;
   border: 0;
   border-radius: 1.15rem;
   background: rgba(255, 255, 255, 0.035);
-  padding: 1.3rem;
+  padding: 1.5rem;
 }
 
 .academy-testimonial figcaption {
@@ -944,7 +948,7 @@ html:has(.academy-page) {
 .academy-testimonial blockquote {
   margin: 0;
   color: rgba(255, 255, 255, 0.78);
-  font-size: 1rem;
+  font-size: 1.08rem;
   line-height: 1.55;
 }
 
@@ -1445,7 +1449,11 @@ html:has(.academy-page) {
   }
 
   .academy-section--tight {
-    padding-top: 3rem;
+    padding-top: 4.5rem;
+  }
+
+  #membership {
+    scroll-margin-top: 4.5rem;
   }
 
   .academy-section-heading {
@@ -1581,9 +1589,9 @@ html:has(.academy-page) {
   }
 
   .academy-testimonial {
-    width: min(22rem, calc(100vw - 2rem));
-    min-height: 14.5rem;
-    padding: 1.15rem;
+    width: min(26rem, calc(100vw - 2rem));
+    min-height: 16rem;
+    padding: 1.3rem;
   }
 }
 
