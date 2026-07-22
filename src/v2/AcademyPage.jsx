@@ -189,7 +189,7 @@ const pathOptions = [
     ],
     cta: {
       label: "Subscribe",
-      href: NEWSLETTER_URL,
+      href: "#membership",
       className: "academy-btn academy-btn--primary"
     },
     color1: "#38bdf8",
@@ -205,7 +205,7 @@ const pathOptions = [
     ],
     cta: {
       label: "Join the live workshop",
-      href: COHORT_URL,
+      href: "#membership",
       className: "academy-btn academy-btn--primary"
     },
     color1: "#3b82f6",
@@ -221,7 +221,7 @@ const pathOptions = [
     ],
     cta: {
       label: "Join the Academy",
-      href: ACADEMY_URL,
+      href: "#membership",
       className: "academy-btn academy-btn--primary"
     },
     color1: "#8b5cf6",
@@ -549,8 +549,6 @@ function AcademyPage() {
                   <a
                     className={path.cta.className}
                     href={path.cta.href}
-                    target="_blank"
-                    rel="noreferrer"
                   >
                     {path.cta.label}
                   </a>

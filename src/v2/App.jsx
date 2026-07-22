@@ -273,7 +273,7 @@ function CinematicHero() {
           className="hero-cinematic-subtitle"
           variants={entranceChild}
         >
-          We help growth stage startups ship AI-native products with thoughtful experience design, design systems, and growth strategies.
+          We help growth-stage startups build products and create experiences people trust so they drive adoption and retention.
         </motion.p>
 
         <motion.a
@@ -394,9 +394,9 @@ const homeOffers = [
     color2: "#ddd6fe"
   },
   {
-    title: "Growth\nStrategies",
+    title: "Growth\nAgents",
     description:
-      "Product positioning, AI agent integration, conversion and retention, and revenue growth work that helps the product hit business goals.",
+      "We embed growth agents and AI systems that improve conversion and retention, grow revenue, and help you hit business goals.",
     slug: "growth-strategies",
     color1: "#10b981",
     color2: "#a7f3d0"
@@ -478,9 +478,9 @@ const offeringPages = {
   },
   "growth-strategies": {
     eyebrow: "Offering 03",
-    title: "Growth Strategies",
+    title: "Growth Agents",
     intro:
-      "Product positioning, AI agent integration, conversion and retention, and revenue growth tied to business goals.",
+      "We embed growth agents and AI systems that improve conversion and retention, grow revenue, and help you hit business goals.",
     status: "placeholder",
     sections: [
       {
@@ -1543,7 +1543,6 @@ function StudioHome({ isHistory = false }) {
           <div className="work-showcase-inner">
             <Entrance className="section-heading no-section-note work-heading">
               <EntranceItem>
-                <p className="eyebrow">Work</p>
                 <h2 id="work-title">Selected Projects</h2>
               </EntranceItem>
               <EntranceItem className="work-nav">
@@ -1802,7 +1801,6 @@ function StudioHome({ isHistory = false }) {
           <Entrance className="final-cta-inner final-cta-inner--newsletter">
             <div className="newsletter-cta">
               <EntranceItem className="newsletter-copy">
-                <p className="eyebrow">Newsletter</p>
                 <h2 id="v2-cta-title">Join 4,000+ readers of the newsletter.</h2>
                 <p className="final-cta-sub">
                   Publishing research, development projects, and industry trends, straight to your inbox.
@@ -1849,7 +1847,6 @@ function StudioHome({ isHistory = false }) {
           <div className="testimonials-inner">
             <Entrance className="section-heading no-section-note">
               <EntranceItem>
-                <p className="eyebrow">Testimonials</p>
                 <h2 id="testimonials-title">What People Say</h2>
               </EntranceItem>
             </Entrance>
