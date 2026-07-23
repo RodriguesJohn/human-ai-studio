@@ -288,7 +288,7 @@ function CinematicHero() {
           <span className="hero-cinematic-avatar" aria-hidden="true">
             <img src={profilePicture} alt="" />
           </span>
-          <span>Book discovery call</span>
+          <span>Book 15 min strategy call</span>
         </motion.a>
       </motion.div>
     </section>
@@ -326,7 +326,7 @@ function BookingButton({ showAvatar = false }) {
           <img src={profilePicture} alt="" />
         </span>
       )}
-      <span className="button-label">Book discovery call</span>
+      <span className="button-label">Book 15 min strategy call</span>
     </motion.a>
   );
 }
@@ -1378,7 +1378,7 @@ function OriginalHome() {
           <div className="footer-column">
             <p>Contact</p>
             <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
-            <BookingTextLink>Book discovery call</BookingTextLink>
+            <BookingTextLink>Book 15 min strategy call</BookingTextLink>
           </div>
         </div>
       </footer>
@@ -2196,7 +2196,7 @@ function OfferingPage({ slug }) {
           <div className="footer-column">
             <p>Contact</p>
             <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
-            <BookingTextLink>Book discovery call</BookingTextLink>
+            <BookingTextLink>Book 15 min strategy call</BookingTextLink>
           </div>
         </div>
         <div className="footer-wordmark reveal" aria-hidden="true">
