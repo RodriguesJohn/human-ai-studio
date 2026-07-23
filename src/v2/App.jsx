@@ -1810,7 +1810,7 @@ function StudioHome({ isHistory = false }) {
                   Join 4,200+ founders, designers, builders, and product leaders.
                 </p>
                 <p className="final-cta-sub">
-                  Original research, product breakdowns, development logs, and practical frameworks from Human AI Studio—helping teams design, build, and grow exceptional AI products.
+                  Original research, product breakdowns, development logs, and practical frameworks from Human AI Studio, helping teams design, build, and grow exceptional AI products.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
@@ -1939,7 +1939,7 @@ function StudioHome({ isHistory = false }) {
                   Join 4,200+ founders, designers, builders, and product leaders.
                 </p>
                 <p className="final-cta-sub">
-                  Original research, product breakdowns, development logs, and practical frameworks from Human AI Studio—helping teams design, build, and grow exceptional AI products.
+                  Original research, product breakdowns, development logs, and practical frameworks from Human AI Studio, helping teams design, build, and grow exceptional AI products.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
