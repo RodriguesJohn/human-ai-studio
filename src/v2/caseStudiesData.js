@@ -15,23 +15,6 @@ import ultraMockWorkPoster from "../assets/work/UltraMock.png";
 
 export const caseStudies = [
   {
-    slug: "olo",
-    title: "Olo",
-    label: "Website Design · olo.app",
-    overview:
-      "Website design for Olo, a sound-as-medicine product experience built to feel calm, immersive, and clear from the first scroll.",
-    problem:
-      "The brand needed a marketing site that could carry the “Olo Effect” — alertness and calm — without feeling clinical, noisy, or hard to understand.",
-    outcome:
-      "A live marketing website at olo.app that presents the product story, science, and download path with a calmer, more immersive narrative.",
-    video: ultraMockWorkVideo,
-    image: ultraMockWorkPoster,
-    position: "center bottom",
-    fit: "contain",
-    containTone: "light",
-    appUrl: "https://www.olo.app/"
-  },
-  {
     slug: "purefi",
     title: "PureFi",
     label: "Native Mobile Redesign · AI-Ready Design System",
@@ -128,6 +111,23 @@ export const caseStudies = [
     image: balanceTransferWorkPoster,
     position: "center",
     fit: "contain"
+  },
+  {
+    slug: "olo",
+    title: "Olo",
+    label: "Website Design · olo.app",
+    overview:
+      "Website design for Olo, a sound-as-medicine product experience built to feel calm, immersive, and clear from the first scroll.",
+    problem:
+      "The brand needed a marketing site that could carry the “Olo Effect” — alertness and calm — without feeling clinical, noisy, or hard to understand.",
+    outcome:
+      "A live marketing website at olo.app that presents the product story, science, and download path with a calmer, more immersive narrative.",
+    video: ultraMockWorkVideo,
+    image: ultraMockWorkPoster,
+    position: "center top",
+    fit: "cover",
+    mediaShift: "down",
+    appUrl: "https://www.olo.app/"
   },
   {
     slug: "no-scroll",

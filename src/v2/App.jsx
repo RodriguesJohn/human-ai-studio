@@ -506,15 +506,6 @@ const offeringPages = {
 
 const workItems = [
   {
-    label: "Website Design · olo.app",
-    title: "Olo",
-    video: ultraMockWorkVideo,
-    image: ultraMockWorkPoster,
-    position: "center bottom",
-    fit: "contain",
-    containTone: "light"
-  },
-  {
     label: "Native Mobile Redesign and AI Ready Design System",
     title: "PureFi",
     video: pureFiVideo,
@@ -562,6 +553,15 @@ const workItems = [
     image: balanceTransferWorkPoster,
     position: "center",
     fit: "contain"
+  },
+  {
+    label: "Website Design · olo.app",
+    title: "Olo",
+    video: ultraMockWorkVideo,
+    image: ultraMockWorkPoster,
+    position: "center top",
+    fit: "cover",
+    mediaShift: "down"
   },
   {
     label: "iOS · 4.6★ · 50K Users",

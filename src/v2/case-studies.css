@@ -315,6 +315,20 @@ html:has(.cs-page) body {
   background: #f6f6f6;
 }
 
+.cs-media--shift-down {
+  background: #f6f6f6;
+  overflow: hidden;
+}
+
+.cs-media--shift-down video,
+.cs-media--shift-down img {
+  inset: auto 0 -18% 0;
+  width: 100%;
+  height: 128%;
+  object-fit: cover;
+  object-position: center top;
+}
+
 .cs-list {
   display: grid;
   gap: 0;

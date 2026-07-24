@@ -57,7 +57,7 @@ function openBookingModal(event) {
 }
 
 function CaseStudyMedia({ study, className = "", priority = false }) {
-  const mediaClass = `cs-media${study.fit === "contain" ? " cs-media--contain" : ""}${study.containTone === "light" ? " cs-media--contain-light" : ""}${className ? ` ${className}` : ""}`;
+  const mediaClass = `cs-media${study.fit === "contain" ? " cs-media--contain" : ""}${study.containTone === "light" ? " cs-media--contain-light" : ""}${study.mediaShift === "down" ? " cs-media--shift-down" : ""}${className ? ` ${className}` : ""}`;
   const containerRef = React.useRef(null);
   const videoRef = React.useRef(null);
   const [shouldLoad, setShouldLoad] = React.useState(false);
