@@ -23,6 +23,16 @@ async function boot() {
       return;
     }
 
+    if (route === "/case-studies") {
+      const { default: CaseStudiesPage } = await import("./v2/CaseStudiesPage.jsx");
+      root.render(
+        <React.StrictMode>
+          <CaseStudiesPage />
+        </React.StrictMode>
+      );
+      return;
+    }
+
     const { default: V2App } = await import("./v2/App.jsx");
     root.render(
       <React.StrictMode>

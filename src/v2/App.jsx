@@ -17,7 +17,11 @@ import florenceWorkImage from "../assets/work/Florence.png";
 import ollieWorkVideo from "../assets/work/OllieAIDemo.mp4";
 import ollieWorkPoster from "../assets/work/OllieAIV1.png";
 import balanceTransferWorkVideo from "../assets/work/BT.mp4";
+import balanceTransferWorkPoster from "../assets/work/BT1.png";
 import noScrollWorkImage from "../assets/work/NoScrollApp.png";
+import dcbWorkImage from "../assets/work/DCB.png";
+import ultraMockWorkVideo from "../assets/work/UltraMock.mp4";
+import ultraMockWorkPoster from "../assets/work/UltraMock.png";
 import codexLogo from "../assets/logos/claude-code.png";
 import vercelLogo from "../assets/logos/codex.png";
 import cursorLogo from "../assets/logos/cursor.webp";
@@ -502,6 +506,15 @@ const offeringPages = {
 
 const workItems = [
   {
+    label: "Website Design · olo.app",
+    title: "Olo",
+    video: ultraMockWorkVideo,
+    image: ultraMockWorkPoster,
+    position: "center bottom",
+    fit: "contain",
+    containTone: "light"
+  },
+  {
     label: "Native Mobile Redesign and AI Ready Design System",
     title: "PureFi",
     video: pureFiVideo,
@@ -515,11 +528,18 @@ const workItems = [
     position: "center"
   },
   {
+    label: "JPMorgan Chase · B2B SaaS Platform",
+    title: "Digital Commercial Banking",
+    image: dcbWorkImage,
+    position: "center"
+  },
+  {
     label: "AI Styling · 0 → 1 Product",
     title: "Outfix AI",
     video: outfixWorkVideo,
     image: outfixWorkPoster,
-    position: "center"
+    position: "center",
+    fit: "contain"
   },
   {
     label: "Voice Todo",
@@ -539,15 +559,17 @@ const workItems = [
     label: "Citi · Consumer Banking",
     title: "Balance Transfer",
     video: balanceTransferWorkVideo,
-    image: studioAbstract,
-    position: "center"
+    image: balanceTransferWorkPoster,
+    position: "center",
+    fit: "contain"
   },
   {
     label: "iOS · 4.6★ · 50K Users",
     title: "No Scroll",
     image: noScrollWorkImage,
     position: "center",
-    fit: "contain"
+    fit: "contain",
+    containTone: "light"
   }
 ];
 
@@ -1549,39 +1571,44 @@ function StudioHome({ isHistory = false }) {
               <EntranceItem>
                 <h2 id="work-title">Selected Projects</h2>
               </EntranceItem>
-              <EntranceItem className="work-nav">
-                <button
-                  type="button"
-                  className="work-nav-btn work-nav-prev"
-                  aria-label="Previous projects"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path
-                      d="M15 5l-7 7 7 7"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.7"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
-                <button
-                  type="button"
-                  className="work-nav-btn work-nav-next"
-                  aria-label="Next projects"
-                >
-                  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                    <path
-                      d="M9 5l7 7-7 7"
-                      fill="none"
-                      stroke="currentColor"
-                      strokeWidth="1.7"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </button>
+              <EntranceItem className="work-heading-actions">
+                <a className="work-case-studies-cta" href="/case-studies">
+                  View Case Studies
+                </a>
+                <div className="work-nav">
+                  <button
+                    type="button"
+                    className="work-nav-btn work-nav-prev"
+                    aria-label="Previous projects"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path
+                        d="M15 5l-7 7 7 7"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                  <button
+                    type="button"
+                    className="work-nav-btn work-nav-next"
+                    aria-label="Next projects"
+                  >
+                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                      <path
+                        d="M9 5l7 7-7 7"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="1.7"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </button>
+                </div>
               </EntranceItem>
             </Entrance>
           </div>
@@ -1593,7 +1620,7 @@ function StudioHome({ isHistory = false }) {
                   key={`${item.title}-${index}`}
                   aria-hidden={index >= workItems.length}
                 >
-                  <div className={`work-card-media${item.fit === "contain" ? " work-card-media-contain" : ""}`}>
+                  <div className={`work-card-media${item.fit === "contain" ? " work-card-media-contain" : ""}${item.containTone === "light" ? " work-card-media-contain-light" : ""}`}>
                     {item.video ? (
                       <video
                         src={item.video}

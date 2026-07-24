@@ -4,6 +4,11 @@
       "source": "/academy/",
       "destination": "/academy",
       "permanent": true
+    },
+    {
+      "source": "/case-studies/",
+      "destination": "/case-studies",
+      "permanent": true
     }
   ],
   "rewrites": [

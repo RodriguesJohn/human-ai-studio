@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Outfit AI">
+  <defs>
+    <linearGradient id="oBack" x1="18" y1="10" x2="52" y2="54" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E8C04A"/>
+      <stop offset="1" stop-color="#D4A033"/>
+    </linearGradient>
+    <linearGradient id="oFront" x1="10" y1="6" x2="46" y2="50" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7E88A"/>
+      <stop offset="0.55" stop-color="#F0D15A"/>
+      <stop offset="1" stop-color="#E4B43C"/>
+    </linearGradient>
+  </defs>
+  <g transform="translate(32 33)">
+    <rect width="34" height="34" x="-15" y="-15" rx="9.5" transform="rotate(16)" fill="url(#oBack)"/>
+    <rect width="34" height="34" x="-19" y="-19" rx="9.5" transform="rotate(-12)" fill="url(#oFront)"/>
+  </g>
+</svg>

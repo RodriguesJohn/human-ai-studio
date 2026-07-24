@@ -3135,6 +3135,38 @@ h3 {
   align-items: center;
 }
 
+.work-heading-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.85rem;
+}
+
+.work-case-studies-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.9rem;
+  padding: 0.7rem 1.15rem;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.06);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.78rem;
+  font-weight: 620;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.work-case-studies-cta:hover {
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+}
+
 .work-nav {
   display: flex;
   gap: 0.6rem;
@@ -3224,12 +3256,16 @@ h3 {
 }
 
 .work-card-media-contain {
-  background: radial-gradient(135% 125% at 50% 40%, #ffffff 0%, #f8f8f8 55%, #f4f4f4 100%);
+  background: #050506;
 }
 
 .work-card-media-contain img,
 .work-card-media-contain video {
   object-fit: contain;
+}
+
+.work-card-media-contain-light {
+  background: #f6f6f6;
 }
 
 .work-card-meta {

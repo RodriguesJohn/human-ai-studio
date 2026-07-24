@@ -15,6 +15,7 @@ const bookingAttributes = {
 };
 
 const academyUrl = "/academy";
+const caseStudiesUrl = "/case-studies";
 const studioUrl = "/";
 
 function openBookingModal(event) {
@@ -132,6 +133,9 @@ export function NavMenu() {
         >
           <a className="nav-menu-item" href={studioUrl} role="menuitem" onClick={close}>
             Studio
+          </a>
+          <a className="nav-menu-item" href={caseStudiesUrl} role="menuitem" onClick={close}>
+            Case Studies
           </a>
           <a className="nav-menu-item" href={academyUrl} role="menuitem" onClick={close}>
             Academy
