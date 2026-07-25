@@ -201,10 +201,10 @@ export default function CaseStudiesPage() {
           <div className="cs-hero-copy">
             <Entrance className="cs-hero-copy-inner" animate="visible">
               <EntranceItem as="h1" id="cs-hero-title">
-                Case Studies
+                All Work
               </EntranceItem>
               <EntranceItem as="p" className="cs-hero-sub">
-                Selected product work across AI-native startups, design systems, and enterprise experiences.
+                AI systems, agentic products, and design systems built for startups and enterprise teams — work that streamlines operations and unlocks measurable growth.
               </EntranceItem>
               <EntranceItem className="cs-cta-row">
                 <a
@@ -263,7 +263,11 @@ export default function CaseStudiesPage() {
                   </div>
                 </dl>
                 <div className="cs-study-cta-row">
-                  {study.appUrl ? (
+                  {study.offerUrl ? (
+                    <a className="cs-cta cs-cta--compact" href={study.offerUrl}>
+                      {study.ctaLabel || "Learn more"}
+                    </a>
+                  ) : study.appUrl ? (
                     <a
                       className="cs-cta cs-cta--compact"
                       href={study.appUrl}

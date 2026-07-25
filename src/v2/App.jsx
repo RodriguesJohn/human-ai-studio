@@ -22,6 +22,8 @@ import noScrollWorkImage from "../assets/work/NoScrollApp.png";
 import dcbWorkImage from "../assets/work/DCB.png";
 import ultraMockWorkVideo from "../assets/work/UltraMock.mp4";
 import ultraMockWorkPoster from "../assets/work/UltraMock.png";
+import aiInsightsWorkVideo from "../assets/work/AIInsightsApp.mp4";
+import aiInsightsWorkPoster from "../assets/work/AIInsightsPoster.webp";
 import codexLogo from "../assets/logos/claude-code.png";
 import vercelLogo from "../assets/logos/codex.png";
 import cursorLogo from "../assets/logos/cursor.webp";
@@ -40,6 +42,7 @@ import storybookLogo from "../assets/logos/storybook.png";
 import typescriptLogo from "../assets/logos/typescript.webp";
 import ProductPage from "./ProductPage.jsx";
 import AcademyPage from "./AcademyPage.jsx";
+import FlorenceOfferPage from "./FlorenceOfferPage.jsx";
 import tocaCompanyLogo from "../assets/companies/Toca.png";
 import citiCompanyLogo from "../assets/companies/Citi.svg.png";
 import chaseCompanyLogo from "../assets/companies/ChaseLightMOde.png";
@@ -263,13 +266,13 @@ function CinematicHero() {
             className="hero-cinematic-line"
             variants={entranceChild}
           >
-            Product Studio for
+            AI Systems for
           </motion.span>
           <motion.span
             className="hero-cinematic-line"
             variants={entranceChild}
           >
-            AI-Native Startups
+            Business Transformation
           </motion.span>
         </h1>
 
@@ -277,23 +280,40 @@ function CinematicHero() {
           className="hero-cinematic-subtitle"
           variants={entranceChild}
         >
-          We help growth-stage startups build products and create experiences{" "}
-          <span className="motto-emphasis">people trust</span> so they drive
-          adoption and retention.
+          We help startups and enterprise teams build AI systems{" "}
+          <span className="motto-emphasis">people trust</span> so they streamline
+          operations and unlock measurable business growth.
         </motion.p>
 
-        <motion.a
-          className="hero-cinematic-cta liquid-glass"
-          href={bookingUrl}
-          onClick={openBookingModal}
-          {...bookingAttributes}
-          variants={entranceChild}
-        >
-          <span className="hero-cinematic-avatar" aria-hidden="true">
-            <img src={profilePicture} alt="" />
+        <motion.div className="hero-cinematic-cta-row" variants={entranceChild}>
+          <a
+            className="hero-cinematic-cta liquid-glass"
+            href={bookingUrl}
+            onClick={openBookingModal}
+            {...bookingAttributes}
+          >
+            <span className="hero-cinematic-avatar" aria-hidden="true">
+              <img src={profilePicture} alt="" />
+            </span>
+            <span>Book 15 min strategy call</span>
+          </a>
+          <span className="hero-cinematic-spots">
+            <svg
+              className="hero-cinematic-spots-icon"
+              viewBox="0 0 16 16"
+              fill="none"
+              aria-hidden="true"
+            >
+              <path
+                d="M9.2 1.5 3.4 9.1h4.1L6.8 14.5l5.8-7.6H8.5L9.2 1.5Z"
+                stroke="currentColor"
+                strokeWidth="1.2"
+                strokeLinejoin="round"
+              />
+            </svg>
+            2 spots left
           </span>
-          <span>Book 15 min strategy call</span>
-        </motion.a>
+        </motion.div>
       </motion.div>
     </section>
   );
@@ -384,29 +404,29 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "0→1 AI Product Design",
+    title: "AI Systems Strategy",
     description:
-      "Transforms complex AI into intuitive, trustworthy product experiences.",
+      "Audits and team workshops to find the gaps, what's working, what's not, and where AI fits. You leave with clear recommendations and a custom integration strategy, because one size never fits.",
     slug: "ai-native-products",
-    stage: "Design",
+    stage: "Strategy",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Design Engineering",
+    title: "Design and MVP Development",
     description:
-      "Technical prototyping, production-ready interfaces, motion, Agentic Design Systems, and interactive AI experiences built to help your team ship faster.",
+      "We design, build, and validate the MVPs, agentic experiences, and systems that drive your business transformation, cutting time, growing revenue, streamlining operations, and shipping faster.",
     slug: "design-engineering",
-    stage: "Build",
+    stage: "Develop",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "AI Growth Systems",
+    title: "AI Enablement, Workshops and Training",
     description:
-      "We design and deploy custom AI agents that automate growth workflows, optimize customer journeys, and increase activation, retention, and revenue.",
-    slug: "growth-strategies",
-    stage: "Grow",
+      "Custom workshops and hands-on training so teams become AI-native and apply new systems in their real workflows.",
+    slug: "ai-training-enablement",
+    stage: "Enable",
     color1: "#10b981",
     color2: "#a7f3d0"
   }
@@ -432,7 +452,7 @@ const offeringPages = {
   },
   "design-engineering": {
     eyebrow: "Offering 02",
-    title: "Design Engineering",
+    title: "MVP Development through Design Engineering",
     intro:
       "Technical prototyping, production-ready interfaces, motion, Agentic Design Systems, and interactive AI experiences built to help your team ship faster.",
     status: "placeholder",
@@ -466,7 +486,7 @@ const offeringPages = {
   },
   "ai-training-enablement": {
     eyebrow: "Offering 03",
-    title: "AI Enablmenrt",
+    title: "AI Enablement, Workshops and Training",
     intro:
       "Custom workshops and cohorts for your teams to become truly AI-native, with hands-on guidance tailored to how your team actually works.",
     status: "live",
@@ -487,24 +507,42 @@ const offeringPages = {
   },
   "growth-strategies": {
     eyebrow: "Offering 03",
-    title: "AI Growth Systems",
+    title: "AI Enablement, Workshops and Training",
     intro:
-      "We design and deploy custom AI agents that automate growth workflows, optimize customer journeys, and increase activation, retention, and revenue.",
-    status: "placeholder",
+      "Custom workshops and cohorts for your teams to become truly AI-native, with hands-on guidance tailored to how your team actually works.",
+    status: "live",
     sections: [
       {
-        heading: "What this looks like",
-        body: "Clarify product positioning, integrate AI agents where they drive outcomes, and tighten conversion and retention so revenue grows with the product."
+        heading: "What you get",
+        body: "Live, hands-on workshops built around your real workflows. Teams leave with practical AI habits, prompts, and systems they use the next day."
       },
       {
-        heading: "Where it fits",
-        body: "Founders who need positioning, AI integration, and conversion and retention to pull toward the same business goals."
+        heading: "Format",
+        body: "Half-day or multi-session engagements, in-person or remote, sized to your team. Follow-up materials and playbooks included."
+      },
+      {
+        heading: "Outcomes",
+        body: "Faster execution, higher-quality output, and a team that treats AI as a core tool rather than a novelty."
       }
     ]
   }
 };
 
 const workItems = [
+  {
+    label: "Agent Ready Design System",
+    title: "Florence",
+    image: florenceWorkImage,
+    position: "center",
+    description: (
+      <>
+        An agent-ready design system, so AI reuses real components instead of
+        inventing UI. Early eval: <strong>95% query accuracy</strong> on catalog
+        matches, with potential <strong>$10M+</strong> in yearly savings at
+        enterprise scale.
+      </>
+    )
+  },
   {
     label: "Native Mobile Redesign and AI Ready Design System",
     title: "PureFi",
@@ -513,16 +551,12 @@ const workItems = [
     position: "72% 46%"
   },
   {
-    label: "Agent Ready Design System",
-    title: "Florence",
-    image: florenceWorkImage,
-    position: "center"
-  },
-  {
     label: "JPMorgan Chase · B2B SaaS Platform",
     title: "Digital Commercial Banking",
     image: dcbWorkImage,
-    position: "center"
+    position: "center",
+    description:
+      "AI agents integration, AI enablement, and hands-on workshops to accelerate workflows and drive transformation across the commercial banking platform, at enterprise dataset scale."
   },
   {
     label: "AI Styling · 0 → 1 Product",
@@ -553,6 +587,15 @@ const workItems = [
     image: balanceTransferWorkPoster,
     position: "center",
     fit: "contain"
+  },
+  {
+    label: "Citi · AI Strategy",
+    title: "AI Insights",
+    video: aiInsightsWorkVideo,
+    image: aiInsightsWorkPoster,
+    position: "center",
+    description:
+      "AI strategy work at Citibank, including an AI insights app that turns complex banking data into clear, decision-ready insights."
   },
   {
     label: "Website Design · olo.app",
@@ -1146,7 +1189,7 @@ function useMarqueeStart() {
 
     const loopWidth = () => track.scrollWidth / 2; // items are duplicated
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const glideSpeed = 46; // pixels per second
+    const glideSpeed = 24; // pixels per second
     let animationFrame = null;
     let lastTimestamp = null;
     let paused = false;
@@ -1569,11 +1612,11 @@ function StudioHome({ isHistory = false }) {
           <div className="work-showcase-inner">
             <Entrance className="section-heading no-section-note work-heading">
               <EntranceItem>
-                <h2 id="work-title">Selected Projects</h2>
+                <h2 id="work-title">Work Highlights</h2>
               </EntranceItem>
               <EntranceItem className="work-heading-actions">
                 <a className="work-case-studies-cta" href="/case-studies">
-                  View Case Studies
+                  View all
                 </a>
                 <div className="work-nav">
                   <button
@@ -1639,6 +1682,9 @@ function StudioHome({ isHistory = false }) {
                   <div className="work-card-meta">
                     <strong>{item.title}</strong>
                     <span>{item.label}</span>
+                    {item.description && (
+                      <p className="work-card-desc">{item.description}</p>
+                    )}
                   </div>
                 </article>
               ))}
@@ -1766,13 +1812,13 @@ function StudioHome({ isHistory = false }) {
           ) : (
             <Entrance className="bio-copy">
               <EntranceItem as="h2" id="v2-bio-title">
-                <span>Your Product & Design Partner</span>
+                <span>Your Design Engineering Partner</span>
               </EntranceItem>
               <EntranceItem as="p">
-                Over the past 10+ years, I've partnered with startups and enterprise teams to design and ship products used by millions of people. From 0→1 AI startups to JPMorgan and Citi, I combine product design, design engineering, and AI systems to turn complex technology into intuitive products people trust.
+                I work with teams from startups to enterprise, combining AI strategy and design engineering to turn complex technology into products people trust. I hold a Master's in Interaction Design, a Bachelor's in Engineering, and completed Stanford's AI and UX program.
               </EntranceItem>
               <EntranceItem as="p">
-                Today, I lead Human AI Studio, where we help AI-native startups design, build, and grow category-defining products.
+                I've earned recognition from JPMorgan Chase leadership, and my Substack, four years running, is read by 4,200+ designers, leaders, and founders from Apple, Google, and other top companies.
               </EntranceItem>
               <EntranceItem className="bio-actions">
                 <a
@@ -1834,10 +1880,10 @@ function StudioHome({ isHistory = false }) {
               <EntranceItem className="newsletter-copy">
                 <h2 id="v2-cta-title">Human AI Studio Publication</h2>
                 <p className="final-cta-lede">
-                  Join 4,200+ founders, designers, builders, and product leaders.
+                  Join 4,200+ founders, business leaders, designers, and operators.
                 </p>
                 <p className="final-cta-sub">
-                  Original research, product breakdowns, development logs, and practical frameworks from Human AI Studio, helping teams design, build, and grow exceptional AI products.
+                  Business case studies, AI insights, and industry trends to help leaders put AI to work.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
@@ -1858,7 +1904,7 @@ function StudioHome({ isHistory = false }) {
                       <span className="issue-card-pill">Subscribed</span>
                     </div>
                     <p className="issue-card-body">
-                      Original research, case studies, and practical frameworks for founders, designers, and builders creating the next generation of AI products.
+                      Business case studies, insights, and industry trends for founders, business leaders, and designers putting AI to work.
                     </p>
                     <div className="issue-card-foot">
                       <span className="issue-card-foot-label">Read by professionals at</span>
@@ -1963,10 +2009,10 @@ function StudioHome({ isHistory = false }) {
               <div className="newsletter-copy">
                 <h2 id="v2-cta-title">Human AI Studio Publication</h2>
                 <p className="final-cta-lede">
-                  Join 4,200+ founders, designers, builders, and product leaders.
+                  Join 4,200+ founders, business leaders, designers, and operators.
                 </p>
                 <p className="final-cta-sub">
-                  Original research, product breakdowns, development logs, and practical frameworks from Human AI Studio, helping teams design, build, and grow exceptional AI products.
+                  Business case studies, AI insights, and industry trends to help leaders put AI to work.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
@@ -2248,6 +2294,8 @@ function App() {
         <ProductPage />
       ) : isAcademy ? (
         <AcademyPage />
+      ) : offeringSlug === "agent-ready-design-system" ? (
+        <FlorenceOfferPage />
       ) : offeringSlug ? (
         <OfferingPage slug={offeringSlug} />
       ) : (

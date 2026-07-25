@@ -9,6 +9,11 @@
       "source": "/case-studies/",
       "destination": "/case-studies",
       "permanent": true
+    },
+    {
+      "source": "/offerings/agent-ready-design-system/",
+      "destination": "/offerings/agent-ready-design-system",
+      "permanent": true
     }
   ],
   "rewrites": [

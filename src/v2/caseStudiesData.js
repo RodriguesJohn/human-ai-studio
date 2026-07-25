@@ -15,6 +15,21 @@ import ultraMockWorkPoster from "../assets/work/UltraMock.png";
 
 export const caseStudies = [
   {
+    slug: "florence",
+    title: "Florence",
+    label: "Agent-Ready Design System",
+    overview:
+      "Agent-ready design system so AI and product UI reuse the same components, not parallel, invented UI.",
+    problem:
+      "As agents entered the product, UI patterns, states, and handoffs started drifting. The system needed to support human and agent workflows without fragmenting the experience.",
+    outcome:
+      "An agent-ready design system, so AI reuses real components instead of inventing UI. Early eval: 95% query accuracy on catalog matches, with potential $10M+ in yearly savings at enterprise scale.",
+    image: florenceWorkImage,
+    position: "center",
+    offerUrl: "/offerings/agent-ready-design-system",
+    ctaLabel: "Learn more"
+  },
+  {
     slug: "purefi",
     title: "PureFi",
     label: "Native Mobile Redesign · AI-Ready Design System",
@@ -27,19 +42,6 @@ export const caseStudies = [
     video: pureFiVideo,
     image: studioAbstract,
     position: "72% 46%"
-  },
-  {
-    slug: "florence",
-    title: "Florence",
-    label: "Agent-Ready Design System",
-    overview:
-      "Agent-ready design system so AI and product UI reuse the same components, not parallel, invented UI.",
-    problem:
-      "As agents entered the product, UI patterns, states, and handoffs started drifting. The system needed to support human and agent workflows without fragmenting the experience.",
-    outcome:
-      "Token-first foundation + component catalog with measured reuse (95% query / 88% Accuracy+); coherent agent and product surfaces as Florence grows.",
-    image: florenceWorkImage,
-    position: "center"
   },
   {
     slug: "digital-commercial-banking",

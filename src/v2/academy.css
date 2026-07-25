@@ -161,7 +161,7 @@ html:has(.academy-page) {
 
 .academy-hero-wrap {
   position: relative;
-  width: min(100% - clamp(0.15rem, 0.6vw, 0.4rem) * 2, 100rem);
+  width: calc(100% - clamp(0.15rem, 0.6vw, 0.4rem) * 2);
   max-width: none;
   margin: 0.85rem auto 0;
   padding-top: 0;

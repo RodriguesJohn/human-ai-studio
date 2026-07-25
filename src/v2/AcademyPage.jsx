@@ -158,7 +158,7 @@ const logos = [
 
 const newsletterBenefits = [
   "Original research & insights",
-  "Product breakdowns & case studies",
+  "Product and business insights and case studies",
   "Industry trends & practical frameworks"
 ];
 
@@ -175,7 +175,8 @@ const pricingBenefits = [
   "Claude Code, Cursor, and Codex tracks",
   "Latest AI research, news, and trends",
   "Recordings, prompts, and templates",
-  "Skool community access"
+  "Skool community access",
+  "Weekly 30-min call with John"
 ];
 
 const pathOptions = [
@@ -185,7 +186,7 @@ const pathOptions = [
       "Original research, case studies, and practical frameworks for founders, designers, and builders shaping the future of AI products.",
     bullets: [
       "Original research & insights",
-      "Product breakdowns & case studies",
+      "Product and business insights and case studies",
       "Industry trends & practical frameworks"
     ],
     cta: {
@@ -559,41 +560,6 @@ function AcademyPage() {
           </Entrance>
         </section>
 
-        <section className="academy-section" id="cohort">
-          <Entrance className="academy-section-heading">
-            <EntranceItem as="h2">What you get</EntranceItem>
-          </Entrance>
-          <Entrance className="academy-modules">
-            {cohortModules.map((module, index) => (
-              <EntranceItem
-                as="article"
-                className="academy-module-card"
-                key={module.title}
-                style={{
-                  "--card-color-1": module.color1,
-                  "--card-color-2": module.color2
-                }}
-              >
-                <div className="academy-module-thumb">
-                  <OfferingShader
-                    color1={module.color1}
-                    color2={module.color2}
-                    seed={index * 3.7 + 1.3}
-                    className="academy-module-shader"
-                  />
-                  <span className="academy-module-number">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className="academy-module-thumb-title">{module.title}</h3>
-                </div>
-                <div className="academy-module-copy">
-                  <p>{module.description}</p>
-                </div>
-              </EntranceItem>
-            ))}
-          </Entrance>
-        </section>
-
         <section className="academy-section">
           <Entrance className="academy-section-heading">
             <EntranceItem as="h2">Tools you’ll actually use.</EntranceItem>
@@ -620,17 +586,6 @@ function AcademyPage() {
             </EntranceItem>
             <EntranceItem>
               <BonusCardStack />
-            </EntranceItem>
-          </Entrance>
-        </section>
-
-        <section className="academy-section">
-          <Entrance className="academy-section-heading">
-            <EntranceItem as="h2">Professionals already shipping.</EntranceItem>
-          </Entrance>
-          <Entrance>
-            <EntranceItem>
-              <TestimonialScroller />
             </EntranceItem>
           </Entrance>
         </section>
@@ -765,6 +720,52 @@ function AcademyPage() {
           <Entrance>
             <EntranceItem as="p" className="academy-disclaimer">
               Courses and materials shown on this page may differ from what’s included in each package. Review the individual package details before purchasing.
+            </EntranceItem>
+          </Entrance>
+        </section>
+
+        <section className="academy-section" id="cohort">
+          <Entrance className="academy-section-heading">
+            <EntranceItem as="h2">What you get</EntranceItem>
+          </Entrance>
+          <Entrance className="academy-modules">
+            {cohortModules.map((module, index) => (
+              <EntranceItem
+                as="article"
+                className="academy-module-card"
+                key={module.title}
+                style={{
+                  "--card-color-1": module.color1,
+                  "--card-color-2": module.color2
+                }}
+              >
+                <div className="academy-module-thumb">
+                  <OfferingShader
+                    color1={module.color1}
+                    color2={module.color2}
+                    seed={index * 3.7 + 1.3}
+                    className="academy-module-shader"
+                  />
+                  <span className="academy-module-number">
+                    {String(index + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="academy-module-thumb-title">{module.title}</h3>
+                </div>
+                <div className="academy-module-copy">
+                  <p>{module.description}</p>
+                </div>
+              </EntranceItem>
+            ))}
+          </Entrance>
+        </section>
+
+        <section className="academy-section">
+          <Entrance className="academy-section-heading">
+            <EntranceItem as="h2">Professionals already shipping.</EntranceItem>
+          </Entrance>
+          <Entrance>
+            <EntranceItem>
+              <TestimonialScroller />
             </EntranceItem>
           </Entrance>
         </section>

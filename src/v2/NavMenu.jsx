@@ -135,7 +135,7 @@ export function NavMenu() {
             Studio
           </a>
           <a className="nav-menu-item" href={caseStudiesUrl} role="menuitem" onClick={close}>
-            Case Studies
+            Works
           </a>
           <a className="nav-menu-item" href={academyUrl} role="menuitem" onClick={close}>
             Academy

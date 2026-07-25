@@ -146,6 +146,8 @@ html:has(.cs-page) body {
 
 .cs-hero-logos {
   margin-top: clamp(1.75rem, 3.5vw, 2.4rem);
+  width: max(100%, min(52rem, calc(100vw - var(--cs-pad) * 2)));
+  max-width: calc(100vw - var(--cs-pad) * 2);
 }
 
 .cs-hero-logos-label {
@@ -160,15 +162,23 @@ html:has(.cs-page) body {
 
 .cs-hero-logos-row {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
-  gap: clamp(1.15rem, 2.8vw, 1.85rem);
+  gap: clamp(0.85rem, 1.8vw, 1.45rem);
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.cs-hero-logos-row::-webkit-scrollbar {
+  display: none;
 }
 
 .cs-hero-logos-row img {
   width: auto;
-  height: clamp(1.15rem, 1.8vw, 1.45rem);
-  max-width: 6.75rem;
+  height: clamp(1.05rem, 1.5vw, 1.3rem);
+  max-width: 5.75rem;
+  flex: 0 0 auto;
   object-fit: contain;
   object-position: left center;
   opacity: 0.72;
@@ -176,18 +186,19 @@ html:has(.cs-page) body {
 }
 
 .cs-hero-logos-row img.cs-hero-logo-mark {
-  height: clamp(1.55rem, 2.2vw, 1.85rem);
+  height: clamp(1.35rem, 1.9vw, 1.65rem);
   max-width: none;
   opacity: 0.9;
 }
 
 .cs-hero-wordmark {
   color: rgba(255, 255, 255, 0.78);
-  font-size: clamp(0.92rem, 1.35vw, 1.05rem);
+  font-size: clamp(0.82rem, 1.15vw, 0.95rem);
   font-weight: 560;
   letter-spacing: -0.03em;
   line-height: 1;
   white-space: nowrap;
+  flex: 0 0 auto;
   opacity: 0.78;
   transition: opacity 220ms ease, color 220ms ease;
 }
