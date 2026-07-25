@@ -204,7 +204,7 @@ export default function CaseStudiesPage() {
                 All Work
               </EntranceItem>
               <EntranceItem as="p" className="cs-hero-sub">
-                AI systems, agentic products, and design systems built for startups and enterprise teams — work that streamlines operations and unlocks measurable growth.
+                AI systems, agentic products, and design systems for startups and enterprise teams.
               </EntranceItem>
               <EntranceItem className="cs-cta-row">
                 <a

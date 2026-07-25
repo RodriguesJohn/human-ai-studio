@@ -1717,7 +1717,12 @@ function StudioHome({ isHistory = false }) {
             <EntranceItem>
               <h2 id="v2-approach-title">Built for your existing stack.</h2>
               <p className="approach-subhead">
-                We plug into the tools your team already uses across design, product, engineering, and AI, keeping collaboration practical, handoffs clear, and new workflows easy to adopt.
+                <span className="approach-subhead-line">
+                  We plug into the tools your team already uses across design, product, engineering, and AI,
+                </span>
+                <span className="approach-subhead-line">
+                  keeping collaboration practical, handoffs clear, and new workflows easy to adopt.
+                </span>
               </p>
             </EntranceItem>
             <EntranceItem className="approach-details">
