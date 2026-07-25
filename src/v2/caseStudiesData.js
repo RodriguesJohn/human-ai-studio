@@ -69,7 +69,8 @@ export const caseStudies = [
     video: outfitWorkVideo,
     image: outfitWorkPoster,
     position: "center",
-    fit: "contain"
+    fit: "contain",
+    containTone: "light"
   },
   {
     slug: "orbi-agent",

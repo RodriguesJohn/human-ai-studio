@@ -157,9 +157,9 @@ const logos = [
 ];
 
 const newsletterBenefits = [
-  "Original research & insights",
-  "Product and business insights and case studies",
-  "Industry trends & practical frameworks"
+  "2 articles every week",
+  "1 article free every week",
+  "Full paid publication for $19/month"
 ];
 
 const cohortPackageBenefits = [
@@ -176,7 +176,7 @@ const pricingBenefits = [
   "Latest AI research, news, and trends",
   "Recordings, prompts, and templates",
   "Skool community access",
-  "Weekly 30-min call with John"
+  "Monthly 30-minute group calls"
 ];
 
 const pathOptions = [
@@ -613,8 +613,7 @@ function AcademyPage() {
                 <div className="academy-package-thumb-copy">
                   <h3>Human AI Studio Publication</h3>
                   <div className="academy-price academy-price--thumb">
-                    <span>$19</span>
-                    <small>/ per month</small>
+                    <span>Free</span>
                   </div>
                 </div>
               </div>
@@ -635,7 +634,7 @@ function AcademyPage() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Read the Publication
+                  Join for free
                 </a>
               </div>
             </EntranceItem>
