@@ -266,13 +266,13 @@ function CinematicHero() {
             className="hero-cinematic-line"
             variants={entranceChild}
           >
-            AI Systems for
+            AI Native Products and
           </motion.span>
           <motion.span
             className="hero-cinematic-line"
             variants={entranceChild}
           >
-            Business Transformation
+            Systems Studio
           </motion.span>
         </h1>
 
@@ -280,9 +280,13 @@ function CinematicHero() {
           className="hero-cinematic-subtitle"
           variants={entranceChild}
         >
-          We help startups and enterprise teams build AI systems{" "}
-          <span className="motto-emphasis">people trust</span> so they streamline
-          operations and unlock measurable business growth.
+          <span className="hero-cinematic-subtitle-line">
+            We help startups and enterprise design AI native products and systems
+          </span>
+          <span className="hero-cinematic-subtitle-line">
+            <span className="motto-emphasis">people trust</span> to increase
+            adaptation, retention, and drive business growth.
+          </span>
         </motion.p>
 
         <motion.div className="hero-cinematic-cta-row" variants={entranceChild}>
@@ -404,20 +408,20 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "AI Systems Strategy",
+    title: "Ship Fast with Design Engineering",
     description:
-      "Audits and team workshops to find the gaps, what's working, what's not, and where AI fits. You leave with clear recommendations and a custom integration strategy, because one size never fits.",
-    slug: "ai-native-products",
-    stage: "Strategy",
+      "Product design, design engineering, agent building, and design systems, with design and development in one loop so you ship faster.",
+    slug: "design-engineering",
+    stage: "Design",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Design and MVP Development",
+    title: "Move Business Needles with AI Systems",
     description:
-      "We design, build, and validate the MVPs, agentic experiences, and systems that drive your business transformation, cutting time, growing revenue, streamlining operations, and shipping faster.",
-    slug: "design-engineering",
-    stage: "Develop",
+      "We create workflow automation systems and run audits that drive business transformation, increasing retention, adaptation, and revenue.",
+    slug: "ai-native-products",
+    stage: "Systems",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
@@ -434,36 +438,36 @@ const homeOffers = [
 
 const offeringPages = {
   "ai-native-products": {
-    eyebrow: "Offering 01",
-    title: "AI Systems",
+    eyebrow: "Offering 02",
+    title: "Move Business Needles with AI Systems",
     intro:
-      "We create AI operating systems for your business that streamline operations, improve revenue streams, and increase measurable growth.",
+      "Workflow automation systems and audits that drive business transformation, increasing retention, adaptation, and revenue.",
     status: "placeholder",
     sections: [
       {
         heading: "What this looks like",
-        body: "End-to-end AI systems: discovery, interface design, agent architecture, and production engineering, designed around the decisions and workflows that move your business."
+        body: "End-to-end AI systems: discovery, workflow automation, agent architecture, and production engineering, designed around the decisions that move retention, adaptation, and revenue."
       },
       {
         heading: "Where it fits",
-        body: "Founders and teams who want AI woven into how the business actually operates, driving outcomes and revenue, not just shipping a demo."
+        body: "Founders and teams who want AI woven into how the business actually operates, driving outcomes and growth, not just shipping a demo."
       }
     ]
   },
   "design-engineering": {
-    eyebrow: "Offering 02",
-    title: "MVP Development through Design Engineering",
+    eyebrow: "Offering 01",
+    title: "Ship Fast with Design Engineering",
     intro:
-      "Technical prototyping, production-ready interfaces, motion, Agentic Design Systems, and interactive AI experiences built to help your team ship faster.",
+      "Product design, design engineering, agent building, and design systems. Components, interactions, and motion built with development in the same loop.",
     status: "placeholder",
     sections: [
       {
         heading: "What this looks like",
-        body: "Prototype ideas in days, build production-ready UI and motion, and ship components your engineering team can take forward without another redesign cycle."
+        body: "Prototype ideas in days, build production-ready UI, motion, and agent surfaces, and ship components without another redesign cycle between design and development."
       },
       {
         heading: "Where it fits",
-        body: "Product teams that need more than mockups — someone who can design, build, and help the interface land in production."
+        body: "Product teams that need more than mockups: someone who can design, build, and help the interface land in production fast."
       }
     ]
   },
@@ -530,8 +534,7 @@ const offeringPages = {
 
 const workItems = [
   {
-    label: "Agent Ready Design System",
-    title: "Florence",
+    title: "Florence design system for AI agents",
     image: florenceWorkImage,
     position: "center",
     description: (
@@ -544,19 +547,18 @@ const workItems = [
     )
   },
   {
-    label: "Native Mobile Redesign and AI Ready Design System",
-    title: "PureFi",
-    video: pureFiVideo,
-    image: studioAbstract,
-    position: "72% 46%"
-  },
-  {
-    label: "JPMorgan Chase · B2B SaaS Platform",
     title: "Digital Commercial Banking",
     image: dcbWorkImage,
     position: "center",
     description:
       "AI agents integration, AI enablement, and hands-on workshops to accelerate workflows and drive transformation across the commercial banking platform, at enterprise dataset scale."
+  },
+  {
+    label: "Native Mobile Redesign and AI Ready Design System",
+    title: "PureFi",
+    video: pureFiVideo,
+    image: studioAbstract,
+    position: "72% 46%"
   },
   {
     label: "AI Styling · 0 → 1 Product",
@@ -1189,7 +1191,7 @@ function useMarqueeStart() {
 
     const loopWidth = () => track.scrollWidth / 2; // items are duplicated
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const glideSpeed = 24; // pixels per second
+    const glideSpeed = 42; // pixels per second
     let animationFrame = null;
     let lastTimestamp = null;
     let paused = false;
@@ -1681,7 +1683,7 @@ function StudioHome({ isHistory = false }) {
                   </div>
                   <div className="work-card-meta">
                     <strong>{item.title}</strong>
-                    <span>{item.label}</span>
+                    {item.label ? <span>{item.label}</span> : null}
                     {item.description && (
                       <p className="work-card-desc">{item.description}</p>
                     )}

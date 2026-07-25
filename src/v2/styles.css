@@ -3259,9 +3259,9 @@ h3 {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: clamp(19rem, 42vw, 33rem);
+  width: clamp(26rem, 56vw, 44rem);
   flex: 0 0 auto;
-  padding: clamp(1rem, 1.4vw, 1.5rem);
+  padding: clamp(1.1rem, 1.55vw, 1.65rem);
   border-radius: 20px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.03);
@@ -3302,15 +3302,15 @@ h3 {
 
 .work-card-meta {
   display: grid;
-  gap: 0.45rem;
-  padding: clamp(1.1rem, 1.55vw, 1.45rem) 0 0;
+  gap: 0.7rem;
+  padding: clamp(1.25rem, 1.7vw, 1.65rem) 0 0;
 }
 
 .work-card-meta strong {
   color: rgba(255, 255, 255, 0.95);
   font-size: clamp(1.18rem, 1.45vw, 1.6rem);
   font-weight: 560;
-  line-height: 1.15;
+  line-height: 1.2;
 }
 
 .work-card-meta span {
@@ -3318,19 +3318,19 @@ h3 {
   font-size: clamp(0.74rem, 0.88vw, 0.95rem);
   font-weight: 500;
   letter-spacing: 0.07em;
-  line-height: 1.2;
+  line-height: 1.25;
   white-space: nowrap;
 }
 
 .work-card-meta .work-card-desc {
-  margin: 0.15rem 0 0;
+  margin: 0.35rem 0 0;
   width: 100%;
   max-width: none;
   color: rgba(255, 255, 255, 0.56);
   font-size: clamp(0.82rem, 0.95vw, 0.98rem);
   font-weight: 400;
   letter-spacing: 0;
-  line-height: 1.5;
+  line-height: 1.65;
 }
 
 .work-card-meta .work-card-desc strong {
@@ -5240,9 +5240,9 @@ h3 {
   padding-inline: clamp(0.5rem, 2vw, 2rem);
   color: #ffffff;
   font-weight: 520;
-  font-size: clamp(44px, 4vw, 72px);
-  line-height: 0.98;
-  letter-spacing: -0.025em;
+  font-size: clamp(52px, 5.4vw, 92px);
+  line-height: 0.96;
+  letter-spacing: -0.03em;
   text-wrap: balance;
 }
 
@@ -5271,8 +5271,10 @@ h3 {
 }
 
 .current-home .hero-cinematic-subtitle {
+  display: grid;
+  gap: 0.15em;
   margin: 0 0 clamp(2rem, 4vw, 2.75rem);
-  max-width: min(62%, 46rem);
+  max-width: min(56%, 42rem);
   color: rgba(255, 255, 255, 0.75);
   font-weight: 300;
   font-size: clamp(17px, 1.15vw, 20px);
@@ -5282,6 +5284,12 @@ h3 {
 .current-home .hero-cinematic-subtitle .motto-emphasis {
   color: #ffffff;
   font-weight: 700;
+  white-space: nowrap;
+}
+
+.current-home .hero-cinematic-subtitle-line {
+  display: block;
+  max-width: none;
 }
 
 .hero-cinematic-subtitle-line {
@@ -5422,7 +5430,7 @@ h3 {
 
 @media (min-width: 640px) {
   .hero-cinematic-break {
-    display: inline;
+    display: block;
   }
 }
 
@@ -5441,7 +5449,7 @@ h3 {
 /* Cinematic hero — mobile */
 @media (max-width: 640px) {
   .work-card {
-    width: min(88vw, 26rem);
+    width: min(92vw, 34rem);
   }
 
   .current-home .nav {
@@ -5485,9 +5493,9 @@ h3 {
     max-width: 100%;
     padding-inline: 0;
     margin-bottom: 1.35rem;
-    font-size: clamp(30px, 8.25vw, 37px);
+    font-size: clamp(34px, 9.2vw, 44px);
     line-height: 1;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.025em;
   }
 
   .current-home .hero-cinematic-line {
