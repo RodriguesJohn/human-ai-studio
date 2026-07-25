@@ -1782,12 +1782,6 @@ h3 {
   display: block;
 }
 
-@media (min-width: 961px) {
-  .current-home .approach-subhead-line {
-    white-space: nowrap;
-  }
-}
-
 .offering-card p {
   margin-bottom: 0;
   color: rgba(0, 0, 0, 0.62);
@@ -5471,7 +5465,7 @@ h3 {
 
   .current-home .brand {
     gap: 0.55rem;
-    font-size: 0.82rem;
+    font-size: 0;
   }
 
   .current-home .brand-mark {

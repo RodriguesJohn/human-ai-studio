@@ -3,7 +3,6 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Entrance, EntranceItem, entranceChild } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { caseStudies } from "./caseStudiesData.js";
-import profilePicture from "../assets/Profile Picture.jpg";
 import caseStudiesHero from "../assets/case-studies-hero.mp4";
 import chaseLogo from "../assets/companies/Chase.png";
 import tocaLogo from "../assets/companies/TocaWhite.png";
@@ -205,22 +204,6 @@ export default function CaseStudiesPage() {
               </EntranceItem>
               <EntranceItem as="p" className="cs-hero-sub">
                 AI systems, agentic products, and design systems for startups and enterprise teams.
-              </EntranceItem>
-              <EntranceItem className="cs-cta-row">
-                <a
-                  className="cs-cta"
-                  href={bookingUrl}
-                  {...bookingAttributes}
-                  onClick={openBookingModal}
-                >
-                  <span className="cs-cta-avatar" aria-hidden="true">
-                    <img src={profilePicture} alt="" />
-                  </span>
-                  <span>Book a call</span>
-                </a>
-                <a className="cs-cta cs-cta--ghost" href="#cs-work">
-                  View case studies
-                </a>
               </EntranceItem>
               <EntranceItem className="cs-hero-logos" aria-label="Companies worked with">
                 <div className="cs-hero-logos-row">
