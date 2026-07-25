@@ -1291,7 +1291,7 @@ function OriginalHome() {
       <section className="hero" id="top" data-nav-theme="dark">
         <div className="hero-inner">
           <div className="hero-copy">
-            <p className="eyebrow hero-eyebrow">AI product studio</p>
+            <p className="eyebrow hero-eyebrow">AI Products and Systems studio</p>
             <h1>
               <span>Human</span>
               <span>AI</span>
