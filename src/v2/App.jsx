@@ -604,9 +604,8 @@ const workItems = [
     title: "Olo",
     video: ultraMockWorkVideo,
     image: ultraMockWorkPoster,
-    position: "center top",
-    fit: "cover",
-    mediaShift: "down"
+    position: "center",
+    fit: "contain"
   },
   {
     label: "iOS · 4.6★ · 50K Users",

@@ -126,9 +126,8 @@ export const caseStudies = [
       "A live marketing website at olo.app that presents the product story, science, and download path with a calmer, more immersive narrative.",
     video: ultraMockWorkVideo,
     image: ultraMockWorkPoster,
-    position: "center top",
-    fit: "cover",
-    mediaShift: "down",
+    position: "center",
+    fit: "contain",
     appUrl: "https://www.olo.app/"
   },
   {

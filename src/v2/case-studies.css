@@ -17,8 +17,8 @@ html:has(.cs-page) body {
   min-height: 100vh;
   margin: 0;
   background:
-    radial-gradient(ellipse 70% 42% at 50% -8%, rgba(255, 255, 255, 0.07), transparent 58%),
-    linear-gradient(180deg, #000000 0%, #0c0d0f 42%, #000000 100%);
+    radial-gradient(ellipse 70% 42% at 50% -8%, rgba(255, 255, 255, 0.045), transparent 58%),
+    #050506;
   color: var(--cs-ink);
   font-family:
     Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -314,7 +314,8 @@ html:has(.cs-page) body {
 .cs-media--contain video,
 .cs-media--contain img {
   object-fit: contain;
-  background: #050506;
+  object-position: center;
+  background: transparent;
 }
 
 .cs-media--contain-light {
