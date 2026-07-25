@@ -159,7 +159,7 @@ const logos = [
 const newsletterBenefits = [
   "2 articles every week",
   "1 article free every week",
-  "Full paid publication for $19/month"
+  "Full paid publication for $12/month"
 ];
 
 const cohortPackageBenefits = [
