@@ -8,6 +8,7 @@ import "./academy.css";
 const COHORT_URL = "https://maven.com/humanaistudio/aimasterycohort";
 const ACADEMY_URL = "https://www.skool.com/ai-design-academy-6114/about";
 const NEWSLETTER_URL = "https://johnrodrigues.substack.com/";
+const NEWSLETTER_EMBED_URL = `${NEWSLETTER_URL}embed`;
 
 const AppleLogo = "/academy/Apple.png";
 const GoogleLogo = "/academy/Google.svg.png";
@@ -439,6 +440,9 @@ function TestimonialScroller() {
 
 function AcademyPage() {
   const shouldReduceMotion = useReducedMotion();
+  const [isNewsletterOpen, setIsNewsletterOpen] = React.useState(false);
+  const newsletterTriggerRef = React.useRef(null);
+  const newsletterCloseRef = React.useRef(null);
 
   React.useEffect(() => {
     document.title = "AI Academy · Human AI Studio";
@@ -454,6 +458,28 @@ function AcademyPage() {
       body.style.background = prevBody;
     };
   }, []);
+
+  React.useEffect(() => {
+    if (!isNewsletterOpen) return undefined;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    newsletterCloseRef.current?.focus();
+
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") {
+        setIsNewsletterOpen(false);
+      }
+    };
+
+    window.addEventListener("keydown", closeOnEscape);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", closeOnEscape);
+      newsletterTriggerRef.current?.focus();
+    };
+  }, [isNewsletterOpen]);
 
   return (
     <div className="academy-page">
@@ -486,21 +512,20 @@ function AcademyPage() {
                 certification, or self-paced learning at AI Academy.
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
-                <a
+                <button
+                  ref={newsletterTriggerRef}
+                  type="button"
                   className="academy-btn academy-btn--primary"
-                  href={COHORT_URL}
-                  target="_blank"
-                  rel="noreferrer"
+                  onClick={() => setIsNewsletterOpen(true)}
+                  aria-haspopup="dialog"
                 >
-                  Join the live workshop
-                </a>
+                  4,200+ readers
+                </button>
                 <a
                   className="academy-btn academy-btn--secondary"
-                  href={ACADEMY_URL}
-                  target="_blank"
-                  rel="noreferrer"
+                  href="#membership"
                 >
-                  Join the Academy
+                  Explore the academy
                 </a>
               </EntranceItem>
             </Entrance>
@@ -611,7 +636,7 @@ function AcademyPage() {
                   className="academy-package-shader"
                 />
                 <div className="academy-package-thumb-copy">
-                  <h3>Human AI Studio Publication</h3>
+                  <h3>Publication</h3>
                   <div className="academy-price academy-price--thumb">
                     <span>Free</span>
                   </div>
@@ -793,6 +818,46 @@ function AcademyPage() {
           <p>Built for designers, founders, and industry professionals.</p>
         </div>
       </footer>
+
+      {isNewsletterOpen ? (
+        <div
+          className="academy-newsletter-modal"
+          role="presentation"
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              setIsNewsletterOpen(false);
+            }
+          }}
+        >
+          <section
+            className="academy-newsletter-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="academy-newsletter-title"
+          >
+            <div className="academy-newsletter-header">
+              <div>
+                <h2 id="academy-newsletter-title">Join 4,200+ readers</h2>
+                <p>AI product thinking, practical workflows, and original research.</p>
+              </div>
+              <button
+                ref={newsletterCloseRef}
+                type="button"
+                className="academy-newsletter-close"
+                aria-label="Close newsletter signup"
+                onClick={() => setIsNewsletterOpen(false)}
+              >
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <iframe
+              className="academy-newsletter-frame"
+              src={NEWSLETTER_EMBED_URL}
+              title="Human AI Studio newsletter signup"
+            />
+          </section>
+        </div>
+      ) : null}
     </div>
   );
 }
