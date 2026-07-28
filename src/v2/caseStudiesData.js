@@ -12,6 +12,8 @@ import noScrollWorkImage from "../assets/work/NoScrollApp.png";
 import dcbWorkImage from "../assets/work/DCB.png";
 import ultraMockWorkVideo from "../assets/work/UltraMock.mp4";
 import ultraMockWorkPoster from "../assets/work/UltraMock.png";
+import aiAcademyWorkVideo from "../assets/work/AIAcademy.mp4";
+import aiAcademyWorkPoster from "../assets/work/AIAcademy.png";
 
 export const caseStudies = [
   {
@@ -116,11 +118,29 @@ export const caseStudies = [
     fit: "contain"
   },
   {
+    slug: "ai-academy",
+    title: "AI Academy",
+    label: "Website Design · AI Academy",
+    overview:
+      "Workshops, courses, and a weekly publication for designers and builders leveling up with AI.",
+    problem:
+      "The Academy needed one marketing site that could present live workshops, self-paced learning, and the publication without feeling fragmented or generic.",
+    outcome:
+      "A focused academy site that turns visitors into readers, workshop signups, and self-paced learners.",
+    video: aiAcademyWorkVideo,
+    image: aiAcademyWorkPoster,
+    position: "center",
+    fit: "contain",
+    containTone: "light",
+    appUrl: "/academy",
+    collections: ["websites"]
+  },
+  {
     slug: "olo",
     title: "Olo",
     label: "Website Design · olo.app",
     overview:
-      "Website design for Olo, a sound-as-medicine product experience built to feel calm, immersive, and clear from the first scroll.",
+      "A calm, immersive marketing site for Olo's sound-as-medicine product at olo.app.",
     problem:
       "The brand needed a marketing site that could carry the “Olo Effect” — alertness and calm — without feeling clinical, noisy, or hard to understand.",
     outcome:
@@ -129,7 +149,9 @@ export const caseStudies = [
     image: ultraMockWorkPoster,
     position: "center",
     fit: "contain",
-    appUrl: "https://www.olo.app/"
+    containTone: "light",
+    appUrl: "https://www.olo.app/",
+    collections: ["websites"]
   },
   {
     slug: "no-scroll",
@@ -148,3 +170,7 @@ export const caseStudies = [
     appUrl: "https://apps.apple.com/us/app/no-scroll-limit-screen-time/id6474079216"
   }
 ];
+
+export const websiteProjects = caseStudies.filter((study) =>
+  study.collections?.includes("websites")
+);

@@ -33,6 +33,16 @@ async function boot() {
       return;
     }
 
+    if (route === "/websites") {
+      const { default: WebsitesPage } = await import("./v2/WebsitesPage.jsx");
+      root.render(
+        <React.StrictMode>
+          <WebsitesPage />
+        </React.StrictMode>
+      );
+      return;
+    }
+
     const { default: V2App } = await import("./v2/App.jsx");
     root.render(
       <React.StrictMode>

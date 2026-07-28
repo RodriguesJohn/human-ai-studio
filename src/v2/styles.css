@@ -1416,11 +1416,11 @@ h2 {
   margin: 0;
   max-width: none;
   color: rgba(255, 255, 255, 0.92);
-  font-size: 24px;
+  font-size: clamp(1.35rem, 2.1vw, 1.85rem);
   font-weight: 750;
   line-height: 1.12;
-  white-space: normal;
-  text-wrap: balance;
+  white-space: nowrap;
+  text-wrap: nowrap;
 }
 
 .dark-offerings .v2-offer-grid .v2-offering-card:hover {
@@ -1768,9 +1768,7 @@ h3 {
 }
 
 .approach-subhead {
-  display: grid;
-  gap: 0.12em;
-  max-width: 52rem;
+  max-width: none;
   margin: clamp(1rem, 2vw, 1.35rem) 0 0;
   color: rgba(255, 255, 255, 0.66);
   font-size: clamp(0.94rem, 1.02vw, 1.02rem);
@@ -1778,8 +1776,8 @@ h3 {
   line-height: 1.56;
 }
 
-.approach-subhead-line {
-  display: block;
+.current-home .approach-subhead {
+  white-space: nowrap;
 }
 
 .offering-card p {
@@ -2192,12 +2190,12 @@ h3 {
 }
 
 .final-cta-lede {
-  max-width: 34rem;
-  margin: 0 0 0.85rem;
-  color: rgba(255, 255, 255, 0.88);
-  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
-  font-weight: 520;
-  line-height: 1.45;
+  max-width: 38rem;
+  margin: 0 0 2rem;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: clamp(1rem, 1.2vw, 1.1rem);
+  font-weight: 450;
+  line-height: 1.5;
 }
 
 .final-cta-sub {
@@ -3266,12 +3264,8 @@ h3 {
   position: relative;
   display: flex;
   flex-direction: column;
-  width: clamp(26rem, 56vw, 44rem);
+  width: clamp(26rem, 52vw, 64rem);
   flex: 0 0 auto;
-  padding: clamp(1.1rem, 1.55vw, 1.65rem);
-  border-radius: 20px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: rgba(255, 255, 255, 0.03);
   cursor: default;
   user-select: none;
 }
@@ -3309,15 +3303,15 @@ h3 {
 
 .work-card-meta {
   display: grid;
-  gap: 0.7rem;
-  padding: clamp(1.25rem, 1.7vw, 1.65rem) 0 0;
+  gap: 0.45rem;
+  padding: clamp(1.1rem, 1.55vw, 1.45rem) 0.35rem 0;
 }
 
 .work-card-meta strong {
   color: rgba(255, 255, 255, 0.95);
   font-size: clamp(1.18rem, 1.45vw, 1.6rem);
   font-weight: 560;
-  line-height: 1.2;
+  line-height: 1.15;
 }
 
 .work-card-meta span {
@@ -3325,25 +3319,8 @@ h3 {
   font-size: clamp(0.74rem, 0.88vw, 0.95rem);
   font-weight: 500;
   letter-spacing: 0.07em;
-  line-height: 1.25;
+  line-height: 1.2;
   white-space: nowrap;
-}
-
-.work-card-meta .work-card-desc {
-  margin: 0.35rem 0 0;
-  width: 100%;
-  max-width: none;
-  color: rgba(255, 255, 255, 0.56);
-  font-size: clamp(0.82rem, 0.95vw, 0.98rem);
-  font-weight: 400;
-  letter-spacing: 0;
-  line-height: 1.65;
-}
-
-.work-card-meta .work-card-desc strong {
-  color: #ffffff;
-  font-weight: inherit;
-  font-size: inherit;
 }
 
 
@@ -5000,7 +4977,11 @@ h3 {
   }
 
   .current-home .dark-offerings .v2-offer-grid .offering-card h3.offering-thumb-title {
-    font-size: clamp(1.05rem, 5.2vw, 1.3rem);
+    font-size: clamp(1.2rem, 5.5vw, 1.5rem);
+  }
+
+  .current-home .approach-subhead {
+    white-space: normal;
   }
 
   .dark-offerings .v2-offer-grid .offering-copy {

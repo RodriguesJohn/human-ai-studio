@@ -47,6 +47,152 @@
   background: color-mix(in srgb, var(--nav-fg, #ffffff) 10%, transparent);
 }
 
+.nav-menu {
+  position: relative;
+  z-index: 2;
+}
+
+.nav-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  font: inherit;
+  appearance: none;
+  -webkit-appearance: none;
+  border: 0;
+  background: transparent;
+}
+
+.nav-menu-icon {
+  flex: 0 0 auto;
+  opacity: 0.88;
+}
+
+.nav-menu-panel {
+  position: fixed;
+  z-index: 120;
+  min-width: 12.5rem;
+  padding: 0.45rem;
+  border-radius: 1rem;
+  background: rgba(14, 14, 14, 0.94);
+  box-shadow:
+    0 1.1rem 2.4rem rgba(0, 0, 0, 0.42),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.nav-menu-group-label {
+  margin: 0.2rem 0.9rem 0.35rem;
+  color: rgba(255, 255, 255, 0.42);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.nav-menu-item {
+  display: block;
+  padding: 0.72rem 0.9rem;
+  border-radius: 0.72rem;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: 0.84rem;
+  font-weight: 500;
+  line-height: 1.2;
+  text-decoration: none;
+  transition:
+    background 160ms ease,
+    color 160ms ease;
+}
+
+.nav-menu-item--nested {
+  padding-left: 1.35rem;
+}
+
+.nav-menu-divider {
+  height: 1px;
+  margin: 0.35rem 0.55rem;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.nav-menu-item:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-menu-trigger--icon {
+  width: 2.55rem;
+  height: 2.55rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 999px;
+  color: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nav-menu-trigger--icon:hover {
+  color: #ffffff;
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nav-menu.is-open .nav-menu-trigger--icon {
+  border-color: rgba(255, 255, 255, 0.42);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.web-nav {
+  --nav-fg: #0a0a0a;
+  --nav-link-ring: rgba(10, 10, 10, 0.2);
+}
+
+.web-nav .nav-menu-trigger--icon {
+  border-color: rgba(10, 10, 10, 0.14);
+  color: #0a0a0a;
+  background: rgba(255, 255, 255, 0.82);
+}
+
+.web-nav .nav-menu-trigger--icon:hover,
+.web-nav .nav-menu.is-open .nav-menu-trigger--icon {
+  color: #0a0a0a;
+  border-color: rgba(10, 10, 10, 0.28);
+  background: #ffffff;
+}
+
+.web-page .web-nav .nav-menu-panel {
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow:
+    0 1.1rem 2.4rem rgba(10, 10, 10, 0.12),
+    inset 0 0 0 1px rgba(10, 10, 10, 0.08);
+}
+
+.web-page .web-nav .nav-menu-group-label {
+  color: rgba(10, 10, 10, 0.45);
+}
+
+.web-page .web-nav .nav-menu-item {
+  color: rgba(10, 10, 10, 0.84);
+}
+
+.web-page .web-nav .nav-menu-item:hover {
+  color: #0a0a0a;
+  background: rgba(10, 10, 10, 0.05);
+}
+
+.web-page .web-nav .nav-menu-divider {
+  background: rgba(10, 10, 10, 0.08);
+}
+
+.web-page .web-nav .nav-direct-link {
+  color: rgba(10, 10, 10, 0.72);
+}
+
+.web-page .web-nav .nav-direct-link:hover {
+  color: #0a0a0a;
+  background: rgba(10, 10, 10, 0.05);
+}
+
 .academy-nav {
   --nav-fg: #ffffff;
   --nav-link-ring: rgba(255, 255, 255, 0.34);
@@ -58,9 +204,16 @@
   }
 
   .nav-direct-link,
-  .nav-direct-book {
+  .nav-direct-book,
+  .nav-menu-trigger {
     min-height: 2.4rem;
     font-size: 0.78rem;
+  }
+
+  .nav-menu-trigger--icon {
+    width: 2.35rem;
+    height: 2.35rem;
+    min-height: 2.35rem;
   }
 
   .nav-direct-link {

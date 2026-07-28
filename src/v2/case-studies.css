@@ -497,6 +497,26 @@ html:has(.cs-page) body {
   }
 }
 
+.cs-hero--simple {
+  min-height: auto;
+  background: #050506;
+}
+
+.cs-hero-eyebrow {
+  margin: 0 0 0.85rem;
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.72rem;
+  font-weight: 580;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+.cs-study--empty .cs-study-copy {
+  width: var(--cs-rail);
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
 @media (max-width: 640px) {
   .cs-nav {
     gap: 0.75rem;

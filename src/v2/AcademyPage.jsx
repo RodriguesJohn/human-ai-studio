@@ -1,8 +1,7 @@
 import React from "react";
 import OfferingShader from "./OfferingShader.jsx";
-import { Entrance, EntranceItem, entranceChild } from "./entrance.jsx";
+import { Entrance, EntranceItem } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
-import { motion, useReducedMotion } from "framer-motion";
 import "./academy.css";
 
 const COHORT_URL = "https://maven.com/humanaistudio/aimasterycohort";
@@ -19,8 +18,8 @@ const CursorBlogImage = "/academy/CursorBlog.png";
 const ClaudeCodeBlog = "/academy/ClaudeCodeBlog.png";
 const NativeMobileImage = "/academy/NativeMobile.jpg";
 
-const ACADEMY_HERO_VIDEO = "/academy/hero.mp4";
-const ACADEMY_HERO_VIDEO_MOBILE = "/academy/hero-mobile.mp4";
+const ACADEMY_HERO_VIDEO = "/academy/hero.mp4?v=hero-cd598d71";
+const ACADEMY_HERO_VIDEO_MOBILE = "/academy/hero-mobile.mp4?v=hero-cd598d71";
 
 function AcademyHeroVideo() {
   const videoRef = React.useRef(null);
@@ -158,6 +157,7 @@ const logos = [
 ];
 
 const newsletterBenefits = [
+  "Research, case studies, and frameworks for AI builders",
   "2 articles every week",
   "1 article free every week",
   "Full paid publication for $12/month"
@@ -184,11 +184,11 @@ const pathOptions = [
   {
     title: "Weekly Publication",
     description:
-      "Original research, case studies, and practical frameworks for founders, designers, and builders shaping the future of AI products.",
+      "Research, case studies, and frameworks for founders and designers building with AI.",
     bullets: [
       "Original research & insights",
-      "Product and business insights and case studies",
-      "Industry trends & practical frameworks"
+      "Product insights & case studies",
+      "Trends & practical frameworks"
     ],
     cta: {
       label: "Read the Publication",
@@ -215,7 +215,7 @@ const pathOptions = [
     color2: "#bae6fd"
   },
   {
-    title: "Self-paced learning\nat AI Academy",
+    title: "Self-paced learning at AI Academy",
     description: "Structured tracks and recordings for Claude Code, Cursor, and Codex.",
     bullets: [
       "Claude Code, Cursor, and Codex tracks",
@@ -439,7 +439,6 @@ function TestimonialScroller() {
 }
 
 function AcademyPage() {
-  const shouldReduceMotion = useReducedMotion();
   const [isNewsletterOpen, setIsNewsletterOpen] = React.useState(false);
   const newsletterTriggerRef = React.useRef(null);
   const newsletterCloseRef = React.useRef(null);
@@ -483,23 +482,21 @@ function AcademyPage() {
 
   return (
     <div className="academy-page">
-      <motion.header
-        className="academy-nav"
-        variants={entranceChild}
-        initial={shouldReduceMotion ? false : "hidden"}
-        animate="visible"
-      >
-        <a className="academy-brand" href="/">
+      <header className="academy-nav">
+        <a className="academy-brand" href="/academy">
           <span className="academy-brand-mark" aria-hidden="true" />
-          Human AI Studio
+          <span className="academy-brand-text">
+            AI Academy
+            <span className="academy-brand-by"> by Human AI Studio</span>
+          </span>
         </a>
         <div className="academy-nav-actions">
           <NavMenu />
         </div>
-      </motion.header>
+      </header>
 
       <main>
-        <section className="academy-hero-wrap academy-hero-wrap--cinematic">
+        <section className="academy-hero-wrap academy-hero-wrap--cinematic academy-hero-wrap--editorial">
           <AcademyHeroVideo />
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
@@ -519,27 +516,46 @@ function AcademyPage() {
                   onClick={() => setIsNewsletterOpen(true)}
                   aria-haspopup="dialog"
                 >
-                  4,200+ readers
+                  Join 4,200 readers
+                  <span className="academy-btn-arrow" aria-hidden="true">
+                    →
+                  </span>
                 </button>
-                <a
-                  className="academy-btn academy-btn--secondary"
-                  href="#membership"
-                >
-                  Explore the academy
+                <a className="academy-btn academy-btn--ghost" href="#membership">
+                  Explore Academy
                 </a>
+              </EntranceItem>
+            </Entrance>
+
+            <Entrance
+              className="academy-hero-proof"
+              aria-label="Professionals from leading companies"
+              animate="visible"
+            >
+              <EntranceItem className="academy-hero-proof-rating">
+                <span
+                  className="academy-hero-stars"
+                  aria-label="4.5 out of 5 stars"
+                >
+                  <span>★</span>
+                  <span>★</span>
+                  <span>★</span>
+                  <span>★</span>
+                  <span className="academy-hero-star academy-hero-star--half">★</span>
+                </span>
+                <span>From 4,200+ builders and product teams</span>
+              </EntranceItem>
+              <EntranceItem className="academy-logo-row academy-logo-row--inline">
+                {logos.map((logo) => (
+                  <img key={logo.alt} src={logo.src} alt={logo.alt} />
+                ))}
               </EntranceItem>
             </Entrance>
           </div>
 
-          <Entrance
-            className="academy-logo-row"
-            aria-label="Professionals from leading companies"
-            animate="visible"
-          >
-            {logos.map((logo) => (
-              <EntranceItem as="img" key={logo.alt} src={logo.src} alt={logo.alt} />
-            ))}
-          </Entrance>
+          <a className="academy-hero-scroll" href="#membership" aria-label="Scroll to enrollment">
+            <span aria-hidden="true">↓</span>
+          </a>
         </section>
 
         <section className="academy-section">
@@ -622,7 +638,7 @@ function AcademyPage() {
           <Entrance className="academy-packages">
             <EntranceItem
               as="article"
-              className="academy-package"
+              className="academy-package academy-package--publication"
               style={{
                 "--card-color-1": "#38bdf8",
                 "--card-color-2": "#e0f2fe"
@@ -643,11 +659,6 @@ function AcademyPage() {
                 </div>
               </div>
               <div className="academy-package-body">
-                <p>
-                  Original research, case studies, and practical frameworks for
-                  founders, designers, and builders shaping the future of AI
-                  products.
-                </p>
                 <ul className="academy-check-list">
                   {newsletterBenefits.map((benefit) => (
                     <li key={benefit}>{benefit}</li>

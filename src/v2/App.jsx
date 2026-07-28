@@ -408,7 +408,7 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "Ship Fast with Design Engineering",
+    title: "AI native product design",
     description:
       "Product design, design engineering, agent building, and design systems, with design and development in one loop so you ship faster.",
     slug: "design-engineering",
@@ -417,7 +417,7 @@ const homeOffers = [
     color2: "#bae6fd"
   },
   {
-    title: "Move Business Needles with AI Systems",
+    title: "Agentic design systems",
     description:
       "We create workflow automation systems and run audits that drive business transformation, increasing retention, adaptation, and revenue.",
     slug: "ai-native-products",
@@ -426,7 +426,7 @@ const homeOffers = [
     color2: "#ddd6fe"
   },
   {
-    title: "AI Enablement, Workshops and Training",
+    title: "Workshops",
     description:
       "Custom workshops and hands-on training so teams become AI-native and apply new systems in their real workflows.",
     slug: "ai-training-enablement",
@@ -534,24 +534,16 @@ const offeringPages = {
 
 const workItems = [
   {
-    title: "Florence design system for AI agents",
+    label: "Design system for AI agents",
+    title: "Florence",
     image: florenceWorkImage,
-    position: "center",
-    description: (
-      <>
-        An agent-ready design system, so AI reuses real components instead of
-        inventing UI. Early eval: <strong>95% query accuracy</strong> on catalog
-        matches, with potential <strong>$10M+</strong> in yearly savings at
-        enterprise scale.
-      </>
-    )
+    position: "center"
   },
   {
+    label: "JPMorgan Chase · B2B SaaS Platform",
     title: "Digital Commercial Banking",
     image: dcbWorkImage,
-    position: "center",
-    description:
-      "AI agents integration, AI enablement, and hands-on workshops to accelerate workflows and drive transformation across the commercial banking platform, at enterprise dataset scale."
+    position: "center"
   },
   {
     label: "Native Mobile Redesign and AI Ready Design System",
@@ -595,9 +587,7 @@ const workItems = [
     title: "AI Insights",
     video: aiInsightsWorkVideo,
     image: aiInsightsWorkPoster,
-    position: "center",
-    description:
-      "AI strategy work at Citibank, including an AI insights app that turns complex banking data into clear, decision-ready insights."
+    position: "center"
   },
   {
     label: "Website Design · olo.app",
@@ -1683,9 +1673,6 @@ function StudioHome({ isHistory = false }) {
                   <div className="work-card-meta">
                     <strong>{item.title}</strong>
                     {item.label ? <span>{item.label}</span> : null}
-                    {item.description && (
-                      <p className="work-card-desc">{item.description}</p>
-                    )}
                   </div>
                 </article>
               ))}
@@ -1716,12 +1703,7 @@ function StudioHome({ isHistory = false }) {
             <EntranceItem>
               <h2 id="v2-approach-title">Built for your existing stack.</h2>
               <p className="approach-subhead">
-                <span className="approach-subhead-line">
-                  We plug into the tools your team already uses across design, product, engineering, and AI,
-                </span>
-                <span className="approach-subhead-line">
-                  keeping collaboration practical, handoffs clear, and new workflows easy to adopt.
-                </span>
+                We plug into the tools your team already uses across design, product, engineering, and AI, keeping collaboration practical, handoffs clear, and new workflows easy to adopt.
               </p>
             </EntranceItem>
             <EntranceItem className="approach-details">
@@ -1886,10 +1868,7 @@ function StudioHome({ isHistory = false }) {
               <EntranceItem className="newsletter-copy">
                 <h2 id="v2-cta-title">Human AI Studio Publication</h2>
                 <p className="final-cta-lede">
-                  Join 4,200+ founders, business leaders, designers, and operators.
-                </p>
-                <p className="final-cta-sub">
-                  Business case studies, AI insights, and industry trends to help leaders put AI to work.
+                  Join 4,200+ founders and leaders for business case studies, AI insights, and industry trends.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
@@ -2015,10 +1994,7 @@ function StudioHome({ isHistory = false }) {
               <div className="newsletter-copy">
                 <h2 id="v2-cta-title">Human AI Studio Publication</h2>
                 <p className="final-cta-lede">
-                  Join 4,200+ founders, business leaders, designers, and operators.
-                </p>
-                <p className="final-cta-sub">
-                  Business case studies, AI insights, and industry trends to help leaders put AI to work.
+                  Join 4,200+ founders and leaders for business case studies, AI insights, and industry trends.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
