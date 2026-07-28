@@ -25,6 +25,21 @@ const processSteps = [
   { title: "Launch", body: "Ship, measure, and iterate on what moves growth." }
 ];
 
+const websiteTestimonials = [
+  {
+    quote:
+      "Working with John has been a real pleasure. He brought a clear process from beginning to end, responded quickly, and delivered high-quality work. The new design makes No Scroll feel like a brand new app.",
+    name: "Andrew",
+    role: "Founder, No Scroll App"
+  },
+  {
+    quote:
+      "Collaborating with John was both easy and productive. John provided valuable insights into product development and user experience that truly enhanced our project and moved it to the next level.",
+    name: "Edward Petkovicz",
+    role: "faxion.ai"
+  }
+];
+
 function openBookingModal(event) {
   if (
     event.defaultPrevented ||
@@ -175,23 +190,30 @@ export default function WebsitesPage() {
   const heroFeaturedProject =
     websiteProjects.find((study) => study.slug === "olo") ?? websiteProjects[0];
 
+  // Dark is the default treatment — preview light with ?theme=light.
+  const [isDark] = React.useState(() => {
+    if (typeof window === "undefined") return true;
+    return new URLSearchParams(window.location.search).get("theme") !== "light";
+  });
+
   React.useEffect(() => {
     document.title = "Websites · Human AI Studio";
     const html = document.documentElement;
     const body = document.body;
     const prevHtml = html.style.background;
     const prevBody = body.style.background;
-    html.style.background = "#f8f8f6";
-    body.style.background = "#f8f8f6";
+    const pageBg = isDark ? "#0b0b0c" : "#f8f8f6";
+    html.style.background = pageBg;
+    body.style.background = pageBg;
 
     return () => {
       html.style.background = prevHtml;
       body.style.background = prevBody;
     };
-  }, []);
+  }, [isDark]);
 
   return (
-    <div className="web-page">
+    <div className={`web-page${isDark ? " web-page--dark" : ""}`}>
       <header className="web-nav">
         <a className="web-brand" href="/">
           <span className="web-brand-mark" aria-hidden="true" />
@@ -208,7 +230,7 @@ export default function WebsitesPage() {
           onBookCall={openBookingModal}
         />
 
-        <section className="web-section" id="websites-work" aria-labelledby="websites-work-title">
+        <section className="web-section web-section--work" id="websites-work" aria-labelledby="websites-work-title">
           <Entrance className="web-section-heading web-section-heading--single-line">
             <EntranceItem as="h2" id="websites-work-title">
               Selected website work
@@ -246,27 +268,49 @@ export default function WebsitesPage() {
           </Entrance>
         </section>
 
-        <section className="web-closing" aria-labelledby="websites-closing-title">
-          <Entrance animate="visible">
-            <EntranceItem as="h2" id="websites-closing-title">
-              Ready for a site that actually moves the business?
+        <section className="web-testimonials" aria-labelledby="websites-testimonials-title">
+          <Entrance className="web-testimonials-heading">
+            <EntranceItem as="h2" id="websites-testimonials-title">
+              What clients say
             </EntranceItem>
-            <EntranceItem as="p">
-              Let’s map your offer, design the experience, and ship a website built to convert.
-            </EntranceItem>
-            <EntranceItem>
-              <a
-                className="web-btn web-btn--solid"
-                href={bookingUrl}
-                {...bookingAttributes}
-                onClick={openBookingModal}
-              >
-                Book a call
-              </a>
-            </EntranceItem>
+          </Entrance>
+          <Entrance className="web-testimonials-grid">
+            {websiteTestimonials.map((testimonial) => (
+              <EntranceItem as="blockquote" className="web-testimonial" key={testimonial.name}>
+                <p>“{testimonial.quote}”</p>
+                <footer>
+                  <strong>{testimonial.name}</strong>
+                  <span>{testimonial.role}</span>
+                </footer>
+              </EntranceItem>
+            ))}
           </Entrance>
         </section>
       </main>
+
+      <footer className="web-footer" aria-label="Human AI Studio footer">
+        <div className="web-footer-inner">
+          <div className="web-footer-brand">
+            <a className="web-brand" href="/" aria-label="Human AI Studio home">
+              <span className="web-brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </a>
+            <p>Strategy, design, and development for ambitious digital products.</p>
+          </div>
+          <div className="web-footer-contact">
+            <span>Contact</span>
+            <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
+            <a
+              href={bookingUrl}
+              {...bookingAttributes}
+              onClick={openBookingModal}
+            >
+              Book a call
+            </a>
+          </div>
+        </div>
+        <div className="web-footer-wordmark" aria-hidden="true">Human AI Studio</div>
+      </footer>
     </div>
   );
 }

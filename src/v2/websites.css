@@ -172,6 +172,29 @@ html:has(.web-page) body {
   margin-top: 1.15rem;
 }
 
+.web-hero-tools {
+  margin-top: 1.35rem;
+  padding-top: 1.1rem;
+  border-top: 1px solid rgba(10, 10, 10, 0.08);
+}
+
+.web-hero-tools-label {
+  display: block;
+  margin-bottom: 0.75rem;
+  color: rgba(10, 10, 10, 0.4);
+  font-size: 0.64rem;
+  font-weight: 520;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.web-hero-tools-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(1.75rem, 4vw, 2.75rem);
+}
+
 .web-btn-chevron {
   margin-left: 0.15rem;
   font-size: 1.05em;
@@ -253,6 +276,20 @@ html:has(.web-page) body {
   width: var(--web-rail);
   margin: 0 auto;
   padding: clamp(4.5rem, 10vw, 7rem) 0 0;
+}
+
+.web-section--work {
+  position: relative;
+  isolation: isolate;
+}
+
+.web-section--work::before {
+  position: absolute;
+  inset: 0 calc(50% - 50vw) auto;
+  z-index: -1;
+  height: calc(100% + clamp(4.5rem, 10vw, 7rem));
+  background: #000000;
+  content: "";
 }
 
 .web-section-heading {
@@ -467,6 +504,7 @@ html:has(.web-page) body {
 }
 
 .web-work-body {
+  position: relative;
   display: flex;
   min-height: 16rem;
   flex-direction: column;
@@ -582,6 +620,35 @@ html:has(.web-page) body {
   line-height: 1.45;
 }
 
+.web-tool {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.web-tool img {
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Optical sizing: each mark is normalised by visual mass, not raw height. */
+.web-tool--framer img {
+  height: 1.7rem;
+}
+
+.web-tool--react img {
+  height: 1.85rem;
+}
+
+.web-tool--tailwind img {
+  height: 1.25rem;
+}
+
+.web-tool--next img {
+  height: 1.6rem;
+}
+
 .web-closing {
   width: var(--web-rail);
   margin: clamp(4.5rem, 9vw, 6.5rem) auto clamp(4rem, 8vw, 6rem);
@@ -610,6 +677,140 @@ html:has(.web-page) body {
 
 .web-closing .web-btn {
   margin-top: 1.5rem;
+}
+
+.web-testimonials {
+  width: var(--web-rail);
+  margin: clamp(5rem, 10vw, 8rem) auto clamp(5rem, 9vw, 7rem);
+}
+
+.web-testimonials-heading {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.web-testimonials-heading > p {
+  margin: 0 0 0.7rem;
+  color: var(--web-soft);
+  font-size: 0.7rem;
+  font-weight: 620;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.web-testimonials-heading h2 {
+  margin: 0;
+  font-size: clamp(1.75rem, 3.2vw, 2.65rem);
+  font-weight: 540;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+.web-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.web-testimonial {
+  display: flex;
+  min-height: 20rem;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 2.5rem;
+  margin: 0;
+  padding: clamp(1.6rem, 3vw, 2.25rem);
+  border: 1px solid var(--web-line);
+  border-radius: 1.2rem;
+  background: var(--web-card);
+}
+
+.web-testimonial > p {
+  margin: 0;
+  color: var(--web-ink);
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 470;
+  line-height: 1.4;
+  letter-spacing: -0.025em;
+}
+
+.web-testimonial footer {
+  display: grid;
+  gap: 0.25rem;
+}
+
+.web-testimonial strong {
+  font-size: 0.9rem;
+  font-weight: 620;
+}
+
+.web-testimonial span {
+  color: var(--web-muted);
+  font-size: 0.82rem;
+}
+
+.web-footer {
+  overflow: hidden;
+  padding: clamp(3rem, 6vw, 4.5rem) var(--web-pad) 0;
+  border-top: 1px solid var(--web-line);
+  background: #000000;
+}
+
+.web-footer-inner {
+  display: grid;
+  width: var(--web-rail);
+  margin: 0 auto;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 3rem;
+}
+
+.web-footer-brand {
+  max-width: 25rem;
+}
+
+.web-footer-brand p {
+  margin: 1rem 0 0;
+  color: var(--web-muted);
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.web-footer-contact {
+  display: grid;
+  align-content: start;
+  gap: 0.55rem;
+}
+
+.web-footer-contact span {
+  margin-bottom: 0.2rem;
+  color: rgba(244, 244, 242, 0.88);
+  font-size: 0.7rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.web-footer-contact a {
+  color: var(--web-muted);
+  font-size: 0.88rem;
+  transition: color 180ms ease;
+}
+
+.web-footer-contact a:hover {
+  color: var(--web-ink);
+}
+
+.web-footer-wordmark {
+  width: var(--web-rail);
+  height: 0.72em;
+  overflow: hidden;
+  margin: clamp(2.75rem, 7vw, 5.5rem) auto 0;
+  color: var(--web-ink);
+  font-size: clamp(2.3rem, 11.5vw, 9rem);
+  font-weight: 540;
+  line-height: 0.88;
+  letter-spacing: -0.065em;
+  white-space: nowrap;
+  text-align: center;
 }
 
 .web-empty {
@@ -717,10 +918,158 @@ html:has(.web-page) body {
   .web-work-grid {
     gap: 1.35rem;
   }
+
+  .web-testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .web-testimonial {
+    min-height: 17rem;
+  }
+
+  .web-footer-inner {
+    grid-template-columns: 1fr;
+    gap: 2.25rem;
+  }
+
+  .web-footer-wordmark {
+    font-size: clamp(2rem, 13vw, 4.5rem);
+  }
 }
 
 @media (min-width: 720px) and (max-width: 899px) {
   .web-process {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* ---------------------------------------------------------------------------
+   Dark mode — opt in with ?theme=dark on the Websites page.
+   Everything below re-points the light tokens plus the handful of places that
+   hardcode a light value (nav wash, hero glass, buttons, media shells).
+--------------------------------------------------------------------------- */
+
+html:has(.web-page--dark),
+html:has(.web-page--dark) body {
+  background: #0b0b0c;
+}
+
+.web-page--dark {
+  --web-bg: #0b0b0c;
+  --web-ink: #f4f4f2;
+  --web-muted: rgba(244, 244, 242, 0.62);
+  --web-soft: rgba(244, 244, 242, 0.44);
+  --web-line: rgba(255, 255, 255, 0.12);
+  --web-accent: #b7d94a;
+  --web-card: #141416;
+  background: #000000;
+}
+
+.web-page--dark .web-nav {
+  background: linear-gradient(180deg, rgba(11, 11, 12, 0.94) 0%, rgba(11, 11, 12, 0) 100%);
+}
+
+.web-page--dark .web-brand-mark {
+  background: #f4f4f2;
+  box-shadow: 0 0 0 0.18rem rgba(255, 255, 255, 0.1);
+}
+
+.web-page--dark .web-hero-backdrop-media {
+  filter: brightness(0.72) saturate(1.02);
+}
+
+.web-page--dark .web-hero-backdrop-scrim {
+  background: linear-gradient(
+    180deg,
+    rgba(11, 11, 12, 0.1) 0%,
+    rgba(11, 11, 12, 0.58) 48%,
+    rgba(11, 11, 12, 0.97) 100%
+  );
+}
+
+.web-page--dark .web-hero-content {
+  border-color: rgba(255, 255, 255, 0.12);
+  background: rgba(20, 20, 22, 0.42);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 16px 48px rgba(0, 0, 0, 0.45);
+}
+
+.web-page--dark .web-btn--solid {
+  border-color: #f4f4f2;
+  background: #f4f4f2;
+  color: #0a0a0a !important;
+}
+
+.web-page--dark .web-btn--solid:hover {
+  background: #ffffff;
+  color: #0a0a0a !important;
+}
+
+.web-page--dark .web-btn--solid:focus-visible {
+  outline-color: #f4f4f2;
+}
+
+.web-page--dark .web-btn--ghost {
+  border-color: rgba(255, 255, 255, 0.22);
+  background: rgba(255, 255, 255, 0.06);
+  color: #f4f4f2 !important;
+}
+
+.web-page--dark .web-btn--ghost:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: rgba(255, 255, 255, 0.12);
+  color: #f4f4f2 !important;
+}
+
+.web-page--dark .web-btn--ghost:focus-visible {
+  outline-color: rgba(255, 255, 255, 0.65);
+}
+
+.web-page--dark .web-hero-tools-label {
+  color: rgba(244, 244, 242, 0.45);
+}
+
+.web-page--dark .web-hero-tools {
+  border-top-color: rgba(255, 255, 255, 0.12);
+}
+
+.web-page--dark .web-work-card,
+.web-page--dark .web-process-step,
+.web-page--dark .web-closing,
+.web-page--dark .web-testimonial {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+
+.web-page--dark .web-closing {
+  background: #0b0b0c;
+}
+
+.web-page--dark .web-work-card:hover {
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, 0.55);
+}
+
+.web-page--dark .web-work-media--contain-light,
+.web-page--dark .web-work-media--contain-light img,
+.web-page--dark .web-work-media--contain-light video {
+  background: #0f0f11;
+}
+
+.web-page--dark .web-work-link:hover {
+  color: rgba(244, 244, 242, 0.72);
+}
+
+.web-page--dark .web-pillar {
+  color: rgba(244, 244, 242, 0.72);
+}
+
+/* The Next.js mark is a black disc — invert it so it reads on a dark card. */
+.web-page--dark .web-tool--next img {
+  filter: invert(1);
+}
+
+/* Flatten the Framer blue to white on dark. */
+.web-page--dark .web-tool--framer img {
+  filter: brightness(0) invert(1);
 }
