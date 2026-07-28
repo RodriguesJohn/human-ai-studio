@@ -283,9 +283,9 @@ function CinematicHero() {
             className="hero-cinematic-subtitle"
             variants={entranceChild}
           >
-            We help startups and enterprise design AI native products and systems{" "}
-            <span className="motto-emphasis">people trust</span> to increase adaptation,
-            retention, and drive business growth.
+            We help startups and enterprise design AI native products{" "}
+            <span className="motto-emphasis">people trust</span>, to increase adaptation
+            and drive business growth.
           </motion.p>
 
           <motion.div className="hero-cinematic-cta-row" variants={entranceChild}>
@@ -298,7 +298,7 @@ function CinematicHero() {
               <span className="hero-cinematic-avatar" aria-hidden="true">
                 <img src={profilePicture} alt="" />
               </span>
-              <span>Book 15 min strategy call</span>
+              <span>Book 15 min call</span>
             </a>
             <span className="hero-cinematic-spots">
               <svg
@@ -354,7 +354,7 @@ function BookingButton({ showAvatar = false }) {
           <img src={profilePicture} alt="" />
         </span>
       )}
-      <span className="button-label">Book 15 min strategy call</span>
+      <span className="button-label">Book 15 min call</span>
     </motion.a>
   );
 }
@@ -410,7 +410,7 @@ const homeOffers = [
   {
     title: "AI Native Product Design",
     description:
-      "Product design, design engineering, agent building, and design systems, with design and development in one loop so you ship faster.",
+      "Design, engineering, and agents in one loop so you ship faster.",
     slug: "design-engineering",
     stage: "Design",
     color1: "#3b82f6",
@@ -419,7 +419,7 @@ const homeOffers = [
   {
     title: "Agentic Design Systems",
     description:
-      "We create workflow automation systems and run audits that drive business transformation, increasing retention, adaptation, and revenue.",
+      "Design systems that are AI-ready and agentic, so you scale without slop.",
     slug: "ai-native-products",
     stage: "Systems",
     color1: "#8b5cf6",
@@ -428,7 +428,7 @@ const homeOffers = [
   {
     title: "Workshops",
     description:
-      "Custom workshops and hands-on training so teams become AI-native and apply new systems in their real workflows.",
+      "Hands-on training that makes your team AI-native, fast.",
     slug: "ai-training-enablement",
     stage: "Enable",
     color1: "#10b981",
@@ -1443,7 +1443,7 @@ function OriginalHome() {
           <div className="footer-column">
             <p>Contact</p>
             <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
-            <BookingTextLink>Book 15 min strategy call</BookingTextLink>
+            <BookingTextLink>Book 15 min call</BookingTextLink>
           </div>
         </div>
       </footer>
@@ -2271,7 +2271,7 @@ function OfferingPage({ slug }) {
           <div className="footer-column">
             <p>Contact</p>
             <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
-            <BookingTextLink>Book 15 min strategy call</BookingTextLink>
+            <BookingTextLink>Book 15 min call</BookingTextLink>
           </div>
         </div>
         <div className="footer-wordmark reveal" aria-hidden="true">

@@ -112,7 +112,7 @@ const demoVideos = [
   }
 ];
 
-function BookingCta({ className = "", children = "Book 15 min strategy call", showAvatar = false }) {
+function BookingCta({ className = "", children = "Book 15 min call", showAvatar = false }) {
   return (
     <a
       className={className}
@@ -343,7 +343,7 @@ export default function FlorenceOfferPage() {
             </EntranceItem>
             <EntranceItem>
               <BookingCta className="flo-cta flo-cta--solid" showAvatar>
-                Book 15 min strategy call
+                Book 15 min call
               </BookingCta>
             </EntranceItem>
           </Entrance>

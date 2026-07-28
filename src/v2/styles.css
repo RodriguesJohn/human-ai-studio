@@ -1403,7 +1403,7 @@ h2 {
   top: clamp(0.9rem, 1.3vw, 1.15rem);
   left: clamp(1rem, 1.5vw, 1.35rem);
   z-index: 2;
-  color: rgba(255, 255, 255, 0.14);
+  color: rgba(255, 255, 255, 0.07);
   font-size: clamp(2.4rem, 4.2vw, 3.6rem);
   font-weight: 650;
   letter-spacing: 0.01em;
@@ -5196,6 +5196,45 @@ h3 {
   pointer-events: none;
 }
 
+/* Home hero: lean on a soft focal blur behind the copy rather than a heavy black wash */
+.current-home .hero-cinematic-scrim {
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16)),
+    linear-gradient(180deg, rgba(1, 1, 1, 0.42) 0%, rgba(1, 1, 1, 0.04) 36%, rgba(1, 1, 1, 0.34) 100%);
+}
+
+.current-home .hero-cinematic-scrim::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: clamp(24rem, 66vh, 42rem);
+  backdrop-filter: blur(22px) saturate(118%);
+  -webkit-backdrop-filter: blur(22px) saturate(118%);
+  mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    rgba(0, 0, 0, 0.94) 26%,
+    rgba(0, 0, 0, 0.72) 44%,
+    rgba(0, 0, 0, 0.44) 60%,
+    rgba(0, 0, 0, 0.2) 74%,
+    rgba(0, 0, 0, 0.07) 87%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to top,
+    #000 0%,
+    rgba(0, 0, 0, 0.94) 26%,
+    rgba(0, 0, 0, 0.72) 44%,
+    rgba(0, 0, 0, 0.44) 60%,
+    rgba(0, 0, 0, 0.2) 74%,
+    rgba(0, 0, 0, 0.07) 87%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
 /* Soft fade from the video into the next section's dark background */
 .current-home .hero-cinematic::after {
   content: "";
@@ -5309,13 +5348,13 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.85rem;
-  padding: clamp(0.85rem, 1.3vw, 1rem) clamp(1.75rem, 3vw, 2.5rem);
+  gap: 0.6rem;
+  padding: clamp(0.7rem, 1vw, 0.8rem) clamp(1rem, 1.5vw, 1.3rem);
   border-radius: 999px;
   color: rgba(255, 255, 255, 0.92);
-  font-size: clamp(0.72rem, 1vw, 0.82rem);
+  font-size: clamp(0.68rem, 0.9vw, 0.76rem);
   font-weight: 400;
-  letter-spacing: 0.2em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
@@ -5324,11 +5363,11 @@ h3 {
 
 .hero-cinematic-cta-row {
   display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  align-items: flex-start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
   justify-content: flex-start;
-  gap: 0;
+  gap: clamp(1rem, 1.8vw, 1.5rem);
   margin-top: 1.15rem;
 }
 
@@ -5336,7 +5375,6 @@ h3 {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
-  margin-top: clamp(1.15rem, 2.4vw, 1.65rem);
   color: rgba(255, 255, 255, 0.72);
   font-size: 0.84rem;
   font-weight: 450;
@@ -5553,14 +5591,15 @@ h3 {
   }
 
   .hero-cinematic-cta {
-    gap: 0.7rem;
-    padding: 0.9rem 1.7rem;
-    font-size: 0.72rem;
-    letter-spacing: 0.16em;
+    gap: 0.6rem;
+    padding: 0.8rem 1.15rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
   }
 
   .hero-cinematic-cta-row {
-    align-items: flex-start;
+    align-items: center;
+    gap: 0.9rem;
   }
 
   .hero-cinematic-avatar {

@@ -289,7 +289,7 @@ export default function CaseStudiesPage() {
                 {...bookingAttributes}
                 onClick={openBookingModal}
               >
-                Book 15 min strategy call
+                Book 15 min call
               </a>
             </EntranceItem>
           </Entrance>
