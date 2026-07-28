@@ -60,6 +60,10 @@ function CaseStudyMedia({ study, className = "", priority = false }) {
   const containerRef = React.useRef(null);
   const videoRef = React.useRef(null);
   const [shouldLoad, setShouldLoad] = React.useState(false);
+  const mediaStyle = {
+    objectPosition: study.position,
+    transform: study.mediaScale ? `scale(${study.mediaScale})` : undefined
+  };
 
   React.useEffect(() => {
     if (!study.video) return undefined;
@@ -117,7 +121,7 @@ function CaseStudyMedia({ study, className = "", priority = false }) {
   if (!study.video) {
     return (
       <div className={mediaClass}>
-        <img src={study.image} alt="" style={{ objectPosition: study.position }} loading={priority ? "eager" : "lazy"} />
+        <img src={study.image} alt="" style={mediaStyle} loading={priority ? "eager" : "lazy"} />
       </div>
     );
   }
@@ -129,7 +133,7 @@ function CaseStudyMedia({ study, className = "", priority = false }) {
           className="cs-media-poster"
           src={study.image}
           alt=""
-          style={{ objectPosition: study.position }}
+          style={mediaStyle}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
         />
@@ -145,7 +149,7 @@ function CaseStudyMedia({ study, className = "", priority = false }) {
           playsInline
           autoPlay
           preload={priority ? "metadata" : "none"}
-          style={{ objectPosition: study.position }}
+          style={mediaStyle}
         />
       ) : null}
     </div>

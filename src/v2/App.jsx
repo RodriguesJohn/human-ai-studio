@@ -7,7 +7,7 @@ import { Entrance, EntranceItem, entranceChild, entranceViewport } from "./entra
 import { NavMenu } from "./NavMenu.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
 import studioAbstract from "../assets/studio-abstract.png";
-import cinematicHeroMobileVideo from "../assets/hero-cinematic-mobile.mp4";
+import caseStudiesHeroVideo from "../assets/case-studies-hero.mp4";
 import evaAiVideo from "../assets/EvaAIV2.mov";
 import pureFiVideo from "../assets/PureFi.MOV";
 import productContextVideo from "../assets/ultramock-product-context.mp4";
@@ -22,6 +22,8 @@ import noScrollWorkImage from "../assets/work/NoScrollApp.png";
 import dcbWorkImage from "../assets/work/DCB.png";
 import ultraMockWorkVideo from "../assets/work/UltraMock.mp4";
 import ultraMockWorkPoster from "../assets/work/UltraMock.png";
+import aiAcademyWorkVideo from "../assets/work/AIAcademy.mp4";
+import aiAcademyWorkPoster from "../assets/work/AIAcademy.png";
 import aiInsightsWorkVideo from "../assets/work/AIInsightsApp.mp4";
 import aiInsightsWorkPoster from "../assets/work/AIInsightsPoster.webp";
 import codexLogo from "../assets/logos/claude-code.png";
@@ -250,8 +252,8 @@ function CinematicHero() {
         }}
         aria-hidden="true"
       >
-        <source src={cinematicHeroMobileVideo} media="(max-width: 640px)" type="video/mp4" />
-        <source src={cinematicHeroVideo} type="video/mp4" />
+        <source src={caseStudiesHeroVideo} media="(max-width: 640px)" type="video/mp4" />
+        <source src={caseStudiesHeroVideo} type="video/mp4" />
       </video>
       <div className="hero-cinematic-scrim" aria-hidden="true" />
 
@@ -261,63 +263,61 @@ function CinematicHero() {
         initial={shouldReduceMotion ? false : "hidden"}
         animate="visible"
       >
-        <h1 className="hero-cinematic-title">
-          <motion.span
-            className="hero-cinematic-line"
-            variants={entranceChild}
-          >
-            AI Native Products and
-          </motion.span>
-          <motion.span
-            className="hero-cinematic-line"
-            variants={entranceChild}
-          >
-            Systems Studio
-          </motion.span>
-        </h1>
-
-        <motion.p
-          className="hero-cinematic-subtitle"
-          variants={entranceChild}
-        >
-          <span className="hero-cinematic-subtitle-line">
-            We help startups and enterprise design AI native products and systems
-          </span>
-          <span className="hero-cinematic-subtitle-line">
-            <span className="motto-emphasis">people trust</span> to increase
-            adaptation, retention, and drive business growth.
-          </span>
-        </motion.p>
-
-        <motion.div className="hero-cinematic-cta-row" variants={entranceChild}>
-          <a
-            className="hero-cinematic-cta liquid-glass"
-            href={bookingUrl}
-            onClick={openBookingModal}
-            {...bookingAttributes}
-          >
-            <span className="hero-cinematic-avatar" aria-hidden="true">
-              <img src={profilePicture} alt="" />
-            </span>
-            <span>Book 15 min strategy call</span>
-          </a>
-          <span className="hero-cinematic-spots">
-            <svg
-              className="hero-cinematic-spots-icon"
-              viewBox="0 0 16 16"
-              fill="none"
-              aria-hidden="true"
+        <div className="hero-cinematic-panel">
+          <h1 className="hero-cinematic-title">
+            <motion.span
+              className="hero-cinematic-line"
+              variants={entranceChild}
             >
-              <path
-                d="M9.2 1.5 3.4 9.1h4.1L6.8 14.5l5.8-7.6H8.5L9.2 1.5Z"
-                stroke="currentColor"
-                strokeWidth="1.2"
-                strokeLinejoin="round"
-              />
-            </svg>
-            2 spots left
-          </span>
-        </motion.div>
+              AI Native Products and
+            </motion.span>
+            <motion.span
+              className="hero-cinematic-line"
+              variants={entranceChild}
+            >
+              Systems Studio
+            </motion.span>
+          </h1>
+
+          <motion.p
+            className="hero-cinematic-subtitle"
+            variants={entranceChild}
+          >
+            We help startups and enterprise design AI native products and systems{" "}
+            <span className="motto-emphasis">people trust</span> to increase adaptation,
+            retention, and drive business growth.
+          </motion.p>
+
+          <motion.div className="hero-cinematic-cta-row" variants={entranceChild}>
+            <a
+              className="hero-cinematic-cta liquid-glass"
+              href={bookingUrl}
+              onClick={openBookingModal}
+              {...bookingAttributes}
+            >
+              <span className="hero-cinematic-avatar" aria-hidden="true">
+                <img src={profilePicture} alt="" />
+              </span>
+              <span>Book 15 min strategy call</span>
+            </a>
+            <span className="hero-cinematic-spots">
+              <svg
+                className="hero-cinematic-spots-icon"
+                viewBox="0 0 16 16"
+                fill="none"
+                aria-hidden="true"
+              >
+                <path
+                  d="M9.2 1.5 3.4 9.1h4.1L6.8 14.5l5.8-7.6H8.5L9.2 1.5Z"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinejoin="round"
+                />
+              </svg>
+              2 spots left
+            </span>
+          </motion.div>
+        </div>
       </motion.div>
     </section>
   );
@@ -408,7 +408,7 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "AI native product design",
+    title: "AI Native Product Design",
     description:
       "Product design, design engineering, agent building, and design systems, with design and development in one loop so you ship faster.",
     slug: "design-engineering",
@@ -417,7 +417,7 @@ const homeOffers = [
     color2: "#bae6fd"
   },
   {
-    title: "Agentic design systems",
+    title: "Agentic Design Systems",
     description:
       "We create workflow automation systems and run audits that drive business transformation, increasing retention, adaptation, and revenue.",
     slug: "ai-native-products",
@@ -588,6 +588,15 @@ const workItems = [
     video: aiInsightsWorkVideo,
     image: aiInsightsWorkPoster,
     position: "center"
+  },
+  {
+    label: "Website Design · AI Academy",
+    title: "AI Academy",
+    video: aiAcademyWorkVideo,
+    image: aiAcademyWorkPoster,
+    position: "center",
+    fit: "contain",
+    containTone: "light"
   },
   {
     label: "Website Design · olo.app",
@@ -1803,10 +1812,7 @@ function StudioHome({ isHistory = false }) {
                 <span>Your Design Engineering Partner</span>
               </EntranceItem>
               <EntranceItem as="p">
-                I work with teams from startups to enterprise, combining AI strategy and design engineering to turn complex technology into products people trust. I hold a Master's in Interaction Design, a Bachelor's in Engineering, and completed Stanford's AI and UX program.
-              </EntranceItem>
-              <EntranceItem as="p">
-                I've earned recognition from JPMorgan Chase leadership, and my Substack, four years running, is read by 4,200+ designers, leaders, and founders from Apple, Google, and other top companies.
+                I work with teams from startups to enterprise, combining AI strategy and design engineering to turn complex technology into products people trust. I hold a Master's in Interaction Design, a Bachelor's in Engineering, completed Stanford's AI and UX program, and have earned recognition from JPMorgan Chase leadership while building a Substack read by 4,200+ designers, leaders, and founders from Apple, Google, and other top companies.
               </EntranceItem>
               <EntranceItem className="bio-actions">
                 <a
@@ -2035,7 +2041,21 @@ function StudioHome({ isHistory = false }) {
       )}
 
       <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
-        {!isHistory && <HeroNebulaShader className="footer-side-shader" />}
+        {!isHistory && (
+          <>
+            <video
+              className="footer-growth-video"
+              src={cinematicHeroVideo}
+              autoPlay
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              aria-hidden="true"
+            />
+            <div className="footer-growth-scrim" aria-hidden="true" />
+          </>
+        )}
         <div className="site-footer-inner">
           {isHistory ? (
             <div className="footer-brand">

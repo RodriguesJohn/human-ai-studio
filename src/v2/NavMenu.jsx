@@ -17,8 +17,10 @@ const bookingAttributes = {
 const academyUrl = "/academy";
 const studioUrl = "/";
 const websitesUrl = "/websites";
+const allWorkUrl = "/case-studies";
 
 const serviceLinks = [
+  { label: "All work", href: allWorkUrl },
   { label: "Websites", href: websitesUrl },
   { label: "Product design", href: studioUrl },
   { label: "Design systems", href: studioUrl }
@@ -145,9 +147,6 @@ export function NavMenu() {
             role="menu"
             style={panelStyle}
           >
-            <p className="nav-menu-group-label" role="presentation">
-              Services
-            </p>
             {serviceLinks.map((service) => (
               <a
                 key={service.label}

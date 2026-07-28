@@ -483,12 +483,9 @@ function AcademyPage() {
   return (
     <div className="academy-page">
       <header className="academy-nav">
-        <a className="academy-brand" href="/academy">
+        <a className="academy-brand" href="/">
           <span className="academy-brand-mark" aria-hidden="true" />
-          <span className="academy-brand-text">
-            AI Academy
-            <span className="academy-brand-by"> by Human AI Studio</span>
-          </span>
+          <span className="academy-brand-text">AI Academy</span>
         </a>
         <div className="academy-nav-actions">
           <NavMenu />

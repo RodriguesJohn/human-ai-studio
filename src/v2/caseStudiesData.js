@@ -115,7 +115,9 @@ export const caseStudies = [
     video: balanceTransferWorkVideo,
     image: balanceTransferWorkPoster,
     position: "center",
-    fit: "contain"
+    fit: "contain",
+    containTone: "light",
+    mediaScale: 1.12
   },
   {
     slug: "ai-academy",
