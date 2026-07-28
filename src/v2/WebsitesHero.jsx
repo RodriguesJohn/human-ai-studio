@@ -1,5 +1,16 @@
 import React from "react";
 import { Entrance, EntranceItem } from "./entrance.jsx";
+import framerLogo from "../assets/logos/framer.svg";
+import reactLogo from "../assets/logos/react-mark.svg";
+import tailwindLogo from "../assets/logos/tailwind.svg";
+import nextLogo from "../assets/logos/nextjs-mark.svg";
+
+export const buildTools = [
+  { name: "Framer", icon: framerLogo, slug: "framer" },
+  { name: "React", icon: reactLogo, slug: "react" },
+  { name: "Tailwind", icon: tailwindLogo, slug: "tailwind" },
+  { name: "Next.js", icon: nextLogo, slug: "next" }
+];
 
 function HeroBackdropMedia({ study, className = "" }) {
   const videoRef = React.useRef(null);
@@ -91,6 +102,19 @@ export function WebsitesHero({
               <a className="web-btn web-btn--ghost" href="#websites-work">
                 See the work
               </a>
+            </EntranceItem>
+            <EntranceItem className="web-hero-tools">
+              <span className="web-hero-tools-label">Built with</span>
+              <div className="web-hero-tools-row">
+                {buildTools.map((tool) => (
+                  <span
+                    className={`web-tool web-tool--${tool.slug}`}
+                    key={tool.name}
+                  >
+                    <img src={tool.icon} alt={tool.name} loading="lazy" />
+                  </span>
+                ))}
+              </div>
             </EntranceItem>
           </Entrance>
         </div>
