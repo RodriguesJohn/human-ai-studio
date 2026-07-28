@@ -803,14 +803,19 @@ function AcademyPage() {
         </section>
       </main>
 
-      <footer className="academy-footer">
+      <footer className="academy-footer" aria-label="Human AI Studio footer">
         <div className="academy-footer-inner">
-          <div>
+          <div className="academy-footer-brand">
+            <a className="academy-footer-brand-link" href="/" aria-label="Human AI Studio home">
+              <span className="academy-brand-mark" aria-hidden="true" />
+              Human AI Studio
+            </a>
             <p>
               AI Academy for industry professionals shipping with AI through live workshops and self-paced tracks.
             </p>
           </div>
-          <div className="academy-footer-links">
+          <div className="academy-footer-column">
+            <p>Explore</p>
             <a href="/">Studio</a>
             <a href={COHORT_URL} target="_blank" rel="noreferrer">
               Live workshop
@@ -818,13 +823,13 @@ function AcademyPage() {
             <a href={ACADEMY_URL} target="_blank" rel="noreferrer">
               Academy
             </a>
-            <a href="mailto:john@humanaistudio.ai">Contact</a>
+          </div>
+          <div className="academy-footer-column">
+            <p>Contact</p>
+            <a href="mailto:john@humanaistudio.ai">john@humanaistudio.ai</a>
           </div>
         </div>
-        <div className="academy-footer-bottom">
-          <p>© 2026 Human AI Studio. All rights reserved.</p>
-          <p>Built for designers, founders, and industry professionals.</p>
-        </div>
+        <div className="academy-footer-wordmark" aria-hidden="true">Human AI Studio</div>
       </footer>
 
       {isNewsletterOpen ? (
