@@ -5533,8 +5533,8 @@ h3 {
   }
 
   .current-home .hero-cinematic-video {
-    object-fit: contain;
-    object-position: center top;
+    object-fit: cover;
+    object-position: center;
     background: #050506;
   }
 
