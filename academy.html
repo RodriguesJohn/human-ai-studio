@@ -60,6 +60,24 @@
         }
       });
     </script>
+    <script>
+      document.addEventListener("click", function (e) {
+        const link = e.target.closest("a");
+        if (!link) return;
+        if (link.href.includes("substack.com")) {
+          gtag("event", "newsletter_cta_click", {
+            event_category: "engagement",
+            event_label: "academy_hero"
+          });
+        }
+        if (link.href.includes("skool.com")) {
+          gtag("event", "academy_cta_click", {
+            event_category: "engagement",
+            event_label: "academy_hero"
+          });
+        }
+      });
+    </script>
     <script type="text/javascript">
       (function (C, A, L) {
         let p = function (a, ar) {
