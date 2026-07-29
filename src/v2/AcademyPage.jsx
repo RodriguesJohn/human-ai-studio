@@ -158,18 +158,10 @@ const logos = [
 
 const newsletterBenefits = [
   "Research, case studies, and frameworks for AI builders",
-  "2 articles every week",
-  "1 article free every week",
-  "Full paid publication for $12/month"
-];
-
-const cohortPackageBenefits = [
-  "4 live workshops",
-  "Certificate of completion",
-  "Live sessions with John",
-  "Ship a real AI product workflow",
-  "Recordings of every session",
-  "Private workshops for teams"
+  "2 new articles published every week",
+  "Every article is free for its first 7 days",
+  "After 7 days, it moves into the member archive",
+  "Unlock the full archive for $12/month"
 ];
 
 const pricingBenefits = [
@@ -182,51 +174,38 @@ const pricingBenefits = [
 
 const pathOptions = [
   {
-    title: "Weekly Publication",
+    title: "Structured learning tracks",
     description:
-      "Research, case studies, and frameworks for founders and designers building with AI.",
+      "Follow a clear path from AI foundations to production-ready workflows.",
     bullets: [
-      "Original research & insights",
-      "Product insights & case studies",
-      "Trends & practical frameworks"
+      "Claude Code, Cursor, and Codex tracks",
+      "Practical projects for real product work",
+      "Recordings, prompts, and templates"
     ],
-    cta: {
-      label: "Read the Publication",
-      href: "#membership",
-      className: "academy-btn academy-btn--primary"
-    },
     color1: "#38bdf8",
     color2: "#e0f2fe"
   },
   {
-    title: "Workshops and training",
-    description: "Vibe coding, agents, and design systems, from curious to shipping.",
+    title: "Builder community",
+    description:
+      "Learn alongside designers, founders, and builders who share feedback and momentum.",
     bullets: [
-      "4.6/5 across workshops",
-      "Live sessions with John",
-      "Ship a real AI workflow"
+      "Get feedback when you feel stuck",
+      "Stay accountable as you build",
+      "Learn from what others are shipping"
     ],
-    cta: {
-      label: "Join the live workshop",
-      href: "#membership",
-      className: "academy-btn academy-btn--primary"
-    },
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Self-paced learning",
-    description: "Structured tracks and recordings for Claude Code, Cursor, and Codex.",
+    title: "Monthly 30-minute sessions",
+    description:
+      "Join John every month to ask questions, unblock your work, and keep shipping.",
     bullets: [
-      "Claude Code, Cursor, and Codex tracks",
-      "Recordings, prompts, and templates",
-      "Latest AI research and news"
+      "Live Q&A and practical walkthroughs",
+      "Apply the learning to real workflows",
+      "Watch the recording anytime"
     ],
-    cta: {
-      label: "Join the Academy",
-      href: "#membership",
-      className: "academy-btn academy-btn--primary"
-    },
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   }
@@ -502,26 +481,30 @@ function AcademyPage() {
                 <span className="academy-hero-line">Products and Agentic Systems.</span>
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
-                <span>Build practical AI fluency and stronger workflows,</span>
-                <span>from foundational to advanced.</span>
-                <span>Learn and ship with a community of designers, founders, and builders.</span>
+                <span>Build practical AI fluency and advance your workflows.</span>
+                <span>Learn and ship alongside a community of AI builders.</span>
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
+                <a
+                  className="academy-btn academy-btn--primary"
+                  href={ACADEMY_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Join AI Academy
+                  <span className="academy-btn-arrow" aria-hidden="true">
+                    →
+                  </span>
+                </a>
                 <button
                   ref={newsletterTriggerRef}
                   type="button"
-                  className="academy-btn academy-btn--primary"
+                  className="academy-btn academy-btn--ghost"
                   onClick={() => setIsNewsletterOpen(true)}
                   aria-haspopup="dialog"
                 >
                   Join 4,200 readers
-                  <span className="academy-btn-arrow" aria-hidden="true">
-                    →
-                  </span>
                 </button>
-                <a className="academy-btn academy-btn--ghost" href="#membership">
-                  Explore Academy
-                </a>
               </EntranceItem>
             </Entrance>
 
@@ -541,7 +524,7 @@ function AcademyPage() {
                   <span>★</span>
                   <span className="academy-hero-star academy-hero-star--half">★</span>
                 </span>
-                <span>From 4,200+ builders and product teams</span>
+                <span>4.6/5 rating on Maven</span>
               </EntranceItem>
               <EntranceItem className="academy-logo-row academy-logo-row--inline">
                 {logos.map((logo) => (
@@ -558,7 +541,7 @@ function AcademyPage() {
 
         <section className="academy-section">
           <Entrance className="academy-section-heading">
-            <EntranceItem as="h2">Three ways to get started.</EntranceItem>
+            <EntranceItem as="h2">Why builders join.</EntranceItem>
           </Entrance>
           <Entrance className="academy-path-grid">
             {pathOptions.map((path, index) => (
@@ -587,12 +570,6 @@ function AcademyPage() {
                       <li key={bullet}>{bullet}</li>
                     ))}
                   </ul>
-                  <a
-                    className={path.cta.className}
-                    href={path.cta.href}
-                  >
-                    {path.cta.label}
-                  </a>
                 </div>
               </EntranceItem>
             ))}
@@ -679,7 +656,7 @@ function AcademyPage() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  Join for free
+                  Read the latest articles
                 </a>
               </div>
             </EntranceItem>
@@ -721,49 +698,6 @@ function AcademyPage() {
                   Join the Academy
                 </a>
               </div>
-            </EntranceItem>
-            <EntranceItem
-              as="article"
-              className="academy-package"
-              style={{
-                "--card-color-1": "#f59e0b",
-                "--card-color-2": "#fde68a"
-              }}
-            >
-              <div className="academy-package-thumb">
-                <OfferingShader
-                  color1="#f59e0b"
-                  color2="#fde68a"
-                  seed={5.1}
-                  className="academy-package-shader"
-                />
-                <div className="academy-package-thumb-copy">
-                  <h3>Live Workshop</h3>
-                  <div className="academy-price academy-price--thumb">
-                    <span>$1,499</span>
-                  </div>
-                </div>
-              </div>
-              <div className="academy-package-body">
-                <ul className="academy-check-list">
-                  {cohortPackageBenefits.map((benefit) => (
-                    <li key={benefit}>{benefit}</li>
-                  ))}
-                </ul>
-                <a
-                  className="academy-btn academy-btn--primary academy-btn--full"
-                  href={COHORT_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Join us live
-                </a>
-              </div>
-            </EntranceItem>
-          </Entrance>
-          <Entrance>
-            <EntranceItem as="p" className="academy-disclaimer">
-              Courses and materials shown on this page may differ from what’s included in each package. Review the individual package details before purchasing.
             </EntranceItem>
           </Entrance>
         </section>
