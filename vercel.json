@@ -18,6 +18,18 @@
   ],
   "rewrites": [
     {
+      "source": "/academy",
+      "destination": "/academy.html"
+    },
+    {
+      "source": "/robots.txt",
+      "destination": "/robots.txt"
+    },
+    {
+      "source": "/sitemap.xml",
+      "destination": "/sitemap.xml"
+    },
+    {
       "source": "/(.*)",
       "destination": "/"
     }

@@ -277,9 +277,9 @@ function CinematicHero() {
             className="hero-cinematic-subtitle"
             variants={entranceChild}
           >
-            We help startups and enterprise design AI native products{" "}
-            <span className="motto-emphasis">people trust</span>, to increase adaptation
-            and drive business growth.
+            We help product teams turn ambiguous problems into{" "}
+            <span className="motto-emphasis">trusted, adoptable products</span> through
+            product design, prototyping, design systems, and design engineering.
           </motion.p>
 
           <motion.div className="hero-cinematic-cta-row" variants={entranceChild}>
