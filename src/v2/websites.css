@@ -705,15 +705,31 @@ html:has(.web-page) body {
   letter-spacing: -0.03em;
 }
 
-.web-testimonials-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 1rem;
+.web-testimonial-marquee {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+
+.web-testimonial-track {
+  display: flex;
+  width: max-content;
+  gap: clamp(1rem, 2vw, 1.35rem);
+  animation: webTestimonialMarquee 58s linear infinite;
+  will-change: transform;
+}
+
+.web-testimonial-marquee:hover .web-testimonial-track {
+  animation-play-state: paused;
 }
 
 .web-testimonial {
   display: flex;
+  width: clamp(19rem, 31vw, 25rem);
   min-height: 20rem;
+  flex: 0 0 auto;
   flex-direction: column;
   justify-content: space-between;
   gap: 2.5rem;
@@ -746,6 +762,26 @@ html:has(.web-page) body {
 .web-testimonial span {
   color: var(--web-muted);
   font-size: 0.82rem;
+}
+
+.web-testimonial footer img {
+  width: auto;
+  height: 1.1rem;
+  margin-top: 0.75rem;
+  object-fit: contain;
+  object-position: left center;
+  filter: brightness(0) invert(1);
+  opacity: 0.7;
+}
+
+@keyframes webTestimonialMarquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    transform: translate3d(calc(-50% - clamp(0.5rem, 1vw, 0.675rem)), 0, 0);
+  }
 }
 
 .web-footer {
@@ -919,12 +955,20 @@ html:has(.web-page) body {
     gap: 1.35rem;
   }
 
-  .web-testimonials-grid {
-    grid-template-columns: 1fr;
+  .web-testimonial-marquee {
+    width: calc(100% + 2rem);
+    margin-left: -1rem;
+  }
+
+  .web-testimonial-track {
+    gap: 0.85rem;
+    animation-duration: 48s;
   }
 
   .web-testimonial {
+    width: min(18.5rem, 78vw);
     min-height: 17rem;
+    padding: 1.25rem;
   }
 
   .web-footer-inner {
@@ -1067,6 +1111,23 @@ html:has(.web-page--dark) body {
 /* The Next.js mark is a black disc — invert it so it reads on a dark card. */
 .web-page--dark .web-tool--next img {
   filter: invert(1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .web-testimonial-marquee {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+    scrollbar-width: thin;
+  }
+
+  .web-testimonial-track {
+    animation: none;
+  }
+
+  .web-testimonial[aria-hidden="true"] {
+    display: none;
+  }
 }
 
 /* Flatten the Framer blue to white on dark. */

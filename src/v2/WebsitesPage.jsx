@@ -3,6 +3,10 @@ import { Entrance, EntranceItem } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { WebsitesHero } from "./WebsitesHero.jsx";
 import { websiteProjects } from "./caseStudiesData.js";
+import googleCompanyLogo from "../assets/companies/GoogleLogog.png";
+import appleCompanyLogo from "../assets/companies/Apple-Logo.png";
+import citiCompanyLogo from "../assets/companies/Citi.svg.png";
+import chaseCompanyLogo from "../assets/companies/ChaseLightMOde.png";
 import "./websites.css";
 
 const bookingLink = "john-rodrigues-rqt2lg/15min";
@@ -28,13 +32,41 @@ const processSteps = [
 const websiteTestimonials = [
   {
     quote:
-      "Working with John has been a real pleasure. He brought a clear process from beginning to end, responded quickly, and delivered high-quality work. The new design makes No Scroll feel like a brand new app.",
-    name: "Andrew",
-    role: "Founder, No Scroll App"
+      "Yay!!! Thank you John! You literally explained auto layout today so effortlessly. I understand it more now than ever before. I'm considering taking your course to take my Figma skills up a notch.",
+    name: "Yariela B",
+    role: "UX Designer",
+    logo: googleCompanyLogo
   },
   {
     quote:
-      "Collaborating with John was both easy and productive. John provided valuable insights into product development and user experience that truly enhanced our project and moved it to the next level.",
+      "Had an amazing chat with John. We exchanged some interesting resources and talked about the importance of understanding the value of a designer.",
+    name: "Lucas W",
+    role: "Product Designer",
+    logo: appleCompanyLogo
+  },
+  {
+    quote:
+      "John has shown tremendous value as a UX designer. This year, he has answered every challenge in taking on additional responsibility in project management, client relationship building, and increased design ownership and delivery.",
+    name: "Zachary E",
+    role: "Creative Director, VP",
+    logo: citiCompanyLogo
+  },
+  {
+    quote:
+      "His thoughtful ideas and entrepreneurship have enhanced our team's collaboration. His design work has significantly boosted visibility and impact across all product areas. His keen eye for UX and resourcefulness with new technologies are impressive.",
+    name: "Kristian K",
+    role: "Product Designer, VP",
+    logo: chaseCompanyLogo
+  },
+  {
+    quote:
+      "Working with John has been a real pleasure. He brought a clear process from beginning to end, responded quickly, and delivered high-quality work. The new design makes No Scroll feel like a brand new app. If you're considering working with John, don't hesitate.",
+    name: "Andrew",
+    role: "Founder of No Scroll App"
+  },
+  {
+    quote:
+      "Collaborating with John was both easy and productive. John provided valuable insights into product development and user experience that truly enhanced our project and moved it to the next level. I highly recommend John.",
     name: "Edward Petkovicz",
     role: "faxion.ai"
   }
@@ -274,17 +306,28 @@ export default function WebsitesPage() {
               What clients say
             </EntranceItem>
           </Entrance>
-          <Entrance className="web-testimonials-grid">
-            {websiteTestimonials.map((testimonial) => (
-              <EntranceItem as="blockquote" className="web-testimonial" key={testimonial.name}>
-                <p>“{testimonial.quote}”</p>
-                <footer>
-                  <strong>{testimonial.name}</strong>
-                  <span>{testimonial.role}</span>
-                </footer>
-              </EntranceItem>
-            ))}
-          </Entrance>
+          <EntranceItem>
+            <div className="web-testimonial-marquee" aria-label="Client testimonials">
+              <div className="web-testimonial-track">
+                {[...websiteTestimonials, ...websiteTestimonials].map((testimonial, index) => (
+                  <blockquote
+                    className="web-testimonial"
+                    key={`${testimonial.name}-${index}`}
+                    aria-hidden={index >= websiteTestimonials.length}
+                  >
+                    <p>“{testimonial.quote}”</p>
+                    <footer>
+                      <strong>{testimonial.name}</strong>
+                      <span>{testimonial.role}</span>
+                      {testimonial.logo ? (
+                        <img src={testimonial.logo} alt="" loading="lazy" />
+                      ) : null}
+                    </footer>
+                  </blockquote>
+                ))}
+              </div>
+            </div>
+          </EntranceItem>
         </section>
       </main>
 

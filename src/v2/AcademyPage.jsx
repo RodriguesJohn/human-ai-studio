@@ -215,7 +215,7 @@ const pathOptions = [
     color2: "#bae6fd"
   },
   {
-    title: "Self-paced learning at AI Academy",
+    title: "Self-paced learning",
     description: "Structured tracks and recordings for Claude Code, Cursor, and Codex.",
     bullets: [
       "Claude Code, Cursor, and Codex tracks",
@@ -234,19 +234,19 @@ const pathOptions = [
 
 const cohortModules = [
   {
-    title: "AI\nfluency",
+    title: "AI fluency",
     description: "AI habits that show up in real product work.",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Tools that\nship",
+    title: "Tools that ship",
     description: "Ship full stack apps.",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Agents &\nsystems",
+    title: "Agents & systems",
     description: "Agents and systems you can ship and keep iterating on.",
     color1: "#10b981",
     color2: "#a7f3d0"
@@ -498,12 +498,13 @@ function AcademyPage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1">
-                <span className="academy-hero-line">Level up your AI workflows.</span>
-                <span className="academy-hero-line">Ship agentic products.</span>
+                <span className="academy-hero-line">Learn how to build AI Native</span>
+                <span className="academy-hero-line">Products and Agentic Systems.</span>
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
-                AI fluency that shows up in your workflow. Live workshop with
-                certification, or self-paced learning at AI Academy.
+                <span>Build practical AI fluency and stronger workflows,</span>
+                <span>from foundational to advanced.</span>
+                <span>Learn and ship with a community of designers, founders, and builders.</span>
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
                 <button
@@ -614,6 +615,17 @@ function AcademyPage() {
                 </div>
               </EntranceItem>
             ))}
+          </Entrance>
+        </section>
+
+        <section className="academy-section">
+          <Entrance className="academy-section-heading">
+            <EntranceItem as="h2">Professionals already shipping.</EntranceItem>
+          </Entrance>
+          <Entrance>
+            <EntranceItem>
+              <TestimonialScroller />
+            </EntranceItem>
           </Entrance>
         </section>
 
@@ -791,16 +803,6 @@ function AcademyPage() {
           </Entrance>
         </section>
 
-        <section className="academy-section">
-          <Entrance className="academy-section-heading">
-            <EntranceItem as="h2">Professionals already shipping.</EntranceItem>
-          </Entrance>
-          <Entrance>
-            <EntranceItem>
-              <TestimonialScroller />
-            </EntranceItem>
-          </Entrance>
-        </section>
       </main>
 
       <footer className="academy-footer" aria-label="Human AI Studio footer">

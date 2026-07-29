@@ -269,13 +269,7 @@ function CinematicHero() {
               className="hero-cinematic-line"
               variants={entranceChild}
             >
-              AI Native Products and
-            </motion.span>
-            <motion.span
-              className="hero-cinematic-line"
-              variants={entranceChild}
-            >
-              Systems Studio
+              AI Native Product Studio
             </motion.span>
           </h1>
 
