@@ -4,7 +4,6 @@ import { Entrance, EntranceItem } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import "./academy.css";
 
-const COHORT_URL = "https://maven.com/humanaistudio/aimasterycohort";
 const ACADEMY_URL = "https://www.skool.com/ai-design-academy-6114/about";
 const NEWSLETTER_URL = "https://johnrodrigues.substack.com/";
 const NEWSLETTER_EMBED_URL = `${NEWSLETTER_URL}embed`;
@@ -753,9 +752,6 @@ function AcademyPage() {
           <div className="academy-footer-column">
             <p>Explore</p>
             <a href="/">Studio</a>
-            <a href={COHORT_URL} target="_blank" rel="noreferrer">
-              Live workshop
-            </a>
             <a href={ACADEMY_URL} target="_blank" rel="noreferrer">
               Academy
             </a>
