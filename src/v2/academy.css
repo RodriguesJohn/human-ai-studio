@@ -1737,6 +1737,14 @@ html:has(.academy-page) {
     line-height: 1.5;
   }
 
+  .academy-hero-sub > span {
+    display: inline;
+  }
+
+  .academy-hero-sub > span + span::before {
+    content: " ";
+  }
+
   .academy-hero-actions {
     flex-direction: column;
     align-items: stretch;
