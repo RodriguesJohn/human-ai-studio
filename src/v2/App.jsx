@@ -402,8 +402,8 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "AI-Native Product Design Sprint",
-    titleLines: ["AI-Native Product", "Design Sprint"],
+    title: "AI-Native Product Design",
+    titleLines: ["AI-Native Product", "Design"],
     description:
       "Design, engineering, and agents in one loop so you ship faster.",
     slug: "design-engineering",
