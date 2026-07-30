@@ -1427,6 +1427,10 @@ h2 {
   text-wrap: nowrap;
 }
 
+.offering-title-line {
+  display: block;
+}
+
 .dark-offerings .v2-offer-grid .v2-offering-card:hover {
   border-color: rgba(255, 255, 255, 0.22);
   background:
@@ -1662,6 +1666,11 @@ h2 {
     border-color 180ms ease,
     box-shadow 180ms ease,
     background 180ms ease;
+}
+
+.offering-card[href] {
+  color: inherit;
+  text-decoration: none;
 }
 
 .offering-card::after {

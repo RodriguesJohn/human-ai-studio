@@ -411,19 +411,22 @@ const homeOffers = [
     color2: "#bae6fd"
   },
   {
-    title: "Agentic Design Systems",
+    title: "2-Week Agent-Ready Design System Sprint",
+    titleLines: ["2-Week Agent-Ready", "Design System Sprint"],
     description:
-      "Design systems that are AI-ready and agentic, so you scale without slop.",
+      "A focused audit that makes your design system ready for AI agents.",
     slug: "ai-native-products",
+    link: "/design-systems",
     stage: "Systems",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Workshops",
+    title: "Academy",
     description:
       "Hands-on training that makes your team AI-native, fast.",
     slug: "ai-training-enablement",
+    link: "/academy",
     stage: "Enable",
     color1: "#10b981",
     color2: "#a7f3d0"
@@ -1555,9 +1558,15 @@ function StudioHome({ isHistory = false }) {
           <Entrance className="offering-grid v2-flow-grid v2-offer-grid" viewport={{ once: true, amount: 0.12, margin: "0px 0px -8% 0px" }}>
             {cards.map((step, index) => (
               <EntranceItem
-                as="article"
+                as={step.link ? "a" : "article"}
                 className="offering-card v2-offering-card"
                 key={step.title}
+                {...(step.link
+                  ? {
+                      href: step.link,
+                      "aria-label": `Learn more about ${step.title}`
+                    }
+                  : {})}
                 style={{
                   "--card-color-1": step.color1,
                   "--card-color-2": step.color2
@@ -1572,7 +1581,15 @@ function StudioHome({ isHistory = false }) {
                   <span className="offering-thumb-number">
                     {step.stage || String(index + 1).padStart(2, "0")}
                   </span>
-                  <h3 className="offering-thumb-title">{step.title}</h3>
+                  <h3 className="offering-thumb-title">
+                    {step.titleLines
+                      ? step.titleLines.map((line) => (
+                          <span className="offering-title-line" key={line}>
+                            {line}
+                          </span>
+                        ))
+                      : step.title}
+                  </h3>
                 </div>
                 <div className="offering-copy">
                   <p>{step.description}</p>
