@@ -833,6 +833,14 @@
     white-space: nowrap;
   }
 
+  .ds-audit-intro {
+    font-size: clamp(0.9rem, 4vw, 1rem);
+  }
+
+  .ds-audit-intro span {
+    white-space: nowrap;
+  }
+
   .ds-audit-actions {
     align-items: stretch;
     flex-direction: column;

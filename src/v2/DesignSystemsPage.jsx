@@ -232,14 +232,8 @@ export default function DesignSystemsPage() {
               <span className="ds-audit-title-line">Two-week audit sprint.</span>
             </EntranceItem>
             <EntranceItem as="p" className="ds-audit-intro">
-              <span>
-                We identify what’s working, where your design system and workflows break,
-                and what needs to improve.
-              </span>
-              <span>
-                You leave with an evidence-based report and a prioritized path to make
-                your existing system agent-ready.
-              </span>
+              <span>Find the gaps in your design system.</span>
+              <span>Get a clear path to agent readiness.</span>
             </EntranceItem>
             <EntranceItem className="ds-audit-actions">
               <BookingButton showAvatar />
