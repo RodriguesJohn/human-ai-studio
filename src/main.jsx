@@ -43,6 +43,16 @@ async function boot() {
       return;
     }
 
+    if (route === "/design-systems") {
+      const { default: DesignSystemsPage } = await import("./v2/DesignSystemsPage.jsx");
+      root.render(
+        <React.StrictMode>
+          <DesignSystemsPage />
+        </React.StrictMode>
+      );
+      return;
+    }
+
     const { default: V2App } = await import("./v2/App.jsx");
     root.render(
       <React.StrictMode>

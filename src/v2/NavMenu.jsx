@@ -18,12 +18,13 @@ const academyUrl = "/academy";
 const studioUrl = "/";
 const websitesUrl = "/websites";
 const allWorkUrl = "/case-studies";
+const designSystemsUrl = "/design-systems";
 
 const serviceLinks = [
   { label: "All work", href: allWorkUrl },
   { label: "Websites", href: websitesUrl },
   { label: "Product design", href: studioUrl },
-  { label: "Design systems", href: studioUrl }
+  { label: "Design systems", href: designSystemsUrl }
 ];
 
 function openBookingModal(event) {
@@ -50,6 +51,10 @@ function openBookingModal(event) {
 
 export function NavMenu() {
   const [open, setOpen] = React.useState(false);
+  const currentPath =
+    typeof window === "undefined"
+      ? "/"
+      : window.location.pathname.replace(/\/+$/, "") || "/";
   const rootRef = React.useRef(null);
   const triggerRef = React.useRef(null);
   const [panelStyle, setPanelStyle] = React.useState(null);
@@ -150,9 +155,12 @@ export function NavMenu() {
             {serviceLinks.map((service) => (
               <a
                 key={service.label}
-                className="nav-menu-item nav-menu-item--nested"
+                className={`nav-menu-item nav-menu-item--nested${
+                  currentPath === service.href ? " is-active" : ""
+                }`}
                 href={service.href}
                 role="menuitem"
+                aria-current={currentPath === service.href ? "page" : undefined}
                 onClick={close}
               >
                 {service.label}
