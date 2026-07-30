@@ -403,7 +403,6 @@ const v2HowItWorks = [
 const homeOffers = [
   {
     title: "AI-Native Product Design",
-    titleLines: ["AI-Native Product", "Design"],
     description:
       "Design, engineering, and agents in one loop so you ship faster.",
     slug: "design-engineering",
@@ -412,8 +411,8 @@ const homeOffers = [
     color2: "#bae6fd"
   },
   {
-    title: "Agent-Ready Design System Sprint",
-    titleLines: ["Agent-Ready Design", "System Sprint"],
+    title: "AI-Ready Design System Sprint",
+    titleLines: ["AI-Ready Design", "System Sprint"],
     description:
       "A focused audit that makes your design system ready for AI agents.",
     slug: "ai-native-products",
