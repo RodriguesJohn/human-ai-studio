@@ -29,10 +29,7 @@
   min-height: 100svh;
   padding: clamp(8rem, 15vh, 11rem) var(--page-padding) clamp(5rem, 9vw, 8rem);
   overflow: hidden;
-  background:
-    radial-gradient(circle at 78% 28%, rgba(139, 92, 246, 0.22), transparent 25rem),
-    radial-gradient(circle at 20% 10%, rgba(255, 255, 255, 0.05), transparent 24rem),
-    #050506;
+  background: #050506;
 }
 
 .ds-audit-hero::after {
@@ -825,6 +822,15 @@
 
   .ds-audit-hero {
     min-height: auto;
+  }
+
+  .ds-audit-hero h1 {
+    font-size: clamp(1.35rem, 6.8vw, 2.15rem);
+    letter-spacing: -0.04em;
+  }
+
+  .ds-audit-title-line {
+    white-space: nowrap;
   }
 
   .ds-audit-actions {
