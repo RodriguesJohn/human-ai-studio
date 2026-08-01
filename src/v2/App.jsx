@@ -901,9 +901,22 @@ function WorkShowcase() {
                 poster={active.image}
                 autoPlay
                 muted
+                defaultMuted
                 loop
                 playsInline
-                preload="metadata"
+                webkit-playsinline="true"
+                preload="auto"
+                controls={false}
+                disablePictureInPicture
+                disableRemotePlayback
+                onLoadedMetadata={(event) => {
+                  event.currentTarget.muted = true;
+                  event.currentTarget.play().catch(() => {});
+                }}
+                onCanPlay={(event) => {
+                  event.currentTarget.muted = true;
+                  event.currentTarget.play().catch(() => {});
+                }}
                 style={{ objectPosition: active.position }}
               />
             ) : (

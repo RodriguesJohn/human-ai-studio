@@ -817,7 +817,8 @@
   }
 
   .ds-audit-page .nav .nav-direct > a {
-    display: none;
+    padding: 0.5rem 0.55rem;
+    font-size: 0.78rem;
   }
 
   .ds-audit-hero {
