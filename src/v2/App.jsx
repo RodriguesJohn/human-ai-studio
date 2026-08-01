@@ -8,6 +8,11 @@ import { NavMenu } from "./NavMenu.jsx";
 import profilePicture from "../assets/Profile Picture.jpg";
 import studioAbstract from "../assets/studio-abstract.png";
 import caseStudiesHeroVideo from "../assets/case-studies-hero.mp4";
+import workReelVideo from "../assets/work-reel.mp4";
+import heroButterflyVideo from "../assets/hero-cinematic-mobile.mp4";
+import rbAiPoster from "../assets/work/rb-ai-poster.jpg";
+import pureFiPoster from "../assets/work/purefi-poster.jpg";
+import orbiPoster from "../assets/work/orbi-poster.jpg";
 import evaAiVideo from "../assets/EvaAIV2.mov";
 import pureFiVideo from "../assets/PureFi.MOV";
 import productContextVideo from "../assets/ultramock-product-context.mp4";
@@ -252,8 +257,8 @@ function CinematicHero() {
         }}
         aria-hidden="true"
       >
-        <source src={caseStudiesHeroVideo} media="(max-width: 640px)" type="video/mp4" />
-        <source src={caseStudiesHeroVideo} type="video/mp4" />
+        <source src={heroButterflyVideo} media="(max-width: 640px)" type="video/mp4" />
+        <source src={heroButterflyVideo} type="video/mp4" />
       </video>
       <div className="hero-cinematic-scrim" aria-hidden="true" />
 
@@ -277,9 +282,8 @@ function CinematicHero() {
             className="hero-cinematic-subtitle"
             variants={entranceChild}
           >
-            We help product teams turn ambiguous problems into{" "}
-            <span className="motto-emphasis">trusted, adoptable products</span> through
-            product design, prototyping, design systems, and design engineering.
+            We design and build products with human judgment and the speed of AI, shipping{" "}
+            <span className="motto-emphasis">experiences from zero to one</span>.
           </motion.p>
 
           <motion.div className="hero-cinematic-cta-row" variants={entranceChild}>
@@ -315,6 +319,115 @@ function CinematicHero() {
       </motion.div>
     </section>
   );
+}
+
+const workPathways = [
+  {
+    name: "1:1 Partner",
+    tagline: "For founders and small teams",
+    price: "Hourly",
+    cadence: "Ongoing",
+    features: [
+      "AI integration strategy",
+      "Product strategy workshops",
+      "Async feedback and working calls",
+      "Direct access to John"
+    ]
+  },
+  {
+    name: "0 → 1 Product Sprint",
+    tagline: "For new products finding their shape",
+    price: "Fixed scope",
+    cadence: "Per engagement",
+    featured: true,
+    features: [
+      "Ambiguous idea to working product",
+      "Functional products and prototypes",
+      "Design and development with production-ready components",
+      "Ships in weeks, not quarters"
+    ]
+  },
+  {
+    name: "Embedded Design Engineering",
+    tagline: "For teams raising the bar",
+    price: "Monthly",
+    cadence: "Retainer",
+    features: [
+      "Embedded with your product team, shipping",
+      "Prototyping to validate ideas and win buy-in",
+      "Design systems and production-ready components",
+      "Craft standards, reviews, and pairing",
+      "A second opinion when you're hiring for craft"
+    ]
+  }
+];
+
+function CheckIcon() {
+  return (
+    <svg viewBox="0 0 20 20" aria-hidden="true" focusable="false" fill="none">
+      <circle cx="10" cy="10" r="9" fill="currentColor" opacity="0.16" />
+      <path
+        d="M6 10.4l2.6 2.6L14 7.6"
+        stroke="currentColor"
+        strokeWidth="1.7"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function WorkPathways() {
+  return (
+    <section className="pathways" aria-labelledby="pathways-title" data-nav-theme="dark">
+      <Entrance className="pathways-inner">
+        <EntranceItem as="h2" id="pathways-title" className="pathways-title">
+          Ways to work together
+        </EntranceItem>
+        <EntranceItem as="p" className="pathways-lede">
+          Three pathways, depending on where your product is today.
+        </EntranceItem>
+
+        <EntranceItem className="pathways-grid">
+          {workPathways.map((plan) => (
+            <article
+              className={`pathway-card${plan.featured ? " is-featured" : ""}`}
+              key={plan.name}
+            >
+              <div className="pathway-head">
+                <h3 className="pathway-name">{plan.name}</h3>
+                {plan.featured ? <span className="pathway-flag">Most common</span> : null}
+              </div>
+              <p className="pathway-tagline">{plan.tagline}</p>
+              <div className="pathway-price">
+                <strong>{plan.price}</strong>
+              </div>
+              <a
+                className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
+                href={bookingUrl}
+                onClick={openBookingModal}
+                {...bookingAttributes}
+              >
+                Book 15 min call
+              </a>
+              <ul className="pathway-features">
+                {plan.features.map((feature) => (
+                  <li key={feature}>
+                    <CheckIcon />
+                    <span>{feature}</span>
+                  </li>
+                ))}
+              </ul>
+            </article>
+          ))}
+        </EntranceItem>
+      </Entrance>
+    </section>
+  );
+}
+
+function BottomBlur() {
+  return <div className="page-bottom-blur" aria-hidden="true" />;
 }
 
 function BookingButton({ showAvatar = false }) {
@@ -402,11 +515,12 @@ const v2HowItWorks = [
 
 const homeOffers = [
   {
-    title: "AI-Native Product Design",
+    title: "0→1 AI-Native Products",
+    titleLines: ["0→1 AI-Native", "Products"],
     description:
-      "Design, engineering, and agents in one loop so you ship faster.",
+      "Fuzzy concepts stall until someone makes them real. We work in coded, clickable flows from week one, so the idea gets tested instead of debated.",
     slug: "design-engineering",
-    stage: "Design",
+    stage: "Build",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
@@ -414,7 +528,7 @@ const homeOffers = [
     title: "AI-Ready Design System Sprint",
     titleLines: ["AI-Ready Design", "System Sprint"],
     description:
-      "A focused audit that makes your design system ready for AI agents.",
+      "Most prototypes get thrown out at handoff. We get your design system agent-ready, so the prototype becomes production code instead of a rebuild.",
     slug: "ai-native-products",
     link: "/design-systems",
     stage: "Systems",
@@ -424,10 +538,40 @@ const homeOffers = [
   {
     title: "Academy",
     description:
-      "Hands-on training that makes your team AI-native, fast.",
+      "Hands-on training on the AI tools that turn a rough idea into a coded flow in hours, so your team stops waiting on specialists.",
     slug: "ai-training-enablement",
     link: "/academy",
     stage: "Enable",
+    color1: "#10b981",
+    color2: "#a7f3d0"
+  }
+];
+
+const homeProblems = [
+  {
+    title: "From Idea to Working Product",
+    titleLines: ["From Idea to", "Working Product"],
+    description:
+      "We turn ambiguity into an MVP you can actually use.",
+    stage: "Ambiguity",
+    color1: "#3b82f6",
+    color2: "#bae6fd"
+  },
+  {
+    title: "Prototypes That Decide",
+    titleLines: ["Prototypes", "That Decide"],
+    description:
+      "Prototypes built to answer the question, not just impress.",
+    stage: "Proof",
+    color1: "#8b5cf6",
+    color2: "#ddd6fe"
+  },
+  {
+    title: "Augmenting Human Experience",
+    titleLines: ["Augmenting Human", "Experience"],
+    description:
+      "AI builds fast. Judgment and taste make it worth using.",
+    stage: "Experience",
     color1: "#10b981",
     color2: "#a7f3d0"
   }
@@ -531,6 +675,13 @@ const offeringPages = {
 
 const workItems = [
   {
+    label: "0 → 1 AI-native product work",
+    title: "RB AI",
+    video: workReelVideo,
+    image: rbAiPoster,
+    position: "center"
+  },
+  {
     label: "Design system for AI agents",
     title: "Florence",
     image: florenceWorkImage,
@@ -546,7 +697,7 @@ const workItems = [
     label: "Native Mobile Redesign and AI Ready Design System",
     title: "PureFi",
     video: pureFiVideo,
-    image: studioAbstract,
+    image: pureFiPoster,
     position: "72% 46%"
   },
   {
@@ -561,7 +712,7 @@ const workItems = [
     label: "Voice Todo",
     title: "Orbi Agent",
     video: evaAiVideo,
-    image: studioAbstract,
+    image: orbiPoster,
     position: "44% 50%"
   },
   {
@@ -612,6 +763,186 @@ const workItems = [
     containTone: "light"
   }
 ];
+
+function BioIcon({ name }) {
+  const common = {
+    viewBox: "0 0 24 24",
+    "aria-hidden": "true",
+    focusable: "false",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 1.6,
+    strokeLinecap: "round",
+    strokeLinejoin: "round"
+  };
+
+  if (name === "cap") {
+    return (
+      <svg {...common}>
+        <path d="M12 4L2 9l10 5 10-5-10-5z" />
+        <path d="M6 11.5V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-4.5" />
+      </svg>
+    );
+  }
+
+  if (name === "badge") {
+    return (
+      <svg {...common}>
+        <circle cx="12" cy="9.5" r="5.5" />
+        <path d="M8.5 14.5L7 21l5-2.4L17 21l-1.5-6.5" />
+      </svg>
+    );
+  }
+
+  if (name === "mail") {
+    return (
+      <svg {...common}>
+        <rect x="2.5" y="5" width="19" height="14" rx="2.5" />
+        <path d="M3 7l9 6 9-6" />
+      </svg>
+    );
+  }
+
+  if (name === "linkedin") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+        <path d="M4.98 3.5A2.5 2.5 0 1 0 5 8.5a2.5 2.5 0 0 0-.02-5zM3 9.75h4v11.25H3V9.75zm6.5 0h3.83v1.54h.05a4.2 4.2 0 0 1 3.78-2.08c4.04 0 4.79 2.66 4.79 6.12V21h-4v-4.96c0-1.18-.02-2.7-1.64-2.7-1.65 0-1.9 1.29-1.9 2.62V21h-4V9.75z" />
+      </svg>
+    );
+  }
+
+  if (name === "substack") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false" fill="currentColor">
+        <path d="M4 3h16v2.6H4V3zm0 4.7h16v2.6H4V7.7zM4 12.4L12 17l8-4.6V21l-8-4.6L4 21v-8.6z" />
+      </svg>
+    );
+  }
+
+  return null;
+}
+
+function WorkShowcase() {
+  const [activeIndex, setActiveIndex] = React.useState(0);
+  const selectorRef = React.useRef(null);
+  const active = workItems[activeIndex];
+  const step = (dir) =>
+    setActiveIndex((i) => (i + dir + workItems.length) % workItems.length);
+
+  // Keep the active thumbnail in view without scrolling the page.
+  React.useEffect(() => {
+    const rail = selectorRef.current;
+    const chip = rail?.children?.[activeIndex];
+    if (!rail || !chip) return;
+    rail.scrollTo({
+      left: chip.offsetLeft - rail.clientWidth / 2 + chip.clientWidth / 2,
+      behavior: "smooth"
+    });
+  }, [activeIndex]);
+
+  return (
+    <section className="work-showcase" aria-labelledby="work-title" data-nav-theme="dark">
+      <div className="work-showcase-inner">
+        <Entrance className="section-heading no-section-note work-heading">
+          <EntranceItem>
+            <h2 id="work-title">Work Highlights</h2>
+          </EntranceItem>
+          <EntranceItem className="work-heading-actions">
+            <a className="work-case-studies-cta" href="/case-studies">
+              View all
+            </a>
+            <div className="work-nav">
+              <button
+                type="button"
+                className="work-nav-btn"
+                aria-label="Previous project"
+                onClick={() => step(-1)}
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M15 5l-7 7 7 7"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+              <button
+                type="button"
+                className="work-nav-btn"
+                aria-label="Next project"
+                onClick={() => step(1)}
+              >
+                <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path
+                    d="M9 5l7 7-7 7"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.7"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+          </EntranceItem>
+        </Entrance>
+
+        <div className="work-spotlight">
+          <div
+            className={`work-spotlight-media${active.fit === "contain" ? " work-spotlight-contain" : ""}`}
+          >
+            {active.video ? (
+              <video
+                key={active.title}
+                src={active.video}
+                poster={active.image}
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                style={{ objectPosition: active.position }}
+              />
+            ) : (
+              <img
+                key={active.title}
+                src={active.image}
+                alt={active.title}
+                style={{ objectPosition: active.position }}
+              />
+            )}
+          </div>
+        </div>
+
+        <div
+          className="work-selector"
+          role="tablist"
+          aria-label="Select a project"
+          ref={selectorRef}
+        >
+          {workItems.map((item, index) => (
+            <button
+              type="button"
+              role="tab"
+              key={item.title}
+              className={`work-chip${index === activeIndex ? " is-active" : ""}`}
+              aria-selected={index === activeIndex}
+              onClick={() => setActiveIndex(index)}
+            >
+              <span className="work-chip-media">
+                <img src={item.image} alt="" style={{ objectPosition: item.position }} />
+              </span>
+              <span className="work-chip-title">{item.title}</span>
+            </button>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 const showSelectedProjects = true;
 
@@ -1452,7 +1783,7 @@ function StudioHome({ isHistory = false }) {
   useRevealAnimation();
   useMarqueeStart();
   const shouldReduceMotion = useReducedMotion();
-  const cards = isHistory ? v2HowItWorks : homeOffers;
+  const cards = isHistory ? v2HowItWorks : homeProblems;
   const principlesList = isHistory ? v2Principles : homePrinciples;
 
   return (
@@ -1500,7 +1831,8 @@ function StudioHome({ isHistory = false }) {
       <section
         id="offerings"
         className={`offerings ${isHistory ? "" : "dark-offerings"}`}
-        aria-labelledby="v2-how-title"
+        aria-labelledby={isHistory ? "v2-how-title" : undefined}
+        aria-label={isHistory ? undefined : "How we build zero to one"}
         data-nav-theme={isHistory ? "light" : "dark"}
       >
         {isHistory ? (
@@ -1515,15 +1847,7 @@ function StudioHome({ isHistory = false }) {
               A forward-deployed process for understanding the business problem, designing the workflow, and shipping AI agents into real operations.
             </p>
           </div>
-        ) : (
-          <Entrance className="section-heading no-section-note">
-            <EntranceItem>
-              <h2 className="v2-how-heading" id="v2-how-title">
-                Three Ways to Work Together
-              </h2>
-            </EntranceItem>
-          </Entrance>
-        )}
+        ) : null}
 
         {isHistory ? (
           <div className="offering-grid v2-flow-grid">
@@ -1592,6 +1916,7 @@ function StudioHome({ isHistory = false }) {
                   </h3>
                 </div>
                 <div className="offering-copy">
+                  {step.kicker && <p className="offering-kicker">{step.kicker}</p>}
                   <p>{step.description}</p>
                 </div>
               </EntranceItem>
@@ -1619,87 +1944,10 @@ function StudioHome({ isHistory = false }) {
       )}
 
       {!isHistory && showSelectedProjects && (
-        <section className="work-showcase" aria-labelledby="work-title" data-nav-theme="dark">
-          <div className="work-showcase-inner">
-            <Entrance className="section-heading no-section-note work-heading">
-              <EntranceItem>
-                <h2 id="work-title">Work Highlights</h2>
-              </EntranceItem>
-              <EntranceItem className="work-heading-actions">
-                <a className="work-case-studies-cta" href="/case-studies">
-                  View all
-                </a>
-                <div className="work-nav">
-                  <button
-                    type="button"
-                    className="work-nav-btn work-nav-prev"
-                    aria-label="Previous projects"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                      <path
-                        d="M15 5l-7 7 7 7"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.7"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                  <button
-                    type="button"
-                    className="work-nav-btn work-nav-next"
-                    aria-label="Next projects"
-                  >
-                    <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-                      <path
-                        d="M9 5l7 7-7 7"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="1.7"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              </EntranceItem>
-            </Entrance>
-          </div>
-          <div className="work-marquee" aria-label="Selected work">
-            <div className="work-track">
-              {[...workItems, ...workItems].map((item, index) => (
-                <article
-                  className="work-card"
-                  key={`${item.title}-${index}`}
-                  aria-hidden={index >= workItems.length}
-                >
-                  <div className={`work-card-media${item.fit === "contain" ? " work-card-media-contain" : ""}${item.containTone === "light" ? " work-card-media-contain-light" : ""}`}>
-                    {item.video ? (
-                      <video
-                        src={item.video}
-                        poster={item.image}
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                        preload="metadata"
-                        style={{ objectPosition: item.position }}
-                      />
-                    ) : (
-                      <img src={item.image} alt="" style={{ objectPosition: item.position }} />
-                    )}
-                  </div>
-                  <div className="work-card-meta">
-                    <strong>{item.title}</strong>
-                    {item.label ? <span>{item.label}</span> : null}
-                  </div>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
+        <WorkShowcase />
       )}
+
+      {!isHistory && <WorkPathways />}
 
       <section className="approach" aria-labelledby="v2-approach-title" data-nav-theme="dark">
         {isHistory ? (
@@ -1827,20 +2075,22 @@ function StudioHome({ isHistory = false }) {
               </EntranceItem>
               <EntranceItem className="bio-actions">
                 <a
-                  className="secondary-button"
+                  className="bio-icon-button"
                   href="https://www.linkedin.com/in/john-rodrigues4?utm_source=share_via&utm_content=profile&utm_medium=member_ios"
                   target="_blank"
                   rel="noreferrer"
+                  aria-label="LinkedIn"
                 >
-                  LinkedIn
+                  <BioIcon name="linkedin" />
                 </a>
                 <a
-                  className="secondary-button"
+                  className="bio-icon-button"
                   href="https://johnrodrigues.substack.com/"
                   target="_blank"
                   rel="noreferrer"
+                  aria-label="Substack"
                 >
-                  Substack
+                  <BioIcon name="substack" />
                 </a>
               </EntranceItem>
               <EntranceItem className="bio-logos" aria-label="Experience with teams at leading companies">
@@ -1878,53 +2128,6 @@ function StudioHome({ isHistory = false }) {
       </section>
 
       {!isHistory && (
-        <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
-          <DotMatrixBackground />
-          <Entrance className="final-cta-inner final-cta-inner--newsletter">
-            <div className="newsletter-cta">
-              <EntranceItem className="newsletter-copy">
-                <h2 id="v2-cta-title">Human AI Studio Publication</h2>
-                <p className="final-cta-lede">
-                  Join 4,200+ founders and leaders for business case studies, AI insights, and industry trends.
-                </p>
-                <div className="newsletter-actions">
-                  <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
-                    <span className="button-label">Read the Publication</span>
-                  </a>
-                </div>
-              </EntranceItem>
-              <EntranceItem className="newsletter-visual" aria-hidden="true">
-                <div className="issue-card-deck">
-                  <div className="issue-card issue-card--back" />
-                  <div className="issue-card issue-card--front">
-                    <div className="issue-card-head">
-                      <span className="issue-mark" />
-                      <div className="issue-card-meta">
-                        <span className="issue-card-name">Human AI Studio</span>
-                        <span className="issue-card-sub">Research Publication</span>
-                      </div>
-                      <span className="issue-card-pill">Subscribed</span>
-                    </div>
-                    <p className="issue-card-body">
-                      Business case studies, insights, and industry trends for founders, business leaders, and designers putting AI to work.
-                    </p>
-                    <div className="issue-card-foot">
-                      <span className="issue-card-foot-label">Read by professionals at</span>
-                      <div className="issue-card-logos">
-                        {newsletterCompanies.map((company) => (
-                          <img key={company.name} src={company.icon} alt={company.name} />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </EntranceItem>
-            </div>
-          </Entrance>
-        </section>
-      )}
-
-      {!isHistory && (
         <section className="testimonials" aria-labelledby="testimonials-title" data-nav-theme="dark">
           <div className="testimonials-inner">
             <Entrance className="section-heading no-section-note">
@@ -1953,6 +2156,53 @@ function StudioHome({ isHistory = false }) {
               </div>
             </div>
           </div>
+        </section>
+      )}
+
+      {!isHistory && (
+        <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
+          <DotMatrixBackground />
+          <Entrance className="final-cta-inner final-cta-inner--newsletter">
+            <div className="newsletter-cta">
+              <EntranceItem className="newsletter-copy">
+                <h2 id="v2-cta-title">Newsletter</h2>
+                <p className="final-cta-lede">
+                  Join 4,200+ founders and leaders for business case studies, AI insights, and industry trends.
+                </p>
+                <div className="newsletter-actions">
+                  <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
+                    <span className="button-label">Read the Newsletter</span>
+                  </a>
+                </div>
+              </EntranceItem>
+              <EntranceItem className="newsletter-visual" aria-hidden="true">
+                <div className="issue-card-deck">
+                  <div className="issue-card issue-card--back" />
+                  <div className="issue-card issue-card--front">
+                    <div className="issue-card-head">
+                      <span className="issue-mark" />
+                      <div className="issue-card-meta">
+                        <span className="issue-card-name">Human AI Studio</span>
+                        <span className="issue-card-sub">Research Newsletter</span>
+                      </div>
+                      <span className="issue-card-pill">Subscribed</span>
+                    </div>
+                    <p className="issue-card-body">
+                      Business case studies, insights, and industry trends for founders, business leaders, and designers putting AI to work.
+                    </p>
+                    <div className="issue-card-foot">
+                      <span className="issue-card-foot-label">Read by professionals at</span>
+                      <div className="issue-card-logos">
+                        {newsletterCompanies.map((company) => (
+                          <img key={company.name} src={company.icon} alt={company.name} />
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </EntranceItem>
+            </div>
+          </Entrance>
         </section>
       )}
 
@@ -2011,13 +2261,13 @@ function StudioHome({ isHistory = false }) {
           ) : (
             <div className="newsletter-cta">
               <div className="newsletter-copy">
-                <h2 id="v2-cta-title">Human AI Studio Publication</h2>
+                <h2 id="v2-cta-title">Newsletter</h2>
                 <p className="final-cta-lede">
                   Join 4,200+ founders and leaders for business case studies, AI insights, and industry trends.
                 </p>
                 <div className="newsletter-actions">
                   <a className="button" href={newsletterUrl} target="_blank" rel="noreferrer">
-                    <span className="button-label">Read the Publication</span>
+                    <span className="button-label">Read the Newsletter</span>
                   </a>
                 </div>
               </div>
@@ -2029,7 +2279,7 @@ function StudioHome({ isHistory = false }) {
                     <span className="issue-mark" />
                     <div className="issue-card-meta">
                       <span className="issue-card-name">Human AI Studio</span>
-                      <span className="issue-card-sub">Research Publication</span>
+                      <span className="issue-card-sub">Research Newsletter</span>
                     </div>
                     <span className="issue-card-pill">Subscribed</span>
                   </div>
@@ -2316,6 +2566,7 @@ function App() {
       ) : (
         <StudioHome isHistory={isHistory} />
       )}
+      <BottomBlur />
       <Analytics />
     </>
   );

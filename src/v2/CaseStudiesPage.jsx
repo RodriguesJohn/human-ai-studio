@@ -3,7 +3,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import { Entrance, EntranceItem, entranceChild } from "./entrance.jsx";
 import { NavMenu } from "./NavMenu.jsx";
 import { caseStudies } from "./caseStudiesData.js";
-import caseStudiesHero from "../assets/case-studies-hero.mp4";
+import caseStudiesHero from "../assets/work-reel.mp4";
 import chaseLogo from "../assets/companies/Chase.png";
 import tocaLogo from "../assets/companies/TocaWhite.png";
 import outfitLogo from "../assets/companies/OutFitLogo.svg";

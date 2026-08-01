@@ -135,6 +135,7 @@ export const caseStudies = [
     fit: "contain",
     containTone: "light",
     appUrl: "/academy",
+    builtWith: ["React"],
     collections: ["websites"]
   },
   {
