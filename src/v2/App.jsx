@@ -356,8 +356,8 @@ const workPathways = [
       "Embedded with your product team, shipping",
       "Prototyping to validate ideas and win buy-in",
       "Design systems and production-ready components",
-      "Craft standards, reviews, and pairing",
-      "A second opinion when you're hiring for craft"
+      "UX and UI recommendations as you build",
+      "AI workflows that accelerate shipping speed"
     ]
   }
 ];

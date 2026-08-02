@@ -1420,10 +1420,10 @@ h2 {
   margin: 0;
   max-width: none;
   color: rgba(255, 255, 255, 0.92);
-  font-size: clamp(1.5rem, 2.35vw, 2.05rem);
+  font-size: clamp(1.2rem, 1.8vw, 1.6rem);
   font-weight: 600;
-  line-height: 1.14;
-  letter-spacing: -0.016em;
+  line-height: 1.16;
+  letter-spacing: -0.014em;
   white-space: nowrap;
   text-wrap: nowrap;
 }
@@ -5214,7 +5214,7 @@ h3 {
   }
 
   .current-home .dark-offerings .v2-offer-grid .offering-card h3.offering-thumb-title {
-    font-size: clamp(1.28rem, 5.4vw, 1.6rem);
+    font-size: clamp(1.1rem, 4.6vw, 1.35rem);
   }
 
   .current-home .approach-subhead {
