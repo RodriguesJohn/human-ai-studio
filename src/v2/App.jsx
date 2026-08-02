@@ -2340,7 +2340,7 @@ function StudioHome({ isHistory = false }) {
           <Entrance className="cohort-section-inner">
             <EntranceItem className="section-heading no-section-note">
               <div>
-                <h2 id="cohort-title">AI enablement for your teams.</h2>
+                <h2 id="cohort-title">Learn how to build products with AI</h2>
               </div>
             </EntranceItem>
             <EntranceItem
