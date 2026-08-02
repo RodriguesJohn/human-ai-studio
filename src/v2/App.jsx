@@ -424,7 +424,7 @@ const workPathways = [
     features: [
       "Ambiguous idea to working product",
       "Functional products and prototypes",
-      "Design and development with production-ready components",
+      "Production-ready components",
       "Ships in weeks, not quarters"
     ]
   },
@@ -436,11 +436,11 @@ const workPathways = [
     color1: "#10b981",
     color2: "#a7f3d0",
     features: [
-      "Embedded with your product team, shipping",
-      "Prototyping to validate ideas and win buy-in",
-      "Design systems and production-ready components",
-      "UX and UI recommendations as you build",
-      "AI workflows that accelerate shipping speed"
+      "Embedded with your product team",
+      "Prototyping to win buy-in",
+      "Design systems and components",
+      "UX and UI recommendations",
+      "AI workflows for shipping speed"
     ]
   }
 ];
