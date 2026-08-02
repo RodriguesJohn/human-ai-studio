@@ -632,29 +632,29 @@ const homeOffers = [
 
 const homeProblems = [
   {
-    title: "From Idea to Working Product",
-    titleLines: ["From Idea to", "Working Product"],
+    title: "From Ambiguity to Clear Product Strategy",
+    titleLines: ["From Ambiguity to", "Clear Product Strategy"],
     description:
-      "We turn ambiguity into an MVP you can actually use.",
-    stage: "Ambiguity",
+      "We turn scattered ideas into a direction the team can act on.",
+    stage: "Strategy",
     color1: "#3b82f6",
     color2: "#bae6fd"
   },
   {
-    title: "Prototypes That Decide",
-    titleLines: ["Prototypes", "That Decide"],
+    title: "Design and Build Without the AI Slop",
+    titleLines: ["Design and Build", "Without the AI Slop"],
     description:
-      "Prototypes built to answer the question, not just impress.",
-    stage: "Proof",
+      "Fast doesn't have to mean generic. The craft survives the speed.",
+    stage: "Craft",
     color1: "#8b5cf6",
     color2: "#ddd6fe"
   },
   {
-    title: "Augmenting Human Experience",
-    titleLines: ["Augmenting Human", "Experience"],
+    title: "Ship Fast With Human Expertise and AI Capabilities",
+    titleLines: ["Ship Fast With Human", "Expertise and AI"],
     description:
-      "AI builds fast. Judgment and taste make it worth using.",
-    stage: "Experience",
+      "Judgment and taste, at the speed the tools now allow.",
+    stage: "Speed",
     color1: "#10b981",
     color2: "#a7f3d0"
   }
