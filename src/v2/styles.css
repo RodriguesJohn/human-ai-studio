@@ -6038,3 +6038,17 @@ h3 {
     margin-inline: auto;
   }
 }
+
+/* Newsletter subscribe modal — compact variant of the booking modal shell */
+.newsletter-modal .booking-modal-panel {
+  width: min(30rem, 100%);
+  height: auto;
+  max-height: calc(100vh - 2rem);
+}
+
+.newsletter-modal iframe {
+  width: 100%;
+  min-height: 20rem;
+  border: 0;
+  background: #ffffff;
+}

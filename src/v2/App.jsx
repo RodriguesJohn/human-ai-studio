@@ -163,7 +163,66 @@ const entranceContainer = {
   }
 };
 
+const newsletterEmbedUrl = "https://johnrodrigues.substack.com/embed";
+
+function NewsletterModal({ open, onClose }) {
+  React.useEffect(() => {
+    if (!open) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") onClose();
+    };
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open, onClose]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="booking-modal newsletter-modal is-open"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Subscribe to the newsletter"
+    >
+      <button
+        type="button"
+        className="booking-modal-backdrop"
+        aria-label="Close"
+        onClick={onClose}
+      />
+      <div className="booking-modal-panel">
+        <div className="booking-modal-header">
+          <div>
+            <p>Human AI Studio Newsletter</p>
+            <span>Business case studies, AI insights, and industry trends.</span>
+          </div>
+          <button
+            type="button"
+            className="booking-modal-close"
+            onClick={onClose}
+            aria-label="Close"
+          >
+            ×
+          </button>
+        </div>
+        <iframe
+          src={newsletterEmbedUrl}
+          title="Subscribe to the Human AI Studio newsletter"
+          frameBorder="0"
+          scrolling="no"
+        />
+      </div>
+    </div>
+  );
+}
+
 function CinematicHero() {
+  const [newsletterOpen, setNewsletterOpen] = React.useState(false);
   const videoRef = React.useRef(null);
   const shouldReduceMotion = useReducedMotion();
   const setHeroVideoRef = React.useCallback((node) => {
@@ -298,7 +357,16 @@ function CinematicHero() {
               </span>
               <span>Book 15 min call</span>
             </a>
-            <span className="hero-cinematic-spots">
+            <a
+              className="hero-cinematic-spots"
+              href={newsletterUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={(event) => {
+                event.preventDefault();
+                setNewsletterOpen(true);
+              }}
+            >
               <svg
                 className="hero-cinematic-spots-icon"
                 viewBox="0 0 16 16"
@@ -306,17 +374,26 @@ function CinematicHero() {
                 aria-hidden="true"
               >
                 <path
-                  d="M9.2 1.5 3.4 9.1h4.1L6.8 14.5l5.8-7.6H8.5L9.2 1.5Z"
+                  d="M2 4.5h12v8H2z"
                   stroke="currentColor"
                   strokeWidth="1.2"
                   strokeLinejoin="round"
                 />
+                <path
+                  d="m2.4 5 5.6 4 5.6-4"
+                  stroke="currentColor"
+                  strokeWidth="1.2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
               </svg>
-              2 spots left
-            </span>
+              Join newsletter
+            </a>
           </motion.div>
         </div>
       </motion.div>
+
+      <NewsletterModal open={newsletterOpen} onClose={() => setNewsletterOpen(false)} />
     </section>
   );
 }
@@ -825,7 +902,39 @@ function BioIcon({ name }) {
 function WorkShowcase() {
   const [activeIndex, setActiveIndex] = React.useState(0);
   const selectorRef = React.useRef(null);
+  const videoRef = React.useRef(null);
   const active = workItems[activeIndex];
+
+  // Browsers defer or pause autoplay for offscreen video; kick it back on
+  // whenever the stage is in view, and whenever the selection changes.
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return undefined;
+
+    const tryPlay = () => {
+      video.muted = true;
+      video.play().catch(() => {});
+    };
+
+    tryPlay();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) tryPlay();
+          else video.pause();
+        });
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(video);
+
+    document.addEventListener("visibilitychange", tryPlay);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener("visibilitychange", tryPlay);
+    };
+  }, [activeIndex]);
   const step = (dir) =>
     setActiveIndex((i) => (i + dir + workItems.length) % workItems.length);
 
@@ -897,6 +1006,7 @@ function WorkShowcase() {
             {active.video ? (
               <video
                 key={active.title}
+                ref={videoRef}
                 src={active.video}
                 poster={active.image}
                 autoPlay
