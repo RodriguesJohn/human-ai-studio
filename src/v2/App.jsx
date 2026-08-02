@@ -439,7 +439,7 @@ const workPathways = [
       "Embedded with your product team",
       "Prototyping to win buy-in",
       "Design systems and components",
-      "UX and UI recommendations",
+      "UX and UI improvements to increase conversion and build trust",
       "AI workflows for shipping speed"
     ]
   }
