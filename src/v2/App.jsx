@@ -482,7 +482,6 @@ function WorkPathways() {
                 <h3 className="pathway-name">{plan.name}</h3>
                 {plan.featured ? <span className="pathway-flag">Most common</span> : null}
               </div>
-              <p className="pathway-tagline">{plan.tagline}</p>
               <div className="pathway-price">
                 <strong>{plan.price}</strong>
               </div>
