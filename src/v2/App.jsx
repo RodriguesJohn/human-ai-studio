@@ -429,7 +429,7 @@ const workPathways = [
     ]
   },
   {
-    name: "Product Builders Embedded in Your Team",
+    name: "Forward-Deployed Builders Embedded",
     tagline: "For teams raising the bar",
     price: "Monthly",
     cadence: "Retainer",
@@ -1143,6 +1143,61 @@ function handleCohortShaderLeave(event) {
 
   card.style.setProperty("--shader-x", "18%");
   card.style.setProperty("--shader-y", "16%");
+}
+
+const academyProofVideo = "/academy/hero.mp4?v=hero-cd598d71";
+const academyProofVideoMobile = "/academy/hero-mobile.mp4?v=hero-cd598d71";
+
+const academyProofLogos = [
+  { name: "Apple", icon: "/academy/Apple.png" },
+  { name: "Google", icon: "/academy/Google.svg.png" },
+  { name: "JPMorgan Chase", icon: "/academy/Chase.png" },
+  { name: "HubSpot", icon: "/academy/Hubspot.svg.png" },
+  { name: "Intercom", icon: "/academy/intercom-1-logo-png-transparent.png" }
+];
+
+function CohortAcademyProof() {
+  const setVideoRef = React.useCallback((node) => {
+    if (!node) return;
+    node.muted = true;
+    node.defaultMuted = true;
+    node.playsInline = true;
+    node.setAttribute("muted", "");
+    node.setAttribute("playsinline", "");
+    node.setAttribute("webkit-playsinline", "true");
+    const playPromise = node.play();
+    if (playPromise && typeof playPromise.catch === "function") {
+      playPromise.catch(() => {});
+    }
+  }, []);
+
+  return (
+    <div className="cohort-proof">
+      <div className="cohort-proof-video">
+        <video
+          ref={setVideoRef}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          disablePictureInPicture
+          aria-label="Inside the AI Academy"
+        >
+          <source src={academyProofVideoMobile} media="(max-width: 768px)" type="video/mp4" />
+          <source src={academyProofVideo} type="video/mp4" />
+        </video>
+      </div>
+      <div className="cohort-proof-trust">
+        <span className="cohort-proof-label">Trusted by builders from</span>
+        <div className="cohort-proof-logos">
+          {academyProofLogos.map((logo) => (
+            <img key={logo.name} src={logo.icon} alt={logo.name} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
 }
 
 const testimonials = [
@@ -2289,6 +2344,45 @@ function StudioHome({ isHistory = false }) {
       )}
 
       {!isHistory && (
+        <section className="cohort-section" aria-labelledby="cohort-title" data-nav-theme="dark">
+          <Entrance className="cohort-section-inner">
+            <EntranceItem className="section-heading no-section-note">
+              <div>
+                <h2 id="cohort-title">Learn how to build products with AI</h2>
+              </div>
+            </EntranceItem>
+            <EntranceItem
+              as="div"
+              className="cohort-card"
+              onPointerMove={handleCohortShaderMove}
+              onPointerLeave={handleCohortShaderLeave}
+            >
+              <div className="cohort-card-copy">
+                <div className="cohort-card-meta" aria-label="Cohort highlights">
+                  <span>4.6/5 rating</span>
+                </div>
+                <h3>Join AI Academy</h3>
+                <p>
+                  Build practical AI fluency through structured learning tracks, a
+                  community of designers and builders, and monthly live sessions
+                  that help you keep learning and shipping.
+                </p>
+                <div className="cohort-card-actions">
+                  <a
+                    className="cohort-card-action cohort-card-action--primary"
+                    href={academyUrl}
+                  >
+                    Join the AI Academy
+                  </a>
+                </div>
+              </div>
+              <CohortAcademyProof />
+            </EntranceItem>
+          </Entrance>
+        </section>
+      )}
+
+      {!isHistory && (
         <section className="final-cta v2-final-cta" aria-labelledby="v2-cta-title" data-nav-theme="dark">
           <DotMatrixBackground />
           <Entrance className="final-cta-inner final-cta-inner--newsletter">
@@ -2331,45 +2425,6 @@ function StudioHome({ isHistory = false }) {
                 </div>
               </EntranceItem>
             </div>
-          </Entrance>
-        </section>
-      )}
-
-      {!isHistory && (
-        <section className="cohort-section" aria-labelledby="cohort-title" data-nav-theme="dark">
-          <Entrance className="cohort-section-inner">
-            <EntranceItem className="section-heading no-section-note">
-              <div>
-                <h2 id="cohort-title">Learn how to build products with AI</h2>
-              </div>
-            </EntranceItem>
-            <EntranceItem
-              as="div"
-              className="cohort-card"
-              onPointerMove={handleCohortShaderMove}
-              onPointerLeave={handleCohortShaderLeave}
-            >
-              <div className="cohort-card-copy">
-                <div className="cohort-card-meta" aria-label="Cohort highlights">
-                  <span>4.6/5 rating</span>
-                </div>
-                <h3>Join AI Academy</h3>
-                <p>
-                  Build practical AI fluency through structured learning tracks, a
-                  community of designers and builders, and monthly live sessions
-                  that help you keep learning and shipping.
-                </p>
-                <div className="cohort-card-actions">
-                  <a
-                    className="cohort-card-action cohort-card-action--primary"
-                    href={academyUrl}
-                  >
-                    Join the AI Academy
-                  </a>
-                </div>
-              </div>
-              <CohortTestimonialRotator />
-            </EntranceItem>
           </Entrance>
         </section>
       )}

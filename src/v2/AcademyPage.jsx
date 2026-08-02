@@ -476,8 +476,8 @@ function AcademyPage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1">
-                <span className="academy-hero-line">Learn how to build AI Native</span>
-                <span className="academy-hero-line">Products and Agentic Systems.</span>
+                <span className="academy-hero-line">Learn How to Build Products With AI</span>
+                <span className="academy-hero-line">and Ship Fast With AI Workflows.</span>
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
                 <span>Build practical AI fluency and advance your workflows.</span>
