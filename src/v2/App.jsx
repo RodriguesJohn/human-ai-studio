@@ -429,7 +429,7 @@ const workPathways = [
     ]
   },
   {
-    name: "Embedded Design Engineering",
+    name: "Product Builders Embedded in Your Team",
     tagline: "For teams raising the bar",
     price: "Monthly",
     cadence: "Retainer",
@@ -650,8 +650,8 @@ const homeProblems = [
     color2: "#ddd6fe"
   },
   {
-    title: "Ship Fast With Human Expertise and AI Capabilities",
-    titleLines: ["Ship Fast With Human", "Expertise and AI"],
+    title: "Ship Fast With Human Judgment and AI Capabilities",
+    titleLines: ["Ship Fast With Human", "Judgment and AI Capabilities"],
     description:
       "Judgment and taste, at the speed the tools now allow.",
     stage: "Speed",
