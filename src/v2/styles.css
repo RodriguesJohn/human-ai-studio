@@ -3201,9 +3201,9 @@ h3 {
 .work-showcase {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
-  min-height: 82vh;
+  min-height: auto;
   --work-rail: var(--home-rail);
-  padding: clamp(3.5rem, 5vw, 5rem) 0 clamp(6rem, 9vw, 9rem);
+  padding: clamp(2.5rem, 4vw, 3.5rem) 0 clamp(2.5rem, 4vw, 3.5rem);
   align-content: center;
   justify-items: center;
   border-top: 1px solid var(--section-line-soft);
@@ -5857,7 +5857,7 @@ h3 {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   justify-items: center;
-  padding: clamp(4rem, 8vw, 7rem) clamp(1.25rem, 4vw, 2rem) clamp(4rem, 8vw, 7rem);
+  padding: clamp(2.75rem, 5vw, 4.5rem) clamp(1.25rem, 4vw, 2rem) clamp(4rem, 8vw, 7rem);
   border-top: 1px solid var(--section-line-soft);
   background: #000000;
   color: #ffffff;
@@ -5900,23 +5900,87 @@ h3 {
 .pathway-card {
   position: relative;
   display: flex;
+  isolation: isolate;
+  overflow: hidden;
   flex-direction: column;
   height: 100%;
   padding: clamp(1.6rem, 2.4vw, 2.25rem);
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: clamp(1rem, 1.4vw, 1.35rem);
   background: rgba(255, 255, 255, 0.02);
-  transition: border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
+  transition:
+    border-color 0.35s ease,
+    background 0.35s ease,
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease;
+}
+
+/* Colour wash bleeding down from the top edge */
+.pathway-card::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 60%;
+  background: radial-gradient(
+    120% 100% at 50% 0%,
+    color-mix(in srgb, var(--card-1) 26%, transparent) 0%,
+    transparent 70%
+  );
+  opacity: 0.55;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
+}
+
+/* Hairline of colour along the top border */
+.pathway-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--card-1) 35%,
+    var(--card-2) 65%,
+    transparent 100%
+  );
+  opacity: 0.65;
+  transition: opacity 0.35s ease;
+  pointer-events: none;
 }
 
 .pathway-card:hover {
-  border-color: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.24);
   background: rgba(255, 255, 255, 0.045);
+  transform: translateY(-6px);
+  box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.45);
+}
+
+.pathway-card:hover::before,
+.pathway-card:hover::after {
+  opacity: 1;
 }
 
 .pathway-card.is-featured {
   border-color: rgba(255, 255, 255, 0.28);
   background: rgba(255, 255, 255, 0.06);
+}
+
+.pathway-card.is-featured::before {
+  opacity: 0.9;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pathway-card,
+  .pathway-card:hover {
+    transform: none;
+    transition-duration: 1ms;
+  }
 }
 
 .pathway-head {
@@ -6028,7 +6092,7 @@ h3 {
   width: 1.15rem;
   height: 1.15rem;
   margin-top: 0.1rem;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--card-2, rgba(255, 255, 255, 0.72));
 }
 
 @media (max-width: 900px) {

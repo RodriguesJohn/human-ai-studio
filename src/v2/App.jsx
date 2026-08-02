@@ -404,6 +404,8 @@ const workPathways = [
     tagline: "For founders and small teams",
     price: "Hourly",
     cadence: "Ongoing",
+    color1: "#3b82f6",
+    color2: "#bae6fd",
     features: [
       "AI integration strategy",
       "Product strategy workshops",
@@ -417,6 +419,8 @@ const workPathways = [
     price: "Fixed scope",
     cadence: "Per engagement",
     featured: true,
+    color1: "#8b5cf6",
+    color2: "#ddd6fe",
     features: [
       "Ambiguous idea to working product",
       "Functional products and prototypes",
@@ -429,6 +433,8 @@ const workPathways = [
     tagline: "For teams raising the bar",
     price: "Monthly",
     cadence: "Retainer",
+    color1: "#10b981",
+    color2: "#a7f3d0",
     features: [
       "Embedded with your product team, shipping",
       "Prototyping to validate ideas and win buy-in",
@@ -470,6 +476,7 @@ function WorkPathways() {
             <article
               className={`pathway-card${plan.featured ? " is-featured" : ""}`}
               key={plan.name}
+              style={{ "--card-1": plan.color1, "--card-2": plan.color2 }}
             >
               <div className="pathway-head">
                 <h3 className="pathway-name">{plan.name}</h3>
