@@ -199,36 +199,35 @@ export default function CaseStudiesPage() {
 
       <main>
         <section className="cs-hero" aria-labelledby="cs-hero-title">
-          <CaseStudyMedia study={featured} className="cs-hero-media" priority />
-          <div className="cs-hero-veil" aria-hidden="true" />
-          <div className="cs-hero-copy">
-            <Entrance className="cs-hero-copy-inner" animate="visible">
-              <EntranceItem as="h1" id="cs-hero-title">
-                All Work
-              </EntranceItem>
-              <EntranceItem as="p" className="cs-hero-sub">
-                AI systems, agentic products, and design systems for startups and enterprise teams.
-              </EntranceItem>
-              <EntranceItem className="cs-hero-logos" aria-label="Companies worked with">
-                <div className="cs-hero-logos-row">
-                  {heroCompanies.map((company) =>
-                    company.kind === "image" ? (
-                      <img
-                        key={company.name}
-                        className={company.mark ? "cs-hero-logo-mark" : undefined}
-                        src={company.icon}
-                        alt={company.name}
-                      />
-                    ) : (
-                      <span key={company.name} className="cs-hero-wordmark">
-                        {company.name}
-                      </span>
-                    )
-                  )}
-                </div>
-              </EntranceItem>
-            </Entrance>
-          </div>
+          <Entrance className="cs-hero-copy" animate="visible">
+            <EntranceItem as="h1" id="cs-hero-title">
+              All Work
+            </EntranceItem>
+            <EntranceItem as="p" className="cs-hero-sub">
+              AI systems, agentic products, and design systems for startups and enterprise teams.
+            </EntranceItem>
+            <EntranceItem className="cs-hero-logos" aria-label="Companies worked with">
+              <div className="cs-hero-logos-row">
+                {heroCompanies.map((company) =>
+                  company.kind === "image" ? (
+                    <img
+                      key={company.name}
+                      className={company.mark ? "cs-hero-logo-mark" : undefined}
+                      src={company.icon}
+                      alt={company.name}
+                    />
+                  ) : (
+                    <span key={company.name} className="cs-hero-wordmark">
+                      {company.name}
+                    </span>
+                  )
+                )}
+              </div>
+            </EntranceItem>
+            <EntranceItem className="cs-hero-card">
+              <CaseStudyMedia study={featured} className="cs-hero-media" priority />
+            </EntranceItem>
+          </Entrance>
         </section>
 
         <section className="cs-list" id="cs-work" aria-label="Case studies">

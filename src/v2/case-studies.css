@@ -75,40 +75,46 @@ html:has(.cs-page) body {
 .cs-hero {
   position: relative;
   isolation: isolate;
-  display: grid;
-  align-items: end;
-  min-height: min(92vh, 56rem);
-  overflow: hidden;
-  border-bottom: 1px solid var(--cs-line);
-}
-
-.cs-hero-media,
-.cs-hero .cs-media {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.cs-hero-veil {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background:
-    linear-gradient(180deg, rgba(5, 5, 6, 0.35) 0%, rgba(5, 5, 6, 0.55) 42%, rgba(5, 5, 6, 0.92) 100%),
-    linear-gradient(90deg, rgba(5, 5, 6, 0.72) 0%, rgba(5, 5, 6, 0.28) 55%, transparent 100%);
-  pointer-events: none;
+  background: #050506;
 }
 
 .cs-hero-copy {
   position: relative;
   z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   width: var(--cs-rail);
   margin: 0 auto;
-  padding: clamp(5rem, 12vw, 8rem) 0 clamp(3rem, 6vw, 4.5rem);
+  padding: clamp(2.5rem, 5vw, 4rem) 0 clamp(4rem, 8vw, 6rem);
 }
 
-.cs-hero-copy-inner {
-  max-width: 44rem;
+/* Video sits as a card under the title, not as a backdrop behind it. */
+.cs-hero-card {
+  position: relative;
+  width: 100%;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  aspect-ratio: 16 / 9;
+  max-height: 64vh;
+  border-radius: clamp(0.9rem, 1.4vw, 1.4rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  overflow: hidden;
+  background: #0b0c0e;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.06) inset,
+    0 2rem 5rem rgba(0, 0, 0, 0.6);
+}
+
+.cs-hero-media,
+.cs-hero-card .cs-media {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.cs-hero-card .cs-media-video,
+.cs-hero-card .cs-media-poster {
+  filter: saturate(1.06) contrast(1.03) brightness(1.06);
 }
 
 .cs-brand-signal {
@@ -121,23 +127,24 @@ html:has(.cs-page) body {
 
 .cs-hero h1 {
   margin: 0;
-  font-size: clamp(2.35rem, 5.5vw, 3.75rem);
+  font-size: clamp(2.6rem, 6.6vw, 5rem);
   font-weight: 560;
-  letter-spacing: -0.045em;
-  line-height: 0.95;
+  letter-spacing: -0.048em;
+  line-height: 0.94;
+  text-wrap: balance;
 }
 
 .cs-hero-sub {
-  margin: 1.15rem 0 1.85rem;
-  max-width: 32rem;
+  margin: clamp(0.9rem, 1.6vw, 1.35rem) 0 0;
+  max-width: 34rem;
   color: var(--cs-muted);
-  font-size: clamp(1rem, 1.35vw, 1.15rem);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
   font-weight: 400;
   line-height: 1.5;
 }
 
 .cs-hero-logos {
-  margin-top: clamp(1.75rem, 3.5vw, 2.4rem);
+  margin-top: clamp(1.75rem, 3.5vw, 2.5rem);
   width: max(100%, min(52rem, calc(100vw - var(--cs-pad) * 2)));
   max-width: calc(100vw - var(--cs-pad) * 2);
 }
@@ -173,7 +180,7 @@ html:has(.cs-page) body {
   flex: 0 0 auto;
   object-fit: contain;
   object-position: left center;
-  opacity: 0.72;
+  opacity: 0.88;
   transition: opacity 220ms ease;
 }
 
@@ -184,14 +191,14 @@ html:has(.cs-page) body {
 }
 
 .cs-hero-wordmark {
-  color: rgba(255, 255, 255, 0.78);
+  color: rgba(255, 255, 255, 0.9);
   font-size: clamp(0.82rem, 1.15vw, 0.95rem);
   font-weight: 560;
   letter-spacing: -0.03em;
   line-height: 1;
   white-space: nowrap;
   flex: 0 0 auto;
-  opacity: 0.78;
+  opacity: 0.9;
   transition: opacity 220ms ease, color 220ms ease;
 }
 
@@ -470,8 +477,8 @@ html:has(.cs-page) body {
 }
 
 @media (max-width: 860px) {
-  .cs-hero {
-    min-height: min(88vh, 44rem);
+  .cs-hero-card {
+    aspect-ratio: 4 / 3;
   }
 
   .cs-study,
@@ -537,7 +544,7 @@ html:has(.cs-page) body {
   }
 
   .cs-hero h1 {
-    font-size: clamp(2.1rem, 10vw, 2.75rem);
+    font-size: clamp(2.3rem, 11vw, 3.1rem);
   }
 
   .cs-cta {
