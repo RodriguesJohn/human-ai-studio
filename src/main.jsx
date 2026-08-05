@@ -1,11 +1,21 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { Analytics } from "@vercel/analytics/react";
 import { applyPageSeo, setupSeoTracking } from "./v2/seo.js";
 
 const route = window.location.pathname.replace(/\/+$/, "") || "/";
 
 setupSeoTracking();
 applyPageSeo(route);
+
+function renderWithAnalytics(root, page) {
+  root.render(
+    <React.StrictMode>
+      {page}
+      <Analytics />
+    </React.StrictMode>
+  );
+}
 
 async function boot() {
   const rootEl = document.getElementById("root");
@@ -19,41 +29,25 @@ async function boot() {
   try {
     if (route === "/academy") {
       const { default: AcademyPage } = await import("./v2/AcademyPage.jsx");
-      root.render(
-        <React.StrictMode>
-          <AcademyPage />
-        </React.StrictMode>
-      );
+      renderWithAnalytics(root, <AcademyPage />);
       return;
     }
 
     if (route === "/case-studies") {
       const { default: CaseStudiesPage } = await import("./v2/CaseStudiesPage.jsx");
-      root.render(
-        <React.StrictMode>
-          <CaseStudiesPage />
-        </React.StrictMode>
-      );
+      renderWithAnalytics(root, <CaseStudiesPage />);
       return;
     }
 
     if (route === "/websites") {
       const { default: WebsitesPage } = await import("./v2/WebsitesPage.jsx");
-      root.render(
-        <React.StrictMode>
-          <WebsitesPage />
-        </React.StrictMode>
-      );
+      renderWithAnalytics(root, <WebsitesPage />);
       return;
     }
 
     if (route === "/design-systems") {
       const { default: DesignSystemsPage } = await import("./v2/DesignSystemsPage.jsx");
-      root.render(
-        <React.StrictMode>
-          <DesignSystemsPage />
-        </React.StrictMode>
-      );
+      renderWithAnalytics(root, <DesignSystemsPage />);
       return;
     }
 
