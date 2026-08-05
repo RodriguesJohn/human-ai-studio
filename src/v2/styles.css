@@ -5955,7 +5955,7 @@ h3 {
 
 .pathways-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.24fr) minmax(0, 1fr);
   gap: clamp(1.25rem, 2.2vw, 1.9rem);
   align-items: stretch;
   margin-top: clamp(2.5rem, 4.5vw, 4rem);
@@ -6031,12 +6031,65 @@ h3 {
 }
 
 .pathway-card.is-featured {
+  padding: clamp(2rem, 3vw, 2.9rem);
   border-color: rgba(255, 255, 255, 0.28);
+  border-radius: clamp(1.15rem, 1.6vw, 1.6rem);
   background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 1.75rem 4rem rgba(0, 0, 0, 0.55);
 }
 
 .pathway-card.is-featured::before {
   opacity: 0.9;
+}
+
+.pathway-card.is-featured .pathway-name {
+  font-size: clamp(1.5rem, 2.2vw, 2.05rem);
+}
+
+/* Travelling stroke of light around the featured card */
+@property --pathway-glow-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.pathway-card.is-featured::after {
+  inset: 0;
+  height: auto;
+  padding: 1px;
+  border-radius: inherit;
+  background: conic-gradient(
+    from var(--pathway-glow-angle),
+    transparent 0deg,
+    transparent 55deg,
+    color-mix(in srgb, var(--card-2) 85%, transparent) 80deg,
+    #ffffff 96deg,
+    color-mix(in srgb, var(--card-1) 90%, transparent) 112deg,
+    transparent 140deg,
+    transparent 360deg
+  );
+  opacity: 0.95;
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: pathway-glow-travel 5s linear infinite;
+}
+
+@keyframes pathway-glow-travel {
+  to {
+    --pathway-glow-angle: 360deg;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pathway-card.is-featured::after {
+    animation: none;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -6083,6 +6136,14 @@ h3 {
   line-height: 1.45;
 }
 
+.pathway-tagline {
+  margin: clamp(0.65rem, 1vw, 0.9rem) 0 0;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: clamp(0.88rem, 1vw, 0.98rem);
+  font-weight: 400;
+  line-height: 1.5;
+}
+
 .pathway-price {
   display: flex;
   margin: clamp(0.9rem, 1.4vw, 1.15rem) 0 clamp(1.35rem, 2.2vw, 1.9rem);
@@ -6104,6 +6165,7 @@ h3 {
 
 .pathway-cta {
   display: inline-flex;
+  margin-top: clamp(1.5rem, 2.4vw, 2rem);
   align-items: center;
   justify-content: center;
   padding: 0.8rem 1.25rem;

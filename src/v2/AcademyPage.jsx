@@ -197,7 +197,7 @@ const pathOptions = [
     color2: "#bae6fd"
   },
   {
-    title: "Monthly 30-minute sessions",
+    title: "Monthly live sessions",
     description:
       "Join John every month to ask questions, unblock your work, and keep shipping.",
     bullets: [
@@ -476,7 +476,7 @@ function AcademyPage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1">
-                <span className="academy-hero-line">Learn How to Build Products With AI</span>
+                <span className="academy-hero-line">Become an AI Product Builder</span>
                 <span className="academy-hero-line">and Ship Fast With AI Workflows.</span>
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">

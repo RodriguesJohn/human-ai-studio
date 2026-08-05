@@ -341,8 +341,8 @@ function CinematicHero() {
             className="hero-cinematic-subtitle"
             variants={entranceChild}
           >
-            We design and build products with human judgment and the speed of AI, shipping{" "}
-            <span className="motto-emphasis">experiences from zero to one</span>.
+            We help you design and build so you can raise funding and ship{" "}
+            <span className="motto-emphasis">products customers love</span>, not AI slop.
           </motion.p>
 
           <motion.div className="hero-cinematic-cta-row" variants={entranceChild}>
@@ -400,47 +400,45 @@ function CinematicHero() {
 
 const workPathways = [
   {
-    name: "1:1 Partner",
-    tagline: "For founders and small teams",
-    price: "Hourly",
-    cadence: "Ongoing",
+    name: "Fractional Design Engineer",
+    tagline: "Ideal for Series A to B teams",
     color1: "#3b82f6",
     color2: "#bae6fd",
     features: [
-      "AI integration strategy",
-      "Product strategy workshops",
-      "Async feedback and working calls",
-      "Direct access to John"
+      "A senior design partner embedded in your team",
+      "AI-native product, UI, and prototyping work",
+      "Design systems your engineers can ship from",
+      "Continuous improvements that lift retention",
+      "Product thinking that drives growth"
     ]
   },
   {
-    name: "0 → 1 Product Sprint",
-    tagline: "For new products finding their shape",
-    price: "Fixed scope",
-    cadence: "Per engagement",
+    name: "0 → 1 Product MVP Sprint",
+    tagline: "Ideal for pre-seed to seed startups",
     featured: true,
     color1: "#8b5cf6",
     color2: "#ddd6fe",
     features: [
-      "Ambiguous idea to working product",
-      "Functional products and prototypes",
-      "Production-ready components",
+      "Ambiguous idea to a fully functional product",
+      "A real prototype you can test with users",
+      "Validate the product before you scale it",
+      "A working demo to raise funding on",
+      "Production-ready components, not throwaway mockups",
       "Ships in weeks, not quarters"
     ]
   },
   {
-    name: "Forward-Deployed Builders Embedded",
-    tagline: "For teams raising the bar",
-    price: "Monthly",
-    cadence: "Retainer",
+    name: "Training and Workshops",
+    tagline: "Ideal for designers and builders levelling up",
     color1: "#10b981",
     color2: "#a7f3d0",
+    ctaLabel: "Explore the Academy",
+    ctaHref: "/academy",
     features: [
-      "Embedded with your product team",
-      "Prototyping to win buy-in",
-      "Design systems and components",
-      "UX and UI improvements to increase conversion and build trust",
-      "AI workflows for shipping speed"
+      "Access to courses, resources, and AI workflows",
+      "Learn at your own pace, around your real work",
+      "Level up on real projects, not toy demos",
+      "Self-paced courses through AI Design Academy"
     ]
   }
 ];
@@ -480,19 +478,25 @@ function WorkPathways() {
             >
               <div className="pathway-head">
                 <h3 className="pathway-name">{plan.name}</h3>
-                {plan.featured ? <span className="pathway-flag">Most common</span> : null}
               </div>
-              <div className="pathway-price">
-                <strong>{plan.price}</strong>
-              </div>
-              <a
-                className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
-                href={bookingUrl}
-                onClick={openBookingModal}
-                {...bookingAttributes}
-              >
-                Book 15 min call
-              </a>
+              <p className="pathway-tagline">{plan.tagline}</p>
+              {plan.ctaHref ? (
+                <a
+                  className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
+                  href={plan.ctaHref}
+                >
+                  {plan.ctaLabel}
+                </a>
+              ) : (
+                <a
+                  className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
+                  href={bookingUrl}
+                  onClick={openBookingModal}
+                  {...bookingAttributes}
+                >
+                  Book 15 min call
+                </a>
+              )}
               <ul className="pathway-features">
                 {plan.features.map((feature) => (
                   <li key={feature}>
