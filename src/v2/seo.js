@@ -236,4 +236,21 @@ export function setupSeoTracking() {
       track("Academy CTA Click", { route, label });
     }
   });
+
+  window.addEventListener("message", (event) => {
+    if (!event.origin.endsWith(".cal.com") && event.origin !== "https://cal.com") {
+      return;
+    }
+
+    const data = event.data;
+    if (data?.type !== "CAL:bookingSuccessful" && data?.event !== "bookingSuccessful") {
+      return;
+    }
+
+    track("Booked Call", {
+      route: normalizePath(window.location.pathname),
+      provider: "cal.com",
+      bookingType: "15min"
+    });
+  });
 }
