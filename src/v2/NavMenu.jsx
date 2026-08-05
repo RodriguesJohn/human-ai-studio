@@ -30,14 +30,6 @@ function trackAcademyNavClick() {
   });
 }
 
-function trackAcademyNavClick() {
-  track("Academy CTA Click", {
-    location: "primary_navigation",
-    label: "Academy",
-    href: academyUrl
-  });
-}
-
 const serviceLinks = [
   { label: "All work", href: allWorkUrl },
   { label: "Websites", href: websitesUrl },
