@@ -19,12 +19,14 @@ const studioUrl = "/";
 const websitesUrl = "/websites";
 const allWorkUrl = "/case-studies";
 const designSystemsUrl = "/design-systems";
+const blogUrl = "/blog";
 
 const serviceLinks = [
   { label: "All work", href: allWorkUrl },
   { label: "Websites", href: websitesUrl },
   { label: "Product design", href: studioUrl },
-  { label: "Design systems", href: designSystemsUrl }
+  { label: "Design systems", href: designSystemsUrl },
+  { label: "Blog", href: blogUrl }
 ];
 
 function openBookingModal(event) {

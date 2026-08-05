@@ -1,9 +1,66 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { resolve } from "node:path";
+import { loadPosts, renderIndex, renderPost, CONTENT_DIR } from "./scripts/blog.mjs";
+
+/**
+ * Generates the blog as real HTML — one file per post, each with its own title,
+ * description and canonical. Dev serves it from middleware; build emits static
+ * files so crawlers get the content without running JavaScript.
+ */
+function blogPlugin() {
+  const pageFor = (pathname) => {
+    const route = pathname.replace(/\/+$/, "") || "/";
+    if (route !== "/blog" && !route.startsWith("/blog/")) return null;
+
+    const posts = loadPosts();
+    if (route === "/blog") return renderIndex(posts);
+
+    const post = posts.find((p) => p.url === route);
+    return post ? renderPost(post) : null;
+  };
+
+  return {
+    name: "human-ai-studio-blog",
+
+    configureServer(server) {
+      server.watcher.add(CONTENT_DIR);
+      // Full reload on content edits — the HTML is generated, so HMR can't patch it.
+      server.watcher.on("all", (_event, file) => {
+        if (file.startsWith(CONTENT_DIR)) server.ws.send({ type: "full-reload" });
+      });
+
+      server.middlewares.use(async (req, res, next) => {
+        const pathname = new URL(req.url, "http://localhost").pathname;
+        let html;
+        try {
+          html = pageFor(pathname);
+        } catch (error) {
+          return next(error);
+        }
+        if (!html) return next();
+
+        res.setHeader("Content-Type", "text/html");
+        res.end(await server.transformIndexHtml(pathname, html));
+      });
+    },
+
+    generateBundle() {
+      const posts = loadPosts();
+      this.emitFile({ type: "asset", fileName: "blog.html", source: renderIndex(posts) });
+      for (const post of posts) {
+        this.emitFile({
+          type: "asset",
+          fileName: `blog/${post.slug}.html`,
+          source: renderPost(post)
+        });
+      }
+    }
+  };
+}
 
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), blogPlugin()],
   optimizeDeps: {
     entries: ["index.html", "academy.html"]
   },

@@ -11,6 +11,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
       "source": "/offerings/agent-ready-design-system/",
       "destination": "/offerings/agent-ready-design-system",
       "permanent": true
@@ -20,6 +25,14 @@
     {
       "source": "/academy",
       "destination": "/academy.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/blog.html"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/blog/:slug.html"
     },
     {
       "source": "/robots.txt",
