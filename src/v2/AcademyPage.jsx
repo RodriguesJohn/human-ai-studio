@@ -422,7 +422,7 @@ function AcademyPage() {
   const newsletterCloseRef = React.useRef(null);
 
   React.useEffect(() => {
-    document.title = "AI Academy · Human AI Studio";
+    document.title = "AI Academy | Human AI Studio";
     const html = document.documentElement;
     const body = document.body;
     const prevHtml = html.style.background;

@@ -1,7 +1,11 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import { applyPageSeo, setupSeoTracking } from "./v2/seo.js";
 
 const route = window.location.pathname.replace(/\/+$/, "") || "/";
+
+setupSeoTracking();
+applyPageSeo(route);
 
 async function boot() {
   const rootEl = document.getElementById("root");

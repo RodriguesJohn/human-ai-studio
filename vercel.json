@@ -1,6 +1,11 @@
 {
   "redirects": [
     {
+      "source": "/:path(.*%22.*)",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/academy/",
       "destination": "/academy",
       "permanent": true
@@ -20,6 +25,42 @@
     {
       "source": "/academy",
       "destination": "/academy.html"
+    },
+    {
+      "source": "/websites",
+      "destination": "/websites.html"
+    },
+    {
+      "source": "/case-studies",
+      "destination": "/case-studies.html"
+    },
+    {
+      "source": "/design-systems",
+      "destination": "/design-systems.html"
+    },
+    {
+      "source": "/product",
+      "destination": "/product.html"
+    },
+    {
+      "source": "/offerings/design-engineering",
+      "destination": "/offering-design-engineering.html"
+    },
+    {
+      "source": "/offerings/ai-native-products",
+      "destination": "/offering-ai-native-products.html"
+    },
+    {
+      "source": "/offerings/ai-consulting",
+      "destination": "/offering-ai-consulting.html"
+    },
+    {
+      "source": "/offerings/ai-training-enablement",
+      "destination": "/offering-ai-training-enablement.html"
+    },
+    {
+      "source": "/offerings/agent-ready-design-system",
+      "destination": "/offering-agent-ready-design-system.html"
     },
     {
       "source": "/robots.txt",

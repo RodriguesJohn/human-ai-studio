@@ -229,7 +229,7 @@ export default function WebsitesPage() {
   });
 
   React.useEffect(() => {
-    document.title = "Websites · Human AI Studio";
+    document.title = "Websites for AI Companies | Human AI Studio";
     const html = document.documentElement;
     const body = document.body;
     const prevHtml = html.style.background;
