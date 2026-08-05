@@ -1,4 +1,5 @@
 import React from "react";
+import { track } from "@vercel/analytics";
 import { Analytics } from "@vercel/analytics/react";
 import { AnimatePresence, motion, useReducedMotion, useInView } from "framer-motion";
 import * as THREE from "three";
@@ -61,6 +62,14 @@ import "./styles.css";
 const bookingLink = "john-rodrigues-rqt2lg/15min";
 const bookingNamespace = "15min";
 const bookingUrl = `https://cal.com/${bookingLink}`;
+
+function trackAcademyCtaClick(location, label = "Academy") {
+  track("Academy CTA Click", {
+    location,
+    label,
+    href: "/academy"
+  });
+}
 const bookingConfig = {
   layout: "month_view",
   useSlotsViewOnSmallScreen: "true"
@@ -484,6 +493,11 @@ function WorkPathways() {
                 <a
                   className={`pathway-cta${plan.featured ? " is-featured" : ""}`}
                   href={plan.ctaHref}
+                  onClick={
+                    plan.ctaHref === "/academy"
+                      ? () => trackAcademyCtaClick("work_pathways", plan.ctaLabel)
+                      : undefined
+                  }
                 >
                   {plan.ctaLabel}
                 </a>
@@ -2076,7 +2090,11 @@ function StudioHome({ isHistory = false }) {
                 {...(step.link
                   ? {
                       href: step.link,
-                      "aria-label": `Learn more about ${step.title}`
+                      "aria-label": `Learn more about ${step.title}`,
+                      onClick:
+                        step.link === "/academy"
+                          ? () => trackAcademyCtaClick("offerings_grid", step.title)
+                          : undefined
                     }
                   : {})}
                 style={{
@@ -2375,6 +2393,7 @@ function StudioHome({ isHistory = false }) {
                   <a
                     className="cohort-card-action cohort-card-action--primary"
                     href={academyUrl}
+                    onClick={() => trackAcademyCtaClick("cohort_card", "Join the AI Academy")}
                   >
                     Join the AI Academy
                   </a>
