@@ -249,9 +249,16 @@
 
 .current-home .ds-audit-problem .v2-offer-grid {
   width: 100%;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   padding: 0;
   margin-right: 0;
   margin-left: 0;
+}
+
+@media (max-width: 1180px) {
+  .current-home .ds-audit-problem .v2-offer-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .ds-audit-checklist,
@@ -736,6 +743,97 @@
 
 .ds-audit-final .ds-audit-cta {
   margin-top: 1.8rem;
+}
+
+.ds-why-now {
+  display: flex;
+  max-width: 46rem;
+  flex-direction: column;
+  gap: 1.15rem;
+  margin-top: clamp(1.75rem, 3vw, 2.5rem);
+}
+
+.ds-why-now p {
+  margin: 0;
+  color: var(--ds-copy);
+  font-size: clamp(1rem, 1.15vw, 1.12rem);
+  line-height: 1.65;
+}
+
+/* Audit upsell — secondary offer beneath the workshop CTA */
+.ds-audit-final:has(+ .ds-upsell) {
+  padding-bottom: clamp(3rem, 6vw, 4.5rem);
+}
+
+.ds-upsell {
+  padding: 0 var(--page-padding) clamp(5rem, 10vw, 8rem);
+  background: #050506;
+}
+
+.ds-upsell-grid {
+  display: grid;
+  max-width: 62rem;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.1rem, 2vw, 1.6rem);
+  align-items: stretch;
+  margin-inline: auto;
+}
+
+.ds-upsell-card {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: clamp(1.9rem, 3.4vw, 2.6rem);
+  border: 1px solid var(--ds-line);
+  border-radius: clamp(1rem, 1.4vw, 1.35rem);
+  background: rgba(255, 255, 255, 0.025);
+  text-align: left;
+}
+
+.ds-upsell-card.is-primary {
+  border-color: rgba(255, 255, 255, 0.24);
+  background:
+    radial-gradient(120% 100% at 50% 0%, rgba(139, 92, 246, 0.16), transparent 70%),
+    rgba(255, 255, 255, 0.05);
+}
+
+/* Push both CTAs to the same baseline regardless of body length */
+.ds-upsell-card > *:last-child {
+  margin-top: auto;
+}
+
+.ds-upsell-eyebrow {
+  margin: 0;
+  color: var(--ds-soft);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.ds-upsell-card h3 {
+  max-width: 22ch;
+  margin: 0.85rem 0 0;
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  line-height: 1.2;
+}
+
+.ds-upsell-body {
+  margin: 1rem 0 0;
+  color: var(--ds-copy);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.ds-upsell-card .ds-audit-cta {
+  margin-top: 1.6rem;
+}
+
+@media (max-width: 780px) {
+  .ds-upsell-grid {
+    max-width: 34rem;
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .ds-audit-footer {

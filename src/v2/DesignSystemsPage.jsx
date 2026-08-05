@@ -23,56 +23,48 @@ const bookingAttributes = {
   "data-cal-config": JSON.stringify(bookingConfig)
 };
 
-const whatYouGet = [
-  {
-    title: "The Full Audit",
-    body: "I go through your design system end to end. Components, tokens, documentation, and adoption across your product. I look at the gap between what’s documented and what’s actually shipped."
-  },
-  {
-    title: "Evals and Tests",
-    body: "I run structured evals against your design system. Not eyeballing it. Actual tests show where it holds up and where it breaks under real use."
-  },
-  {
-    title: "Evidence-Based Report",
-    body: "A detailed report laying out what’s working, what’s not, and why. No sugarcoating. No vague feedback. Just what I found."
-  },
-  {
-    title: "The Recommendations",
-    body: "A clear, prioritized list of what to fix first, what to rebuild, and what to leave alone. Ordered by impact, not by what’s easiest to say."
-  }
-];
-
 const problemSignals = [
   {
-    title: "AI-generated UI slows your path to market.",
-    body: "Every generated surface needs correction, review, and rework. That slows releases instead of accelerating them.",
+    title: "The playbook for AI-ready design systems.",
+    body: "You leave knowing exactly what an AI-ready design system is, and holding the playbook that defines it.",
     color1: "#8b5cf6",
     color2: "#2563eb"
   },
   {
-    title: "Inconsistent product UI breaks user trust.",
-    body: "Components and interactions drift from screen to screen, making the product feel unreliable.",
+    title: "AI workflow templates for Figma and code.",
+    body: "Templates that work with the design system you already have, across both Figma and your codebase.",
     color1: "#ec4899",
     color2: "#7c3aed"
   },
   {
-    title: "Rework creates friction across the team.",
-    body: "Design corrects drift, engineering rewrites code, and product renegotiates scope.",
+    title: "A roadmap to make your system agent-ready.",
+    body: "You will know what makes a design system agent-ready, and get the roadmap to take yours there.",
     color1: "#06b6d4",
     color2: "#4f46e5"
+  },
+  {
+    title: "A step-by-step checklist you can run.",
+    body: "Walk away with a checklist your team can work through to make your design systems hold up.",
+    color1: "#f59e0b",
+    color2: "#db2777"
   }
 ];
 
 const sprintSteps = [
   {
-    timing: "Week 1",
-    title: "Audit + Evals + Team Interviews",
-    body: "I review your codebase, Figma files, and docs, interview your team, and test where the system holds up under real use."
+    timing: "Block 1",
+    title: "Where your system stands",
+    body: "We walk your design system together and find the exact places coding agents go off the rails. Your team sees the failure modes live, in their own product."
   },
   {
-    timing: "Week 2",
-    title: "Report + Walkthrough",
-    body: "I write up everything I found and walk you through it live. You leave with a report and a plan, not just a deck."
+    timing: "Block 2",
+    title: "Rebuild the foundations",
+    body: "Working session. We restructure tokens, components, and naming so the system holds up under generation, and your team does the work with me."
+  },
+  {
+    timing: "Block 3",
+    title: "Playbook and next steps",
+    body: "We write the rules down and agree what happens next. You end the session with a playbook and a prioritised list your team can act on."
   }
 ];
 
@@ -110,7 +102,7 @@ function openBookingModal(event) {
   calApi("modal", { calLink: bookingLink, config: bookingConfig });
 }
 
-function BookingButton({ children = "Book a discovery call", showAvatar = false }) {
+function BookingButton({ children = "Join the workshop", showAvatar = false }) {
   return (
     <a
       className="ds-audit-cta liquid-glass"
@@ -195,9 +187,9 @@ export default function DesignSystemsPage() {
   }
 
   React.useEffect(() => {
-    document.title = "Agent-Ready Design System Two-Week Audit Sprint · Human AI Studio";
+    document.title = "Agent-Ready Design System Live Workshop · Human AI Studio";
     const description =
-      "An agent-ready design system two-week audit sprint with an AI-readiness checklist, prioritized recommendations, and a practical roadmap.";
+      "A live, hands-on workshop that gets your team building an agent-ready design system, working in your own tokens, components, and docs.";
     let meta = document.querySelector('meta[name="description"]');
     const previous = meta?.getAttribute("content");
     if (!meta) {
@@ -229,15 +221,15 @@ export default function DesignSystemsPage() {
           <div className="ds-audit-hero-copy">
             <EntranceItem as="h1" id="ds-audit-title">
               <span className="ds-audit-title-line">Agent-ready design system</span>
-              <span className="ds-audit-title-line">Two-week audit sprint.</span>
+              <span className="ds-audit-title-line">Live team workshop.</span>
             </EntranceItem>
             <EntranceItem as="p" className="ds-audit-intro">
-              <span>Find the gaps in your design system.</span>
-              <span>Get a clear path to agent readiness.</span>
+              <span>Hands-on with your team, in your own files.</span>
+              <span>Leave with a design system agents can build from.</span>
             </EntranceItem>
             <EntranceItem className="ds-audit-actions">
               <BookingButton showAvatar />
-              <a href="#how-it-works">See how it works <span aria-hidden="true">↓</span></a>
+              <a href="#free-masterclass">Join the free masterclass <span aria-hidden="true">↓</span></a>
             </EntranceItem>
           </div>
           <EntranceItem className="ds-audit-hero-media">
@@ -259,7 +251,7 @@ export default function DesignSystemsPage() {
         <Entrance className="ds-audit-rail">
           <EntranceItem className="ds-audit-problem-intro">
             <h2 id="ds-audit-problem-title">
-              Coding agents are shipping off-brand UI.
+              What you’ll walk away with.
             </h2>
           </EntranceItem>
           <div className="offering-grid v2-flow-grid v2-offer-grid ds-audit-problem-grid">
@@ -293,11 +285,15 @@ export default function DesignSystemsPage() {
         </Entrance>
       </section>
 
-      <section className="ds-audit-series" aria-labelledby="ds-audit-series-title">
+      <section
+        className="ds-audit-series"
+        id="free-masterclass"
+        aria-labelledby="ds-audit-series-title"
+      >
         <Entrance className="ds-audit-series-heading">
           <EntranceItem as="h2" id="ds-audit-series-title">
-            <span>Work 1:1 with John to make</span>
-            <span>your design system agent-ready.</span>
+            <span>Look into what agent-ready</span>
+            <span>design systems are.</span>
           </EntranceItem>
         </Entrance>
         <Entrance className="ds-audit-series-module">
@@ -367,26 +363,34 @@ export default function DesignSystemsPage() {
         <Entrance className="ds-audit-section-head">
           <EntranceItem>
             <h2 id="ds-audit-checklist-title">
-              <span>What’s included in the</span>
-              <span>two-week sprint?</span>
+              <span>Why now</span>
             </h2>
           </EntranceItem>
         </Entrance>
-        <div className="ds-audit-area-grid">
-          {whatYouGet.map((area, index) => (
-            <Entrance as="article" className="ds-audit-area" key={area.title}>
-              <EntranceItem as="span">{String(index + 1).padStart(2, "0")}</EntranceItem>
-              <EntranceItem as="h3">{area.title}</EntranceItem>
-              <EntranceItem as="p">{area.body}</EntranceItem>
-            </Entrance>
-          ))}
-        </div>
+        <Entrance className="ds-why-now">
+          <EntranceItem as="p">
+            AI has improved efficiency, but building products without your design system is
+            of no use. Most designers are now struggling with how to work with existing
+            systems, and how to make design systems agent-ready as workflows change.
+          </EntranceItem>
+          <EntranceItem as="p">
+            Design systems are becoming the infrastructure coding agents build on, but many
+            are confused on the how. This is the next big opportunity for designers. We
+            don’t just need to clean up the AI slop, we need to own the architecture of the
+            systems. In this workshop we teach you the how, and give you the step-by-step
+            checklist you need.
+          </EntranceItem>
+          <EntranceItem as="p">
+            This workshop is based on the R&amp;D at Human AI Studio and building Florence
+            DS, an agent-ready design system.
+          </EntranceItem>
+        </Entrance>
       </section>
 
       <section className="ds-audit-process" id="how-it-works" aria-labelledby="ds-audit-process-title">
         <Entrance className="ds-audit-section-head">
           <EntranceItem>
-            <h2 id="ds-audit-process-title">Two focused weeks from audit to action.</h2>
+            <h2 id="ds-audit-process-title">Three working blocks, one live session.</h2>
           </EntranceItem>
         </Entrance>
         <ol className="ds-audit-timeline">
@@ -411,15 +415,47 @@ export default function DesignSystemsPage() {
         <Entrance className="ds-audit-final-inner">
           <EntranceItem as="p" className="eyebrow">Start here</EntranceItem>
           <EntranceItem as="h2" id="ds-audit-final-title">
-            Know exactly what your design system needs for the agent era.
+            Get your team building a design system agents can use.
           </EntranceItem>
           <EntranceItem as="p">
-            Two weeks. One focused audit. A practical path your team can use immediately.
-          </EntranceItem>
-          <EntranceItem>
-            <BookingButton showAvatar>Book a 15 min call</BookingButton>
+            Two ways in, depending on how deep you want to go.
           </EntranceItem>
         </Entrance>
+      </section>
+
+      <section className="ds-upsell" aria-label="Ways to work together">
+        <div className="ds-upsell-grid">
+          <Entrance as="article" className="ds-upsell-card is-primary">
+            <EntranceItem as="p" className="ds-upsell-eyebrow">
+              Live workshop
+            </EntranceItem>
+            <EntranceItem as="h3">Join the workshop.</EntranceItem>
+            <EntranceItem as="p" className="ds-upsell-body">
+              A live, hands-on session with your team, working in your own tokens,
+              components, and docs. Everyone leaves with a playbook they helped write and
+              know how to use.
+            </EntranceItem>
+            <EntranceItem>
+              <BookingButton showAvatar>Join the workshop</BookingButton>
+            </EntranceItem>
+          </Entrance>
+
+          <Entrance as="article" className="ds-upsell-card">
+            <EntranceItem as="p" className="ds-upsell-eyebrow">
+              Going deeper
+            </EntranceItem>
+            <EntranceItem as="h3">Book an audit for your company.</EntranceItem>
+            <EntranceItem as="p" className="ds-upsell-body">
+              The workshop gets your team moving. The audit tells you exactly where the
+              system is failing today. I review components, tokens, docs, and adoption end
+              to end, run structured evals, and hand back a prioritised list of what to fix
+              first.
+            </EntranceItem>
+            <EntranceItem>
+              <BookingButton>Book an audit</BookingButton>
+            </EntranceItem>
+          </Entrance>
+        </div>
       </section>
 
       <footer className="site-footer" aria-label="Human AI Studio footer" data-nav-theme="dark">
