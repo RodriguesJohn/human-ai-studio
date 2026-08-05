@@ -1,4 +1,5 @@
 import { track } from "@vercel/analytics";
+import { blogPosts } from "./blogData.js";
 
 const SITE_URL = "https://www.humanaistudio.io";
 const SITE_NAME = "Human AI Studio";
@@ -41,6 +42,12 @@ const pages = {
     description:
       "AI agent teams and operating systems that help creative businesses connect clients, projects, revenue, and workflows without losing context.",
     type: "Product"
+  },
+  "/blog": {
+    title: "Blog | Human AI Studio",
+    description:
+      "Notes from Human AI Studio on AI-native products, agent-ready design systems, and practical workflows for teams shipping with AI.",
+    type: "Blog"
   }
 };
 
@@ -85,6 +92,19 @@ function pageForPath(pathname) {
     const offering = offeringPages[offeringMatch[1]];
     if (offering) {
       return { path, type: "Service", ...offering };
+    }
+  }
+
+  const blogMatch = path.match(/^\/blog\/([^/]+)$/);
+  if (blogMatch) {
+    const post = blogPosts.find((entry) => entry.slug === blogMatch[1]);
+    if (post) {
+      return {
+        path,
+        type: "BlogPosting",
+        title: `${post.title} | Human AI Studio`,
+        description: post.description
+      };
     }
   }
 

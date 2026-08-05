@@ -20,6 +20,15 @@ const studioUrl = "/";
 const websitesUrl = "/websites";
 const allWorkUrl = "/case-studies";
 const designSystemsUrl = "/design-systems";
+const blogUrl = "/blog";
+
+function trackAcademyNavClick() {
+  track("Academy CTA Click", {
+    location: "primary_navigation",
+    label: "Academy",
+    href: academyUrl
+  });
+}
 
 function trackAcademyNavClick() {
   track("Academy CTA Click", {
@@ -33,7 +42,8 @@ const serviceLinks = [
   { label: "All work", href: allWorkUrl },
   { label: "Websites", href: websitesUrl },
   { label: "Product design", href: studioUrl },
-  { label: "Design systems", href: designSystemsUrl }
+  { label: "Design systems", href: designSystemsUrl },
+  { label: "Blog", href: blogUrl }
 ];
 
 function openBookingModal(event) {
