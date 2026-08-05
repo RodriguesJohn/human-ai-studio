@@ -37,6 +37,12 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://www.humanaistudio.io/blog</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://www.humanaistudio.io/offerings/design-engineering</loc>
     <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>

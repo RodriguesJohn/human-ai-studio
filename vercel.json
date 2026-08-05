@@ -16,6 +16,11 @@
       "permanent": true
     },
     {
+      "source": "/blog/",
+      "destination": "/blog",
+      "permanent": true
+    },
+    {
       "source": "/offerings/agent-ready-design-system/",
       "destination": "/offerings/agent-ready-design-system",
       "permanent": true
@@ -41,6 +46,14 @@
     {
       "source": "/product",
       "destination": "/product.html"
+    },
+    {
+      "source": "/blog",
+      "destination": "/"
+    },
+    {
+      "source": "/blog/:slug",
+      "destination": "/"
     },
     {
       "source": "/offerings/design-engineering",

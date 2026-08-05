@@ -51,6 +51,12 @@ async function boot() {
       return;
     }
 
+    if (route === "/blog" || route.startsWith("/blog/")) {
+      const { default: BlogPage } = await import("./v2/BlogPage.jsx");
+      renderWithAnalytics(root, <BlogPage />);
+      return;
+    }
+
     const { default: V2App } = await import("./v2/App.jsx");
     root.render(
       <React.StrictMode>
