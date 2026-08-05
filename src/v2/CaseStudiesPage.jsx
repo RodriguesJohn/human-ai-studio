@@ -166,7 +166,7 @@ export default function CaseStudiesPage() {
   };
 
   React.useEffect(() => {
-    document.title = "Case Studies · Human AI Studio";
+    document.title = "Case Studies | Human AI Studio";
     const html = document.documentElement;
     const body = document.body;
     const prevHtml = html.style.background;

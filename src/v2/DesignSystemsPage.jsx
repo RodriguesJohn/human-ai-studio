@@ -187,7 +187,7 @@ export default function DesignSystemsPage() {
   }
 
   React.useEffect(() => {
-    document.title = "Agent-Ready Design System Live Workshop · Human AI Studio";
+    document.title = "Agent-Ready Design Systems | Human AI Studio";
     const description =
       "A live, hands-on workshop that gets your team building an agent-ready design system, working in your own tokens, components, and docs.";
     let meta = document.querySelector('meta[name="description"]');
