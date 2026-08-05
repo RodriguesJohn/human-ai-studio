@@ -1,4 +1,5 @@
 import React from "react";
+import { track } from "@vercel/analytics";
 import "./nav-menu.css";
 
 const bookingLink = "john-rodrigues-rqt2lg/15min";
@@ -20,6 +21,14 @@ const websitesUrl = "/websites";
 const allWorkUrl = "/case-studies";
 const designSystemsUrl = "/design-systems";
 const blogUrl = "/blog";
+
+function trackAcademyNavClick() {
+  track("Academy CTA Click", {
+    location: "primary_navigation",
+    label: "Academy",
+    href: academyUrl
+  });
+}
 
 const serviceLinks = [
   { label: "All work", href: allWorkUrl },
@@ -116,7 +125,7 @@ export function NavMenu() {
       <a className="nav-direct-link" href={studioUrl}>
         Studio
       </a>
-      <a className="nav-direct-link" href={academyUrl}>
+      <a className="nav-direct-link" href={academyUrl} onClick={trackAcademyNavClick}>
         Academy
       </a>
 

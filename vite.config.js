@@ -66,10 +66,23 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
-      input: {
-        main: resolve(import.meta.dirname, "index.html"),
-        academy: resolve(import.meta.dirname, "academy.html")
-      }
+      // Every route with its own HTML entry must be listed here, or the file
+      // never reaches dist/ and the rewrite in vercel.json resolves to nothing.
+      input: Object.fromEntries(
+        [
+          ["main", "index.html"],
+          ["academy", "academy.html"],
+          ["websites", "websites.html"],
+          ["caseStudies", "case-studies.html"],
+          ["designSystems", "design-systems.html"],
+          ["product", "product.html"],
+          ["offeringDesignEngineering", "offering-design-engineering.html"],
+          ["offeringAiNativeProducts", "offering-ai-native-products.html"],
+          ["offeringAiConsulting", "offering-ai-consulting.html"],
+          ["offeringAiTrainingEnablement", "offering-ai-training-enablement.html"],
+          ["offeringAgentReadyDesignSystem", "offering-agent-ready-design-system.html"]
+        ].map(([name, file]) => [name, resolve(import.meta.dirname, file)])
+      )
     }
   },
   server: {

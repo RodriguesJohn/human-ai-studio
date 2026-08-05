@@ -1,0 +1,212 @@
+.blog-page {
+  min-height: 100vh;
+  background: #050506;
+  color: #fff;
+  font-family: Geist, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.blog-nav,
+.blog-footer,
+.blog-main {
+  width: min(100% - clamp(2rem, 6vw, 6rem), 76rem);
+  margin: 0 auto;
+}
+
+.blog-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.4rem, 3vw, 2.5rem) 0;
+}
+
+.blog-brand,
+.blog-footer a,
+.blog-back {
+  color: inherit;
+  text-decoration: none;
+}
+
+.blog-brand {
+  font-size: 0.95rem;
+  font-weight: 520;
+  letter-spacing: -0.02em;
+}
+
+.blog-main {
+  padding: clamp(4rem, 9vw, 8rem) 0 clamp(5rem, 10vw, 9rem);
+}
+
+.blog-hero {
+  max-width: 54rem;
+}
+
+.blog-eyebrow {
+  margin: 0 0 1rem;
+  color: rgba(255, 255, 255, 0.54);
+  font-size: 0.82rem;
+  font-weight: 560;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.blog-hero h1,
+.blog-article h1,
+.blog-empty h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(3.2rem, 8.5vw, 7.5rem);
+  font-weight: 520;
+  letter-spacing: -0.075em;
+  line-height: 0.86;
+}
+
+.blog-hero p,
+.blog-empty p,
+.blog-article-description {
+  max-width: 42rem;
+  margin: clamp(1.4rem, 3vw, 2.4rem) 0 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: clamp(1.05rem, 1.5vw, 1.35rem);
+  line-height: 1.55;
+}
+
+.blog-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+.blog-card,
+.blog-empty {
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.blog-card {
+  display: flex;
+  min-height: 18rem;
+  flex-direction: column;
+  padding: 1.25rem;
+  color: inherit;
+  text-decoration: none;
+  transition: border-color 180ms ease, background 180ms ease, transform 180ms ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.055);
+}
+
+.blog-card span,
+.blog-card time,
+.blog-article time {
+  color: rgba(255, 255, 255, 0.48);
+  font-size: 0.8rem;
+}
+
+.blog-card h2 {
+  margin: 1rem 0 0;
+  font-size: clamp(1.35rem, 2vw, 1.9rem);
+  font-weight: 520;
+  letter-spacing: -0.045em;
+  line-height: 1;
+}
+
+.blog-card p {
+  margin: 0.9rem 0 1.5rem;
+  color: rgba(255, 255, 255, 0.64);
+  line-height: 1.5;
+}
+
+.blog-card time {
+  margin-top: auto;
+}
+
+.blog-empty {
+  max-width: 44rem;
+  margin-top: clamp(3rem, 6vw, 5rem);
+  padding: clamp(1.4rem, 4vw, 2.4rem);
+}
+
+.blog-empty h2 {
+  margin: 0;
+  font-size: clamp(1.7rem, 3vw, 2.5rem);
+  font-weight: 520;
+  letter-spacing: -0.05em;
+}
+
+.blog-empty a {
+  display: inline-flex;
+  margin-top: 1.4rem;
+  border-radius: 999px;
+  background: #fff;
+  padding: 0.85rem 1.1rem;
+  color: #050506;
+  text-decoration: none;
+  font-weight: 560;
+}
+
+.blog-main--article {
+  display: flex;
+  justify-content: center;
+}
+
+.blog-article {
+  width: min(100%, 46rem);
+}
+
+.blog-back {
+  display: inline-flex;
+  margin-bottom: 3rem;
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.blog-article h1 {
+  max-width: none;
+  font-size: clamp(3rem, 7vw, 6.2rem);
+}
+
+.blog-article-body {
+  margin-top: clamp(3rem, 6vw, 5rem);
+  color: rgba(255, 255, 255, 0.78);
+  font-size: clamp(1.05rem, 1.35vw, 1.22rem);
+  line-height: 1.72;
+}
+
+.blog-article-body h2 {
+  margin: 2.4rem 0 0.8rem;
+  color: #fff;
+  font-size: clamp(1.6rem, 3vw, 2.2rem);
+  font-weight: 520;
+  letter-spacing: -0.05em;
+  line-height: 1;
+}
+
+.blog-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.4rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  padding: 1.5rem 0 2rem;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.9rem;
+}
+
+@media (max-width: 760px) {
+  .blog-list {
+    grid-template-columns: 1fr;
+  }
+
+  .blog-nav {
+    align-items: flex-start;
+  }
+
+  .blog-hero h1,
+  .blog-article h1,
+  .blog-empty h1 {
+    font-size: clamp(3rem, 16vw, 4.8rem);
+  }
+}
