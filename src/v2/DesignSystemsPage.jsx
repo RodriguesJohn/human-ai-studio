@@ -11,6 +11,7 @@ const bookingLink = "john-rodrigues-rqt2lg/15min";
 const bookingNamespace = "15min";
 const bookingUrl = `https://cal.com/${bookingLink}`;
 const newsletterUrl = "https://substack.com/@johnrodrigues";
+const COHORT_URL = "https://maven.com/humanaistudio/aimasterycohort";
 const footerVideoUrl =
   "https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260619_191346_9d19d66e-86a4-47f7-8dc6-712c1788c3b2.mp4";
 const bookingConfig = {
@@ -427,16 +428,25 @@ export default function DesignSystemsPage() {
         <div className="ds-upsell-grid">
           <Entrance as="article" className="ds-upsell-card is-primary">
             <EntranceItem as="p" className="ds-upsell-eyebrow">
-              Live workshop
+              Live cohort
             </EntranceItem>
-            <EntranceItem as="h3">Join the workshop.</EntranceItem>
+            <EntranceItem as="h3">Join the 2 week cohort.</EntranceItem>
             <EntranceItem as="p" className="ds-upsell-body">
-              A live, hands-on session with your team, working in your own tokens,
-              components, and docs. Everyone leaves with a playbook they helped write and
-              know how to use.
+              Master the fundamentals through advanced techniques for making design
+              systems agent-ready. Two live workshops covering advanced foundations,
+              component architecture, and AI readiness, with certification on
+              completion.
             </EntranceItem>
             <EntranceItem>
-              <BookingButton showAvatar>Join the workshop</BookingButton>
+              <a
+                className="ds-audit-cta liquid-glass"
+                href={COHORT_URL}
+                target="_blank"
+                rel="noreferrer"
+              >
+                <span>Join the cohort</span>
+                <span aria-hidden="true">↗</span>
+              </a>
             </EntranceItem>
           </Entrance>
 
@@ -446,10 +456,9 @@ export default function DesignSystemsPage() {
             </EntranceItem>
             <EntranceItem as="h3">Book an audit for your company.</EntranceItem>
             <EntranceItem as="p" className="ds-upsell-body">
-              The workshop gets your team moving. The audit tells you exactly where the
-              system is failing today. I review components, tokens, docs, and adoption end
-              to end, run structured evals, and hand back a prioritised list of what to fix
-              first.
+              The audit tells you exactly where the system is failing today. I review
+              components, tokens, docs, and adoption end to end, run structured evals,
+              and hand back a prioritised list of what to fix first.
             </EntranceItem>
             <EntranceItem>
               <BookingButton>Book an audit</BookingButton>

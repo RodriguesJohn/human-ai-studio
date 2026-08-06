@@ -34,7 +34,7 @@ const serviceLinks = [
   { label: "All work", href: allWorkUrl },
   { label: "Websites", href: websitesUrl },
   { label: "Product design", href: studioUrl },
-  { label: "Design systems", href: designSystemsUrl },
+  { label: "Design systems workshop", href: designSystemsUrl },
   { label: "Blog", href: blogUrl }
 ];
 

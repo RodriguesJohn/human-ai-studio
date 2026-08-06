@@ -155,14 +155,6 @@ const logos = [
   { src: IntercomLogo, alt: "Intercom" }
 ];
 
-const newsletterBenefits = [
-  "Research, case studies, and frameworks for AI builders",
-  "2 new articles published every week",
-  "Every article is free for its first 7 days",
-  "After 7 days, it moves into the member archive",
-  "Unlock the full archive for $12/month"
-];
-
 const pricingBenefits = [
   "Claude Code, Cursor, and Codex tracks",
   "Latest AI research, news, and trends",
@@ -173,9 +165,9 @@ const pricingBenefits = [
 
 const pathOptions = [
   {
-    title: "Structured learning tracks",
+    title: "Stay ahead of the shift",
     description:
-      "Follow a clear path from AI foundations to production-ready workflows.",
+      "AI-native workflows aren't the edge case anymore, they're becoming the baseline. Designers and PMs who can build with Claude Code, Cursor, and Codex are already commanding more at their companies. This track teaches the real skills through real product work.",
     bullets: [
       "Claude Code, Cursor, and Codex tracks",
       "Practical projects for real product work",
@@ -185,9 +177,9 @@ const pathOptions = [
     color2: "#e0f2fe"
   },
   {
-    title: "Builder community",
+    title: "Learn and grow together",
     description:
-      "Learn alongside designers, founders, and builders who share feedback and momentum.",
+      "Join a curated group of AI-native designers and builders. Learn from each other, trade what's working, and level up your network as you grow.",
     bullets: [
       "Get feedback when you feel stuck",
       "Stay accountable as you build",
@@ -379,6 +371,9 @@ const testimonials = [
   }
 ];
 
+const featuredTestimonial =
+  testimonials.find((item) => item.name === "IniOluwa") || testimonials[0];
+
 function TestimonialScroller() {
   const marqueeItems = [...testimonials, ...testimonials];
 
@@ -476,8 +471,8 @@ function AcademyPage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1">
-                <span className="academy-hero-line">Become an AI Product Builder</span>
-                <span className="academy-hero-line">and Ship Fast With AI Workflows.</span>
+                <span className="academy-hero-line">Become AI Native Product Designer</span>
+                <span className="academy-hero-line">and Master AI Workflows.</span>
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
                 <span>Build practical AI fluency and advance your workflows.</span>
@@ -623,40 +618,35 @@ function AcademyPage() {
           <Entrance className="academy-packages">
             <EntranceItem
               as="article"
-              className="academy-package academy-package--publication"
+              className="academy-package academy-package--testimonials"
               style={{
-                "--card-color-1": "#38bdf8",
-                "--card-color-2": "#e0f2fe"
+                "--card-color-1": "#64748b",
+                "--card-color-2": "#e2e8f0"
               }}
             >
-              <div className="academy-package-thumb">
-                <OfferingShader
-                  color1="#38bdf8"
-                  color2="#e0f2fe"
-                  seed={1.2}
-                  className="academy-package-shader"
-                />
-                <div className="academy-package-thumb-copy">
-                  <h3>Publication</h3>
-                  <div className="academy-price academy-price--thumb">
-                    <span>Free</span>
-                  </div>
-                </div>
-              </div>
               <div className="academy-package-body">
-                <ul className="academy-check-list">
-                  {newsletterBenefits.map((benefit) => (
-                    <li key={benefit}>{benefit}</li>
-                  ))}
-                </ul>
-                <a
-                  className="academy-btn academy-btn--primary academy-btn--full"
-                  href={NEWSLETTER_URL}
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  Read the latest articles
-                </a>
+                <p className="academy-package-eyebrow">What builders say</p>
+                <blockquote className="academy-package-quote">
+                  {featuredTestimonial.quote}
+                </blockquote>
+                <div className="academy-package-quote-person">
+                  <img src={featuredTestimonial.img} alt="" loading="lazy" />
+                  <span>
+                    <strong>{featuredTestimonial.name}</strong>
+                    <small>{featuredTestimonial.role}</small>
+                  </span>
+                </div>
+                <div className="academy-package-proof">
+                  <div className="academy-package-avatars" aria-hidden="true">
+                    {testimonials
+                      .filter((item) => item.name !== featuredTestimonial.name)
+                      .slice(0, 4)
+                      .map((item) => (
+                        <img key={item.name} src={item.img} alt="" loading="lazy" />
+                      ))}
+                  </div>
+                  <p>4.6/5 rating on Maven</p>
+                </div>
               </div>
             </EntranceItem>
             <EntranceItem
@@ -675,7 +665,7 @@ function AcademyPage() {
                   className="academy-package-shader"
                 />
                 <div className="academy-package-thumb-copy">
-                  <h3>Self-paced</h3>
+                  <h3>Become AI Native Designer Courses</h3>
                   <div className="academy-price academy-price--thumb">
                     <span>$149</span>
                     <small>/ per month</small>

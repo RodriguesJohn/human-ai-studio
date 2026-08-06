@@ -1379,6 +1379,109 @@ html:has(.academy-page) {
   transform: translateY(-2px);
 }
 
+/* Social-proof card — no shader thumb, so it collapses to a single body row. */
+.academy-package--testimonials {
+  grid-template-rows: minmax(0, 1fr);
+}
+
+.academy-package--testimonials .academy-package-body {
+  gap: 1.5rem;
+  padding-top: clamp(1.6rem, 2.6vw, 2.2rem);
+}
+
+.academy-package-eyebrow {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.academy-package-quote {
+  position: relative;
+  margin: 0.4rem 0 0;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: clamp(1.25rem, 1.9vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.015em;
+  text-wrap: pretty;
+}
+
+.academy-package-quote::before {
+  content: "“";
+  display: block;
+  margin-bottom: -0.35em;
+  color: rgba(255, 255, 255, 0.22);
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+/* Pins the social-proof row to the bottom so the card matches its neighbours. */
+.academy-package-proof {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.academy-package-proof p {
+  margin: 0;
+  color: var(--academy-muted);
+  font-size: 0.88rem;
+}
+
+.academy-package-avatars {
+  display: flex;
+  flex: none;
+}
+
+.academy-package-avatars img {
+  width: 1.9rem;
+  height: 1.9rem;
+  border-radius: 50%;
+  border: 2px solid #23262d;
+  object-fit: cover;
+}
+
+.academy-package-avatars img + img {
+  margin-left: -0.6rem;
+}
+
+.academy-package-quote-person {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.academy-package-quote-person img {
+  width: 2.1rem;
+  height: 2.1rem;
+  flex: none;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.academy-package-quote-person span {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.25;
+}
+
+.academy-package-quote-person strong {
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.academy-package-quote-person small {
+  color: var(--academy-muted);
+  font-size: 0.8rem;
+}
+
 .academy-package-thumb {
   position: relative;
   width: 100%;
@@ -1430,24 +1533,43 @@ html:has(.academy-page) {
   padding: 1.35rem 1.25rem 1.4rem;
 }
 
+/* Title anchors to the top of the thumb, price to the bottom. The scrim below
+   keeps the title legible where the shader runs light. */
 .academy-package-thumb-copy {
   position: absolute;
-  left: clamp(1rem, 1.4vw, 1.25rem);
-  right: clamp(1rem, 1.4vw, 1.25rem);
-  bottom: clamp(0.9rem, 1.3vw, 1.15rem);
+  inset: 0;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  gap: 0.35rem;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: clamp(1.6rem, 2.6vw, 2.2rem) clamp(1rem, 1.4vw, 1.35rem)
+    clamp(1rem, 1.4vw, 1.35rem);
+}
+
+.academy-package-thumb::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.62) 0%,
+    rgba(0, 0, 0, 0.22) 34%,
+    transparent 62%
+  );
+  pointer-events: none;
 }
 
 .academy-package-thumb-copy h3 {
   margin: 0;
-  color: rgba(255, 255, 255, 0.92);
-  font-size: clamp(1.15rem, 1.9vw, 1.4rem);
-  font-weight: 650;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
+  max-width: 16ch;
+  color: #fff;
+  font-size: clamp(1.45rem, 2.5vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.14;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
 }
 
 .academy-package-body > p {
@@ -1874,7 +1996,7 @@ html:has(.academy-page) {
   }
 
   .academy-package-thumb-copy h3 {
-    font-size: clamp(1.15rem, 5vw, 1.4rem);
+    font-size: clamp(1.35rem, 6vw, 1.7rem);
   }
 
   .academy-path-body .academy-btn,
