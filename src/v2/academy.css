@@ -1398,9 +1398,26 @@ html:has(.academy-page) {
   text-transform: uppercase;
 }
 
+/* Reserves height for the longest quote so rotation doesn't jog the layout. */
+.academy-package-quote-slot {
+  min-height: 15rem;
+  animation: academy-quote-in 520ms ease both;
+}
+
+@keyframes academy-quote-in {
+  from {
+    opacity: 0;
+    transform: translateY(0.5rem);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
 .academy-package-quote {
   position: relative;
-  margin: 0.4rem 0 0;
+  margin: 0.4rem 0 1.35rem;
   color: rgba(255, 255, 255, 0.95);
   font-size: clamp(1.25rem, 1.9vw, 1.5rem);
   font-weight: 500;
@@ -1445,6 +1462,15 @@ html:has(.academy-page) {
   border-radius: 50%;
   border: 2px solid #23262d;
   object-fit: cover;
+  opacity: 0.45;
+  transition:
+    opacity 300ms ease,
+    transform 300ms ease;
+}
+
+.academy-package-avatars img[data-active="true"] {
+  opacity: 1;
+  transform: translateY(-1px) scale(1.08);
 }
 
 .academy-package-avatars img + img {

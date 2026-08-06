@@ -221,8 +221,8 @@ export default function DesignSystemsPage() {
         <Entrance className="ds-audit-hero-inner" animate="visible">
           <div className="ds-audit-hero-copy">
             <EntranceItem as="h1" id="ds-audit-title">
-              <span className="ds-audit-title-line">Agent-ready design system</span>
-              <span className="ds-audit-title-line">Live team workshop.</span>
+              <span className="ds-audit-title-line">Agent-Ready Design System</span>
+              <span className="ds-audit-title-line">Live Team Workshop.</span>
             </EntranceItem>
             <EntranceItem as="p" className="ds-audit-intro">
               <span>Hands-on with your team, in your own files.</span>

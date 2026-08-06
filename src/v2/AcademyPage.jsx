@@ -371,8 +371,56 @@ const testimonials = [
   }
 ];
 
-const featuredTestimonial =
-  testimonials.find((item) => item.name === "IniOluwa") || testimonials[0];
+const featuredOrder = (() => {
+  const lead = testimonials.findIndex((item) => item.name === "IniOluwa");
+  if (lead <= 0) return testimonials;
+  return [...testimonials.slice(lead), ...testimonials.slice(0, lead)];
+})();
+
+/* Cycles the quote so the card never sits static next to the pricing cards. */
+function PackageTestimonial() {
+  const [index, setIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const id = window.setInterval(() => {
+      setIndex((current) => (current + 1) % featuredOrder.length);
+    }, 6500);
+    return () => window.clearInterval(id);
+  }, []);
+
+  const testimonial = featuredOrder[index];
+
+  return (
+    <div className="academy-package-body">
+      <p className="academy-package-eyebrow">What builders say</p>
+      <div className="academy-package-quote-slot" key={testimonial.name}>
+        <blockquote className="academy-package-quote">{testimonial.quote}</blockquote>
+        <div className="academy-package-quote-person">
+          <img src={testimonial.img} alt="" loading="lazy" />
+          <span>
+            <strong>{testimonial.name}</strong>
+            <small>{testimonial.role}</small>
+          </span>
+        </div>
+      </div>
+      <div className="academy-package-proof">
+        <div className="academy-package-avatars" aria-hidden="true">
+          {featuredOrder.slice(0, 5).map((item, itemIndex) => (
+            <img
+              key={item.name}
+              src={item.img}
+              alt=""
+              loading="lazy"
+              data-active={itemIndex === index ? "true" : undefined}
+            />
+          ))}
+        </div>
+        <p>4.6/5 rating on Maven</p>
+      </div>
+    </div>
+  );
+}
 
 function TestimonialScroller() {
   const marqueeItems = [...testimonials, ...testimonials];
@@ -624,30 +672,7 @@ function AcademyPage() {
                 "--card-color-2": "#e2e8f0"
               }}
             >
-              <div className="academy-package-body">
-                <p className="academy-package-eyebrow">What builders say</p>
-                <blockquote className="academy-package-quote">
-                  {featuredTestimonial.quote}
-                </blockquote>
-                <div className="academy-package-quote-person">
-                  <img src={featuredTestimonial.img} alt="" loading="lazy" />
-                  <span>
-                    <strong>{featuredTestimonial.name}</strong>
-                    <small>{featuredTestimonial.role}</small>
-                  </span>
-                </div>
-                <div className="academy-package-proof">
-                  <div className="academy-package-avatars" aria-hidden="true">
-                    {testimonials
-                      .filter((item) => item.name !== featuredTestimonial.name)
-                      .slice(0, 4)
-                      .map((item) => (
-                        <img key={item.name} src={item.img} alt="" loading="lazy" />
-                      ))}
-                  </div>
-                  <p>4.6/5 rating on Maven</p>
-                </div>
-              </div>
+              <PackageTestimonial />
             </EntranceItem>
             <EntranceItem
               as="article"
