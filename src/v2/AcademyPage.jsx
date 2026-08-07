@@ -519,7 +519,7 @@ function AcademyPage() {
           <div className="academy-hero">
             <Entrance className="academy-hero-copy" animate="visible">
               <EntranceItem as="h1">
-                <span className="academy-hero-line">Become AI Native Product Designer</span>
+                <span className="academy-hero-line">Become AI Native Product Builder</span>
                 <span className="academy-hero-line">and Master AI Workflows.</span>
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
@@ -690,7 +690,6 @@ function AcademyPage() {
                   className="academy-package-shader"
                 />
                 <div className="academy-package-thumb-copy">
-                  <h3>Become AI Native Designer Courses</h3>
                   <div className="academy-price academy-price--thumb">
                     <span>$149</span>
                     <small>/ per month</small>

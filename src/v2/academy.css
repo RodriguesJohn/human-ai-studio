@@ -1559,15 +1559,15 @@ html:has(.academy-page) {
   padding: 1.35rem 1.25rem 1.4rem;
 }
 
-/* Title anchors to the top of the thumb, price to the bottom. The scrim below
-   keeps the title legible where the shader runs light. */
+/* Price anchors to the bottom of the thumb. The scrim below keeps it legible
+   where the shader runs light. */
 .academy-package-thumb-copy {
   position: absolute;
   inset: 0;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   gap: 1rem;
   padding: clamp(1.6rem, 2.6vw, 2.2rem) clamp(1rem, 1.4vw, 1.35rem)
     clamp(1rem, 1.4vw, 1.35rem);
