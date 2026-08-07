@@ -350,8 +350,9 @@ function CinematicHero() {
             className="hero-cinematic-subtitle"
             variants={entranceChild}
           >
-            We help you design and build so you can raise funding and ship{" "}
-            <span className="motto-emphasis">products customers love</span>, not AI slop.
+            We design and build{" "}
+            <span className="motto-emphasis">AI-native products, agents, and systems</span> for
+            ambitious companies.
           </motion.p>
 
           <motion.div className="hero-cinematic-cta-row" variants={entranceChild}>
