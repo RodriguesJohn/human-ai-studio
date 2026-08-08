@@ -523,8 +523,8 @@ function AcademyPage() {
                 <span className="academy-hero-line">and Master AI Workflows.</span>
               </EntranceItem>
               <EntranceItem as="p" className="academy-hero-sub">
-                <span>Build practical AI fluency and advance your workflows.</span>
-                <span>Learn and ship alongside a community of AI builders.</span>
+                <span>Learn to build products with AI agents and systems, guided by</span>
+                <span>experts and alongside a community of builders.</span>
               </EntranceItem>
               <EntranceItem className="academy-hero-actions">
                 <a
